@@ -1,0 +1,23 @@
+[
+  {
+    "id": "usr-admin",
+    "email": "admin@beadssource.com",
+    "password": "admin",
+    "name": "Ramesh Sir (Admin)",
+    "role": "admin",
+    "company": "BeadsSource SP Bengaluru",
+    "phone": "+91 98450 00000",
+    "wholesaleApproved": true
+  },
+  {
+    "id": "usr-buyer1",
+    "email": "buyer@boutiquejewels.com",
+    "password": "buyer",
+    "name": "Sarah Jenkins",
+    "role": "customer",
+    "company": "Jenkins Boutique Jewels LLC",
+    "phone": "+1 212 555 0199",
+    "wholesaleApproved": true,
+    "taxId": "US-TAX-8921094"
+  }
+]

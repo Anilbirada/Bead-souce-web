@@ -1,0 +1,80 @@
+[
+  {
+    "id": "RFQ-2026-101",
+    "date": "2026-10-31T09:20:00.000Z",
+    "customer": {
+      "name": "Sophie Laurent",
+      "company": "Bijoux Paris SAS",
+      "email": "sophie@bijouxparis.fr",
+      "phone": "+33 1 42 68 55 00",
+      "country": "France",
+      "taxId": "FR849204192",
+      "businessType": "Jewelry Brand / Retail Chain"
+    },
+    "targetDeliveryDate": "2026-12-05",
+    "targetBudget": "$3,500 USD",
+    "items": [
+      {
+        "id": "bs-019",
+        "name": "Australian Emerald Gemstone Perfume Bottle Pendant",
+        "sku": "BTL-EMR-PFM",
+        "catalogPrice": 20.0,
+        "requestedQty": 150,
+        "targetPrice": 14.5,
+        "notes": "Custom engraved gold cap with our monogram if possible."
+      },
+      {
+        "id": "bs-020",
+        "name": "Flat Round Natural Amethyst Gemstone Perfume Bottle",
+        "sku": "BTL-AME-PFM",
+        "catalogPrice": 20.0,
+        "requestedQty": 100,
+        "targetPrice": 14.5,
+        "notes": "Match color saturation across pieces."
+      }
+    ],
+    "status": "In Review",
+    "adminNotes": "Checking factory production slot for emerald carving. Viable MOQ 250 pcs combined.",
+    "counterOffer": 15.2,
+    "responseSent": false
+  },
+  {
+    "id": "RFQ-2026-102",
+    "date": "2026-11-01T16:45:00.000Z",
+    "customer": {
+      "name": "David Miller",
+      "company": "Southwest Artisan Guild",
+      "email": "david@southwestguild.com",
+      "phone": "+1 (505) 983-1120",
+      "country": "United States",
+      "taxId": "NM-992014-001",
+      "businessType": "Wholesale Distributor"
+    },
+    "targetDeliveryDate": "2026-11-25",
+    "targetBudget": "$6,000 USD",
+    "items": [
+      {
+        "id": "bs-011",
+        "name": "25x18mm Smooth Light Green Oval Turquoise Stone Strand 16\"",
+        "sku": "TRQ-OVL-2518",
+        "catalogPrice": 5.0,
+        "requestedQty": 500,
+        "targetPrice": 3.8,
+        "notes": "Require certificate of natural magnesite origin."
+      },
+      {
+        "id": "bs-022",
+        "name": "36x39mm Lead-Free Pewter Hollow Heart Charm (SKU A12502)",
+        "sku": "A12502",
+        "catalogPrice": 1.25,
+        "requestedQty": 1200,
+        "targetPrice": 0.85,
+        "notes": "Antique silver finish only."
+      }
+    ],
+    "status": "Approved",
+    "adminNotes": "Volume discount approved by Ramesh Sir. Ready to convert to production order.",
+    "counterOffer": 3.95,
+    "responseSent": true
+  }
+]

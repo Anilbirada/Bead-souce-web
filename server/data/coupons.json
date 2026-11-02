@@ -1,0 +1,26 @@
+[
+  {
+    "code": "WHOLESALE10",
+    "discountType": "percentage",
+    "discountValue": 10,
+    "minOrder": 200,
+    "description": "10% off for verified wholesale orders above $200",
+    "active": true
+  },
+  {
+    "code": "BULK20",
+    "discountType": "percentage",
+    "discountValue": 20,
+    "minOrder": 1000,
+    "description": "20% off master wholesale bulk orders above $1,000",
+    "active": true
+  },
+  {
+    "code": "FREESHIP500",
+    "discountType": "free_shipping",
+    "discountValue": 0,
+    "minOrder": 500,
+    "description": "Complimentary worldwide express courier delivery above $500",
+    "active": true
+  }
+]

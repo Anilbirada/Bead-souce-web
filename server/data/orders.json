@@ -1,0 +1,135 @@
+[
+  {
+    "id": "ORD-2026-3290",
+    "date": "2026-11-02T08:41:24.617Z",
+    "customer": {
+      "name": "Sarah Jenkins",
+      "company": "Jenkins Boutique Jewels LLC",
+      "email": "buyer@boutiquejewels.com",
+      "phone": "+1 212 555 0199",
+      "address": "452 Post Street, Suite 4B",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94102",
+      "country": "United States",
+      "taxId": "US-TAX-8921094"
+    },
+    "items": [
+      {
+        "id": "bs-001",
+        "name": "10x14mm Gold Micro Pave CZ Toggle Clasp Connector",
+        "sku": "CZ-TOG-1014",
+        "price": 1.35,
+        "quantity": 1,
+        "finish": "18K Gold",
+        "size": "10x14mm (10 pcs/pack)",
+        "total": 1.35,
+        "image": "https://beadssource.com/wp-content/uploads/2025/09/10mm圆14mm长棒子金色-13包-10个每包-300x300.jpg"
+      }
+    ],
+    "subtotal": 1.35,
+    "discount": 0,
+    "couponCode": null,
+    "shipping": 25,
+    "tax": 0,
+    "total": 26.35,
+    "status": "Processing",
+    "paymentMethod": "Wire Transfer / TT",
+    "paymentStatus": "Paid",
+    "trackingNumber": "EXP-38879269",
+    "notes": ""
+  },
+  {
+    "id": "ORD-2026-9041",
+    "date": "2026-10-28T10:30:00.000Z",
+    "customer": {
+      "name": "Eleanor Vance",
+      "company": "Vance Atelier Studio",
+      "email": "eleanor@vancestudio.com",
+      "phone": "+1 (415) 890-2341",
+      "address": "452 Post Street, Suite 4B",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94102",
+      "country": "United States",
+      "taxId": "EIN-94-382910"
+    },
+    "items": [
+      {
+        "id": "bs-007",
+        "name": "8mm Multicolor Handmade Double Knotted Gemstone Beaded Strand 16\"",
+        "sku": "GEM-STR-8MC",
+        "price": 5.25,
+        "quantity": 50,
+        "total": 262.5,
+        "image": "https://beadssource.com/wp-content/uploads/DSC_2552-scaled-1-1536x1025-1-300x300.jpg"
+      },
+      {
+        "id": "bs-001",
+        "name": "10x14mm Gold Micro Pave CZ Toggle Clasp Connector",
+        "sku": "CZ-TOG-1014",
+        "price": 1.5,
+        "quantity": 100,
+        "total": 150,
+        "image": "https://beadssource.com/wp-content/uploads/2025/09/10mm圆14mm长棒子金色-13包-10个每包-300x300.jpg"
+      }
+    ],
+    "subtotal": 412.5,
+    "discount": 41.25,
+    "couponCode": "WHOLESALE10",
+    "shipping": 0,
+    "tax": 0,
+    "total": 371.25,
+    "status": "Processing",
+    "paymentMethod": "Wire Transfer / TT",
+    "paymentStatus": "Paid",
+    "trackingNumber": "DHL-EXP-992014856",
+    "notes": "Pack with export bubble wrap. Delivery before Nov 12."
+  },
+  {
+    "id": "ORD-2026-9042",
+    "date": "2026-10-30T14:15:00.000Z",
+    "customer": {
+      "name": "Rajesh Sharma",
+      "company": "Kaveri Gems & Exports",
+      "email": "rajesh@kaverigems.in",
+      "phone": "+91 98450 12399",
+      "address": "78 Commercial Street",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "zip": "560001",
+      "country": "India",
+      "taxId": "29AABCU9603R1ZX"
+    },
+    "items": [
+      {
+        "id": "bs-011",
+        "name": "25x18mm Smooth Light Green Oval Turquoise Stone Strand 16\"",
+        "sku": "TRQ-OVL-2518",
+        "price": 5,
+        "quantity": 40,
+        "total": 200,
+        "image": "https://beadssource.com/wp-content/uploads/2025/09/il_794xN.1715404164_2dhf-1-2-300x300.jpg"
+      },
+      {
+        "id": "bs-026",
+        "name": "6mm Thin Daisy Spacer Beads Lead-Free Pewter (SKU A8283)",
+        "sku": "A8283",
+        "price": 0.35,
+        "quantity": 300,
+        "total": 105,
+        "image": "https://beadssource.com/wp-content/uploads/2025/09/6mm厚2mmA8283古金18包-古银20包-150x150.jpg"
+      }
+    ],
+    "subtotal": 305,
+    "discount": 0,
+    "shipping": 15,
+    "tax": 16,
+    "total": 336,
+    "status": "Shipped",
+    "paymentMethod": "UPI / Net Banking",
+    "paymentStatus": "Paid",
+    "trackingNumber": "BLUEDART-88120491",
+    "notes": "Handover to SP Road showroom pickup or local express dispatch."
+  }
+]

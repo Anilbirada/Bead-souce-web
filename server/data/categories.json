@@ -1,0 +1,110 @@
+[
+  {
+    "id": "natural-gemstone-beads",
+    "name": "Natural Gemstone Beads",
+    "slug": "natural-gemstone-beads",
+    "description": "Authentic natural gemstone bead strands, hand-selected minerals, and artisan cuts for premium jewelry creation.",
+    "image": "https://beadssource.com/wp-content/uploads/DSC_2552-scaled-1-1536x1025-1-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 18
+  },
+  {
+    "id": "turquoise-beads",
+    "name": "Turquoise Beads",
+    "slug": "turquoise-beads",
+    "description": "Natural and magnesite turquoise nuggets, smooth ovals, rondelles, and slab beads.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/il_794xN.1715404164_2dhf-1-2-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 14
+  },
+  {
+    "id": "crystal-beads",
+    "name": "Crystal Beads",
+    "slug": "crystal-beads",
+    "description": "Precision faceted round, rondelle, bicone, and teardrop sparkling crystals.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/DSC_21011-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 22
+  },
+  {
+    "id": "cubic-zirconia",
+    "name": "Cubic Zirconia (CZ)",
+    "slug": "cubic-zirconia",
+    "description": "Micro pave CZ balls, large hole spacers, connectors, and luxury sparkling elements.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/il_fullxfull.1769582423_mqbc-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 19
+  },
+  {
+    "id": "jewelry-pendants",
+    "name": "Jewelry Pendants",
+    "slug": "jewelry-pendants",
+    "description": "Carved gemstone pendants, perfume bottle pendants, pave crosses, and statement focal pieces.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/18x30mm微镶十字架金色白钻20包-5个每包-1-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1611591475879-da0066ec960a?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 26
+  },
+  {
+    "id": "jewelry-connectors",
+    "name": "Jewelry Connectors",
+    "slug": "jewelry-connectors",
+    "description": "Multi-strand connectors, micro-pave clover links, toggle clasps, and religious motifs.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/10mm圆14mm长棒子金色-13包-10个每包-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 15
+  },
+  {
+    "id": "jewelry-spacers",
+    "name": "Jewelry Spacers",
+    "slug": "jewelry-spacers",
+    "description": "Lead-free pewter spacers, daisy spacers, rondelles, and beaded metal separators.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/6mm厚2mmA8283古金18包-古银20包-150x150.jpg",
+    "banner": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 28
+  },
+  {
+    "id": "jewelry-findings",
+    "name": "Jewelry Findings",
+    "slug": "jewelry-findings",
+    "description": "Chains, lobster clasps, jump rings, earring hooks, bead caps, and professional wire.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/il_fullxfull-5-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 35
+  },
+  {
+    "id": "handmade-necklaces",
+    "name": "Handmade Necklaces",
+    "slug": "handmade-necklaces",
+    "description": "Hand-knotted gemstone malas, crystal long necklaces, and multi-gemstone designer strands.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/161e2bb10b664305e2d4c95829a6030-1-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 16
+  },
+  {
+    "id": "handmade-bracelets",
+    "name": "Handmade Bracelets",
+    "slug": "handmade-bracelets",
+    "description": "Stretchy gemstone bracelets, freshwater pearl combinations, and lava stone diffuser bracelets.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/14mm四叶草孔兰扁珠黑色火山石串珠7.5英寸20条-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1611591475879-da0066ec960a?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 20
+  },
+  {
+    "id": "charms",
+    "name": "Charms",
+    "slug": "charms",
+    "description": "Antique gold and silver lead-free pewter charms, crosses, animals, nature, and symbols.",
+    "image": "https://beadssource.com/wp-content/uploads/2025/09/36x39mmA12502古金30包-古银44包-24个每包-300x300.jpg",
+    "banner": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 42
+  },
+  {
+    "id": "accessories",
+    "name": "Accessories & Displays",
+    "slug": "accessories",
+    "description": "Beading cords, silk tassels, velvet jewelry displays, presentation trays, and tools.",
+    "image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+    "banner": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=80",
+    "itemCount": 15
+  }
+]
