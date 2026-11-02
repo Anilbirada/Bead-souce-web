@@ -415,6 +415,15 @@ app.get('/api/admin/stats', (req, res) => {
   });
 });
 
+// --- SERVE FRONTEND STATIC BUILD (FOR RENDER / PRODUCTION) ---
+const distPath = path.join(__dirname, '../dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.get(/^(?!\/api).+/, (req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
+
 app.listen(PORT, () => {
   console.log(`BeadsSource Wholesale API running on http://localhost:${PORT}`);
 });

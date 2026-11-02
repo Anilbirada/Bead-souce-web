@@ -146,7 +146,34 @@ npm run preview
 
 ---
 
-## 💎 4. MASTER FEATURES & MODULE BREAKDOWN
+## ☁️ 4. RENDER.COM DEPLOYMENT SETTINGS (COPY & PASTE)
+
+When creating a new **Web Service** on [Render Dashboard](https://dashboard.render.com/):
+
+### Configuration Settings
+| Setting Name | Value to Enter |
+| :--- | :--- |
+| **Name** | `beadssource-wholesale` (or your choice) |
+| **Language / Runtime** | `Node` |
+| **Branch** | `main` |
+| **Region** | `Oregon (US West)` or `Singapore` |
+| **Root Directory** | *(Leave blank)* |
+| **Build Command** | `npm install && npm run build` |
+| **Start Command** | `npm start` *(or `node server/index.js`)* |
+| **Plan Type** | `Free` (or Starter) |
+
+### Environment Variables
+Add these key-value pairs in Render's **Environment** tab:
+| Key | Value | Description |
+| :--- | :--- | :--- |
+| `NODE_ENV` | `production` | Enables production optimizations and static build serving |
+| `PORT` | `10000` | Render's default web service port |
+
+*(Note: The repository also includes a `render.yaml` file so you can use Render's Blueprint 1-Click Deploy feature).*
+
+---
+
+## 💎 5. MASTER FEATURES & MODULE BREAKDOWN
 
 ### 1. Homepage & Visual Merchandising
 - **Announcement Bar:** Global currency switcher (**USD $ / INR ₹** with live calculation at ₹86.5/USD), free shipping threshold tracker ($500+), SP Bengaluru direct line (+91 98450 12399), and B2B Wholesale Portal sign-in.
