@@ -1,14 +1,20 @@
 # BEADSSOURCE – PREMIUM INTERNATIONAL WHOLESALE E-COMMERCE PLATFORM
 
 [![Production Ready](https://img.shields.io/badge/status-production--ready-emerald.svg)](#)
+[![Live Demo](https://img.shields.io/badge/live_demo-render-success.svg)](https://beadssource-wholesale.onrender.com)
 [![Stack](https://img.shields.io/badge/stack-React_19_+_Vite_+_Tailwind_v4_+_Node.js-blue.svg)](#)
 [![Client](https://img.shields.io/badge/client-Ramesh_Sir_(SP_Bengaluru)-amber.svg)](#)
 [![Compliance](https://img.shields.io/badge/compliance-CPSIA_%7C_Prop_65_%7C_REACH-purple.svg)](#)
+
+> 🌐 **Live Production URL:** [https://beadssource-wholesale.onrender.com](https://beadssource-wholesale.onrender.com)  
+> 🔗 **Custom Domain:** [https://beadsource.rsrtechnologies.co.in](https://beadsource.rsrtechnologies.co.in) *(GoDaddy DNS)*
 
 ---
 
 ## 📌 1. PROJECT INFORMATION & BACKGROUND
 
+- **Live Production Website:** [https://beadssource-wholesale.onrender.com](https://beadssource-wholesale.onrender.com)
+- **Custom Wholesale Domain:** [https://beadsource.rsrtechnologies.co.in](https://beadsource.rsrtechnologies.co.in)
 - **Client:** Ramesh Sir – SP Bengaluru, Karnataka, India
 - **Existing Website:** [https://beadssource.com/](https://beadssource.com/)
 - **Design & Experience Reference:** [Everful Wholesale](https://www.everfulwholesale.com/)
@@ -146,30 +152,38 @@ npm run preview
 
 ---
 
-## ☁️ 4. RENDER.COM DEPLOYMENT SETTINGS (COPY & PASTE)
+## ☁️ 4. CLOUD DEPLOYMENT & CUSTOM DOMAIN (RENDER.COM + GODADDY)
 
-When creating a new **Web Service** on [Render Dashboard](https://dashboard.render.com/):
+### 🌐 Live Production Deployment
+- **Live URL:** [https://beadssource-wholesale.onrender.com](https://beadssource-wholesale.onrender.com)
+- **Custom Domain:** [https://beadsource.rsrtechnologies.co.in](https://beadsource.rsrtechnologies.co.in)
 
-### Configuration Settings
+### Render.com Configuration Settings
 | Setting Name | Value to Enter |
 | :--- | :--- |
-| **Name** | `beadssource-wholesale` (or your choice) |
+| **Name** | `beadssource-wholesale` |
 | **Language / Runtime** | `Node` |
 | **Branch** | `main` |
 | **Region** | `Oregon (US West)` or `Singapore` |
 | **Root Directory** | *(Leave blank)* |
-| **Build Command** | `npm install && npm run build` |
+| **Build Command** | `npm install --include=dev && npm run build` |
 | **Start Command** | `npm start` *(or `node server/index.js`)* |
 | **Plan Type** | `Free` (or Starter) |
 
 ### Environment Variables
-Add these key-value pairs in Render's **Environment** tab:
 | Key | Value | Description |
 | :--- | :--- | :--- |
 | `NODE_ENV` | `production` | Enables production optimizations and static build serving |
 | `PORT` | `10000` | Render's default web service port |
 
-*(Note: The repository also includes a `render.yaml` file so you can use Render's Blueprint 1-Click Deploy feature).*
+### 🛠️ Connecting GoDaddy Custom Domain (`beadsource.rsrtechnologies.co.in`)
+1. **On Render:** In your Web Service settings, scroll to **Custom Domains** and add `beadsource.rsrtechnologies.co.in`.
+2. **On GoDaddy:** Open DNS Management for `rsrtechnologies.co.in` and add a new record:
+   - **Type:** `CNAME`
+   - **Name:** `beadsource`
+   - **Value:** `beadssource-wholesale.onrender.com`
+   - **TTL:** `1/2 Hour` (or Default)
+3. **Verification & SSL:** Render will automatically verify the CNAME record and issue a free SSL certificate for HTTPS.
 
 ---
 
