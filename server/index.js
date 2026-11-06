@@ -73,11 +73,8 @@ const getAuthUser = (req) => {
 const requireRoles = (allowedRoles = []) => {
   return (req, res, next) => {
     const user = getAuthUser(req);
-    // For convenience in production demo/testing, if no auth header is present on internal demo routes, allow default super_admin
     if (!user) {
-      // In strict API mode we can enforce, or check query token
-      req.currentUser = { id: 'usr-guest', role: 'guest', name: 'Guest' };
-      return next();
+      return res.status(401).json({ error: 'Authentication required. Please provide a valid Bearer token.' });
     }
     req.currentUser = user;
     if (allowedRoles.length > 0 && !allowedRoles.includes(user.role) && user.role !== 'super_admin') {
@@ -366,7 +363,11 @@ app.post('/api/auth/register', (req, res) => {
 
 app.post('/api/auth/login', (req, res) => {
   const users = readData('users.json');
-  const { email, password } = req.body;
+  const { email, password } = req.body || {};
+
+  if (!email || !password || !String(email).trim() || !String(password).trim()) {
+    return res.status(400).json({ error: 'Email and password are required' });
+  }
 
   const user = users.find(u => u.email.toLowerCase() === (email || '').toLowerCase().trim());
   if (!user || user.password !== password) {
@@ -404,15 +405,15 @@ app.put('/api/auth/profile', (req, res) => {
   res.json(userSafe);
 });
 
-// Admin: List all registered customers / users
-app.get('/api/users', (req, res) => {
+// Admin: List all registered customers / users (Restricted to management/support)
+app.get('/api/users', requireRoles(['super_admin', 'admin', 'support']), (req, res) => {
   const users = readData('users.json');
   const usersSafe = users.map(({ password, ...u }) => u);
   res.json(usersSafe);
 });
 
 // Admin: Create staff or customer user
-app.post('/api/users', (req, res) => {
+app.post('/api/users', requireRoles(['super_admin', 'admin']), (req, res) => {
   const users = readData('users.json');
   const { email, password, name, role, company, phone, taxId, wholesaleApproved } = req.body;
 
@@ -448,7 +449,7 @@ app.post('/api/users', (req, res) => {
 });
 
 // Admin: Update user role, status or wholesale approval
-app.put('/api/users/:id', (req, res) => {
+app.put('/api/users/:id', requireRoles(['super_admin', 'admin']), (req, res) => {
   const users = readData('users.json');
   const index = users.findIndex(u => u.id === req.params.id);
   if (index === -1) return res.status(404).json({ error: 'User not found' });
@@ -470,7 +471,7 @@ app.put('/api/users/:id', (req, res) => {
 });
 
 // Admin: Delete user
-app.delete('/api/users/:id', (req, res) => {
+app.delete('/api/users/:id', requireRoles(['super_admin']), (req, res) => {
   let users = readData('users.json');
   const target = users.find(u => u.id === req.params.id);
   if (!target) return res.status(404).json({ error: 'User not found' });
@@ -784,7 +785,7 @@ app.delete('/api/reviews/:id', (req, res) => {
 // ==========================================
 // 12. ADMIN STATS & ANALYTICS API
 // ==========================================
-app.get('/api/admin/stats', (req, res) => {
+app.get('/api/admin/stats', requireRoles(['super_admin', 'admin', 'order_manager']), (req, res) => {
   const products = readData('products.json');
   const orders = readData('orders.json');
   const quotes = readData('quotes.json');

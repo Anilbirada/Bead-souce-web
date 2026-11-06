@@ -202,6 +202,10 @@ export const api = {
     return await res.json();
   },
 
+  async getCustomers() {
+    return this.getUsers();
+  },
+
   async createUser(userData) {
     const res = await fetch(`${API_BASE}/users`, {
       method: 'POST',
