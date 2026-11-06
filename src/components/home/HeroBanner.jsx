@@ -29,7 +29,7 @@ export default function HeroBanner({ onNavigate }) {
 
             {/* Subtext */}
             <p className="text-sm sm:text-base text-[#615A4D] max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Crafted in Bengaluru and delivered worldwide. BeadsSource provides direct manufacturer pricing, certified lead-free components, and flexible wholesale tier discounts for jewelry designers, retail boutiques, and distributors.
+              Engineered to international fine jewellery standards and delivered worldwide. BeadsSource provides direct manufacturer pricing, certified lead-free components, and flexible wholesale tier discounts for jewelry designers, retail boutiques, and distributors.
             </p>
 
             {/* CTAs */}

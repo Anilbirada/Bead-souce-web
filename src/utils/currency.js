@@ -1,15 +1,31 @@
-export const EXCHANGE_RATE_USD_TO_INR = 86.5;
+export const EXCHANGE_RATES = {
+  USD: 1.0,
+  INR: 86.5,
+  EUR: 0.92,
+  GBP: 0.79
+};
 
 export const formatPrice = (amount, currency = 'USD') => {
   if (amount === undefined || amount === null || isNaN(amount)) return '$0.00';
   const num = Number(amount);
 
-  if (currency === 'INR') {
-    const inrValue = num * EXCHANGE_RATE_USD_TO_INR;
-    return `₹${Math.round(inrValue).toLocaleString('en-IN')}`;
+  switch (currency) {
+    case 'INR': {
+      const inrValue = num * EXCHANGE_RATES.INR;
+      return `₹${Math.round(inrValue).toLocaleString('en-IN')}`;
+    }
+    case 'EUR': {
+      const eurValue = num * EXCHANGE_RATES.EUR;
+      return `€${eurValue.toFixed(2)}`;
+    }
+    case 'GBP': {
+      const gbpValue = num * EXCHANGE_RATES.GBP;
+      return `£${gbpValue.toFixed(2)}`;
+    }
+    case 'USD':
+    default:
+      return `$${num.toFixed(2)}`;
   }
-
-  return `$${num.toFixed(2)}`;
 };
 
 export const calculateTierPrice = (basePrice, quantity) => {

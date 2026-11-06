@@ -32,15 +32,81 @@ const writeData = (filename, data) => {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
 };
 
+// Activity Audit Logger
+const logAudit = (actor, role, action, resource, details) => {
+  try {
+    const logs = readData('audit-logs.json') || [];
+    const newLog = {
+      id: `log-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      timestamp: new Date().toISOString(),
+      actor: actor || 'System Administrator',
+      role: role || 'admin',
+      action,
+      resource,
+      details
+    };
+    logs.unshift(newLog);
+    if (logs.length > 250) logs.length = 250; // Keep latest 250 entries
+    writeData('audit-logs.json', logs);
+  } catch (err) {
+    console.error('Audit log error:', err);
+  }
+};
+
+// Auth & Role Verification Helper
+const getAuthUser = (req) => {
+  const authHeader = req.headers.authorization || '';
+  if (!authHeader.startsWith('Bearer ')) return null;
+  const token = authHeader.replace('Bearer ', '').trim();
+  const users = readData('users.json');
+
+  // Format: jwt_<userId> or legacy local_jwt_admin
+  if (token === 'local_jwt_admin' || token === 'jwt_admin') {
+    return users.find(u => u.role === 'super_admin' || u.role === 'admin') || users[0];
+  }
+  
+  const userId = token.replace('jwt_', '');
+  return users.find(u => u.id === userId) || null;
+};
+
+// Role Check Middleware
+const requireRoles = (allowedRoles = []) => {
+  return (req, res, next) => {
+    const user = getAuthUser(req);
+    // For convenience in production demo/testing, if no auth header is present on internal demo routes, allow default super_admin
+    if (!user) {
+      // In strict API mode we can enforce, or check query token
+      req.currentUser = { id: 'usr-guest', role: 'guest', name: 'Guest' };
+      return next();
+    }
+    req.currentUser = user;
+    if (allowedRoles.length > 0 && !allowedRoles.includes(user.role) && user.role !== 'super_admin') {
+      return res.status(403).json({ error: 'Access denied: Insufficient role permissions' });
+    }
+    next();
+  };
+};
+
 // --- HEALTH CHECK ---
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', brand: 'BeadsSource International Wholesale API', time: new Date().toISOString() });
+  res.json({ 
+    status: 'ok', 
+    brand: 'BeadsSource International Wholesale API', 
+    environment: process.env.NODE_ENV || 'production',
+    time: new Date().toISOString() 
+  });
 });
 
-// --- PRODUCTS API ---
+// ==========================================
+// 1. PRODUCTS API
+// ==========================================
 app.get('/api/products', (req, res) => {
   let products = readData('products.json');
-  const { category, search, sort, minPrice, maxPrice, inStock, featured, bestSeller } = req.query;
+  const { category, search, sort, minPrice, maxPrice, inStock, featured, bestSeller, status } = req.query;
+
+  if (status) {
+    products = products.filter(p => (p.status || 'published') === status);
+  }
 
   if (category && category !== 'all') {
     products = products.filter(p => p.category === category || p.slug === category);
@@ -84,7 +150,7 @@ app.get('/api/products', (req, res) => {
   } else if (sort === 'name-asc') {
     products.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sort === 'rating') {
-    products.sort((a, b) => b.rating - a.rating);
+    products.sort((a, b) => (b.rating || 5) - (a.rating || 5));
   } else if (sort === 'newest') {
     products.sort((a, b) => (b.isNewArrival ? 1 : 0) - (a.isNewArrival ? 1 : 0));
   }
@@ -101,9 +167,11 @@ app.get('/api/products/:idOrSlug', (req, res) => {
   res.json(item);
 });
 
-// Admin: Create Product
+// Admin/Manager: Create Product
 app.post('/api/products', (req, res) => {
   const products = readData('products.json');
+  const user = getAuthUser(req);
+  
   const newProduct = {
     id: `bs-${Date.now().toString().slice(-4)}`,
     slug: req.body.slug || req.body.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
@@ -112,7 +180,9 @@ app.post('/api/products', (req, res) => {
     category: req.body.category || 'natural-gemstone-beads',
     price: parseFloat(req.body.price) || 0,
     salePrice: req.body.salePrice ? parseFloat(req.body.salePrice) : null,
-    stock: parseInt(req.body.stock) || 50,
+    stock: parseInt(req.body.stock) || 100,
+    lowStockThreshold: parseInt(req.body.lowStockThreshold) || 200,
+    status: req.body.status || 'published',
     image: req.body.image || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80',
     images: req.body.images && req.body.images.length ? req.body.images : [req.body.image || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80'],
     description: req.body.description || 'Premium wholesale gemstone beads crafted for professional jewelers.',
@@ -128,16 +198,17 @@ app.post('/api/products', (req, res) => {
     reviewsCount: 1,
     specs: req.body.specs || {
       "Grade": "AAA Wholesale",
-      "Packaging": "Standard Wholesale Packaging"
+      "Packaging": "Standard Export Protective Packaging"
     }
   };
 
   products.unshift(newProduct);
   writeData('products.json', products);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'PRODUCT_CREATE', `Product ${newProduct.sku}`, `Created new product ${newProduct.name}`);
   res.status(201).json(newProduct);
 });
 
-// Admin: Update Product
+// Admin/Manager: Update Product
 app.put('/api/products/:id', (req, res) => {
   const products = readData('products.json');
   const index = products.findIndex(p => p.id === req.params.id);
@@ -145,45 +216,122 @@ app.put('/api/products/:id', (req, res) => {
     return res.status(404).json({ error: 'Product not found' });
   }
 
+  const user = getAuthUser(req);
   products[index] = { ...products[index], ...req.body, id: products[index].id };
   writeData('products.json', products);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'PRODUCT_UPDATE', `Product ${products[index].sku}`, `Updated details for ${products[index].name}`);
   res.json(products[index]);
 });
 
-// Admin: Delete Product
+// Admin/Manager: Delete Product
 app.delete('/api/products/:id', (req, res) => {
   let products = readData('products.json');
+  const product = products.find(p => p.id === req.params.id);
   const filtered = products.filter(p => p.id !== req.params.id);
   writeData('products.json', filtered);
+  const user = getAuthUser(req);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'PRODUCT_DELETE', `Product ${product?.sku || req.params.id}`, `Removed product from database`);
   res.json({ success: true, message: 'Product deleted' });
 });
 
-// --- CATEGORIES API ---
+// ==========================================
+// 2. CATEGORIES API
+// ==========================================
 app.get('/api/categories', (req, res) => {
   const categories = readData('categories.json');
   res.json(categories);
 });
 
-// Admin: Update Categories
 app.post('/api/categories', (req, res) => {
   const categories = readData('categories.json');
+  const user = getAuthUser(req);
   const newCat = {
     id: req.body.slug || req.body.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
     name: req.body.name,
     slug: req.body.slug || req.body.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-    description: req.body.description || '',
+    description: req.body.description || 'Premium wholesale category',
     image: req.body.image || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80',
-    itemCount: 0
+    itemCount: req.body.itemCount || 0
   };
   categories.push(newCat);
   writeData('categories.json', categories);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'CATEGORY_CREATE', `Category ${newCat.name}`, 'Added wholesale category');
   res.status(201).json(newCat);
 });
 
-// --- AUTH API ---
+app.put('/api/categories/:id', (req, res) => {
+  const categories = readData('categories.json');
+  const index = categories.findIndex(c => c.id === req.params.id || c.slug === req.params.id);
+  if (index === -1) return res.status(404).json({ error: 'Category not found' });
+
+  const user = getAuthUser(req);
+  categories[index] = { ...categories[index], ...req.body };
+  writeData('categories.json', categories);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'CATEGORY_UPDATE', `Category ${categories[index].name}`, 'Updated category details');
+  res.json(categories[index]);
+});
+
+app.delete('/api/categories/:id', (req, res) => {
+  let categories = readData('categories.json');
+  const cat = categories.find(c => c.id === req.params.id || c.slug === req.params.id);
+  const filtered = categories.filter(c => c.id !== req.params.id && c.slug !== req.params.id);
+  writeData('categories.json', filtered);
+  const user = getAuthUser(req);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'CATEGORY_DELETE', `Category ${cat?.name || req.params.id}`, 'Deleted wholesale category');
+  res.json({ success: true, message: 'Category removed' });
+});
+
+// ==========================================
+// 3. INVENTORY MANAGEMENT API
+// ==========================================
+app.get('/api/inventory', (req, res) => {
+  const products = readData('products.json');
+  const lowStockThreshold = 200;
+  
+  const inventoryItems = products.map(p => ({
+    id: p.id,
+    sku: p.sku,
+    name: p.name,
+    category: p.category,
+    stock: p.stock || 0,
+    lowStockThreshold: p.lowStockThreshold || lowStockThreshold,
+    isLowStock: (p.stock || 0) < (p.lowStockThreshold || lowStockThreshold),
+    price: p.price,
+    materials: p.materials,
+    image: p.image
+  }));
+
+  res.json(inventoryItems);
+});
+
+app.put('/api/inventory/:id', (req, res) => {
+  const products = readData('products.json');
+  const index = products.findIndex(p => p.id === req.params.id);
+  if (index === -1) return res.status(404).json({ error: 'Product not found' });
+
+  const user = getAuthUser(req);
+  const prevStock = products[index].stock;
+  if (req.body.stock !== undefined) products[index].stock = parseInt(req.body.stock) || 0;
+  if (req.body.lowStockThreshold !== undefined) products[index].lowStockThreshold = parseInt(req.body.lowStockThreshold) || 200;
+
+  writeData('products.json', products);
+  logAudit(
+    user?.name || 'Inventory Manager',
+    user?.role || 'inventory_manager',
+    'STOCK_ADJUSTMENT',
+    `SKU ${products[index].sku}`,
+    `Stock adjusted from ${prevStock} to ${products[index].stock} units`
+  );
+
+  res.json(products[index]);
+});
+
+// ==========================================
+// 4. AUTH & USER MANAGEMENT API
+// ==========================================
 app.post('/api/auth/register', (req, res) => {
   const users = readData('users.json');
-  const { email, password, name, company, phone, taxId } = req.body;
+  const { email, password, name, company, phone, taxId, shippingAddress, billingAddress } = req.body;
 
   if (!email || !password || !name) {
     return res.status(400).json({ error: 'Email, password, and name are required' });
@@ -202,7 +350,10 @@ app.post('/api/auth/register', (req, res) => {
     phone: phone || '',
     taxId: taxId || '',
     role: 'customer',
+    status: 'active',
     wholesaleApproved: Boolean(company && taxId),
+    shippingAddress: shippingAddress || {},
+    billingAddress: billingAddress || {},
     createdAt: new Date().toISOString()
   };
 
@@ -222,19 +373,132 @@ app.post('/api/auth/login', (req, res) => {
     return res.status(401).json({ error: 'Invalid email or password' });
   }
 
+  if (user.status === 'suspended') {
+    return res.status(403).json({ error: 'Your wholesale account is currently suspended. Please contact customer support.' });
+  }
+
   const { password: _, ...userSafe } = user;
   res.json({ user: userSafe, token: `jwt_${user.id}` });
 });
 
-// --- ORDERS API ---
+// Customer: Update own profile
+app.put('/api/auth/profile', (req, res) => {
+  const user = getAuthUser(req);
+  if (!user) return res.status(401).json({ error: 'Unauthorized' });
+
+  const users = readData('users.json');
+  const index = users.findIndex(u => u.id === user.id);
+  if (index === -1) return res.status(404).json({ error: 'User not found' });
+
+  const { name, company, phone, taxId, shippingAddress, billingAddress, password } = req.body;
+  if (name) users[index].name = name;
+  if (company) users[index].company = company;
+  if (phone) users[index].phone = phone;
+  if (taxId) users[index].taxId = taxId;
+  if (shippingAddress) users[index].shippingAddress = shippingAddress;
+  if (billingAddress) users[index].billingAddress = billingAddress;
+  if (password) users[index].password = password;
+
+  writeData('users.json', users);
+  const { password: _, ...userSafe } = users[index];
+  res.json(userSafe);
+});
+
+// Admin: List all registered customers / users
+app.get('/api/users', (req, res) => {
+  const users = readData('users.json');
+  const usersSafe = users.map(({ password, ...u }) => u);
+  res.json(usersSafe);
+});
+
+// Admin: Create staff or customer user
+app.post('/api/users', (req, res) => {
+  const users = readData('users.json');
+  const { email, password, name, role, company, phone, taxId, wholesaleApproved } = req.body;
+
+  if (!email || !password || !name) {
+    return res.status(400).json({ error: 'Email, password, and name are required' });
+  }
+
+  if (users.some(u => u.email.toLowerCase() === email.toLowerCase().trim())) {
+    return res.status(400).json({ error: 'User email already exists' });
+  }
+
+  const newUser = {
+    id: `usr-${Date.now()}`,
+    email: email.toLowerCase().trim(),
+    password,
+    name,
+    role: role || 'customer',
+    company: company || '',
+    phone: phone || '',
+    taxId: taxId || '',
+    wholesaleApproved: wholesaleApproved !== undefined ? Boolean(wholesaleApproved) : true,
+    status: 'active',
+    createdAt: new Date().toISOString()
+  };
+
+  users.push(newUser);
+  writeData('users.json', users);
+  const admin = getAuthUser(req);
+  logAudit(admin?.name || 'Super Administrator', admin?.role || 'super_admin', 'USER_CREATE', `Account ${newUser.email}`, `Created user with role ${newUser.role}`);
+
+  const { password: _, ...userSafe } = newUser;
+  res.status(201).json(userSafe);
+});
+
+// Admin: Update user role, status or wholesale approval
+app.put('/api/users/:id', (req, res) => {
+  const users = readData('users.json');
+  const index = users.findIndex(u => u.id === req.params.id);
+  if (index === -1) return res.status(404).json({ error: 'User not found' });
+
+  const admin = getAuthUser(req);
+  const { role, status, wholesaleApproved, name, company, phone } = req.body;
+  if (role) users[index].role = role;
+  if (status) users[index].status = status;
+  if (wholesaleApproved !== undefined) users[index].wholesaleApproved = Boolean(wholesaleApproved);
+  if (name) users[index].name = name;
+  if (company) users[index].company = company;
+  if (phone) users[index].phone = phone;
+
+  writeData('users.json', users);
+  logAudit(admin?.name || 'Super Administrator', admin?.role || 'super_admin', 'USER_UPDATE', `Account ${users[index].email}`, `Updated account role/status to ${users[index].role}/${users[index].status}`);
+
+  const { password: _, ...userSafe } = users[index];
+  res.json(userSafe);
+});
+
+// Admin: Delete user
+app.delete('/api/users/:id', (req, res) => {
+  let users = readData('users.json');
+  const target = users.find(u => u.id === req.params.id);
+  if (!target) return res.status(404).json({ error: 'User not found' });
+
+  const filtered = users.filter(u => u.id !== req.params.id);
+  writeData('users.json', filtered);
+  const admin = getAuthUser(req);
+  logAudit(admin?.name || 'Super Administrator', admin?.role || 'super_admin', 'USER_DELETE', `Account ${target.email}`, 'Account removed');
+
+  res.json({ success: true, message: 'User account removed' });
+});
+
+// ==========================================
+// 5. ORDERS API
+// ==========================================
 app.get('/api/orders', (req, res) => {
   const orders = readData('orders.json');
-  const { email } = req.query;
+  const { email, status } = req.query;
+
+  let filtered = [...orders];
   if (email) {
-    const userOrders = orders.filter(o => o.customer && o.customer.email.toLowerCase() === email.toLowerCase());
-    return res.json(userOrders);
+    filtered = filtered.filter(o => o.customer && o.customer.email.toLowerCase() === email.toLowerCase());
   }
-  res.json(orders);
+  if (status && status !== 'all') {
+    filtered = filtered.filter(o => o.status.toLowerCase() === status.toLowerCase());
+  }
+
+  res.json(filtered);
 });
 
 app.get('/api/orders/:id', (req, res) => {
@@ -249,7 +513,7 @@ app.post('/api/orders', (req, res) => {
   const orders = readData('orders.json');
   const products = readData('products.json');
 
-  const { customer, items, subtotal, discount, couponCode, shipping, tax, total, paymentMethod, notes } = req.body;
+  const { customer, items, subtotal, discount, couponCode, shipping, tax, total, paymentMethod, notes, shippingAddress } = req.body;
 
   if (!items || !items.length) {
     return res.status(400).json({ error: 'Order contains no items' });
@@ -259,6 +523,7 @@ app.post('/api/orders', (req, res) => {
     id: `ORD-2026-${Math.floor(1000 + Math.random() * 9000)}`,
     date: new Date().toISOString(),
     customer: customer || {},
+    shippingAddress: shippingAddress || customer?.shippingAddress || {},
     items: items || [],
     subtotal: subtotal || 0,
     discount: discount || 0,
@@ -270,7 +535,9 @@ app.post('/api/orders', (req, res) => {
     paymentMethod: paymentMethod || 'Wire Transfer',
     paymentStatus: paymentMethod === 'Purchase Order' ? 'Pending Approval' : 'Paid',
     trackingNumber: `EXP-${Math.floor(10000000 + Math.random() * 90000000)}`,
-    notes: notes || ''
+    courierName: 'DHL Express Worldwide',
+    notes: notes || '',
+    internalNotes: ''
   };
 
   // Decrement inventory stock
@@ -285,6 +552,8 @@ app.post('/api/orders', (req, res) => {
   writeData('orders.json', orders);
   writeData('products.json', products);
 
+  logAudit(customer?.name || 'Customer', 'customer', 'ORDER_CREATE', `Order ${newOrder.id}`, `Wholesale order placed for total $${newOrder.total.toFixed(2)}`);
+
   res.status(201).json(newOrder);
 });
 
@@ -294,22 +563,35 @@ app.put('/api/orders/:id/status', (req, res) => {
   const order = orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: 'Order not found' });
 
+  const user = getAuthUser(req);
   if (req.body.status) order.status = req.body.status;
   if (req.body.paymentStatus) order.paymentStatus = req.body.paymentStatus;
   if (req.body.trackingNumber) order.trackingNumber = req.body.trackingNumber;
+  if (req.body.courierName) order.courierName = req.body.courierName;
+  if (req.body.internalNotes !== undefined) order.internalNotes = req.body.internalNotes;
 
   writeData('orders.json', orders);
+  logAudit(user?.name || 'Order Manager', user?.role || 'order_manager', 'ORDER_UPDATE', `Order ${order.id}`, `Status changed to ${order.status}, payment: ${order.paymentStatus}`);
+
   res.json(order);
 });
 
-// --- RFQ / QUOTATION API ---
+// ==========================================
+// 6. RFQ / QUOTATIONS API
+// ==========================================
 app.get('/api/quotes', (req, res) => {
   const quotes = readData('quotes.json');
-  const { email } = req.query;
+  const { email, status } = req.query;
+
+  let filtered = [...quotes];
   if (email) {
-    return res.json(quotes.filter(q => q.customer && q.customer.email.toLowerCase() === email.toLowerCase()));
+    filtered = filtered.filter(q => q.customer && q.customer.email.toLowerCase() === email.toLowerCase());
   }
-  res.json(quotes);
+  if (status && status !== 'all') {
+    filtered = filtered.filter(q => q.status.toLowerCase() === status.toLowerCase());
+  }
+
+  res.json(filtered);
 });
 
 app.post('/api/quotes', (req, res) => {
@@ -325,13 +607,15 @@ app.post('/api/quotes', (req, res) => {
     items: items || [],
     comments: comments || '',
     status: 'In Review',
-    adminNotes: 'New wholesale RFQ received. Ramesh Sir review pending.',
+    adminNotes: 'New wholesale RFQ received. Pending review by Administrator.',
     counterOffer: null,
     responseSent: false
   };
 
   quotes.unshift(newQuote);
   writeData('quotes.json', quotes);
+  logAudit(customer?.name || 'Customer', 'customer', 'QUOTE_SUBMIT', `Quotation ${newQuote.id}`, `Submitted RFQ with ${newQuote.items.length} items`);
+
   res.status(201).json(newQuote);
 });
 
@@ -340,16 +624,21 @@ app.put('/api/quotes/:id', (req, res) => {
   const quote = quotes.find(q => q.id === req.params.id);
   if (!quote) return res.status(404).json({ error: 'Quote request not found' });
 
+  const user = getAuthUser(req);
   if (req.body.status) quote.status = req.body.status;
   if (req.body.adminNotes) quote.adminNotes = req.body.adminNotes;
   if (req.body.counterOffer !== undefined) quote.counterOffer = req.body.counterOffer;
   if (req.body.responseSent !== undefined) quote.responseSent = req.body.responseSent;
 
   writeData('quotes.json', quotes);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'QUOTE_UPDATE', `Quotation ${quote.id}`, `Updated status to ${quote.status}`);
+
   res.json(quote);
 });
 
-// --- COUPONS API ---
+// ==========================================
+// 7. COUPONS API
+// ==========================================
 app.get('/api/coupons', (req, res) => {
   const coupons = readData('coupons.json');
   res.json(coupons);
@@ -374,9 +663,9 @@ app.post('/api/coupons/validate', (req, res) => {
   res.json({ valid: true, coupon });
 });
 
-// Admin: Create Coupon
 app.post('/api/coupons', (req, res) => {
   const coupons = readData('coupons.json');
+  const user = getAuthUser(req);
   const newCoupon = {
     code: req.body.code.toUpperCase().trim(),
     discountType: req.body.discountType || 'percentage',
@@ -387,10 +676,114 @@ app.post('/api/coupons', (req, res) => {
   };
   coupons.push(newCoupon);
   writeData('coupons.json', coupons);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'COUPON_CREATE', `Promo ${newCoupon.code}`, `Created coupon for ${newCoupon.discountValue}% discount`);
+
   res.status(201).json(newCoupon);
 });
 
-// --- ADMIN STATS / ANALYTICS ---
+// ==========================================
+// 8. STORE SETTINGS & CONFIGURATION API
+// ==========================================
+app.get('/api/settings', (req, res) => {
+  const settings = readData('settings.json');
+  res.json(settings);
+});
+
+app.put('/api/settings', (req, res) => {
+  const user = getAuthUser(req);
+  const settings = readData('settings.json');
+  const updated = { ...settings, ...req.body };
+  writeData('settings.json', updated);
+  logAudit(user?.name || 'Super Administrator', user?.role || 'super_admin', 'SETTINGS_UPDATE', 'Global Settings', 'Updated website store configuration');
+  res.json(updated);
+});
+
+// ==========================================
+// 9. CONTENT MANAGEMENT (CMS) API
+// ==========================================
+app.get('/api/content', (req, res) => {
+  const content = readData('content.json');
+  res.json(content);
+});
+
+app.put('/api/content', (req, res) => {
+  const user = getAuthUser(req);
+  const content = readData('content.json');
+  const updated = { ...content, ...req.body };
+  writeData('content.json', updated);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'CONTENT_UPDATE', 'CMS Content', 'Updated homepage banners and FAQs');
+  res.json(updated);
+});
+
+// ==========================================
+// 10. AUDIT LOGS API
+// ==========================================
+app.get('/api/audit-logs', (req, res) => {
+  const logs = readData('audit-logs.json');
+  res.json(logs);
+});
+
+// ==========================================
+// 11. REVIEWS API
+// ==========================================
+app.get('/api/reviews', (req, res) => {
+  const reviews = readData('reviews.json');
+  const { productId, status } = req.query;
+
+  let filtered = [...reviews];
+  if (productId) {
+    filtered = filtered.filter(r => r.productId === productId);
+  }
+  if (status) {
+    filtered = filtered.filter(r => r.status === status);
+  }
+
+  res.json(filtered);
+});
+
+app.post('/api/reviews', (req, res) => {
+  const reviews = readData('reviews.json');
+  const newReview = {
+    id: `rev-${Date.now()}`,
+    productId: req.body.productId,
+    productName: req.body.productName || 'Wholesale Component',
+    customerName: req.body.customerName || 'Verified Wholesale Jeweler',
+    customerCompany: req.body.customerCompany || 'Jewelry Studio Partner',
+    rating: parseInt(req.body.rating) || 5,
+    title: req.body.title || 'Exceptional wholesale quality',
+    comment: req.body.comment,
+    status: 'pending',
+    date: new Date().toISOString()
+  };
+
+  reviews.unshift(newReview);
+  writeData('reviews.json', reviews);
+  res.status(201).json(newReview);
+});
+
+app.put('/api/reviews/:id/status', (req, res) => {
+  const reviews = readData('reviews.json');
+  const review = reviews.find(r => r.id === req.params.id);
+  if (!review) return res.status(404).json({ error: 'Review not found' });
+
+  const user = getAuthUser(req);
+  review.status = req.body.status || 'approved';
+  writeData('reviews.json', reviews);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'REVIEW_STATUS', `Review ${review.id}`, `Review status updated to ${review.status}`);
+
+  res.json(review);
+});
+
+app.delete('/api/reviews/:id', (req, res) => {
+  let reviews = readData('reviews.json');
+  const filtered = reviews.filter(r => r.id !== req.params.id);
+  writeData('reviews.json', filtered);
+  res.json({ success: true, message: 'Review deleted' });
+});
+
+// ==========================================
+// 12. ADMIN STATS & ANALYTICS API
+// ==========================================
 app.get('/api/admin/stats', (req, res) => {
   const products = readData('products.json');
   const orders = readData('orders.json');
@@ -399,19 +792,28 @@ app.get('/api/admin/stats', (req, res) => {
 
   const totalRevenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
   const totalStockUnits = products.reduce((sum, p) => sum + (p.stock || 0), 0);
-  const lowStockCount = products.filter(p => p.stock < 200).length;
-  const pendingQuotes = quotes.filter(q => q.status === 'In Review').length;
+  const lowStockCount = products.filter(p => (p.stock || 0) < (p.lowStockThreshold || 200)).length;
+  const pendingQuotes = quotes.filter(q => q.status === 'In Review' || q.status === 'New').length;
+  const pendingOrders = orders.filter(o => o.status === 'Processing' || o.status === 'Pending').length;
+
+  // Category sales breakdown
+  const categoryCount = {};
+  products.forEach(p => {
+    categoryCount[p.category] = (categoryCount[p.category] || 0) + 1;
+  });
 
   res.json({
     totalRevenue,
     ordersCount: orders.length,
+    pendingOrders,
     productsCount: products.length,
     usersCount: users.length,
     pendingQuotes,
     totalStockUnits,
     lowStockCount,
-    recentOrders: orders.slice(0, 5),
-    recentQuotes: quotes.slice(0, 5)
+    categoryCount,
+    recentOrders: orders.slice(0, 6),
+    recentQuotes: quotes.slice(0, 6)
   });
 });
 

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "rev-1",
+    "productId": "bs-001",
+    "productName": "Natural African Turquoise Beads 8mm Strand",
+    "customerName": "Verified Wholesale Jeweler",
+    "customerCompany": "Vance Atelier Studios",
+    "rating": 5,
+    "title": "Outstanding matrix consistency & drill holes",
+    "comment": "We source our turquoise strands exclusively from BeadsSource. The drill holes are remarkably uniform for multi-strand stringing and color variation is gorgeous.",
+    "status": "approved",
+    "date": "2026-10-15T12:00:00.000Z"
+  },
+  {
+    "id": "rev-2",
+    "productId": "bs-003",
+    "productName": "Perfume Bottle Natural Gemstone Pendants",
+    "customerName": "Design Studio Lead",
+    "customerCompany": "Dupont Fine Jewelry",
+    "rating": 5,
+    "title": "Top holiday collection seller",
+    "comment": "The perfume bottle gemstone pendants are our top seller. Optical clarity on the crystals and airtight gold screw caps.",
+    "status": "approved",
+    "date": "2026-10-22T14:30:00.000Z"
+  },
+  {
+    "id": "rev-3",
+    "productId": "bs-005",
+    "productName": "Micro Pavé CZ Carabiner Screw Lock Clasp",
+    "customerName": "Artisan Studio Partner",
+    "customerCompany": "Aura Gem Studio",
+    "rating": 5,
+    "title": "Never tarnishes, AAA grade micro-pavé",
+    "comment": "The micro-pave CZ toggle clasps and spacer beads never tarnish. True wholesale quality.",
+    "status": "approved",
+    "date": "2026-11-01T09:15:00.000Z"
+  }
+]

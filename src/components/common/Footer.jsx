@@ -81,25 +81,25 @@ export default function Footer({ onNavigate }) {
                 B
               </div>
               <span className="font-serif text-2xl font-bold tracking-tight text-white">
-                BEADS<span className="text-[#D4AF37]">SOURCE</span>
+                BEADS<span className="text-[#C49A3A]">SOURCE</span>
               </span>
             </div>
 
             <p className="text-xs text-[#9E9789] leading-relaxed max-w-sm">
-              Established in Bengaluru, BeadsSource is an international manufacturer and wholesale supplier of natural gemstone beads, pavé cubic zirconia, lead-free pewter components, and finished artisanal jewelry.
+              BeadsSource is an international manufacturer and wholesale exporter of natural gemstone beads, pavé cubic zirconia, lead-free pewter components, and finished artisanal jewelry.
             </p>
 
             <div className="space-y-2 text-xs text-[#B8B2A4] pt-2">
               <p className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                <span>SP Road Commercial District, Bengaluru, Karnataka 560002, India</span>
+                <MapPin className="w-4 h-4 text-[#C49A3A] shrink-0" />
+                <span>Central International Distribution &amp; Sourcing Operations</span>
               </p>
               <p className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                <span>+91 98450 12399 &bull; Showroom: Ramesh Sir</span>
+                <Phone className="w-4 h-4 text-[#C49A3A] shrink-0" />
+                <span>+1 (800) 555-0199 &bull; Global Wholesale Desk</span>
               </p>
               <p className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <Mail className="w-4 h-4 text-[#C49A3A] shrink-0" />
                 <span>wholesale@beadssource.com &bull; support@beadssource.com</span>
               </p>
             </div>
@@ -193,7 +193,7 @@ export default function Footer({ onNavigate }) {
                   onClick={() => onNavigate('contact')} 
                   className="hover:text-white transition-colors"
                 >
-                  Bengaluru Showroom Visits
+                  Private Showroom Visits
                 </button>
               </li>
               <li>
@@ -244,7 +244,7 @@ export default function Footer({ onNavigate }) {
         {/* Bottom Bar: Copyright & Compliance */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#80796C] gap-4">
           <p>
-            &copy; 2026 BeadsSource LLC &bull; SP Bengaluru &bull; All Rights Reserved.
+            &copy; 2026 BeadsSource LLC &bull; All Rights Reserved.
           </p>
 
           <div className="flex items-center gap-6">

@@ -197,7 +197,7 @@ export default function ProductDetailPage({
                 <Scale className="w-5 h-5 text-[#C4A052] shrink-0" />
                 <div>
                   <p className="font-semibold text-[#1A1A1A]">Authentic Mineral</p>
-                  <p className="text-[10px] text-gray-500">Calibrated Sizing &bull; SP Road</p>
+                  <p className="text-[10px] text-gray-500">Calibrated Sizing &bull; Lab Verified</p>
                 </div>
               </div>
             </div>
@@ -516,10 +516,10 @@ export default function ProductDetailPage({
                 All orders are inspected and packed with shock-resistant export bubble wraps and sealed polyethylene bags to guarantee intact delivery of delicate gemstone beads and pave crystals.
               </p>
               <ul className="space-y-2 pl-4 list-disc">
-                <li><strong>Dispatch Hub:</strong> Showroom &amp; Warehouse, SP Road, Bengaluru, Karnataka, India.</li>
+                <li><strong>Dispatch Hub:</strong> Central International Logistics Center.</li>
                 <li><strong>International Couriers:</strong> DHL Express Worldwide, FedEx International Priority, and UPS Air Freight.</li>
                 <li><strong>Transit Times:</strong> 3-5 business days to North America, Europe, Australia, and Middle East.</li>
-                <li><strong>Domestic India:</strong> BlueDart, DTDC, and SP Road local showroom pickup.</li>
+                <li><strong>Regional Deliveries:</strong> Express air couriers and warehouse distribution pickup.</li>
                 <li><strong>Free Shipping:</strong> Automatically activated on all wholesale purchases over $500 USD.</li>
               </ul>
             </div>

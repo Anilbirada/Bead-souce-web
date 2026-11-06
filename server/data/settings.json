@@ -1,0 +1,73 @@
+{
+  "general": {
+    "storeName": "BeadsSource Wholesale",
+    "tagline": "International Luxury Gemstones, Crystals & Jewelry Findings",
+    "businessEmail": "wholesale@beadssource.com",
+    "supportEmail": "support@beadssource.com",
+    "phone": "+1 (800) 555-0199",
+    "headquarters": "Central International Distribution Hub",
+    "copyright": "© 2026 BeadsSource LLC. All Rights Reserved."
+  },
+  "currencies": {
+    "defaultCurrency": "USD",
+    "supportedCurrencies": ["USD", "EUR", "GBP", "INR", "CAD", "AUD"],
+    "exchangeRates": {
+      "USD": 1.0,
+      "INR": 86.50,
+      "EUR": 0.92,
+      "GBP": 0.79,
+      "CAD": 1.36,
+      "AUD": 1.52
+    }
+  },
+  "tax": {
+    "taxRatePercent": 5.0,
+    "taxIdentificationNumber": "GST-INT-998241",
+    "taxIncludedInPrice": false
+  },
+  "shipping": {
+    "freeShippingThreshold": 500,
+    "methods": [
+      {
+        "id": "dhl-express",
+        "name": "DHL Express Worldwide",
+        "rate": 35.0,
+        "deliveryDays": "3-5 Business Days",
+        "enabled": true
+      },
+      {
+        "id": "fedex-priority",
+        "name": "FedEx International Priority",
+        "rate": 38.0,
+        "deliveryDays": "2-4 Business Days",
+        "enabled": true
+      },
+      {
+        "id": "air-courier",
+        "name": "Standard International Air Freight",
+        "rate": 20.0,
+        "deliveryDays": "7-10 Business Days",
+        "enabled": true
+      },
+      {
+        "id": "warehouse-pickup",
+        "name": "Distribution Center Warehouse Pickup",
+        "rate": 0.0,
+        "deliveryDays": "Ready in 24 Hours",
+        "enabled": true
+      }
+    ]
+  },
+  "notifications": {
+    "emailOnNewOrder": true,
+    "emailOnOrderStatus": true,
+    "emailOnNewQuote": true,
+    "emailOnLowStock": true,
+    "lowStockAlertThreshold": 200
+  },
+  "seo": {
+    "metaTitle": "BeadsSource – Premium International Wholesale Gemstone & Findings",
+    "metaDescription": "Direct manufacturer and exporter of genuine natural gemstone beads, lead-free pewter charms, micro-pavé cubic zirconia and jewelry findings.",
+    "keywords": "gemstone beads wholesale, lead-free pewter charms, cubic zirconia findings, jewelry making supplies, natural turquoise beads"
+  }
+}

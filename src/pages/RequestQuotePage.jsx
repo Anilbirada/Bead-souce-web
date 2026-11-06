@@ -84,7 +84,7 @@ export default function RequestQuotePage({ onNavigate }) {
               Quotation Request #{submittedQuote.id}
             </h1>
             <p className="text-xs sm:text-sm text-[#6B6557] mt-2 max-w-md mx-auto">
-              Thank you, <strong>{customer.name}</strong>. Your quotation request has been forwarded directly to Ramesh Sir and our SP Bengaluru wholesale desk.
+              Thank you, <strong>{customer.name}</strong>. Your quotation request has been forwarded directly to our Senior Sourcing &amp; Production Desk.
             </p>
           </div>
 
@@ -146,7 +146,7 @@ export default function RequestQuotePage({ onNavigate }) {
             Request a Wholesale Bulk Quotation
           </h1>
           <p className="text-xs sm:text-sm text-[#C9C3B4] mt-2 max-w-2xl leading-relaxed">
-            Need customized gemstone specifications, special drill hole sizes, OEM casting, or container-level volume pricing? Add items to your quotation list and our SP Bengaluru team will provide a tailored quote.
+            Need customized gemstone specifications, special drill hole sizes, OEM casting, or container-level volume pricing? Add items to your quotation list and our wholesale sourcing team will provide a tailored quote.
           </p>
         </div>
       </div>
@@ -313,7 +313,7 @@ export default function RequestQuotePage({ onNavigate }) {
                       required
                       value={customer.name}
                       onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
-                      placeholder="e.g. Ramesh Sir / Eleanor Vance"
+                      placeholder="e.g. Authorized Business Representative"
                       className="w-full pl-9 pr-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl text-xs focus:outline-none focus:border-[#C4A052]"
                     />
                   </div>
@@ -428,7 +428,7 @@ export default function RequestQuotePage({ onNavigate }) {
                 </button>
 
                 <p className="text-[11px] text-gray-500 text-center pt-2">
-                  🔒 Strictly confidential. Your quotation request is sent directly to Ramesh Sir's export desk.
+                  🔒 Strictly confidential. Your quotation request is reviewed exclusively by our verified B2B wholesale management.
                 </p>
               </div>
 
@@ -441,10 +441,10 @@ export default function RequestQuotePage({ onNavigate }) {
                 <span>Need Urgent Assistance?</span>
               </div>
               <p className="leading-relaxed">
-                For immediate large container orders or custom casting tooling questions, contact Ramesh Sir directly at our SP Road Bengaluru showroom:
+                For immediate large container inquiries or custom casting tooling specifications, contact our wholesale support desk:
               </p>
               <p className="font-bold text-[#1A1A1A]">
-                WhatsApp / Call: +91 98450 12399 &bull; info@beadssource.com
+                Toll-Free Support: +1 (800) 555-0199 &bull; wholesale@beadssource.com
               </p>
             </div>
 

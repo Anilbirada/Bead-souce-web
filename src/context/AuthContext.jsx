@@ -3,6 +3,16 @@ import { api } from '../utils/api';
 
 const AuthContext = createContext();
 
+const ROLE_PERMISSIONS = {
+  super_admin: ['dashboard', 'products', 'categories', 'inventory', 'orders', 'quotes', 'customers', 'reviews', 'content', 'reports', 'roles', 'settings', 'help', 'audit'],
+  admin: ['dashboard', 'products', 'categories', 'inventory', 'orders', 'quotes', 'customers', 'reviews', 'content', 'reports', 'settings', 'help', 'audit'],
+  product_manager: ['dashboard', 'products', 'categories', 'inventory', 'reviews', 'help'],
+  order_manager: ['dashboard', 'orders', 'quotes', 'customers', 'reports', 'help'],
+  inventory_manager: ['dashboard', 'inventory', 'products', 'help'],
+  support: ['dashboard', 'orders', 'quotes', 'customers', 'reviews', 'help'],
+  customer: ['dashboard', 'orders', 'quotes', 'profile', 'wishlist']
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     try {
@@ -69,6 +79,10 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
   };
 
+  const updateUser = (updatedData) => {
+    setUser(prev => ({ ...prev, ...updatedData }));
+  };
+
   const openLogin = () => {
     setAuthModalMode('login');
     setAuthModalOpen(true);
@@ -79,8 +93,17 @@ export const AuthProvider = ({ children }) => {
     setAuthModalOpen(true);
   };
 
-  const isAdmin = user && user.role === 'admin';
+  const userRole = user?.role || 'guest';
+  const isAdmin = ['super_admin', 'admin', 'product_manager', 'order_manager', 'inventory_manager', 'support'].includes(userRole);
+  const isSuperAdmin = userRole === 'super_admin';
   const isWholesaleVerified = user && Boolean(user.wholesaleApproved);
+
+  const hasPermission = (permission) => {
+    if (!user) return false;
+    if (user.role === 'super_admin') return true;
+    const permissions = ROLE_PERMISSIONS[user.role] || [];
+    return permissions.includes(permission);
+  };
 
   return (
     <AuthContext.Provider value={{
@@ -90,7 +113,11 @@ export const AuthProvider = ({ children }) => {
       login,
       register,
       logout,
+      updateUser,
       isAdmin,
+      isSuperAdmin,
+      userRole,
+      hasPermission,
       isWholesaleVerified,
       authModalOpen,
       setAuthModalOpen,

@@ -33,14 +33,14 @@ export default function WhyChooseSection({ onNavigate }) {
       desc: "Shipments dispatched via DHL Express and FedEx International with live door-to-door tracking. Complimentary shipping on orders above $500."
     },
     {
-      icon: <FileText className="w-6 h-6 text-[#D4AF37]" />,
+      icon: <FileText className="w-6 h-6 text-[#C49A3A]" />,
       title: "Custom OEM Casting & RFQ Desk",
-      desc: "Have a custom design or need 10,000+ units? Submit your specifications directly to Ramesh Sir for custom casting, plating, and bespoke volume pricing."
+      desc: "Have a custom design or need 10,000+ units? Submit your specifications directly to our engineering desk for custom casting, plating, and bespoke volume pricing."
     },
     {
-      icon: <BadgeCheck className="w-6 h-6 text-[#D4AF37]" />,
-      title: "SP Bengaluru Heritage & Showroom",
-      desc: "Rooted in Bengaluru's famed jewelry and trade hub on SP Road, offering both physical showroom viewing and seamless international online purchasing."
+      icon: <BadgeCheck className="w-6 h-6 text-[#C49A3A]" />,
+      title: "International Manufacturing Heritage",
+      desc: "Backed by decades of fine lapidary craftsmanship and precision component manufacturing, offering verified wholesale assurance and seamless international logistics."
     }
   ];
 

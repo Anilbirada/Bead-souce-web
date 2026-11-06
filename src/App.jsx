@@ -26,17 +26,20 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 
 import { api } from './utils/api';
+import { ShieldAlert, ArrowLeft } from 'lucide-react';
 
 function MainApp() {
-  const { openLogin } = useAuth();
+  const { user, isAdmin, openLogin } = useAuth();
 
   const [currentPage, setCurrentPage] = useState('home');
+  const [adminInitialTab, setAdminInitialTab] = useState('overview');
+  const [customerInitialTab, setCustomerInitialTab] = useState('orders');
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [catalogFilters, setCatalogFilters] = useState({ category: 'all', search: '' });
+  const [catalogFilters, setCatalogFilters] = useState({ category: 'all', search: '', sort: '' });
 
   // Load products and categories on mount
   useEffect(() => {
@@ -62,12 +65,21 @@ function MainApp() {
     if (page === 'catalog') {
       setCatalogFilters({
         category: params.category || 'all',
-        search: params.search || ''
+        search: params.search || '',
+        sort: params.sort || ''
       });
     }
 
     if (page === 'product' && params.product) {
       setSelectedProduct(params.product);
+    }
+
+    if (page === 'admin' && params.tab) {
+      setAdminInitialTab(params.tab);
+    }
+
+    if (page === 'dashboard' && params.tab) {
+      setCustomerInitialTab(params.tab);
     }
   };
 
@@ -77,10 +89,66 @@ function MainApp() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // =========================================================================
+  // SEPARATE DEDICATED ADMIN LAYOUT
+  // =========================================================================
+  if (currentPage === 'admin') {
+    // Role & Authorization Check
+    if (!isAdmin) {
+      return (
+        <div className="min-h-screen bg-[#191919] text-white flex items-center justify-center p-6 text-center select-none">
+          <div className="bg-[#242424] p-8 sm:p-12 rounded-3xl border border-[#383838] max-w-md space-y-5 shadow-2xl">
+            <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mx-auto">
+              <ShieldAlert className="w-8 h-8" />
+            </div>
+            <h2 className="font-serif font-bold text-2xl text-white">Administrator Access Required</h2>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              This area is strictly restricted to authorized BeadsSource management and staff members. Ordinary customer accounts cannot view administrative workflows.
+            </p>
+            <div className="flex flex-col gap-3 pt-2">
+              <button
+                onClick={openLogin}
+                className="w-full py-3 bg-[#C49A3A] hover:bg-[#A9812A] text-black font-bold text-xs rounded-xl transition-all cursor-pointer"
+              >
+                Sign In with Administrator Credentials
+              </button>
+              <button
+                onClick={() => handleNavigate('home')}
+                className="w-full py-2.5 bg-transparent hover:bg-white/5 text-gray-300 text-xs font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>Return to Storefront</span>
+              </button>
+            </div>
+          </div>
+          <AuthModal />
+        </div>
+      );
+    }
+
+    // Render Dedicated Admin Suite
+    return (
+      <div className="min-h-screen bg-[#FAF9F5] selection:bg-[#C49A3A]/30">
+        <AdminDashboardPage
+          initialTab={adminInitialTab}
+          onNavigate={handleNavigate}
+          onRefreshCatalogue={async () => {
+            const fresh = await api.getProducts();
+            setProducts(fresh);
+          }}
+        />
+        <AuthModal />
+      </div>
+    );
+  }
+
+  // =========================================================================
+  // STANDARD LUXURY STOREFRONT LAYOUT
+  // =========================================================================
   return (
-    <div className="flex flex-col min-h-screen selection:bg-[#EBE2D0] selection:text-[#1A1A1A]">
+    <div className="flex flex-col min-h-screen selection:bg-[#E9E3D8] selection:text-[#191919] bg-[#FFFFFF] text-[#303030]">
       
-      {/* 1. Announcement Bar */}
+      {/* 1. Slim Announcement Bar */}
       <AnnouncementBar onOpenAuth={openLogin} />
 
       {/* 2. Premium Navigation Header */}
@@ -142,16 +210,9 @@ function MainApp() {
         )}
 
         {currentPage === 'dashboard' && (
-          <CustomerDashboardPage onNavigate={handleNavigate} />
-        )}
-
-        {currentPage === 'admin' && (
-          <AdminDashboardPage
-            onNavigate={handleNavigate}
-            onRefreshCatalogue={async () => {
-              const fresh = await api.getProducts();
-              setProducts(fresh);
-            }}
+          <CustomerDashboardPage 
+            initialTab={customerInitialTab}
+            onNavigate={handleNavigate} 
           />
         )}
 

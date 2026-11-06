@@ -293,20 +293,32 @@ export default function CartDrawer({ onNavigate }) {
                     closeCartDrawer();
                     onNavigate('checkout');
                   }}
-                  className="w-full py-3 bg-[#1C1A17] hover:bg-[#332E26] text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3 bg-[#191919] hover:bg-[#303030] text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border border-[#191919]"
                 >
-                  <span>Proceed to Wholesale Checkout</span>
-                  <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
+                  <span>Proceed to Checkout</span>
+                  <ArrowRight className="w-4 h-4 text-[#C49A3A]" />
                 </button>
 
-                <button
-                  onClick={handleConvertToQuote}
-                  className="w-full py-2 bg-white hover:bg-[#FAF6ED] text-[#8C6D2B] border border-[#D5C6A3] text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-                  title="Request special custom wholesale rate from Ramesh Sir"
-                >
-                  <FileText className="w-3.5 h-3.5 text-[#AA771C]" />
-                  <span>Convert Cart into Custom RFQ Quote</span>
-                </button>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => {
+                      closeCartDrawer();
+                      onNavigate('catalog');
+                    }}
+                    className="py-2.5 bg-[#F8F6F1] hover:bg-[#EAE4D5] text-[#303030] border border-[#E9E3D8] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center cursor-pointer"
+                  >
+                    <span>Continue Shopping</span>
+                  </button>
+
+                  <button
+                    onClick={handleConvertToQuote}
+                    className="py-2.5 bg-white hover:bg-[#FAF6ED] text-[#8C6D2B] border border-[#D5C6A3] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                    title="Request special custom wholesale rate for bulk production"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-[#C49A3A]" />
+                    <span>Convert to RFQ</span>
+                  </button>
+                </div>
               </div>
 
             </div>

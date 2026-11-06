@@ -3,7 +3,17 @@ import localCategories from '../data/categories.json';
 
 const API_BASE = '/api';
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('beadssource_token');
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  return headers;
+};
+
 export const api = {
+  // --- PRODUCTS ---
   async getProducts(params = {}) {
     const query = new URLSearchParams();
     Object.entries(params).forEach(([key, val]) => {
@@ -50,6 +60,33 @@ export const api = {
     }
   },
 
+  async createProduct(productData) {
+    const res = await fetch(`${API_BASE}/products`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(productData)
+    });
+    return await res.json();
+  },
+
+  async updateProduct(id, productData) {
+    const res = await fetch(`${API_BASE}/products/${id}`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(productData)
+    });
+    return await res.json();
+  },
+
+  async deleteProduct(id) {
+    const res = await fetch(`${API_BASE}/products/${id}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders()
+    });
+    return await res.json();
+  },
+
+  // --- CATEGORIES ---
   async getCategories() {
     try {
       const res = await fetch(`${API_BASE}/categories`);
@@ -60,6 +97,51 @@ export const api = {
     }
   },
 
+  async createCategory(catData) {
+    const res = await fetch(`${API_BASE}/categories`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(catData)
+    });
+    return await res.json();
+  },
+
+  async updateCategory(id, catData) {
+    const res = await fetch(`${API_BASE}/categories/${id}`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(catData)
+    });
+    return await res.json();
+  },
+
+  async deleteCategory(id) {
+    const res = await fetch(`${API_BASE}/categories/${id}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders()
+    });
+    return await res.json();
+  },
+
+  // --- INVENTORY ---
+  async getInventory() {
+    const res = await fetch(`${API_BASE}/inventory`, {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Failed to fetch inventory');
+    return await res.json();
+  },
+
+  async updateInventory(id, data) {
+    const res = await fetch(`${API_BASE}/inventory/${id}`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data)
+    });
+    return await res.json();
+  },
+
+  // --- AUTH & USERS ---
   async login(email, password) {
     try {
       const res = await fetch(`${API_BASE}/auth/login`, {
@@ -71,18 +153,19 @@ export const api = {
       if (!res.ok) throw new Error(data.error || 'Login failed');
       return data;
     } catch (err) {
-      // Fallback auth for local testing
+      // Professional role-based local fallback for testing
       if (email.toLowerCase().includes('admin') && password === 'admin') {
         return {
           user: {
-            id: 'usr-admin',
+            id: 'usr-super-admin',
             email: 'admin@beadssource.com',
-            name: 'Ramesh Sir (Admin)',
-            role: 'admin',
-            company: 'BeadsSource SP Bengaluru',
-            wholesaleApproved: true
+            name: 'Administrator',
+            role: 'super_admin',
+            company: 'BeadsSource Wholesale Management',
+            wholesaleApproved: true,
+            status: 'active'
           },
-          token: 'local_jwt_admin'
+          token: 'jwt_usr-super-admin'
         };
       }
       throw err;
@@ -100,10 +183,58 @@ export const api = {
     return data;
   },
 
+  async updateProfile(profileData) {
+    const res = await fetch(`${API_BASE}/auth/profile`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(profileData)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Profile update failed');
+    return data;
+  },
+
+  async getUsers() {
+    const res = await fetch(`${API_BASE}/users`, {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Failed to load users');
+    return await res.json();
+  },
+
+  async createUser(userData) {
+    const res = await fetch(`${API_BASE}/users`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(userData)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'User creation failed');
+    return data;
+  },
+
+  async updateUser(id, userData) {
+    const res = await fetch(`${API_BASE}/users/${id}`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(userData)
+    });
+    return await res.json();
+  },
+
+  async deleteUser(id) {
+    const res = await fetch(`${API_BASE}/users/${id}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders()
+    });
+    return await res.json();
+  },
+
+  // --- ORDERS ---
   async createOrder(orderData) {
     const res = await fetch(`${API_BASE}/orders`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(orderData)
     });
     const data = await res.json();
@@ -111,9 +242,14 @@ export const api = {
     return data;
   },
 
-  async getOrders(email = null) {
-    const url = email ? `${API_BASE}/orders?email=${encodeURIComponent(email)}` : `${API_BASE}/orders`;
-    const res = await fetch(url);
+  async getOrders(email = null, status = null) {
+    const query = new URLSearchParams();
+    if (email) query.append('email', email);
+    if (status && status !== 'all') query.append('status', status);
+
+    const res = await fetch(`${API_BASE}/orders?${query.toString()}`, {
+      headers: getAuthHeaders()
+    });
     if (!res.ok) throw new Error('Failed to fetch orders');
     return await res.json();
   },
@@ -121,16 +257,17 @@ export const api = {
   async updateOrderStatus(orderId, statusData) {
     const res = await fetch(`${API_BASE}/orders/${orderId}/status`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(statusData)
     });
     return await res.json();
   },
 
+  // --- RFQ / QUOTATIONS ---
   async submitQuote(quoteData) {
     const res = await fetch(`${API_BASE}/quotes`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(quoteData)
     });
     const data = await res.json();
@@ -138,9 +275,14 @@ export const api = {
     return data;
   },
 
-  async getQuotes(email = null) {
-    const url = email ? `${API_BASE}/quotes?email=${encodeURIComponent(email)}` : `${API_BASE}/quotes`;
-    const res = await fetch(url);
+  async getQuotes(email = null, status = null) {
+    const query = new URLSearchParams();
+    if (email) query.append('email', email);
+    if (status && status !== 'all') query.append('status', status);
+
+    const res = await fetch(`${API_BASE}/quotes?${query.toString()}`, {
+      headers: getAuthHeaders()
+    });
     if (!res.ok) throw new Error('Failed to fetch quotes');
     return await res.json();
   },
@@ -148,12 +290,13 @@ export const api = {
   async updateQuote(quoteId, quoteData) {
     const res = await fetch(`${API_BASE}/quotes/${quoteId}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(quoteData)
     });
     return await res.json();
   },
 
+  // --- COUPONS ---
   async validateCoupon(code, subtotal) {
     const res = await fetch(`${API_BASE}/coupons/validate`, {
       method: 'POST',
@@ -166,47 +309,104 @@ export const api = {
   },
 
   async getCoupons() {
-    const res = await fetch(`${API_BASE}/coupons`);
+    const res = await fetch(`${API_BASE}/coupons`, {
+      headers: getAuthHeaders()
+    });
     return await res.json();
   },
 
   async createCoupon(couponData) {
     const res = await fetch(`${API_BASE}/coupons`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(couponData)
     });
     return await res.json();
   },
 
-  async getAdminStats() {
-    const res = await fetch(`${API_BASE}/admin/stats`);
-    if (!res.ok) throw new Error('Failed to load stats');
+  // --- SETTINGS ---
+  async getSettings() {
+    const res = await fetch(`${API_BASE}/settings`);
+    if (!res.ok) throw new Error('Failed to fetch settings');
     return await res.json();
   },
 
-  async createProduct(productData) {
-    const res = await fetch(`${API_BASE}/products`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(productData)
-    });
-    return await res.json();
-  },
-
-  async updateProduct(id, productData) {
-    const res = await fetch(`${API_BASE}/products/${id}`, {
+  async updateSettings(settingsData) {
+    const res = await fetch(`${API_BASE}/settings`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(productData)
+      headers: getAuthHeaders(),
+      body: JSON.stringify(settingsData)
     });
     return await res.json();
   },
 
-  async deleteProduct(id) {
-    const res = await fetch(`${API_BASE}/products/${id}`, {
-      method: 'DELETE'
+  // --- CONTENT / CMS ---
+  async getContent() {
+    const res = await fetch(`${API_BASE}/content`);
+    if (!res.ok) throw new Error('Failed to fetch content');
+    return await res.json();
+  },
+
+  async updateContent(contentData) {
+    const res = await fetch(`${API_BASE}/content`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(contentData)
     });
+    return await res.json();
+  },
+
+  // --- AUDIT LOGS ---
+  async getAuditLogs() {
+    const res = await fetch(`${API_BASE}/audit-logs`, {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Failed to fetch audit logs');
+    return await res.json();
+  },
+
+  // --- REVIEWS ---
+  async getReviews(params = {}) {
+    const query = new URLSearchParams();
+    if (params.productId) query.append('productId', params.productId);
+    if (params.status) query.append('status', params.status);
+
+    const res = await fetch(`${API_BASE}/reviews?${query.toString()}`);
+    return await res.json();
+  },
+
+  async createReview(reviewData) {
+    const res = await fetch(`${API_BASE}/reviews`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(reviewData)
+    });
+    return await res.json();
+  },
+
+  async updateReviewStatus(id, status) {
+    const res = await fetch(`${API_BASE}/reviews/${id}/status`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ status })
+    });
+    return await res.json();
+  },
+
+  async deleteReview(id) {
+    const res = await fetch(`${API_BASE}/reviews/${id}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders()
+    });
+    return await res.json();
+  },
+
+  // --- ADMIN STATS ---
+  async getAdminStats() {
+    const res = await fetch(`${API_BASE}/admin/stats`, {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Failed to load stats');
     return await res.json();
   }
 };

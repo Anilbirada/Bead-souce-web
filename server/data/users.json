@@ -1,23 +1,101 @@
 [
   {
-    "id": "usr-admin",
+    "id": "usr-super-admin",
     "email": "admin@beadssource.com",
     "password": "admin",
-    "name": "Ramesh Sir (Admin)",
+    "name": "Super Administrator",
+    "role": "super_admin",
+    "company": "BeadsSource Global Operations",
+    "phone": "+1 (800) 555-0199",
+    "wholesaleApproved": true,
+    "status": "active",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "usr-store-admin",
+    "email": "manager@beadssource.com",
+    "password": "manager",
+    "name": "Store Administrator",
     "role": "admin",
-    "company": "BeadsSource SP Bengaluru",
-    "phone": "+91 98450 00000",
-    "wholesaleApproved": true
+    "company": "BeadsSource Operations Desk",
+    "phone": "+1 (800) 555-0199",
+    "wholesaleApproved": true,
+    "status": "active",
+    "createdAt": "2026-01-15T00:00:00.000Z"
+  },
+  {
+    "id": "usr-product-mgr",
+    "email": "products@beadssource.com",
+    "password": "products",
+    "name": "Product Manager",
+    "role": "product_manager",
+    "company": "BeadsSource Merchandising",
+    "phone": "+1 (800) 555-0199",
+    "wholesaleApproved": true,
+    "status": "active",
+    "createdAt": "2026-02-01T00:00:00.000Z"
+  },
+  {
+    "id": "usr-order-mgr",
+    "email": "orders@beadssource.com",
+    "password": "orders",
+    "name": "Order Fulfillment Manager",
+    "role": "order_manager",
+    "company": "BeadsSource Logistics",
+    "phone": "+1 (800) 555-0199",
+    "wholesaleApproved": true,
+    "status": "active",
+    "createdAt": "2026-02-10T00:00:00.000Z"
+  },
+  {
+    "id": "usr-inventory-mgr",
+    "email": "inventory@beadssource.com",
+    "password": "inventory",
+    "name": "Inventory Manager",
+    "role": "inventory_manager",
+    "company": "BeadsSource Central Warehouse",
+    "phone": "+1 (800) 555-0199",
+    "wholesaleApproved": true,
+    "status": "active",
+    "createdAt": "2026-02-15T00:00:00.000Z"
+  },
+  {
+    "id": "usr-support",
+    "email": "support@beadssource.com",
+    "password": "support",
+    "name": "Customer Support Specialist",
+    "role": "support",
+    "company": "BeadsSource Help Desk",
+    "phone": "+1 (800) 555-0199",
+    "wholesaleApproved": true,
+    "status": "active",
+    "createdAt": "2026-03-01T00:00:00.000Z"
   },
   {
     "id": "usr-buyer1",
     "email": "buyer@boutiquejewels.com",
     "password": "buyer",
-    "name": "Sarah Jenkins",
+    "name": "Wholesale Buyer",
     "role": "customer",
-    "company": "Jenkins Boutique Jewels LLC",
+    "company": "Boutique Fine Jewels LLC",
     "phone": "+1 212 555 0199",
     "wholesaleApproved": true,
-    "taxId": "US-TAX-8921094"
+    "taxId": "TAX-8921094",
+    "status": "active",
+    "createdAt": "2026-03-10T00:00:00.000Z",
+    "shippingAddress": {
+      "addressLine1": "450 Fashion Avenue, Suite 1200",
+      "city": "New York",
+      "state": "NY",
+      "postalCode": "10018",
+      "country": "United States"
+    },
+    "billingAddress": {
+      "addressLine1": "450 Fashion Avenue, Suite 1200",
+      "city": "New York",
+      "state": "NY",
+      "postalCode": "10018",
+      "country": "United States"
+    }
   }
 ]

@@ -90,16 +90,16 @@
     "id": "ORD-2026-9042",
     "date": "2026-10-30T14:15:00.000Z",
     "customer": {
-      "name": "Rajesh Sharma",
-      "company": "Kaveri Gems & Exports",
-      "email": "rajesh@kaverigems.in",
-      "phone": "+91 98450 12399",
-      "address": "78 Commercial Street",
-      "city": "Bengaluru",
-      "state": "Karnataka",
-      "zip": "560001",
-      "country": "India",
-      "taxId": "29AABCU9603R1ZX"
+      "name": "Verified Wholesale Partner",
+      "company": "Kaveri Artisan Fine Jewels",
+      "email": "purchasing@kaverigems.com",
+      "phone": "+1 (800) 555-0199",
+      "address": "78 Commercial Boulevard",
+      "city": "London",
+      "state": "Greater London",
+      "zip": "EC1A 1BB",
+      "country": "United Kingdom",
+      "taxId": "GB-VAT-9603102"
     },
     "items": [
       {
@@ -127,9 +127,9 @@
     "tax": 16,
     "total": 336,
     "status": "Shipped",
-    "paymentMethod": "UPI / Net Banking",
+    "paymentMethod": "Wire Transfer",
     "paymentStatus": "Paid",
-    "trackingNumber": "BLUEDART-88120491",
-    "notes": "Handover to SP Road showroom pickup or local express dispatch."
+    "trackingNumber": "DHL-EXP-88120491",
+    "notes": "Express air freight delivery with customs export documentation attached."
   }
 ]

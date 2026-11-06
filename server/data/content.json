@@ -1,0 +1,46 @@
+{
+  "announcement": {
+    "enabled": true,
+    "text": "International Wholesale Pricing • Tier Discounts up to 30% Off • Certified Lead-Free & Genuine Gemstones",
+    "supportPhone": "+1 (800) 555-0199",
+    "badgeText": "Direct Factory Export"
+  },
+  "hero": {
+    "supertag": "International Wholesale Jewellery • Direct Factory Manufacturer",
+    "titleLine1": "The Source for",
+    "titleItalic": "Fine Natural Gemstones,",
+    "titleLine2": "Pave CZ & Artisan Findings",
+    "subtext": "Engineered to international fine jewellery standards and delivered worldwide. BeadsSource provides direct manufacturer pricing, certified lead-free components, and flexible wholesale tier discounts for jewelry designers, retail boutiques, and distributors.",
+    "ctaCatalog": "Explore 2026 Wholesale Catalogue",
+    "ctaQuote": "Request Custom Bulk Quotation"
+  },
+  "faqs": [
+    {
+      "id": "faq-1",
+      "question": "What is the Minimum Order Quantity (MOQ) for wholesale tier pricing?",
+      "answer": "Our catalog allows small trial packs (starting at 5-10 units) up to massive master production lots. Volume discounts automatically apply: 15% off for 10-49 packs, and 30% off for 50+ packs."
+    },
+    {
+      "id": "faq-2",
+      "question": "Are your pewter components and charms certified lead-free?",
+      "answer": "Yes. Every pewter finding is 100% certified lead-free (<90 ppm) and cadmium-free, fully compliant with US CPSIA, California Prop 65, and European REACH regulations."
+    },
+    {
+      "id": "faq-3",
+      "question": "How quickly do international orders ship?",
+      "answer": "Standard catalog orders are dispatched from our central warehouse within 24 to 48 hours via DHL Express Worldwide or FedEx International Priority, arriving in 3-5 business days globally."
+    },
+    {
+      "id": "faq-4",
+      "question": "Can I submit a custom Request for Quote (RFQ) for custom casting or bespoke plating?",
+      "answer": "Yes! Use our multi-product RFQ builder to specify custom casting shapes, finish plating (18K Gold, Rhodium, Antique Bronze), and target pricing. Our production desk reviews and returns firm quotes within 24 hours."
+    }
+  ],
+  "about": {
+    "headline": "Engineering Precision & Artisanal Mineral Heritage",
+    "leadParagraph": "BeadsSource is an international manufacturer and wholesale exporter of natural gemstone bead strands, certified lead-free pewter charms, micro-pavé cubic zirconia findings, and finished artisan jewelry.",
+    "yearsInIndustry": "20+ Years",
+    "activePartners": "5,000+",
+    "certifications": "100% Certified CPSIA & REACH Compliant"
+  }
+}

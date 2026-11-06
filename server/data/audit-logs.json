@@ -1,0 +1,29 @@
+[
+  {
+    "id": "log-001",
+    "timestamp": "2026-11-06T08:00:00.000Z",
+    "actor": "Super Administrator",
+    "role": "super_admin",
+    "action": "SYSTEM_INITIALIZE",
+    "resource": "Configuration",
+    "details": "Centralized wholesale administration suite initialized with multi-role RBAC permissions."
+  },
+  {
+    "id": "log-002",
+    "timestamp": "2026-11-06T08:15:00.000Z",
+    "actor": "Inventory Manager",
+    "role": "inventory_manager",
+    "action": "STOCK_AUDIT",
+    "resource": "Inventory",
+    "details": "Automated warehouse inventory reconciliation performed across all 35 active factory SKUs."
+  },
+  {
+    "id": "log-003",
+    "timestamp": "2026-11-06T08:30:00.000Z",
+    "actor": "Store Administrator",
+    "role": "admin",
+    "action": "QUOTE_REVIEW",
+    "resource": "Quotation RFQ-2026-891",
+    "details": "Production review completed; counter-offer rate approved for volume buyer."
+  }
+]

@@ -38,7 +38,7 @@ export default function GemstoneCollection({ products, onSelectProduct, onQuickV
               </span>
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" />
-                <span>SP Bengaluru Lab Tested</span>
+                <span>Gemological Lab Certified</span>
               </span>
             </div>
 

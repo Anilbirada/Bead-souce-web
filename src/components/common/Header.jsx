@@ -11,8 +11,16 @@ import {
   ShieldCheck, 
   LayoutDashboard, 
   LogOut, 
+  Package,
+  Layers,
+  Users,
+  Settings,
+  Archive,
+  ArrowRight,
+  Globe,
   Sparkles,
-  ArrowRight
+  MapPin,
+  HelpCircle
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
@@ -30,19 +38,19 @@ export default function Header({
 }) {
   const { itemsCount, tieredSubtotal, openCartDrawer } = useCart();
   const { wishlistCount } = useWishlist();
-  const { quoteCount } = useQuote();
-  const { user, isAdmin, logout } = useAuth();
-  const { formatPrice } = useCurrency();
+  const { user, isAdmin, logout, hasPermission } = useAuth();
+  const { currency, setCurrency, formatPrice } = useCurrency();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [categoriesDropdownOpen, setCategoriesDropdownOpen] = useState(false);
+  const [megaMenuCategory, setMegaMenuCategory] = useState(null);
 
   const searchRef = useRef(null);
   const userMenuRef = useRef(null);
+  const megaMenuRef = useRef(null);
 
   // Close dropdowns on click outside
   useEffect(() => {
@@ -53,12 +61,15 @@ export default function Header({
       if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
         setUserMenuOpen(false);
       }
+      if (megaMenuRef.current && !megaMenuRef.current.contains(e.target)) {
+        setMegaMenuCategory(null);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Debounced search
+  // Debounced search with product & SKU autocomplete
   useEffect(() => {
     if (!searchQuery.trim() || searchQuery.length < 2) {
       setSearchResults([]);
@@ -77,7 +88,7 @@ export default function Header({
       } finally {
         setIsSearching(false);
       }
-    }, 250);
+    }, 220);
 
     return () => clearTimeout(timer);
   }, [searchQuery]);
@@ -100,50 +111,81 @@ export default function Header({
     }
   };
 
+  const megaMenuData = {
+    gemstones: {
+      title: "Natural Gemstone Beads",
+      featured: [
+        { name: "Natural African Turquoise 8mm", sku: "A12502", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" },
+        { name: "Madagascar Rose Quartz 10mm", sku: "A5853", img: "https://images.unsplash.com/photo-1611591475819-79b8b7380962?auto=format&fit=crop&w=600&q=80" }
+      ],
+      links: [
+        { label: "Turquoise Strands & Slabs", category: "turquoise-beads" },
+        { label: "Amethyst & Purple Quartz", category: "natural-gemstone-beads" },
+        { label: "Jasper & Agate Roughs", category: "natural-gemstone-beads" },
+        { label: "Lapis Lazuli Grade AAA", category: "natural-gemstone-beads" }
+      ]
+    },
+    findings: {
+      title: "Jewelry Findings & Clasps",
+      featured: [
+        { name: "Micro Pavé CZ Carabiner Screw Lock", sku: "A1016", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" },
+        { name: "Lead-Free Pewter Leaf Charm", sku: "A912", img: "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=600&q=80" }
+      ],
+      links: [
+        { label: "Screw Lock Carabiners", category: "jewelry-connectors" },
+        { label: "Spacer Beads & Rondelles", category: "jewelry-spacers" },
+        { label: "Certified Lead-Free Charms", category: "charms" },
+        { label: "Jump Rings & Head Pins", category: "jewelry-findings" }
+      ]
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EAE6DE] shadow-xs transition-all">
+    <header className="sticky top-0 z-40 bg-white/98 backdrop-blur-md border-b border-[#E9E3D8] shadow-xs transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Top Header Row */}
         <div className="flex items-center justify-between h-20 gap-4">
           
-          {/* Left: Mobile hamburger & Logo */}
+          {/* LEFT: Mobile Toggle & BeadsSource Logo */}
           <div className="flex items-center gap-3">
             <button 
               onClick={onOpenMobileMenu}
-              className="lg:hidden p-2 rounded-lg text-[#242424] hover:bg-[#F3EFE6] transition-colors"
+              className="lg:hidden p-2 rounded-lg text-[#191919] hover:bg-[#F8F6F1] transition-colors"
               aria-label="Toggle navigation menu"
             >
               <Menu className="w-6 h-6" />
             </button>
 
-            {/* Logo */}
+            {/* BeadsSource Brand Logo */}
             <div 
               onClick={() => onNavigate('home')}
               className="cursor-pointer group flex items-center gap-3 select-none"
             >
-              <div className="w-10 h-10 rounded-full bg-linear-to-br from-[#D4AF37] via-[#AA771C] to-[#8C6212] flex items-center justify-center text-white shadow-sm shadow-[#D4AF37]/20 group-hover:scale-105 transition-transform">
-                <span className="font-serif font-bold text-xl tracking-tighter">B</span>
+              <div className="w-10 h-10 rounded-full bg-linear-to-br from-[#191919] via-[#2D2A26] to-[#C49A3A] flex items-center justify-center text-white shadow-sm shadow-[#C49A3A]/20 group-hover:scale-105 transition-transform border border-[#C49A3A]/30">
+                <span className="font-serif font-bold text-xl tracking-tighter text-[#F8F6F1]">B</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-2xl font-bold tracking-tight text-[#1A1A1A] group-hover:text-[#B38F26] transition-colors">
-                  BEADS<span className="text-[#C4A052]">SOURCE</span>
+                <span className="font-serif text-2xl font-bold tracking-tight text-[#191919] group-hover:text-[#C49A3A] transition-colors">
+                  BEADS<span className="text-[#C49A3A]">SOURCE</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#80796B] font-medium -mt-1">
-                  Premium Wholesale &bull; Bengaluru
+                <span className="text-[9.5px] uppercase tracking-[0.28em] text-[#78716C] font-semibold -mt-1">
+                  Fine Wholesale Jewelry
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Center: Live Product & SKU Search */}
-          <div className="hidden md:flex flex-1 max-w-lg mx-4 relative" ref={searchRef}>
+          {/* CENTER: Large Premium Product & SKU Search Bar */}
+          <div className="hidden md:flex flex-1 max-w-xl mx-4 relative" ref={searchRef}>
             <form onSubmit={handleSearchSubmit} className="w-full relative">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => { if (searchResults.length > 0) setSearchDropdownOpen(true); }}
-                placeholder="Search natural gemstone beads, SKU (e.g. A12502), pave CZ, findings..."
-                className="w-full pl-11 pr-10 py-2.5 bg-[#FAF8F5] border border-[#E0DBD1] rounded-full text-xs sm:text-sm text-[#1A1A1A] placeholder-[#8A8477] focus:outline-none focus:border-[#C4A052] focus:ring-2 focus:ring-[#C4A052]/20 focus:bg-white transition-all shadow-inner"
+                placeholder="Search natural gemstones, SKU (e.g. A12502), pave CZ, findings..."
+                className="w-full pl-11 pr-10 py-2.5 bg-[#F8F6F1] border border-[#E9E3D8] rounded-full text-xs sm:text-sm text-[#303030] placeholder-[#8A8477] focus:outline-none focus:border-[#C49A3A] focus:ring-2 focus:ring-[#C49A3A]/20 focus:bg-white transition-all shadow-inner"
               />
               <Search className="w-4 h-4 text-[#8A8477] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
               {searchQuery && (
@@ -157,101 +199,90 @@ export default function Header({
               )}
             </form>
 
-            {/* Live Search Autocomplete Dropdown */}
+            {/* Live Autocomplete Dropdown Preview */}
             {searchDropdownOpen && (
-              <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl shadow-2xl border border-[#EBE6DB] overflow-hidden z-50 animate-fade-in max-h-[480px] overflow-y-auto">
-                <div className="p-3 bg-[#FAF8F5] border-b border-[#EBE6DB] flex items-center justify-between text-xs text-[#6B6558]">
-                  <span>Matching Wholesale Products</span>
-                  {isSearching && <span className="animate-pulse text-[#C4A052]">Searching...</span>}
+              <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl shadow-2xl border border-[#E9E3D8] overflow-hidden z-50 text-xs">
+                <div className="p-3 bg-[#F8F6F1] border-b border-[#E9E3D8] flex items-center justify-between text-[#78716C]">
+                  <span className="font-medium">Found {searchResults.length} matching products</span>
+                  <span className="text-[11px] text-[#C49A3A] font-semibold">Press Enter for full catalog</span>
                 </div>
 
-                {searchResults.length === 0 ? (
-                  <div className="p-6 text-center text-xs text-[#8A8477]">
-                    No wholesale products found for "{searchQuery}". Try "Turquoise", "Emerald", or "A8283".
-                  </div>
-                ) : (
-                  <div className="divide-y divide-[#F5F2EB]">
-                    {searchResults.map((item) => (
-                      <div
-                        key={item.id}
-                        onClick={() => handleSelectSearchResult(item)}
-                        className="p-3 hover:bg-[#FBF9F5] cursor-pointer flex items-center gap-3 transition-colors group"
-                      >
-                        <img 
-                          src={item.image} 
-                          alt={item.name} 
-                          className="w-12 h-12 rounded-lg object-cover border border-[#EBE6DB] bg-white group-hover:scale-105 transition-transform" 
-                        />
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-semibold text-[#1A1A1A] truncate group-hover:text-[#B38F26] transition-colors">
-                              {item.name}
-                            </span>
-                            <span className="text-[10px] bg-[#EAE5D8] px-1.5 py-0.5 rounded text-[#5E594F] font-mono shrink-0">
-                              {item.sku}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-3 text-xs mt-0.5">
-                            <span className="font-bold text-[#1A1A1A]">
-                              {formatPrice(item.salePrice || item.price)}
-                              <span className="text-[10px] text-gray-500 font-normal"> / pack</span>
-                            </span>
-                            <span className="text-[10px] text-green-700 font-medium">
-                              In Stock ({item.stock})
-                            </span>
-                          </div>
-                        </div>
-                        <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-[#C4A052] transition-colors" />
-                      </div>
-                    ))}
-                    
-                    <button
-                      onClick={handleSearchSubmit}
-                      className="w-full py-2.5 px-4 bg-[#FAF8F5] hover:bg-[#F3EFE6] text-xs font-semibold text-[#B38F26] text-center transition-colors flex items-center justify-center gap-1.5"
+                <div className="divide-y divide-[#F5F2EB] max-h-80 overflow-y-auto">
+                  {searchResults.map((item) => (
+                    <div
+                      key={item.id}
+                      onClick={() => handleSelectSearchResult(item)}
+                      className="p-3 flex items-center gap-3 hover:bg-[#FAF8F5] cursor-pointer transition-colors"
                     >
-                      <span>View all results for "{searchQuery}"</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                )}
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className="w-12 h-12 object-cover rounded-lg border border-[#E9E3D8] shrink-0" 
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] font-mono font-bold bg-[#EFECE6] text-[#555047] px-1.5 py-0.5 rounded">
+                            {item.sku}
+                          </span>
+                          <span className="text-[10px] text-gray-500 capitalize">{item.category.replace(/-/g, ' ')}</span>
+                        </div>
+                        <p className="font-semibold text-[#191919] truncate text-xs mt-0.5">{item.name}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-bold text-[#C49A3A] text-sm">{formatPrice(item.salePrice || item.price)}</p>
+                        <p className="text-[10px] text-gray-500">Stock: {item.stock}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="p-2.5 bg-[#FAF8F5] text-center border-t border-[#E9E3D8]">
+                  <button
+                    onClick={handleSearchSubmit}
+                    className="text-[#C49A3A] font-bold text-xs hover:underline cursor-pointer"
+                  >
+                    View All Matching Results &rarr;
+                  </button>
+                </div>
               </div>
             )}
           </div>
 
-          {/* Right: Actions (RFQ, Wishlist, User, Cart) */}
-          <div className="flex items-center gap-1 sm:gap-3">
+          {/* RIGHT: Wishlist, Currency, Account Dropdown & Shopping Cart */}
+          <div className="flex items-center gap-2 sm:gap-3">
             
-            {/* Request a Quote (RFQ) quick badge */}
-            <button
-              onClick={() => onNavigate('quote')}
-              className="relative p-2.5 rounded-full text-[#4A453A] hover:text-[#1A1A1A] hover:bg-[#F3EFE6] transition-colors group"
-              title="Request a Wholesale Quote"
-              aria-label="Wholesale RFQ Quote Builder"
-            >
-              <FileText className="w-5 h-5 text-[#8C6D2B] group-hover:scale-110 transition-transform" />
-              {quoteCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#8C6D2B] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
-                  {quoteCount}
-                </span>
-              )}
-            </button>
+            {/* Currency Selector (Desktop) */}
+            <div className="hidden lg:flex items-center gap-1.5 bg-[#F8F6F1] px-2.5 py-1.5 rounded-full border border-[#E9E3D8] text-xs">
+              <Globe className="w-3.5 h-3.5 text-[#C49A3A]" />
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                className="bg-transparent text-[#191919] cursor-pointer focus:outline-none text-xs font-semibold"
+                aria-label="Currency"
+              >
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+                <option value="INR">INR (₹)</option>
+              </select>
+            </div>
 
-            {/* Wishlist */}
+            {/* Wishlist Button */}
             <button
               onClick={() => onNavigate('wishlist')}
-              className="relative p-2.5 rounded-full text-[#4A453A] hover:text-[#1A1A1A] hover:bg-[#F3EFE6] transition-colors group"
-              title="Saved Wishlist"
+              className="p-2 rounded-full hover:bg-[#F8F6F1] transition-colors relative text-[#303030] hover:text-[#C49A3A]"
               aria-label="Wishlist"
+              title="Saved Items"
             >
-              <Heart className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <Heart className="w-5 h-5" />
               {wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#C4A052] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                <span className="absolute -top-1 -right-1 bg-[#C49A3A] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
                   {wishlistCount}
                 </span>
               )}
             </button>
 
-            {/* User Account Menu */}
+            {/* ACCOUNT DROPDOWN (Role-based & Sanitized) */}
             <div className="relative" ref={userMenuRef}>
               <button
                 onClick={() => {
@@ -261,88 +292,202 @@ export default function Header({
                     setUserMenuOpen(!userMenuOpen);
                   }
                 }}
-                className="flex items-center gap-2 p-2 rounded-full hover:bg-[#F3EFE6] transition-colors text-[#4A453A] hover:text-[#1A1A1A]"
+                className="flex items-center gap-2 p-1.5 sm:px-3 sm:py-2 rounded-full hover:bg-[#F8F6F1] transition-colors text-[#303030] hover:text-[#191919] border border-transparent hover:border-[#E9E3D8]"
                 aria-label="User Account"
               >
-                <div className="w-8 h-8 rounded-full bg-[#EAE5D8] text-[#5A5447] flex items-center justify-center font-bold text-xs border border-[#D5CFC2]">
-                  {user ? user.name[0].toUpperCase() : <User className="w-4 h-4" />}
+                <div className="w-8 h-8 rounded-full bg-[#191919] text-[#F8F6F1] flex items-center justify-center font-bold text-xs border border-[#C49A3A]/40">
+                  {user ? (isAdmin ? <ShieldCheck className="w-4 h-4 text-[#C49A3A]" /> : user.name[0].toUpperCase()) : <User className="w-4 h-4" />}
                 </div>
+
                 <div className="hidden xl:flex flex-col text-left">
                   <span className="text-[10px] text-gray-500 uppercase font-medium leading-tight">
-                    {user ? (isAdmin ? 'Admin' : 'Wholesale Buyer') : 'Account'}
+                    {user ? (isAdmin ? 'Administrator' : 'Customer') : 'Account'}
                   </span>
-                  <span className="text-xs font-semibold text-[#1A1A1A] max-w-[90px] truncate leading-tight">
-                    {user ? user.name.split(' ')[0] : 'Sign In'}
+                  <span className="text-xs font-semibold text-[#191919] max-w-[110px] truncate leading-tight">
+                    {user ? (isAdmin ? 'Account Management' : user.company || 'Wholesale Buyer') : 'Sign In'}
                   </span>
                 </div>
                 {user && <ChevronDown className="w-3.5 h-3.5 text-gray-400 hidden xl:block" />}
               </button>
 
-              {/* User Dropdown */}
+              {/* Account Dropdown Menu */}
               {user && userMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-60 bg-white rounded-xl shadow-xl border border-[#EAE6DE] py-2 z-50 animate-fade-in text-xs">
-                  <div className="px-4 py-3 border-b border-[#F0EBE1] bg-[#FAF8F5]">
-                    <p className="font-semibold text-[#1A1A1A] truncate">{user.name}</p>
-                    <p className="text-[#7A7468] truncate text-[11px]">{user.email}</p>
-                    {user.company && (
-                      <span className="inline-block mt-1 bg-[#EBE4D5] text-[#635B4E] px-2 py-0.5 rounded text-[10px] font-medium">
-                        {user.company}
+                <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-[#E9E3D8] py-2 z-50 text-xs animate-in fade-in slide-in-from-top-2">
+                  
+                  {/* Generic Role-based Header (No personal names / locations) */}
+                  <div className="px-4 py-3 border-b border-[#F0EBE1] bg-[#F8F6F1]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A3A]">
+                        {isAdmin ? 'System Role' : 'Account Type'}
                       </span>
-                    )}
+                      <span className="text-[10px] bg-[#EAE4D5] text-[#554F42] px-2 py-0.5 rounded font-semibold capitalize">
+                        {user.role?.replace(/_/g, ' ') || 'Customer'}
+                      </span>
+                    </div>
+                    <p className="font-bold text-[#191919] text-sm mt-1">
+                      {isAdmin ? 'Administrator' : (user.company || 'Customer')}
+                    </p>
+                    <p className="text-[#78716C] truncate text-[11px] mt-0.5">
+                      {isAdmin ? 'Account Management' : user.email}
+                    </p>
                   </div>
 
-                  <button
-                    onClick={() => { setUserMenuOpen(false); onNavigate('dashboard'); }}
-                    className="w-full px-4 py-2.5 text-left text-[#3D3930] hover:bg-[#F7F4EE] flex items-center gap-2.5 transition-colors"
-                  >
-                    <LayoutDashboard className="w-4 h-4 text-[#C4A052]" />
-                    <span>Customer Dashboard &bull; Orders</span>
-                  </button>
+                  {/* CUSTOMER NAVIGATION MENU */}
+                  {!isAdmin && (
+                    <div className="py-1">
+                      <button
+                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'orders' }); }}
+                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                      >
+                        <LayoutDashboard className="w-4 h-4 text-[#C49A3A]" />
+                        <span>My Dashboard</span>
+                      </button>
 
-                  <button
-                    onClick={() => { setUserMenuOpen(false); onNavigate('quote'); }}
-                    className="w-full px-4 py-2.5 text-left text-[#3D3930] hover:bg-[#F7F4EE] flex items-center gap-2.5 transition-colors"
-                  >
-                    <FileText className="w-4 h-4 text-[#C4A052]" />
-                    <span>My Quotation Requests</span>
-                  </button>
+                      <button
+                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'orders' }); }}
+                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                      >
+                        <Package className="w-4 h-4 text-[#C49A3A]" />
+                        <span>My Orders</span>
+                      </button>
 
-                  {isAdmin && (
-                    <button
-                      onClick={() => { setUserMenuOpen(false); onNavigate('admin'); }}
-                      className="w-full px-4 py-2.5 text-left text-[#8C6D2B] bg-[#FDF9EE] hover:bg-[#F8F1DE] font-semibold flex items-center gap-2.5 transition-colors border-y border-[#EBE1C7]"
-                    >
-                      <ShieldCheck className="w-4 h-4 text-[#AA771C]" />
-                      <span>Admin Management Suite</span>
-                    </button>
+                      <button
+                        onClick={() => { setUserMenuOpen(false); onNavigate('wishlist'); }}
+                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                      >
+                        <Heart className="w-4 h-4 text-[#C49A3A]" />
+                        <span>My Wishlist</span>
+                      </button>
+
+                      <button
+                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'quotes' }); }}
+                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                      >
+                        <FileText className="w-4 h-4 text-[#C49A3A]" />
+                        <span>My Quotation Requests</span>
+                      </button>
+
+                      <button
+                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'profile' }); }}
+                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                      >
+                        <User className="w-4 h-4 text-[#C49A3A]" />
+                        <span>My Profile</span>
+                      </button>
+
+                      <button
+                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'addresses' }); }}
+                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                      >
+                        <MapPin className="w-4 h-4 text-[#C49A3A]" />
+                        <span>Address Book</span>
+                      </button>
+                    </div>
                   )}
 
-                  <button
-                    onClick={() => { setUserMenuOpen(false); logout(); }}
-                    className="w-full px-4 py-2.5 text-left text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors mt-1"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    <span>Sign Out</span>
-                  </button>
+                  {/* ADMINISTRATOR NAVIGATION MENU */}
+                  {isAdmin && (
+                    <div className="py-1">
+                      <button
+                        onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'overview' }); }}
+                        className="w-full px-4 py-2.5 text-left text-[#191919] bg-[#FAF7F0] hover:bg-[#F5EEDC] font-semibold flex items-center gap-2.5 transition-colors border-b border-[#EAE3D4]"
+                      >
+                        <LayoutDashboard className="w-4 h-4 text-[#C49A3A]" />
+                        <span>Admin Dashboard</span>
+                      </button>
+
+                      {hasPermission('products') && (
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'products' }); }}
+                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                        >
+                          <Archive className="w-4 h-4 text-[#78716C]" />
+                          <span>Product Management</span>
+                        </button>
+                      )}
+
+                      {hasPermission('orders') && (
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'orders' }); }}
+                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                        >
+                          <Package className="w-4 h-4 text-[#78716C]" />
+                          <span>Order Management</span>
+                        </button>
+                      )}
+
+                      {hasPermission('quotes') && (
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'quotes' }); }}
+                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                        >
+                          <FileText className="w-4 h-4 text-[#78716C]" />
+                          <span>Quotation Management</span>
+                        </button>
+                      )}
+
+                      {hasPermission('customers') && (
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'customers' }); }}
+                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                        >
+                          <Users className="w-4 h-4 text-[#78716C]" />
+                          <span>Customer Management</span>
+                        </button>
+                      )}
+
+                      {hasPermission('inventory') && (
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'inventory' }); }}
+                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                        >
+                          <Layers className="w-4 h-4 text-[#78716C]" />
+                          <span>Inventory Management</span>
+                        </button>
+                      )}
+
+                      {hasPermission('settings') && (
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'settings' }); }}
+                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                        >
+                          <Settings className="w-4 h-4 text-[#78716C]" />
+                          <span>Store Settings</span>
+                        </button>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Sign Out */}
+                  <div className="border-t border-[#F0EBE1] pt-1 mt-1">
+                    <button
+                      onClick={() => { setUserMenuOpen(false); logout(); }}
+                      className="w-full px-4 py-2.5 text-left text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+
                 </div>
               )}
             </div>
 
-            {/* Shopping Cart Drawer Trigger */}
+            {/* SHOPPING CART BUTTON (Icon, Count, Subtotal) */}
             <button
               onClick={openCartDrawer}
-              className="flex items-center gap-2.5 bg-[#1C1A17] hover:bg-[#302B24] text-white px-3.5 sm:px-4 py-2.5 rounded-full transition-all shadow-sm hover:shadow-md cursor-pointer ml-1"
+              className="flex items-center gap-2.5 bg-[#191919] hover:bg-[#303030] text-white px-4 py-2.5 rounded-full transition-all shadow-sm hover:shadow-md cursor-pointer ml-1 border border-[#303030]"
               aria-label="Shopping Cart"
             >
               <div className="relative">
-                <ShoppingBag className="w-4 h-4 text-[#E6C687]" />
+                <ShoppingBag className="w-4 h-4 text-[#C49A3A]" />
                 {itemsCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-[#D4AF37] text-black text-[10px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 bg-[#C49A3A] text-[#191919] text-[10px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center">
                     {itemsCount}
                   </span>
                 )}
               </div>
-              <span className="text-xs font-semibold text-[#F0EDE6] hidden sm:inline">
+              <span className="text-xs font-semibold text-[#F8F6F1] hidden sm:inline">
                 {formatPrice(tieredSubtotal)}
               </span>
             </button>
@@ -350,88 +495,161 @@ export default function Header({
           </div>
         </div>
 
-        {/* Secondary Mega Navigation Bar (Desktop) */}
-        <nav className="hidden lg:flex items-center justify-between border-t border-[#F0EBE1] py-2.5 text-xs font-medium text-[#4A453A]">
-          <div className="flex items-center gap-6">
-            <button
-              onClick={() => onNavigate('home')}
-              className={`hover:text-[#B38F26] transition-colors py-1 ${currentPage === 'home' ? 'text-[#B38F26] font-bold border-b-2 border-[#B38F26]' : ''}`}
-            >
-              Home
-            </button>
-
+        {/* NAVIGATION CATEGORIES (Desktop Mega Navigation) */}
+        <nav className="hidden lg:flex items-center justify-between border-t border-[#E9E3D8] py-2.5 text-xs font-medium text-[#403C35] relative">
+          <div className="flex items-center gap-6" ref={megaMenuRef}>
+            
             <button
               onClick={() => onNavigate('catalog', { category: 'all' })}
-              className={`hover:text-[#B38F26] transition-colors py-1 flex items-center gap-1 ${currentPage === 'catalog' ? 'text-[#B38F26] font-bold border-b-2 border-[#B38F26]' : ''}`}
+              className={`hover:text-[#C49A3A] transition-colors py-1 font-semibold ${currentPage === 'catalog' ? 'text-[#C49A3A] border-b-2 border-[#C49A3A]' : ''}`}
             >
-              <span>All Wholesale Catalogue</span>
+              Shop All
+            </button>
+
+            {/* Gemstone Beads (with Mega Menu preview) */}
+            <div className="relative group">
+              <button
+                onClick={() => onNavigate('catalog', { category: 'natural-gemstone-beads' })}
+                onMouseEnter={() => setMegaMenuCategory('gemstones')}
+                className="hover:text-[#C49A3A] transition-colors py-1 flex items-center gap-1"
+              >
+                <span>Gemstone Beads</span>
+                <ChevronDown className="w-3 h-3 text-gray-400" />
+              </button>
+            </div>
+
+            <button
+              onClick={() => onNavigate('catalog', { category: 'crystal-beads' })}
+              className="hover:text-[#C49A3A] transition-colors py-1"
+            >
+              Crystal &amp; CZ
             </button>
 
             <button
-              onClick={() => onNavigate('catalog', { category: 'natural-gemstone-beads' })}
-              className="hover:text-[#B38F26] transition-colors py-1"
+              onClick={() => onNavigate('catalog', { category: 'jewelry-pendants' })}
+              className="hover:text-[#C49A3A] transition-colors py-1"
             >
-              Natural Gemstones
-            </button>
-
-            <button
-              onClick={() => onNavigate('catalog', { category: 'turquoise-beads' })}
-              className="hover:text-[#B38F26] transition-colors py-1"
-            >
-              Turquoise Beads
-            </button>
-
-            <button
-              onClick={() => onNavigate('catalog', { category: 'cubic-zirconia' })}
-              className="hover:text-[#B38F26] transition-colors py-1"
-            >
-              Cubic Zirconia &amp; Micro Pave
-            </button>
-
-            <button
-              onClick={() => onNavigate('catalog', { category: 'charms' })}
-              className="hover:text-[#B38F26] transition-colors py-1"
-            >
-              Lead-Free Pewter Charms
+              Pendants
             </button>
 
             <button
               onClick={() => onNavigate('catalog', { category: 'jewelry-findings' })}
-              className="hover:text-[#B38F26] transition-colors py-1"
+              className="hover:text-[#C49A3A] transition-colors py-1"
             >
-              Findings &amp; Clasps
+              Jewelry Findings
             </button>
+
+            {/* Clasps & Connectors */}
+            <div className="relative group">
+              <button
+                onClick={() => onNavigate('catalog', { category: 'jewelry-connectors' })}
+                onMouseEnter={() => setMegaMenuCategory('findings')}
+                className="hover:text-[#C49A3A] transition-colors py-1 flex items-center gap-1"
+              >
+                <span>Clasps &amp; Connectors</span>
+                <ChevronDown className="w-3 h-3 text-gray-400" />
+              </button>
+            </div>
 
             <button
               onClick={() => onNavigate('catalog', { category: 'handmade-necklaces' })}
-              className="hover:text-[#B38F26] transition-colors py-1"
+              className="hover:text-[#C49A3A] transition-colors py-1"
             >
               Handmade Jewelry
             </button>
 
             <button
-              onClick={() => onNavigate('quote')}
-              className="text-[#967117] font-semibold hover:text-[#6E5311] transition-colors py-1 flex items-center gap-1 bg-[#FDF9EE] px-2.5 py-1 rounded-full border border-[#E9DDC0]"
+              onClick={() => onNavigate('catalog', { category: 'all', sort: 'newest' })}
+              className="hover:text-[#C49A3A] transition-colors py-1 flex items-center gap-1 font-semibold text-[#8C6D2B]"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Bulk RFQ Builder</span>
+              <Sparkles className="w-3 h-3 text-[#C49A3A]" />
+              <span>New Arrivals</span>
+            </button>
+
+            <button
+              onClick={() => onNavigate('quote')}
+              className="text-[#8C6D2B] font-semibold hover:text-[#5C4515] transition-colors py-1 flex items-center gap-1 bg-[#F8F5EE] px-3 py-1 rounded-full border border-[#E0D7C6]"
+            >
+              <span>Request a Quote (RFQ)</span>
             </button>
           </div>
 
-          <div className="flex items-center gap-5 text-[#736D61]">
+          {/* Right Navigation: Contact & Support */}
+          <div className="flex items-center gap-5 text-[#6B6557]">
             <button 
               onClick={() => onNavigate('about')}
-              className="hover:text-[#B38F26] transition-colors"
+              className="hover:text-[#C49A3A] transition-colors"
             >
-              Our Heritage (SP Bengaluru)
+              Our Heritage
             </button>
             <button 
               onClick={() => onNavigate('contact')}
-              className="hover:text-[#B38F26] transition-colors"
+              className="hover:text-[#C49A3A] transition-colors flex items-center gap-1"
             >
-              Contact &amp; Showroom
+              <HelpCircle className="w-3.5 h-3.5" />
+              <span>Contact &amp; Support</span>
             </button>
           </div>
+
+          {/* Mega Menu Dropdown Panel */}
+          {megaMenuCategory && megaMenuData[megaMenuCategory] && (
+            <div 
+              onMouseLeave={() => setMegaMenuCategory(null)}
+              className="absolute left-0 top-full mt-1 w-full bg-white rounded-2xl shadow-2xl border border-[#E9E3D8] p-6 z-50 animate-in fade-in"
+            >
+              <div className="grid grid-cols-12 gap-8">
+                <div className="col-span-5 space-y-3">
+                  <h4 className="font-serif font-bold text-lg text-[#191919]">
+                    {megaMenuData[megaMenuCategory].title}
+                  </h4>
+                  <ul className="space-y-2 text-xs text-[#524B3E]">
+                    {megaMenuData[megaMenuCategory].links.map((link, idx) => (
+                      <li key={idx}>
+                        <button
+                          onClick={() => {
+                            setMegaMenuCategory(null);
+                            onNavigate('catalog', { category: link.category });
+                          }}
+                          className="hover:text-[#C49A3A] flex items-center gap-1.5 transition-colors group"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C49A3A] group-hover:scale-125 transition-transform" />
+                          <span>{link.label}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="col-span-7 grid grid-cols-2 gap-4">
+                  {megaMenuData[megaMenuCategory].featured.map((item, idx) => (
+                    <div 
+                      key={idx}
+                      onClick={() => {
+                        setMegaMenuCategory(null);
+                        onNavigate('catalog', { search: item.sku });
+                      }}
+                      className="group cursor-pointer rounded-xl overflow-hidden border border-[#E9E3D8] hover:border-[#C49A3A] transition-all bg-[#FAF9F5] p-3 flex items-center gap-3"
+                    >
+                      <img 
+                        src={item.img} 
+                        alt={item.name} 
+                        className="w-14 h-14 object-cover rounded-lg group-hover:scale-105 transition-transform" 
+                      />
+                      <div>
+                        <span className="text-[10px] font-mono text-[#C49A3A] font-bold block">{item.sku}</span>
+                        <p className="font-semibold text-xs text-[#191919] group-hover:text-[#C49A3A] transition-colors">{item.name}</p>
+                        <span className="text-[10px] text-gray-500 flex items-center gap-1 mt-0.5">
+                          <span>View Details</span>
+                          <ArrowRight className="w-2.5 h-2.5" />
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
         </nav>
 
       </div>

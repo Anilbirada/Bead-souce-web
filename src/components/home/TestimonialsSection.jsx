@@ -4,30 +4,30 @@ import { Star, Quote, CheckCircle2 } from 'lucide-react';
 export default function TestimonialsSection() {
   const testimonials = [
     {
-      name: "Eleanor Vance",
+      name: "Verified Wholesale Partner",
       role: "Creative Director",
-      company: "Vance Atelier Studios, San Francisco",
+      company: "Fine Atelier Studios",
       country: "United States",
       rating: 5,
-      comment: "We source our turquoise nuggets and lead-free pewter charms exclusively from BeadsSource. The consistency of hole drillings and matrix quality is unrivaled at this price tier. Ramesh Sir's team dispatches within 48 hours without fail.",
+      comment: "We source our turquoise nuggets and lead-free pewter charms exclusively from BeadsSource. The consistency of hole drillings and matrix quality is unrivaled at this price tier. Orders dispatch within 48 hours without fail.",
       verified: true
     },
     {
-      name: "Marcus Dupont",
+      name: "International Jewelry Designer",
       role: "Founder & Head Jeweler",
-      company: "Dupont Joaillerie, Lyon",
+      company: "European Design Atelier",
       country: "France",
       rating: 5,
       comment: "The perfume bottle gemstone pendants are our top holiday seller. Optical clarity on the crystals and airtight gold screw caps. Custom bulk quotation turnaround was less than 24 hours.",
       verified: true
     },
     {
-      name: "Pooja Hegde",
-      role: "Boutique Owner",
-      company: "Aura Artisan Gems, Bengaluru",
-      country: "India",
+      name: "B2B Production Director",
+      role: "Studio Director",
+      company: "Artisan Gemstones & Findings",
+      country: "International Partner",
       rating: 5,
-      comment: "Having visited their SP Road showroom personally, I can vouch for the sheer depth of their inventory. The micro-pave CZ toggle clasps and spacer beads never tarnish. True wholesale partner.",
+      comment: "The sheer depth of their inventory and gemstone consistency is outstanding. The micro-pave CZ toggle clasps and spacer beads never tarnish. True wholesale partner.",
       verified: true
     }
   ];

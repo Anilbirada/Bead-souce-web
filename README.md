@@ -3,7 +3,7 @@
 [![Production Ready](https://img.shields.io/badge/status-production--ready-emerald.svg)](#)
 [![Live Demo](https://img.shields.io/badge/live_demo-render-success.svg)](https://beadssource-wholesale.onrender.com)
 [![Stack](https://img.shields.io/badge/stack-React_19_+_Vite_+_Tailwind_v4_+_Node.js-blue.svg)](#)
-[![Client](https://img.shields.io/badge/client-Ramesh_Sir_(SP_Bengaluru)-amber.svg)](#)
+[![Enterprise RBAC](https://img.shields.io/badge/security-Enterprise_RBAC_Multi--Role-amber.svg)](#)
 [![Compliance](https://img.shields.io/badge/compliance-CPSIA_%7C_Prop_65_%7C_REACH-purple.svg)](#)
 
 > 🌐 **Live Production URL:** [https://beadssource-wholesale.onrender.com](https://beadssource-wholesale.onrender.com)  
@@ -15,45 +15,52 @@
 
 - **Live Production Website:** [https://beadssource-wholesale.onrender.com](https://beadssource-wholesale.onrender.com)
 - **Custom Wholesale Domain:** [https://beadsource.rsrtechnologies.co.in](https://beadsource.rsrtechnologies.co.in)
-- **Client:** Ramesh Sir – SP Bengaluru, Karnataka, India
-- **Existing Website:** [https://beadssource.com/](https://beadssource.com/)
 - **Design & Experience Reference:** [Everful Wholesale](https://www.everfulwholesale.com/)
-- **Project Name:** BeadsSource Premium Website Redesign & Production Build
-- **Project Type:** Production-Ready Full-Stack Wholesale E-Commerce Platform
+- **Project Name:** BeadsSource Premium Website & Enterprise Administration Suite
+- **Project Type:** Production-Ready Full-Stack Wholesale E-Commerce & Management Platform
 - **Repository:** [https://github.com/Anilbirada/Bead-souce-web](https://github.com/Anilbirada/Bead-souce-web)
 
-### Project Genesis & Purpose
-BeadsSource is an international manufacturer and wholesale exporter of natural gemstone bead strands, certified lead-free pewter charms, micro-pavé cubic zirconia findings, and finished artisan jewelry based in the historic SP Road jewelry and commercial hub of Bengaluru. 
+### Project Architecture & Purpose
+BeadsSource is an international manufacturer and wholesale exporter of natural gemstone bead strands, certified lead-free pewter charms, micro-pavé cubic zirconia findings, and finished artisan jewelry.
 
-Guided by the conversion-focused, minimalist e-commerce structure of **Everful Wholesale**, this platform completely modernizes BeadsSource with:
-- **Luxury Minimalist Aesthetics:** Warm ivory backgrounds (`#FAF9F5`), champagne gold borders (`#D4AF37`, `#C4A052`), and elegant serif typography (*Cormorant Garamond* and *Playfair Display* paired with *Plus Jakarta Sans*).
-- **Zero middleman trading overhead:** Preserving and migrating genuine factory SKUs (e.g. `A12502`, `A5853`, `A8283`, `A1016`, `A912`), real prices ($0.30 to $20.00), authentic product photography, and comprehensive technical specifications.
-- **Dedicated Wholesale Features:** Automated volume tier discounts (15% off for 10–49 pk, 30% off for 50+ pk), a multi-product Request a Quote (RFQ) builder, instant SKU search, dual-currency switching (USD $ / INR ₹), and an executive administration suite.
+Guided by the conversion-focused, minimalist e-commerce structure of **Everful Wholesale**, this platform features:
+- **Luxury Minimalist Aesthetics:** Warm ivory backgrounds (`#FAF9F5`, `#F8F6F1`), deep charcoal (`#191919`), champagne gold accents (`#C49A3A`), and elegant editorial typography.
+- **Dedicated Enterprise Admin Suite:** 15 comprehensive management modules including live KPI analytics, product CRUD, category taxonomy, SKU-level inventory controls, order tracking, multi-product RFQ counter-offers, customer moderation, and tamper-evident audit logs.
+- **Strict Role-Based Access Control (RBAC):** Configurable permissions across Super Administrator, Store Administrator, Product Manager, Order Manager, Inventory Manager, and Customer Support.
 
 ---
 
 ## 🔐 2. DATABASE CONFIGURATION & ACCESS PASSWORDS
 
-The platform utilizes a high-performance, atomic JSON database engine residing in the `server/data/` directory. This delivers zero-configuration portability, ACID-compliant persistence, and local fallback data hydration for offline testing.
+The platform utilizes a high-performance, atomic JSON database engine residing in the `server/data/` directory with complete ACID guarantees.
 
 ### 🔑 Pre-Configured Accounts & Credentials
 
 | Account Role | Email / Username | Password | Database Location | Access Rights |
 | :--- | :--- | :--- | :--- | :--- |
-| **Store Owner / Admin** | `admin@beadssource.com` | `admin` | `server/data/users.json` | **Full Executive Admin Suite**: Add/Edit/Delete Products, Stock Level Adjustments, Order Fulfillment, International Tracking Assignment, RFQ Counter-Offers, Coupon Creation, Revenue KPIs |
-| **Wholesale Buyer** | `buyer@boutiquejewels.com` | `buyer` | `server/data/users.json` | **Verified Tier 1 B2B Account**: Tier Discounts, Multi-Product RFQ Builder, Order History, Commercial Invoices |
+| **Super Administrator** | `admin@beadssource.com` | `admin` | `server/data/users.json` | **Unrestricted Access**: Global Store Settings, RBAC Staff Management, Financial Analytics, Audit Trail, Catalog CRUD |
+| **Store Administrator** | `manager@beadssource.com` | `manager` | `server/data/users.json` | **Full Store Management**: Products, Categories, Orders, RFQs, Inventory, Coupons, Customer Moderation |
+| **Product Manager** | `products@beadssource.com` | `products` | `server/data/users.json` | **Catalogue & Merchandising**: Add/Edit/Delete Products, Categories, Badges, Variations |
+| **Order Manager** | `orders@beadssource.com` | `orders` | `server/data/users.json` | **Fulfillment Desk**: Process Orders, Assign International Couriers & Tracking, Invoices |
+| **Inventory Manager** | `inventory@beadssource.com` | `inventory` | `server/data/users.json` | **Warehouse Desk**: SKU Restock Multipliers, Low-Stock Alerts, Inventory Reconciliation |
+| **Customer Support** | `support@beadssource.com` | `support` | `server/data/users.json` | **Support Desk**: Customer Inquiries, Review Moderation, Order Status Verification |
+| **Wholesale Buyer** | `buyer@boutiquejewels.com` | `buyer` | `server/data/users.json` | **Verified B2B Account**: Tier Discounts, Multi-Product RFQ Builder, Order History, Invoices |
 
 *(Note: The B2B Auth modal also features 1-click **Quick Demo Login** buttons for immediate testing without manual typing).*
 
 ### 🗄️ Database Schema & File Structure
 ```
 server/data/
-├── products.json     # 35+ genuine BeadsSource products with SKUs, prices, images & specs
+├── products.json     # 35+ factory products with SKUs, tier pricing, images & specs
 ├── categories.json   # 12 master wholesale categories with banner imagery
-├── orders.json       # Live customer purchase orders, addresses & tracking codes
-├── quotes.json       # Submitted RFQ quotation requests, target pricing & counter-offers
+├── orders.json       # Purchase orders, courier assignments & tracking numbers
+├── quotes.json       # Submitted RFQ requests, target rates & counter-offers
 ├── coupons.json      # Wholesale promo discount codes (e.g. WHOLESALE10, BULK20)
-└── users.json        # User credentials, business profiles, and GSTIN/Tax ID records
+├── users.json        # RBAC user credentials, staff roles, and resale certificates
+├── settings.json     # Centralized branding, currencies, tax rates, and courier rules
+├── content.json      # Global announcement text, hero banners, and FAQ database
+├── reviews.json      # Product customer reviews, ratings, and moderation flags
+└── audit-logs.json   # Immutable administrative activity logs & audit trail
 ```
 
 ---

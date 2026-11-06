@@ -44,8 +44,8 @@ export default function AuthModal() {
 
   const fillQuickDemo = (role) => {
     setError(null);
+    setAuthModalMode('login');
     if (role === 'admin') {
-      setAuthModalMode('login');
       setFormData({
         email: 'admin@beadssource.com',
         password: 'admin',
@@ -54,8 +54,16 @@ export default function AuthModal() {
         phone: '',
         taxId: ''
       });
+    } else if (role === 'manager') {
+      setFormData({
+        email: 'manager@beadssource.com',
+        password: 'manager',
+        name: '',
+        company: '',
+        phone: '',
+        taxId: ''
+      });
     } else {
-      setAuthModalMode('login');
       setFormData({
         email: 'buyer@boutiquejewels.com',
         password: 'buyer',
@@ -76,10 +84,10 @@ export default function AuthModal() {
       />
 
       {/* Modal Dialog */}
-      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-[#EAE4D5] overflow-hidden z-10 animate-fade-in">
+      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-[#E9E3D8] overflow-hidden z-10 animate-fade-in">
         
         {/* Top Header */}
-        <div className="bg-[#1C1A17] p-6 text-white relative">
+        <div className="bg-[#191919] p-6 text-white relative">
           <button
             onClick={() => setAuthModalOpen(false)}
             className="absolute top-4 right-4 text-gray-400 hover:text-white p-1 rounded-lg"
@@ -87,7 +95,7 @@ export default function AuthModal() {
             <X className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center gap-2 mb-2 text-[#D4AF37]">
+          <div className="flex items-center gap-2 mb-2 text-[#C49A3A]">
             <ShieldCheck className="w-5 h-5" />
             <span className="text-xs uppercase tracking-widest font-semibold">BeadsSource B2B Portal</span>
           </div>
@@ -103,22 +111,29 @@ export default function AuthModal() {
         </div>
 
         {/* Demo Fast Login Bar */}
-        <div className="bg-[#F8F5EE] px-6 py-2.5 border-b border-[#EBE4D5] flex items-center justify-between text-xs">
+        <div className="bg-[#F8F6F1] px-6 py-2.5 border-b border-[#E9E3D8] flex items-center justify-between text-xs">
           <span className="text-[#696253] font-medium text-[11px]">Quick 1-Click Login:</span>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 flex-wrap">
             <button
               type="button"
               onClick={() => fillQuickDemo('admin')}
               className="px-2 py-1 bg-white border border-[#DACFBA] rounded text-[10px] font-bold text-[#8C6D2B] hover:bg-[#F3EFE6]"
             >
-              Ramesh Sir (Admin)
+              Administrator
+            </button>
+            <button
+              type="button"
+              onClick={() => fillQuickDemo('manager')}
+              className="px-2 py-1 bg-white border border-[#DACFBA] rounded text-[10px] font-bold text-[#554F42] hover:bg-[#F3EFE6]"
+            >
+              Store Manager
             </button>
             <button
               type="button"
               onClick={() => fillQuickDemo('buyer')}
               className="px-2 py-1 bg-white border border-[#DACFBA] rounded text-[10px] font-bold text-[#3B372F] hover:bg-[#F3EFE6]"
             >
-              Wholesale Buyer
+              Customer
             </button>
           </div>
         </div>
@@ -142,7 +157,7 @@ export default function AuthModal() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="e.g. Ramesh Sir / Sarah Jenkins"
+                    placeholder="e.g. Authorized Business Representative"
                     className="w-full pl-9 pr-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-lg text-xs focus:outline-none focus:border-[#C4A052] focus:bg-white"
                   />
                 </div>

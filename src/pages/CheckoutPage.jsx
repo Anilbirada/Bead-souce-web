@@ -175,9 +175,9 @@ export default function CheckoutPage({ onNavigate }) {
                     BEADS<span className="text-[#C4A052]">SOURCE</span> LLC
                   </span>
                 </div>
-                <p className="text-xs text-gray-500">SP Road Commercial Center &bull; Bengaluru, India</p>
-                <p className="text-xs text-gray-500">GSTIN: 29AABCU9603R1ZX &bull; IEC: 0714018291</p>
-                <p className="text-xs text-gray-500">Phone: +91 98450 12399 &bull; info@beadssource.com</p>
+                <p className="text-xs text-gray-500">Central International Logistics &amp; Fulfillment Center</p>
+                <p className="text-xs text-gray-500">Export Registration: EXP-INT-998241 &bull; IEC: 0714018291</p>
+                <p className="text-xs text-gray-500">Toll-Free: +1 (800) 555-0199 &bull; orders@beadssource.com</p>
               </div>
 
               <div className="text-left sm:text-right">
@@ -280,9 +280,9 @@ export default function CheckoutPage({ onNavigate }) {
             {/* Wire Transfer instructions if applicable */}
             <div className="p-4 bg-[#FAF7F0] rounded-2xl border border-[#EBE4D5] text-xs space-y-1.5 text-[#5C5547]">
               <p className="font-bold text-[#1A1A1A]">Bank Remittance / TT Instructions for BeadsSource Export:</p>
-              <p>Bank: State Bank of India &bull; Branch: SP Road Commercial Branch, Bengaluru</p>
-              <p>Beneficiary: BeadsSource LLC Export Account &bull; Account No: 382910481920</p>
-              <p>IFSC: SBIN0001824 &bull; Swift Code: SBININBB182</p>
+              <p>Bank: International Commercial Banking Corporation &bull; Global Treasury Branch</p>
+              <p>Beneficiary: BeadsSource Wholesale LLC Export Account &bull; Account No: 382910481920</p>
+              <p>Routing / Swift Code: BSNUS33NYC</p>
               <p className="text-[10px] text-gray-500 pt-1">
                 Kindly quote your Invoice #{completedOrder.id} in your wire transfer narration.
               </p>
@@ -356,7 +356,7 @@ export default function CheckoutPage({ onNavigate }) {
                     required
                     value={customer.name}
                     onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
-                    placeholder="e.g. Eleanor Vance / Ramesh Sir"
+                    placeholder="e.g. Authorized Purchasing Agent"
                     className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl focus:outline-none focus:border-[#C4A052]"
                   />
                 </div>

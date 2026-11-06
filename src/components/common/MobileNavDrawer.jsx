@@ -204,7 +204,7 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
             onClick={() => { onClose(); onNavigate('about'); }}
             className="w-full px-4 py-2.5 text-left text-xs text-[#4A453A] hover:bg-[#FAF8F5] flex items-center justify-between"
           >
-            <span>Our Heritage (SP Bengaluru)</span>
+            <span>Our Heritage &amp; Craft</span>
             <ChevronRight className="w-4 h-4 text-gray-400" />
           </button>
 
@@ -212,7 +212,7 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
             onClick={() => { onClose(); onNavigate('contact'); }}
             className="w-full px-4 py-2.5 text-left text-xs text-[#4A453A] hover:bg-[#FAF8F5] flex items-center justify-between"
           >
-            <span>Contact &amp; Showroom</span>
+            <span>Contact &amp; Support Desk</span>
             <ChevronRight className="w-4 h-4 text-gray-400" />
           </button>
         </div>
@@ -221,11 +221,11 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
         <div className="p-4 bg-[#F5F2EB] border-t border-[#E8E2D3] text-[11px] text-[#635C4E] space-y-2">
           <p className="flex items-center gap-1.5 font-medium">
             <MapPin className="w-3.5 h-3.5 text-[#C4A052]" />
-            <span>SP Road, Bengaluru, Karnataka, India</span>
+            <span>Central International Logistics Center</span>
           </p>
           <p className="flex items-center gap-1.5 font-medium">
             <Phone className="w-3.5 h-3.5 text-[#C4A052]" />
-            <span>+91 98450 12399 &bull; info@beadssource.com</span>
+            <span>+1 (800) 555-0199 &bull; support@beadssource.com</span>
           </p>
           <p className="flex items-center gap-1.5 text-[10px] text-gray-500">
             <ShieldCheck className="w-3.5 h-3.5 text-green-700" />
