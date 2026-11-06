@@ -821,7 +821,11 @@ app.get('/api/admin/stats', (req, res) => {
 const distPath = path.join(__dirname, '../dist');
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
-  app.get(/^(?!\/api).+/, (req, res) => {
+  // Express 5 compatible SPA fallback middleware
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
     res.sendFile(path.join(distPath, 'index.html'));
   });
 }

@@ -26,6 +26,8 @@ import WishlistPage from './pages/WishlistPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 
+import initialProducts from './data/products.json';
+import initialCategories from './data/categories.json';
 import { api } from './utils/api';
 import { ShieldAlert, ArrowLeft } from 'lucide-react';
 
@@ -35,14 +37,14 @@ function MainApp() {
   const [currentPage, setCurrentPage] = useState('home');
   const [adminInitialTab, setAdminInitialTab] = useState('overview');
   const [customerInitialTab, setCustomerInitialTab] = useState('orders');
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState(initialProducts || []);
+  const [categories, setCategories] = useState(initialCategories || []);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [catalogFilters, setCatalogFilters] = useState({ category: 'all', search: '', sort: '' });
 
-  // Load products and categories on mount
+  // Load live products and categories on mount
   useEffect(() => {
     const initData = async () => {
       try {
@@ -50,10 +52,10 @@ function MainApp() {
           api.getProducts(),
           api.getCategories()
         ]);
-        setProducts(prods);
-        setCategories(cats);
+        if (Array.isArray(prods) && prods.length > 0) setProducts(prods);
+        if (Array.isArray(cats) && cats.length > 0) setCategories(cats);
       } catch (err) {
-        console.error('Initialization error:', err);
+        console.warn('API sync fallback active:', err);
       }
     };
     initData();

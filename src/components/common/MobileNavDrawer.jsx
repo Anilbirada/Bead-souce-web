@@ -71,7 +71,7 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
         <div className="p-4 bg-[#FAF7F0] border-b border-[#EAE4D5]">
           {user ? (
             <div className="space-y-1">
-              <p className="text-xs font-semibold text-[#1A1A1A]">{user.name}</p>
+              <p className="text-xs font-semibold text-[#1A1A1A]">{user.name || user.company || user.email || 'Customer'}</p>
               <p className="text-[11px] text-[#6B6557]">{user.company || user.email}</p>
               <div className="flex items-center gap-3 pt-2">
                 <button

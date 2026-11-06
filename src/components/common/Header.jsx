@@ -308,7 +308,7 @@ export default function Header({
                 aria-label="User Account"
               >
                 <div className="w-8 h-8 rounded-full bg-[#191919] text-[#F8F6F1] flex items-center justify-center font-bold text-xs border border-[#C49A3A]/40">
-                  {user ? (isAdmin ? <ShieldCheck className="w-4 h-4 text-[#C49A3A]" /> : user.name[0].toUpperCase()) : <User className="w-4 h-4" />}
+                  {user ? (isAdmin ? <ShieldCheck className="w-4 h-4 text-[#C49A3A]" /> : ((user?.name && user.name[0]) || user?.email?.[0] || 'U').toUpperCase()) : <User className="w-4 h-4" />}
                 </div>
 
                 <div className="hidden xl:flex flex-col text-left">
