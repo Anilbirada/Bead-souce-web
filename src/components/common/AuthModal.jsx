@@ -117,9 +117,9 @@ export default function AuthModal() {
             <button
               type="button"
               onClick={() => fillQuickDemo('admin')}
-              className="px-2 py-1 bg-white border border-[#DACFBA] rounded text-[10px] font-bold text-[#8C6D2B] hover:bg-[#F3EFE6]"
+              className="px-2 py-1 bg-white border border-[#DACFBA] rounded text-[10px] font-bold text-[#8C6D2B] hover:bg-[#F3EFE6] flex items-center gap-1"
             >
-              Administrator
+              <span>👑 Super Admin</span>
             </button>
             <button
               type="button"
@@ -133,7 +133,7 @@ export default function AuthModal() {
               onClick={() => fillQuickDemo('buyer')}
               className="px-2 py-1 bg-white border border-[#DACFBA] rounded text-[10px] font-bold text-[#3B372F] hover:bg-[#F3EFE6]"
             >
-              Customer
+              Wholesale Customer
             </button>
           </div>
         </div>

@@ -93,10 +93,47 @@ export const AuthProvider = ({ children }) => {
     setAuthModalOpen(true);
   };
 
+  const [impersonatedCustomer, setImpersonatedCustomer] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem('beadssource_impersonated_customer');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const [viewMode, setViewMode] = useState(() => {
+    return sessionStorage.getItem('beadssource_view_mode') || 'admin';
+  });
+
+  useEffect(() => {
+    if (impersonatedCustomer) {
+      sessionStorage.setItem('beadssource_impersonated_customer', JSON.stringify(impersonatedCustomer));
+    } else {
+      sessionStorage.removeItem('beadssource_impersonated_customer');
+    }
+  }, [impersonatedCustomer]);
+
+  useEffect(() => {
+    sessionStorage.setItem('beadssource_view_mode', viewMode);
+  }, [viewMode]);
+
+  const startImpersonating = (customer) => {
+    setImpersonatedCustomer(customer);
+    setViewMode('customer');
+  };
+
+  const stopImpersonating = () => {
+    setImpersonatedCustomer(null);
+    setViewMode('admin');
+  };
+
   const userRole = user?.role || 'guest';
   const isAdmin = ['super_admin', 'admin', 'product_manager', 'order_manager', 'inventory_manager', 'support'].includes(userRole);
   const isSuperAdmin = userRole === 'super_admin';
   const isWholesaleVerified = user && Boolean(user.wholesaleApproved);
+
+  const effectiveUser = (viewMode === 'customer' && impersonatedCustomer) ? impersonatedCustomer : user;
 
   const hasPermission = (permission) => {
     if (!user) return false;
@@ -108,6 +145,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={{
       user,
+      effectiveUser,
       token,
       loading,
       login,
@@ -124,7 +162,13 @@ export const AuthProvider = ({ children }) => {
       authModalMode,
       setAuthModalMode,
       openLogin,
-      openRegister
+      openRegister,
+      impersonatedCustomer,
+      startImpersonating,
+      stopImpersonating,
+      viewMode,
+      setViewMode,
+      isImpersonating: Boolean(impersonatedCustomer)
     }}>
       {children}
     </AuthContext.Provider>

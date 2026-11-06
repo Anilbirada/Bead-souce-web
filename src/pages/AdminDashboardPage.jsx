@@ -44,7 +44,7 @@ import { useAuth } from '../context/AuthContext';
 
 export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, initialTab = 'overview' }) {
   const { formatPrice } = useCurrency();
-  const { user, userRole, isSuperAdmin, hasPermission } = useAuth();
+  const { user, userRole, isSuperAdmin, hasPermission, startImpersonating, setViewMode } = useAuth();
 
   const [activeTab, setActiveTab] = useState(initialTab); 
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -583,11 +583,23 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
         </div>
 
         {/* Right Admin Controls */}
-        <div className="flex items-center gap-4 text-xs">
+        <div className="flex items-center gap-3 text-xs">
           <div className="hidden sm:flex items-center gap-2 text-[#D0C9BD] bg-[#252525] px-3 py-1.5 rounded-full border border-[#3A3A3A]">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#C49A3A]" />
+            <span className="text-[#C49A3A] font-bold">👑</span>
             <span>Role: <strong className="text-white capitalize">{userRole.replace(/_/g, ' ')}</strong></span>
           </div>
+
+          <button
+            onClick={() => {
+              setViewMode('customer');
+              onNavigate('dashboard');
+            }}
+            className="px-3 py-1.5 bg-[#252525] hover:bg-[#353535] text-[#D0C9BD] hover:text-white rounded-lg transition-colors border border-[#3A3A3A] flex items-center gap-1.5 cursor-pointer"
+            title="Inspect Customer Experience & Orders"
+          >
+            <Users className="w-3.5 h-3.5 text-[#C49A3A]" />
+            <span className="hidden md:inline">Customer Portal View</span>
+          </button>
 
           <button
             onClick={loadAllData}
@@ -603,7 +615,7 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
             className="px-3.5 py-1.5 bg-[#C49A3A] hover:bg-[#A9812A] text-black font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
           >
             <ExternalLink className="w-3.5 h-3.5" />
-            <span>View Storefront</span>
+            <span>Storefront</span>
           </button>
         </div>
       </header>
@@ -1327,13 +1339,25 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
                             </span>
                           </td>
                           <td className="py-3 px-4 text-right">
-                            <button
-                              onClick={() => handleOpenEditUser(cust)}
-                              className="p-1.5 text-gray-600 hover:text-[#C49A3A] rounded-lg"
-                              title="Edit Account"
-                            >
-                              <Edit3 className="w-4 h-4" />
-                            </button>
+                            <div className="flex items-center justify-end gap-1">
+                              <button
+                                onClick={() => {
+                                  startImpersonating(cust);
+                                  onNavigate('dashboard');
+                                }}
+                                className="p-1.5 text-gray-600 hover:text-[#C49A3A] hover:bg-[#F0EBE1] rounded-lg transition-colors cursor-pointer"
+                                title={`Inspect Customer Portal as ${cust.name}`}
+                              >
+                                <Eye className="w-4 h-4 text-[#8C6D2B]" />
+                              </button>
+                              <button
+                                onClick={() => handleOpenEditUser(cust)}
+                                className="p-1.5 text-gray-600 hover:text-[#C49A3A] hover:bg-[#F0EBE1] rounded-lg transition-colors cursor-pointer"
+                                title="Edit Account"
+                              >
+                                <Edit3 className="w-4 h-4" />
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       ))}

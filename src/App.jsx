@@ -13,6 +13,7 @@ import MobileBottomBar from './components/common/MobileBottomBar';
 import AuthModal from './components/common/AuthModal';
 import CartDrawer from './components/common/CartDrawer';
 import ProductQuickView from './components/shop/ProductQuickView';
+import SuperAdminBar from './components/common/SuperAdminBar';
 
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
@@ -29,7 +30,7 @@ import { api } from './utils/api';
 import { ShieldAlert, ArrowLeft } from 'lucide-react';
 
 function MainApp() {
-  const { user, isAdmin, openLogin } = useAuth();
+  const { user, isAdmin, isSuperAdmin, openLogin } = useAuth();
 
   const [currentPage, setCurrentPage] = useState('home');
   const [adminInitialTab, setAdminInitialTab] = useState('overview');
@@ -128,7 +129,8 @@ function MainApp() {
 
     // Render Dedicated Admin Suite
     return (
-      <div className="min-h-screen bg-[#FAF9F5] selection:bg-[#C49A3A]/30">
+      <div className="min-h-screen bg-[#FAF9F5] selection:bg-[#C49A3A]/30 flex flex-col">
+        <SuperAdminBar currentPage={currentPage} onNavigate={handleNavigate} />
         <AdminDashboardPage
           initialTab={adminInitialTab}
           onNavigate={handleNavigate}
@@ -148,6 +150,9 @@ function MainApp() {
   return (
     <div className="flex flex-col min-h-screen selection:bg-[#E9E3D8] selection:text-[#191919] bg-[#FFFFFF] text-[#303030]">
       
+      {/* 0. Omnipresent Super Admin Controls */}
+      <SuperAdminBar currentPage={currentPage} onNavigate={handleNavigate} />
+
       {/* 1. Slim Announcement Bar */}
       <AnnouncementBar onOpenAuth={openLogin} />
 

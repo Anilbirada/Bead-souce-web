@@ -20,7 +20,10 @@ import {
   Globe,
   Sparkles,
   MapPin,
-  HelpCircle
+  HelpCircle,
+  Eye,
+  RotateCcw,
+  Store
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
@@ -38,7 +41,16 @@ export default function Header({
 }) {
   const { itemsCount, tieredSubtotal, openCartDrawer } = useCart();
   const { wishlistCount } = useWishlist();
-  const { user, isAdmin, logout, hasPermission } = useAuth();
+  const { 
+    user, 
+    isAdmin, 
+    isSuperAdmin, 
+    logout, 
+    hasPermission, 
+    impersonatedCustomer, 
+    stopImpersonating, 
+    setViewMode 
+  } = useAuth();
   const { currency, setCurrency, formatPrice } = useCurrency();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -312,85 +324,55 @@ export default function Header({
 
               {/* Account Dropdown Menu */}
               {user && userMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-[#E9E3D8] py-2 z-50 text-xs animate-in fade-in slide-in-from-top-2">
+                <div className="absolute right-0 top-full mt-2 w-72 sm:w-80 bg-white rounded-2xl shadow-2xl border border-[#E9E3D8] py-2 z-50 text-xs animate-in fade-in slide-in-from-top-2 max-h-[85vh] overflow-y-auto">
                   
-                  {/* Generic Role-based Header (No personal names / locations) */}
+                  {/* Generic Role-based Header */}
                   <div className="px-4 py-3 border-b border-[#F0EBE1] bg-[#F8F6F1]">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A3A]">
-                        {isAdmin ? 'System Role' : 'Account Type'}
+                        {isSuperAdmin ? '👑 Super Admin' : (isAdmin ? '🛡️ Management' : 'Account Type')}
                       </span>
                       <span className="text-[10px] bg-[#EAE4D5] text-[#554F42] px-2 py-0.5 rounded font-semibold capitalize">
                         {user.role?.replace(/_/g, ' ') || 'Customer'}
                       </span>
                     </div>
                     <p className="font-bold text-[#191919] text-sm mt-1">
-                      {isAdmin ? 'Administrator' : (user.company || 'Customer')}
+                      {isSuperAdmin ? 'Super Administrator' : (isAdmin ? 'Administrator' : (user.company || 'Customer'))}
                     </p>
                     <p className="text-[#78716C] truncate text-[11px] mt-0.5">
-                      {isAdmin ? 'Account Management' : user.email}
+                      {user.email}
                     </p>
                   </div>
 
-                  {/* CUSTOMER NAVIGATION MENU */}
-                  {!isAdmin && (
-                    <div className="py-1">
+                  {/* Active Customer Impersonation Banner */}
+                  {impersonatedCustomer && (
+                    <div className="m-2 p-2.5 bg-[#FFF9E6] border border-[#ECD9A5] rounded-xl flex items-center justify-between">
+                      <div className="min-w-0 pr-2">
+                        <span className="text-[9px] font-bold uppercase text-[#8C6D2B] block">Viewing As Customer:</span>
+                        <p className="font-bold text-[#191919] text-xs truncate">{impersonatedCustomer.name}</p>
+                        <p className="text-[10px] text-gray-500 truncate">{impersonatedCustomer.company || impersonatedCustomer.email}</p>
+                      </div>
                       <button
-                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'orders' }); }}
-                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                        onClick={stopImpersonating}
+                        className="px-2 py-1 bg-white border border-[#DACFBA] rounded text-[10px] font-bold text-red-600 hover:bg-red-50 shrink-0 cursor-pointer"
+                        title="Revert to Super Admin"
                       >
-                        <LayoutDashboard className="w-4 h-4 text-[#C49A3A]" />
-                        <span>My Dashboard</span>
-                      </button>
-
-                      <button
-                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'orders' }); }}
-                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
-                      >
-                        <Package className="w-4 h-4 text-[#C49A3A]" />
-                        <span>My Orders</span>
-                      </button>
-
-                      <button
-                        onClick={() => { setUserMenuOpen(false); onNavigate('wishlist'); }}
-                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
-                      >
-                        <Heart className="w-4 h-4 text-[#C49A3A]" />
-                        <span>My Wishlist</span>
-                      </button>
-
-                      <button
-                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'quotes' }); }}
-                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
-                      >
-                        <FileText className="w-4 h-4 text-[#C49A3A]" />
-                        <span>My Quotation Requests</span>
-                      </button>
-
-                      <button
-                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'profile' }); }}
-                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
-                      >
-                        <User className="w-4 h-4 text-[#C49A3A]" />
-                        <span>My Profile</span>
-                      </button>
-
-                      <button
-                        onClick={() => { setUserMenuOpen(false); onNavigate('dashboard', { tab: 'addresses' }); }}
-                        className="w-full px-4 py-2.5 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
-                      >
-                        <MapPin className="w-4 h-4 text-[#C49A3A]" />
-                        <span>Address Book</span>
+                        Exit View
                       </button>
                     </div>
                   )}
 
-                  {/* ADMINISTRATOR NAVIGATION MENU */}
+                  {/* SUPER ADMIN / ADMIN SUITE SECTION */}
                   {isAdmin && (
-                    <div className="py-1">
+                    <div className="py-1 border-b border-[#F0EBE1]">
+                      <div className="px-4 py-1.5 flex items-center justify-between text-[10px] font-bold text-[#78716C] uppercase tracking-wider bg-[#FAF9F5]">
+                        <span>Administrative Suite</span>
+                        <span className="text-[#C49A3A]">Full Access</span>
+                      </div>
+
                       <button
                         onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'overview' }); }}
-                        className="w-full px-4 py-2.5 text-left text-[#191919] bg-[#FAF7F0] hover:bg-[#F5EEDC] font-semibold flex items-center gap-2.5 transition-colors border-b border-[#EAE3D4]"
+                        className="w-full px-4 py-2 text-left text-[#191919] hover:bg-[#F8F6F1] font-semibold flex items-center gap-2.5 transition-colors"
                       >
                         <LayoutDashboard className="w-4 h-4 text-[#C49A3A]" />
                         <span>Admin Dashboard</span>
@@ -399,7 +381,7 @@ export default function Header({
                       {hasPermission('products') && (
                         <button
                           onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'products' }); }}
-                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                          className="w-full px-4 py-1.5 text-left text-[#444] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
                         >
                           <Archive className="w-4 h-4 text-[#78716C]" />
                           <span>Product Management</span>
@@ -409,7 +391,7 @@ export default function Header({
                       {hasPermission('orders') && (
                         <button
                           onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'orders' }); }}
-                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                          className="w-full px-4 py-1.5 text-left text-[#444] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
                         >
                           <Package className="w-4 h-4 text-[#78716C]" />
                           <span>Order Management</span>
@@ -419,42 +401,131 @@ export default function Header({
                       {hasPermission('quotes') && (
                         <button
                           onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'quotes' }); }}
-                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                          className="w-full px-4 py-1.5 text-left text-[#444] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
                         >
                           <FileText className="w-4 h-4 text-[#78716C]" />
-                          <span>Quotation Management</span>
+                          <span>Wholesale Quotations</span>
                         </button>
                       )}
 
                       {hasPermission('customers') && (
                         <button
                           onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'customers' }); }}
-                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                          className="w-full px-4 py-1.5 text-left text-[#444] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
                         >
                           <Users className="w-4 h-4 text-[#78716C]" />
-                          <span>Customer Management</span>
-                        </button>
-                      )}
-
-                      {hasPermission('inventory') && (
-                        <button
-                          onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'inventory' }); }}
-                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
-                        >
-                          <Layers className="w-4 h-4 text-[#78716C]" />
-                          <span>Inventory Management</span>
+                          <span>Customer Database</span>
                         </button>
                       )}
 
                       {hasPermission('settings') && (
                         <button
                           onClick={() => { setUserMenuOpen(false); onNavigate('admin', { tab: 'settings' }); }}
-                          className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                          className="w-full px-4 py-1.5 text-left text-[#444] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
                         >
                           <Settings className="w-4 h-4 text-[#78716C]" />
                           <span>Store Settings</span>
                         </button>
                       )}
+                    </div>
+                  )}
+
+                  {/* CUSTOMER PORTAL & EXPERIENCE SECTION (Always available to Super Admin & Customers) */}
+                  <div className="py-1">
+                    <div className="px-4 py-1.5 flex items-center justify-between text-[10px] font-bold text-[#78716C] uppercase tracking-wider bg-[#FAF9F5]">
+                      <span>Customer Experience &amp; Portal</span>
+                      {isAdmin && <span className="text-emerald-700 font-bold">Enabled</span>}
+                    </div>
+
+                    <button
+                      onClick={() => { 
+                        setUserMenuOpen(false); 
+                        if (isAdmin) setViewMode('customer');
+                        onNavigate('dashboard', { tab: 'orders' }); 
+                      }}
+                      className="w-full px-4 py-2 text-left text-[#303030] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors font-medium"
+                    >
+                      <LayoutDashboard className="w-4 h-4 text-[#C49A3A]" />
+                      <span>Customer Dashboard</span>
+                    </button>
+
+                    <button
+                      onClick={() => { 
+                        setUserMenuOpen(false); 
+                        if (isAdmin) setViewMode('customer');
+                        onNavigate('dashboard', { tab: 'orders' }); 
+                      }}
+                      className="w-full px-4 py-1.5 text-left text-[#444] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                    >
+                      <Package className="w-4 h-4 text-[#78716C]" />
+                      <span>Customer Order History</span>
+                    </button>
+
+                    <button
+                      onClick={() => { 
+                        setUserMenuOpen(false); 
+                        if (isAdmin) setViewMode('customer');
+                        onNavigate('dashboard', { tab: 'quotes' }); 
+                      }}
+                      className="w-full px-4 py-1.5 text-left text-[#444] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                    >
+                      <FileText className="w-4 h-4 text-[#78716C]" />
+                      <span>Customer RFQ Quotes</span>
+                    </button>
+
+                    <button
+                      onClick={() => { setUserMenuOpen(false); onNavigate('wishlist'); }}
+                      className="w-full px-4 py-1.5 text-left text-[#444] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                    >
+                      <Heart className="w-4 h-4 text-[#78716C]" />
+                      <span>Wishlist ({wishlistCount})</span>
+                    </button>
+
+                    <button
+                      onClick={() => { 
+                        setUserMenuOpen(false); 
+                        if (isAdmin) setViewMode('customer');
+                        onNavigate('dashboard', { tab: 'profile' }); 
+                      }}
+                      className="w-full px-4 py-1.5 text-left text-[#444] hover:bg-[#F8F6F1] flex items-center gap-2.5 transition-colors"
+                    >
+                      <User className="w-4 h-4 text-[#78716C]" />
+                      <span>Customer Profile &amp; Address Book</span>
+                    </button>
+                  </div>
+
+                  {/* STOREFRONT QUICK JUMP (Super Admin & Staff) */}
+                  {isAdmin && (
+                    <div className="py-1 border-t border-[#F0EBE1]">
+                      <div className="px-4 py-1 text-[10px] font-bold text-[#78716C] uppercase tracking-wider">
+                        Storefront Pages
+                      </div>
+                      <div className="grid grid-cols-2 gap-1 px-3 py-1">
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('catalog'); }}
+                          className="px-2 py-1 text-left text-[11px] text-[#555] hover:bg-[#F8F6F1] rounded"
+                        >
+                          Shop Catalog
+                        </button>
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('quote'); }}
+                          className="px-2 py-1 text-left text-[11px] text-[#555] hover:bg-[#F8F6F1] rounded"
+                        >
+                          Custom RFQ
+                        </button>
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('checkout'); }}
+                          className="px-2 py-1 text-left text-[11px] text-[#555] hover:bg-[#F8F6F1] rounded"
+                        >
+                          Checkout
+                        </button>
+                        <button
+                          onClick={() => { setUserMenuOpen(false); onNavigate('contact'); }}
+                          className="px-2 py-1 text-left text-[11px] text-[#555] hover:bg-[#F8F6F1] rounded"
+                        >
+                          Contact Desk
+                        </button>
+                      </div>
                     </div>
                   )}
 

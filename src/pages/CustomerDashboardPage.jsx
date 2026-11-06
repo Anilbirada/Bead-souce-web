@@ -17,7 +17,9 @@ import {
   Save,
   AlertCircle,
   Eye,
-  Heart
+  Heart,
+  Users,
+  RotateCcw
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -25,41 +27,75 @@ import { useWishlist } from '../context/WishlistContext';
 import { api } from '../utils/api';
 
 export default function CustomerDashboardPage({ onNavigate, initialTab = 'orders' }) {
-  const { user, isAdmin, updateUser } = useAuth();
+  const { 
+    user, 
+    effectiveUser, 
+    isAdmin, 
+    isSuperAdmin, 
+    impersonatedCustomer, 
+    startImpersonating, 
+    stopImpersonating, 
+    updateUser 
+  } = useAuth();
   const { formatPrice } = useCurrency();
   const { wishlistCount } = useWishlist();
+
+  const activeCustomer = impersonatedCustomer || effectiveUser || user;
 
   const [activeTab, setActiveTab] = useState(initialTab); // 'orders', 'quotes', 'profile', 'addresses'
   const [orders, setOrders] = useState([]);
   const [quotes, setQuotes] = useState([]);
+  const [customersList, setCustomersList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedOrderForInvoice, setSelectedOrderForInvoice] = useState(null);
 
+  // Load customer list for Super Admin
+  useEffect(() => {
+    if (isAdmin || isSuperAdmin) {
+      api.getCustomers().then(custs => {
+        if (Array.isArray(custs)) setCustomersList(custs);
+      }).catch(() => {});
+    }
+  }, [isAdmin, isSuperAdmin]);
+
   // Profile Form State
   const [profileForm, setProfileForm] = useState({
-    name: user?.name || '',
-    company: user?.company || '',
-    phone: user?.phone || '',
-    taxId: user?.taxId || '',
+    name: activeCustomer?.name || '',
+    company: activeCustomer?.company || '',
+    phone: activeCustomer?.phone || '',
+    taxId: activeCustomer?.taxId || '',
     newPassword: '',
     confirmPassword: ''
   });
 
+  // Keep form updated if active customer changes
+  useEffect(() => {
+    if (activeCustomer) {
+      setProfileForm(prev => ({
+        ...prev,
+        name: activeCustomer.name || '',
+        company: activeCustomer.company || '',
+        phone: activeCustomer.phone || '',
+        taxId: activeCustomer.taxId || ''
+      }));
+    }
+  }, [activeCustomer]);
+
   // Address Form State
   const [shippingAddress, setShippingAddress] = useState({
-    addressLine1: user?.shippingAddress?.addressLine1 || '450 Fashion Avenue, Suite 1200',
-    city: user?.shippingAddress?.city || 'New York',
-    state: user?.shippingAddress?.state || 'NY',
-    postalCode: user?.shippingAddress?.postalCode || '10018',
-    country: user?.shippingAddress?.country || 'United States'
+    addressLine1: activeCustomer?.shippingAddress?.addressLine1 || '450 Fashion Avenue, Suite 1200',
+    city: activeCustomer?.shippingAddress?.city || 'New York',
+    state: activeCustomer?.shippingAddress?.state || 'NY',
+    postalCode: activeCustomer?.shippingAddress?.postalCode || '10018',
+    country: activeCustomer?.shippingAddress?.country || 'United States'
   });
 
   const [billingAddress, setBillingAddress] = useState({
-    addressLine1: user?.billingAddress?.addressLine1 || '450 Fashion Avenue, Suite 1200',
-    city: user?.billingAddress?.city || 'New York',
-    state: user?.billingAddress?.state || 'NY',
-    postalCode: user?.billingAddress?.postalCode || '10018',
-    country: user?.billingAddress?.country || 'United States'
+    addressLine1: activeCustomer?.billingAddress?.addressLine1 || '450 Fashion Avenue, Suite 1200',
+    city: activeCustomer?.billingAddress?.city || 'New York',
+    state: activeCustomer?.billingAddress?.state || 'NY',
+    postalCode: activeCustomer?.billingAddress?.postalCode || '10018',
+    country: activeCustomer?.billingAddress?.country || 'United States'
   });
 
   const [saveMessage, setSaveMessage] = useState(null);
@@ -69,9 +105,16 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'orders
     const fetchData = async () => {
       setLoading(true);
       try {
+        let emailFilter = null;
+        if (impersonatedCustomer) {
+          emailFilter = impersonatedCustomer.email;
+        } else if (!isAdmin && user?.email) {
+          emailFilter = user.email;
+        }
+
         const [ordersData, quotesData] = await Promise.all([
-          api.getOrders(user?.email),
-          api.getQuotes(user?.email)
+          api.getOrders(emailFilter),
+          api.getQuotes(emailFilter)
         ]);
         setOrders(ordersData);
         setQuotes(quotesData);
@@ -82,7 +125,7 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'orders
       }
     };
     fetchData();
-  }, [user]);
+  }, [user, impersonatedCustomer, isAdmin]);
 
   const handleSaveProfile = async (e) => {
     e.preventDefault();
@@ -132,22 +175,75 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'orders
     <div className="min-h-screen bg-[#FAF9F5] pb-24">
       
       {/* Header Banner */}
-      <div className="bg-[#191919] text-white py-12 px-4 sm:px-6 lg:px-8 border-b border-[#2C2C2C]">
+      <div className="bg-[#191919] text-white py-10 px-4 sm:px-6 lg:px-8 border-b border-[#2C2C2C]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-xs text-[#C49A3A] font-semibold mb-1">
-              <ShieldCheck className="w-4 h-4" />
-              <span>Wholesale Customer Portal &bull; Account Management</span>
+              {isSuperAdmin ? (
+                <>
+                  <span className="text-sm">👑</span>
+                  <span>Super Administrator &bull; Customer Portal Access</span>
+                </>
+              ) : (
+                <>
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Wholesale Customer Portal &bull; Account Management</span>
+                </>
+              )}
             </div>
             <h1 className="font-serif text-3xl font-bold text-white">
-              {user ? `Welcome back, ${user.company || 'Wholesale Buyer'}` : 'Customer Dashboard'}
+              {impersonatedCustomer ? (
+                <span>Customer View: <span className="text-[#C49A3A]">{impersonatedCustomer.name}</span></span>
+              ) : activeCustomer ? (
+                `Welcome, ${activeCustomer.company || activeCustomer.name || 'Wholesale Buyer'}`
+              ) : (
+                'Customer Dashboard'
+              )}
             </h1>
             <p className="text-xs text-[#D0C9BD] mt-1">
-              Account ID: {user?.id || 'usr-guest'} &bull; Contact: {user?.email || 'buyer@boutiquejewels.com'}
+              Account: {activeCustomer?.email || 'customer@luxuryjewels.com'} &bull; Status: {activeCustomer?.wholesaleApproved ? 'Verified Wholesale Partner' : 'Standard Account'}
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Super Admin Customer Switcher */}
+            {(isAdmin || isSuperAdmin) && (
+              <div className="flex items-center gap-2 bg-[#262626] border border-[#3E3E3E] rounded-xl px-3 py-1.5 text-xs">
+                <Users className="w-4 h-4 text-[#C49A3A]" />
+                <span className="text-gray-400 font-medium text-[11px]">Inspect Customer:</span>
+                <select
+                  value={impersonatedCustomer?.id || ''}
+                  onChange={(e) => {
+                    const cid = e.target.value;
+                    if (!cid) {
+                      stopImpersonating();
+                    } else {
+                      const found = customersList.find(c => c.id === cid || c.email === cid);
+                      if (found) startImpersonating(found);
+                    }
+                  }}
+                  className="bg-[#1A1A1A] text-white text-xs font-semibold rounded px-2 py-1 border border-[#444] focus:outline-none focus:border-[#C49A3A] cursor-pointer"
+                  aria-label="Inspect specific customer"
+                >
+                  <option value="">-- All Orders (Super Admin View) --</option>
+                  {customersList.map(c => (
+                    <option key={c.id} value={c.id}>
+                      {c.name} ({c.company || c.email})
+                    </option>
+                  ))}
+                </select>
+                {impersonatedCustomer && (
+                  <button
+                    onClick={stopImpersonating}
+                    className="p-1 text-gray-400 hover:text-white rounded"
+                    title="Exit customer view"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            )}
+
             {isAdmin && (
               <button
                 onClick={() => onNavigate('admin')}
@@ -162,7 +258,7 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'orders
               className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs rounded-xl transition-colors border border-white/20 cursor-pointer flex items-center gap-1.5"
             >
               <ShoppingBag className="w-4 h-4 text-[#C49A3A]" />
-              <span>Order More Products</span>
+              <span>Catalog</span>
             </button>
           </div>
         </div>
