@@ -5,6 +5,68 @@
     "supportPhone": "+1 (800) 555-0199",
     "badgeText": "Direct Factory Export"
   },
+  "heroSlides": [
+    {
+      "id": "slide-gemstones",
+      "supertag": "Direct Factory Gemstones • Certified Genuine",
+      "headline": "Discover the Beauty of Gemstones",
+      "description": "Explore beautiful gemstone collections and find inspiration for your next creation.",
+      "ctaText": "Explore Gemstones",
+      "ctaCategory": "natural-gemstone-beads",
+      "image": "https://beadssource.com/wp-content/uploads/DSC_2552-scaled-1-1536x1025-1-300x300.jpg",
+      "bgGradient": "from-[#176B68]/90 to-[#191F23]/80",
+      "highlightTag": "Natural Gemstones",
+      "badge": "Hand-Cut Minerals & Agates"
+    },
+    {
+      "id": "slide-crystals",
+      "supertag": "Precision Cut Crystals • AAA Brilliance",
+      "headline": "Create Something Brilliant",
+      "description": "Discover crystal collections designed to inspire creativity.",
+      "ctaText": "Shop Crystal Beads",
+      "ctaCategory": "crystal-beads",
+      "image": "https://beadssource.com/wp-content/uploads/2025/09/DSC_21011-300x300.jpg",
+      "bgGradient": "from-[#134E4C]/90 to-[#191F23]/80",
+      "highlightTag": "Micro-Pavé CZ",
+      "badge": "Faceted Sparkle"
+    },
+    {
+      "id": "slide-pearls",
+      "supertag": "Lustrous Freshwater & Baroque Selection",
+      "headline": "Timeless Beauty. Endless Creativity.",
+      "description": "Explore lustrous freshwater and baroque pearl collections designed for heirloom jewelry.",
+      "ctaText": "Explore Pearls",
+      "ctaCategory": "natural-gemstone-beads",
+      "image": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1600&q=80",
+      "bgGradient": "from-[#1E5C59]/90 to-[#191F23]/80",
+      "highlightTag": "Cultured Pearls",
+      "badge": "Heirloom Grade"
+    },
+    {
+      "id": "slide-findings",
+      "supertag": "100% Certified Lead-Free Pewter & 18K Plated Brass",
+      "headline": "Every Detail Makes a Difference",
+      "description": "Precision-engineered clasps, micro-pave connectors, and 100% certified lead-free pewter findings.",
+      "ctaText": "Shop Findings",
+      "ctaCategory": "jewelry-findings",
+      "image": "https://beadssource.com/wp-content/uploads/2025/09/10mm圆14mm长棒子金色-13包-10个每包-300x300.jpg",
+      "bgGradient": "from-[#176B68]/90 to-[#191F23]/80",
+      "highlightTag": "Jewelry Components",
+      "badge": "CPSIA Certified Lead-Free"
+    },
+    {
+      "id": "slide-premium-beads",
+      "supertag": "Master Wholesale Lots • Direct Manufacturer Export",
+      "headline": "Inspire Your Next Creation",
+      "description": "Direct factory pricing, master wholesale lots, and bespoke production for jewelry designers worldwide.",
+      "ctaText": "Explore Collection",
+      "ctaCategory": "all",
+      "image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=80",
+      "bgGradient": "from-[#0F4745]/90 to-[#191F23]/80",
+      "highlightTag": "Master Lots",
+      "badge": "Tier Discounts Up to 30%"
+    }
+  ],
   "hero": {
     "supertag": "International Wholesale Jewellery • Direct Factory Manufacturer",
     "titleLine1": "The Source for",
@@ -14,6 +76,32 @@
     "ctaCatalog": "Explore 2026 Wholesale Catalogue",
     "ctaQuote": "Request Custom Bulk Quotation"
   },
+  "pricingTiers": [
+    {
+      "tierId": "tier-standard",
+      "minQty": 1,
+      "maxQty": 9,
+      "discountPercent": 0,
+      "label": "Small Batch / Trial",
+      "description": "Standard catalog wholesale price per pack"
+    },
+    {
+      "tierId": "tier-volume-15",
+      "minQty": 10,
+      "maxQty": 49,
+      "discountPercent": 15,
+      "label": "Volume Studio Tier",
+      "description": "15% automatic discount on 10+ packs"
+    },
+    {
+      "tierId": "tier-volume-30",
+      "minQty": 50,
+      "maxQty": 9999,
+      "discountPercent": 30,
+      "label": "Master Production Lot",
+      "description": "30% maximum wholesale discount on 50+ packs"
+    }
+  ],
   "faqs": [
     {
       "id": "faq-1",

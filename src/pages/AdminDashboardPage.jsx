@@ -635,13 +635,13 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
                   onClick={() => { setActiveTab(item.id); setSearchFilter(''); }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     isActive 
-                      ? 'bg-[#C49A3A] text-black shadow-sm font-bold' 
+                      ? 'bg-[#176B68] text-white shadow-md font-bold' 
                       : 'hover:bg-[#282828] hover:text-white text-[#D0C9BD]'
                   }`}
                   title={item.label}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <span className={isActive ? 'text-black' : 'text-[#C49A3A]'}>{item.icon}</span>
+                    <span className={isActive ? 'text-[#C3A36B]' : 'text-[#C3A36B]'}>{item.icon}</span>
                     {!sidebarCollapsed && <span className="truncate">{item.label}</span>}
                   </div>
 
@@ -1507,12 +1507,133 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
                   </div>
                 </div>
 
+                {/* Hero Carousel Slides Manager (5 Collections) */}
+                <div className="space-y-4 pb-6 border-b border-[#F0EBE1]">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-bold text-[#191F23] uppercase text-[11px] tracking-wider">
+                        Hero Carousel Collection Slides (Live Homepage Carousel)
+                      </h4>
+                      <p className="text-[11px] text-gray-500">
+                        Manage headlines, descriptions, CTAs, and photography for all 5 collection banners.
+                      </p>
+                    </div>
+                    <span className="text-xs bg-[#EBF4F3] text-[#176B68] font-bold px-2.5 py-1 rounded-full border border-[#CADEDD]">
+                      {siteContent.heroSlides?.length || 5} Active Slides
+                    </span>
+                  </div>
+
+                  <div className="space-y-4">
+                    {(siteContent.heroSlides || []).map((slide, sIdx) => (
+                      <div key={slide.id || sIdx} className="p-4 bg-[#FAF8F5] rounded-2xl border border-[#E9E5DC] space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-xs text-[#176B68]">
+                            Slide #{sIdx + 1}: {slide.headline || 'Collection Banner'}
+                          </span>
+                          <span className="text-[10px] uppercase font-mono text-gray-500">
+                            {slide.id}
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-gray-600 mb-1">Slide Headline</label>
+                            <input
+                              type="text"
+                              value={slide.headline || ''}
+                              onChange={(e) => {
+                                const newSlides = [...(siteContent.heroSlides || [])];
+                                newSlides[sIdx] = { ...newSlides[sIdx], headline: e.target.value };
+                                setSiteContent({ ...siteContent, heroSlides: newSlides });
+                              }}
+                              className="w-full px-3 py-1.5 bg-white border border-[#DDD6C8] rounded-lg text-xs focus:outline-none focus:border-[#176B68]"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-gray-600 mb-1">Supertag Badge</label>
+                            <input
+                              type="text"
+                              value={slide.supertag || ''}
+                              onChange={(e) => {
+                                const newSlides = [...(siteContent.heroSlides || [])];
+                                newSlides[sIdx] = { ...newSlides[sIdx], supertag: e.target.value };
+                                setSiteContent({ ...siteContent, heroSlides: newSlides });
+                              }}
+                              className="w-full px-3 py-1.5 bg-white border border-[#DDD6C8] rounded-lg text-xs focus:outline-none focus:border-[#176B68]"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-gray-600 mb-1">Slide Description</label>
+                          <textarea
+                            rows={2}
+                            value={slide.description || ''}
+                            onChange={(e) => {
+                              const newSlides = [...(siteContent.heroSlides || [])];
+                              newSlides[sIdx] = { ...newSlides[sIdx], description: e.target.value };
+                              setSiteContent({ ...siteContent, heroSlides: newSlides });
+                            }}
+                            className="w-full px-3 py-1.5 bg-white border border-[#DDD6C8] rounded-lg text-xs focus:outline-none focus:border-[#176B68]"
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          <div>
+                            <label className="block text-gray-600 mb-1">CTA Button Text</label>
+                            <input
+                              type="text"
+                              value={slide.ctaText || ''}
+                              onChange={(e) => {
+                                const newSlides = [...(siteContent.heroSlides || [])];
+                                newSlides[sIdx] = { ...newSlides[sIdx], ctaText: e.target.value };
+                                setSiteContent({ ...siteContent, heroSlides: newSlides });
+                              }}
+                              className="w-full px-3 py-1.5 bg-white border border-[#DDD6C8] rounded-lg text-xs focus:outline-none focus:border-[#176B68]"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-gray-600 mb-1">Destination Category Slug</label>
+                            <input
+                              type="text"
+                              value={slide.ctaCategory || slide.category || ''}
+                              onChange={(e) => {
+                                const newSlides = [...(siteContent.heroSlides || [])];
+                                newSlides[sIdx] = { ...newSlides[sIdx], ctaCategory: e.target.value, category: e.target.value };
+                                setSiteContent({ ...siteContent, heroSlides: newSlides });
+                              }}
+                              className="w-full px-3 py-1.5 bg-white border border-[#DDD6C8] rounded-lg text-xs font-mono focus:outline-none focus:border-[#176B68]"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-gray-600 mb-1">Banner Image URL</label>
+                            <input
+                              type="text"
+                              value={slide.image || ''}
+                              onChange={(e) => {
+                                const newSlides = [...(siteContent.heroSlides || [])];
+                                newSlides[sIdx] = { ...newSlides[sIdx], image: e.target.value };
+                                setSiteContent({ ...siteContent, heroSlides: newSlides });
+                              }}
+                              className="w-full px-3 py-1.5 bg-white border border-[#DDD6C8] rounded-lg text-xs focus:outline-none focus:border-[#176B68]"
+                            />
+                          </div>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-[#191919] hover:bg-[#303030] text-white font-bold rounded-xl flex items-center gap-1.5 cursor-pointer"
+                  className="px-6 py-2.5 bg-[#176B68] hover:bg-[#125250] text-white font-bold rounded-xl flex items-center gap-1.5 cursor-pointer shadow-md"
                 >
-                  <Save className="w-4 h-4 text-[#C49A3A]" />
-                  <span>Save CMS Content</span>
+                  <Save className="w-4 h-4 text-[#C3A36B]" />
+                  <span>Save CMS Banners &amp; Content</span>
                 </button>
               </form>
             </div>

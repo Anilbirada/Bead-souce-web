@@ -300,6 +300,27 @@ export const api = {
     return await res.json();
   },
 
+  async acceptQuote(quoteId) {
+    const res = await fetch(`${API_BASE}/quotes/${quoteId}/accept`, {
+      method: 'POST',
+      headers: getAuthHeaders()
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to accept quotation');
+    return data;
+  },
+
+  async requestQuoteRevision(quoteId, revisionData) {
+    const res = await fetch(`${API_BASE}/quotes/${quoteId}/revision`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(revisionData)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to submit revision request');
+    return data;
+  },
+
   // --- COUPONS ---
   async validateCoupon(code, subtotal) {
     const res = await fetch(`${API_BASE}/coupons/validate`, {

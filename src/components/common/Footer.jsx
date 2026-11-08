@@ -74,7 +74,7 @@ export default function Footer({ onNavigate }) {
         {/* Main Footer Links & Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 py-12 border-b border-[#2B2620]">
           
-          {/* Col 1: Brand & Bengaluru Flagship */}
+          {/* Col 1: Brand & International Operations */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-linear-to-br from-[#D4AF37] to-[#8C6212] flex items-center justify-center text-white font-serif font-bold text-lg shadow-sm">

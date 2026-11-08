@@ -43,17 +43,20 @@ function MainApp() {
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [catalogFilters, setCatalogFilters] = useState({ category: 'all', search: '', sort: '' });
+  const [siteContent, setSiteContent] = useState(null);
 
-  // Load live products and categories on mount
+  // Load live products, categories, and content on mount
   useEffect(() => {
     const initData = async () => {
       try {
-        const [prods, cats] = await Promise.all([
+        const [prods, cats, content] = await Promise.all([
           api.getProducts(),
-          api.getCategories()
+          api.getCategories(),
+          api.getContent().catch(() => null)
         ]);
         if (Array.isArray(prods) && prods.length > 0) setProducts(prods);
         if (Array.isArray(cats) && cats.length > 0) setCategories(cats);
+        if (content) setSiteContent(content);
       } catch (err) {
         console.warn('API sync fallback active:', err);
       }
@@ -173,6 +176,7 @@ function MainApp() {
           <HomePage
             products={products}
             categories={categories}
+            siteContent={siteContent}
             onSelectProduct={handleSelectProduct}
             onQuickView={(p) => setQuickViewProduct(p)}
             onNavigate={handleNavigate}

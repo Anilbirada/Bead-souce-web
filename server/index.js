@@ -637,6 +637,135 @@ app.put('/api/quotes/:id', (req, res) => {
   res.json(quote);
 });
 
+// Customer / Admin: Accept Quotation & Automatically Convert to Confirmed Order
+app.post('/api/quotes/:id/accept', (req, res) => {
+  const quotes = readData('quotes.json');
+  const quote = quotes.find(q => q.id === req.params.id);
+  if (!quote) return res.status(404).json({ error: 'Quotation not found' });
+
+  // Prevent duplicate acceptance / order creation
+  if (quote.orderId || quote.status === 'Accepted') {
+    return res.status(400).json({ 
+      error: `Quotation ${quote.id} has already been accepted and converted into Order ${quote.orderId || ''}.` 
+    });
+  }
+
+  const orders = readData('orders.json');
+  const products = readData('products.json');
+
+  // Calculate order items with approved prices
+  const orderItems = (quote.items || []).map(item => {
+    const unitPrice = typeof quote.counterOffer === 'number' && quote.counterOffer > 0 
+      ? quote.counterOffer 
+      : (item.targetPrice || item.catalogPrice || item.price || 1.50);
+    const qty = parseInt(item.requestedQty || item.quantity || 50, 10);
+    return {
+      id: item.id || `item-${Math.floor(1000 + Math.random() * 9000)}`,
+      name: item.name,
+      sku: item.sku || 'WH-GEM-01',
+      price: unitPrice,
+      quantity: qty,
+      total: parseFloat((unitPrice * qty).toFixed(2)),
+      image: item.image || 'https://beadssource.com/wp-content/uploads/DSC_2552-scaled-1-1536x1025-1-300x300.jpg'
+    };
+  });
+
+  const subtotal = orderItems.reduce((sum, item) => sum + item.total, 0);
+  const shipping = typeof quote.shippingRate === 'number' ? quote.shippingRate : 35.00;
+  const tax = 0; // Wholesale international B2B tax exemption
+  const total = parseFloat((subtotal + shipping + tax).toFixed(2));
+
+  // Create Confirmed Order
+  const newOrder = {
+    id: `ORD-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+    date: new Date().toISOString(),
+    quoteId: quote.id,
+    customer: quote.customer || {},
+    shippingAddress: quote.customer?.shippingAddress || {
+      addressLine1: '450 Fashion Avenue, Suite 1200',
+      city: 'New York',
+      state: 'NY',
+      postalCode: '10018',
+      country: quote.customer?.country || 'United States'
+    },
+    items: orderItems,
+    subtotal,
+    discount: 0,
+    shipping,
+    tax,
+    total,
+    status: 'Confirmed',
+    paymentMethod: 'Net 30 Commercial Invoice / Wire Transfer',
+    paymentStatus: 'Invoice Issued',
+    trackingNumber: `EXP-${Math.floor(10000000 + Math.random() * 90000000)}`,
+    courierName: 'DHL Express Worldwide',
+    notes: `Officially converted from approved RFQ ${quote.id}. Target delivery requested: ${quote.targetDeliveryDate || 'Flexible'}.`,
+    internalNotes: `Quotation conversion completed. Payment term: Net 30 Commercial Terms.`
+  };
+
+  // Decrement inventory stock safely
+  orderItems.forEach(orderItem => {
+    const prod = products.find(p => p.id === orderItem.id || p.sku === orderItem.sku);
+    if (prod) {
+      prod.stock = Math.max(0, (prod.stock || 0) - orderItem.quantity);
+    }
+  });
+
+  // Update Quotation Status
+  quote.status = 'Accepted';
+  quote.acceptedAt = new Date().toISOString();
+  quote.orderId = newOrder.id;
+
+  orders.unshift(newOrder);
+  writeData('orders.json', orders);
+  writeData('quotes.json', quotes);
+  writeData('products.json', products);
+
+  logAudit(
+    quote.customer?.name || 'Customer', 
+    'customer', 
+    'QUOTE_ACCEPT', 
+    `Quotation ${quote.id}`, 
+    `Quotation accepted and converted to Order ${newOrder.id} ($${total.toFixed(2)})`
+  );
+
+  res.status(201).json({
+    success: true,
+    message: `Quotation successfully accepted! Confirmed Order ${newOrder.id} has been generated.`,
+    order: newOrder,
+    quote
+  });
+});
+
+// Customer: Submit Revision Request for Quotation
+app.post('/api/quotes/:id/revision', (req, res) => {
+  const quotes = readData('quotes.json');
+  const quote = quotes.find(q => q.id === req.params.id);
+  if (!quote) return res.status(404).json({ error: 'Quotation not found' });
+
+  const { revisionNotes, proposedTargetPrice } = req.body || {};
+
+  quote.status = 'Revision Requested';
+  quote.revisionNotes = revisionNotes || 'Customer requested price/quantity adjustments.';
+  if (proposedTargetPrice) quote.customerProposedPrice = parseFloat(proposedTargetPrice);
+  quote.revisionRequestedAt = new Date().toISOString();
+
+  writeData('quotes.json', quotes);
+  logAudit(
+    quote.customer?.name || 'Customer', 
+    'customer', 
+    'QUOTE_REVISION_REQUEST', 
+    `Quotation ${quote.id}`, 
+    `Revision requested: ${quote.revisionNotes}`
+  );
+
+  res.json({
+    success: true,
+    message: 'Revision request submitted to BeadsSource Wholesale Management Desk.',
+    quote
+  });
+});
+
 // ==========================================
 // 7. COUPONS API
 // ==========================================
