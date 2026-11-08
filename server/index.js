@@ -11,7 +11,16 @@ const DATA_DIR = path.join(__dirname, 'data');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.disable('x-powered-by');
 app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
@@ -32,15 +41,34 @@ app.post('/api/upload', (req, res) => {
       return res.status(400).json({ error: 'No image data provided' });
     }
 
+    // Strict Validation: Data URLs must be image MIME types, web URLs must be http(s)
+    if (image.startsWith('data:') && !image.startsWith('data:image/')) {
+      return res.status(400).json({ error: 'Only valid image data URLs (data:image/...) are permitted' });
+    }
+
+    if (!image.startsWith('data:image/') && !image.startsWith('http://') && !image.startsWith('https://') && !image.startsWith('/uploads/')) {
+      return res.status(400).json({ error: 'Invalid image URL or base64 format' });
+    }
+
     // Process base64 data URL
     if (image.startsWith('data:image')) {
       const matches = image.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
       if (!matches) {
         return res.json({ url: image });
       }
-      let ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
+      let ext = (matches[1] === 'jpeg' ? 'jpg' : matches[1]).toLowerCase();
       if (ext.includes('+')) ext = ext.split('+')[0];
+
+      const allowedExts = ['jpg', 'jpeg', 'png', 'webp', 'svg', 'gif', 'avif'];
+      if (!allowedExts.includes(ext)) {
+        return res.status(400).json({ error: 'Unsupported file extension. Only valid image files are permitted.' });
+      }
+
       const buffer = Buffer.from(matches[2], 'base64');
+      if (buffer.length > 20 * 1024 * 1024) {
+        return res.status(400).json({ error: 'Image file exceeds maximum allowable size (20MB)' });
+      }
+
       const safeName = `img-${Date.now()}-${Math.floor(Math.random() * 10000)}.${ext}`;
       
       fs.writeFileSync(path.join(UPLOADS_DIR, safeName), buffer);
@@ -291,7 +319,7 @@ app.get('/api/recommendations', (req, res) => {
 });
 
 // Admin/Manager: Create Product
-app.post('/api/products', (req, res) => {
+app.post('/api/products', requireRoles(['super_admin', 'admin', 'product_manager']), (req, res) => {
   const products = readData('products.json');
   const user = getAuthUser(req);
   
@@ -332,7 +360,7 @@ app.post('/api/products', (req, res) => {
 });
 
 // Admin/Manager: Update Product
-app.put('/api/products/:id', (req, res) => {
+app.put('/api/products/:id', requireRoles(['super_admin', 'admin', 'product_manager']), (req, res) => {
   const products = readData('products.json');
   const index = products.findIndex(p => p.id === req.params.id);
   if (index === -1) {
@@ -347,7 +375,7 @@ app.put('/api/products/:id', (req, res) => {
 });
 
 // Admin/Manager: Delete Product
-app.delete('/api/products/:id', (req, res) => {
+app.delete('/api/products/:id', requireRoles(['super_admin', 'admin']), (req, res) => {
   let products = readData('products.json');
   const product = products.find(p => p.id === req.params.id);
   const filtered = products.filter(p => p.id !== req.params.id);
@@ -365,7 +393,7 @@ app.get('/api/categories', (req, res) => {
   res.json(categories);
 });
 
-app.post('/api/categories', (req, res) => {
+app.post('/api/categories', requireRoles(['super_admin', 'admin', 'product_manager']), (req, res) => {
   const categories = readData('categories.json');
   const user = getAuthUser(req);
   const newCat = {
@@ -382,7 +410,7 @@ app.post('/api/categories', (req, res) => {
   res.status(201).json(newCat);
 });
 
-app.put('/api/categories/:id', (req, res) => {
+app.put('/api/categories/:id', requireRoles(['super_admin', 'admin', 'product_manager']), (req, res) => {
   const categories = readData('categories.json');
   const index = categories.findIndex(c => c.id === req.params.id || c.slug === req.params.id);
   if (index === -1) return res.status(404).json({ error: 'Category not found' });
@@ -394,7 +422,7 @@ app.put('/api/categories/:id', (req, res) => {
   res.json(categories[index]);
 });
 
-app.delete('/api/categories/:id', (req, res) => {
+app.delete('/api/categories/:id', requireRoles(['super_admin', 'admin']), (req, res) => {
   let categories = readData('categories.json');
   const cat = categories.find(c => c.id === req.params.id || c.slug === req.params.id);
   const filtered = categories.filter(c => c.id !== req.params.id && c.slug !== req.params.id);
@@ -427,7 +455,7 @@ app.get('/api/inventory', (req, res) => {
   res.json(inventoryItems);
 });
 
-app.put('/api/inventory/:id', (req, res) => {
+app.put('/api/inventory/:id', requireRoles(['super_admin', 'admin', 'inventory_manager']), (req, res) => {
   const products = readData('products.json');
   const index = products.findIndex(p => p.id === req.params.id);
   if (index === -1) return res.status(404).json({ error: 'Product not found' });
@@ -685,7 +713,7 @@ app.post('/api/orders', (req, res) => {
 });
 
 // Admin: Update Order Status
-app.put('/api/orders/:id/status', (req, res) => {
+app.put('/api/orders/:id/status', requireRoles(['super_admin', 'admin', 'order_manager']), (req, res) => {
   const orders = readData('orders.json');
   const order = orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: 'Order not found' });
@@ -746,7 +774,7 @@ app.post('/api/quotes', (req, res) => {
   res.status(201).json(newQuote);
 });
 
-app.put('/api/quotes/:id', (req, res) => {
+app.put('/api/quotes/:id', requireRoles(['super_admin', 'admin', 'sales_manager', 'quotation_manager', 'order_manager']), (req, res) => {
   const quotes = readData('quotes.json');
   const quote = quotes.find(q => q.id === req.params.id);
   if (!quote) return res.status(404).json({ error: 'Quote request not found' });
@@ -919,9 +947,13 @@ app.post('/api/coupons/validate', (req, res) => {
   res.json({ valid: true, coupon });
 });
 
-app.post('/api/coupons', (req, res) => {
+app.post('/api/coupons', requireRoles(['super_admin', 'admin']), (req, res) => {
   const coupons = readData('coupons.json');
   const user = getAuthUser(req);
+  if (!req.body || !req.body.code) {
+    return res.status(400).json({ error: 'Coupon code is required' });
+  }
+
   const newCoupon = {
     code: req.body.code.toUpperCase().trim(),
     discountType: req.body.discountType || 'percentage',
@@ -945,7 +977,7 @@ app.get('/api/settings', (req, res) => {
   res.json(settings);
 });
 
-app.put('/api/settings', (req, res) => {
+app.put('/api/settings', requireRoles(['super_admin', 'admin']), (req, res) => {
   const user = getAuthUser(req);
   const settings = readData('settings.json');
   const updated = { ...settings, ...req.body };
@@ -962,7 +994,7 @@ app.get('/api/content', (req, res) => {
   res.json(content);
 });
 
-app.put('/api/content', (req, res) => {
+app.put('/api/content', requireRoles(['super_admin', 'admin']), (req, res) => {
   const user = getAuthUser(req);
   const content = readData('content.json');
   const updated = { ...content, ...req.body };
@@ -1088,7 +1120,7 @@ app.post('/api/campaigns/:id/track', (req, res) => {
 // ==========================================
 // 10. AUDIT LOGS API
 // ==========================================
-app.get('/api/audit-logs', (req, res) => {
+app.get('/api/audit-logs', requireRoles(['super_admin', 'admin']), (req, res) => {
   const logs = readData('audit-logs.json');
   res.json(logs);
 });
@@ -1131,7 +1163,7 @@ app.post('/api/reviews', (req, res) => {
   res.status(201).json(newReview);
 });
 
-app.put('/api/reviews/:id/status', (req, res) => {
+app.put('/api/reviews/:id/status', requireRoles(['super_admin', 'admin', 'support']), (req, res) => {
   const reviews = readData('reviews.json');
   const review = reviews.find(r => r.id === req.params.id);
   if (!review) return res.status(404).json({ error: 'Review not found' });
@@ -1144,7 +1176,7 @@ app.put('/api/reviews/:id/status', (req, res) => {
   res.json(review);
 });
 
-app.delete('/api/reviews/:id', (req, res) => {
+app.delete('/api/reviews/:id', requireRoles(['super_admin', 'admin']), (req, res) => {
   let reviews = readData('reviews.json');
   const filtered = reviews.filter(r => r.id !== req.params.id);
   writeData('reviews.json', filtered);
