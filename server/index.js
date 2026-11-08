@@ -12,7 +12,56 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json({ limit: '10mb' }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+// Serve static uploaded images
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+const PUBLIC_UPLOADS = path.join(__dirname, '../public/uploads');
+if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+if (!fs.existsSync(PUBLIC_UPLOADS)) fs.mkdirSync(PUBLIC_UPLOADS, { recursive: true });
+app.use('/uploads', express.static(UPLOADS_DIR));
+app.use('/uploads', express.static(PUBLIC_UPLOADS));
+
+// File / Base64 Image Upload API
+app.post('/api/upload', (req, res) => {
+  try {
+    const { image: rawImage, dataUrl, filename } = req.body || {};
+    const image = rawImage || dataUrl;
+    if (!image) {
+      return res.status(400).json({ error: 'No image data provided' });
+    }
+
+    // Process base64 data URL
+    if (image.startsWith('data:image')) {
+      const matches = image.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
+      if (!matches) {
+        return res.json({ url: image });
+      }
+      let ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
+      if (ext.includes('+')) ext = ext.split('+')[0];
+      const buffer = Buffer.from(matches[2], 'base64');
+      const safeName = `img-${Date.now()}-${Math.floor(Math.random() * 10000)}.${ext}`;
+      
+      fs.writeFileSync(path.join(UPLOADS_DIR, safeName), buffer);
+      try {
+        fs.writeFileSync(path.join(PUBLIC_UPLOADS, safeName), buffer);
+      } catch (err) {}
+
+      return res.json({ 
+        success: true, 
+        url: `/uploads/${safeName}`, 
+        filename: safeName 
+      });
+    }
+
+    // If already a URL, return as-is
+    res.json({ success: true, url: image });
+  } catch (err) {
+    console.error('Image upload failed:', err);
+    res.status(500).json({ error: 'Failed to process uploaded image' });
+  }
+});
 
 // Helper functions for reading/writing persistent data
 const readData = (filename) => {
@@ -162,6 +211,83 @@ app.get('/api/products/:idOrSlug', (req, res) => {
     return res.status(404).json({ error: 'Product not found' });
   }
   res.json(item);
+});
+
+// ==========================================
+// SMART PRODUCT RECOMMENDATION ENGINE API
+// ==========================================
+app.get('/api/products/:idOrSlug/recommendations', (req, res) => {
+  const products = readData('products.json').filter(p => (p.status || 'published') === 'published');
+  const target = products.find(p => p.id === req.params.idOrSlug || p.slug === req.params.idOrSlug);
+  
+  if (!target) {
+    return res.status(404).json({ error: 'Product not found' });
+  }
+
+  // 1. Same Category / Materials Related Items (excluding self)
+  const related = products.filter(p => 
+    p.id !== target.id && (
+      p.category === target.category ||
+      (target.materials && p.materials && p.materials.toLowerCase().includes(target.materials.toLowerCase()))
+    )
+  ).slice(0, 8);
+
+  // 2. Intelligent Complementary Pairings (Cross-selling rule matrix)
+  const categoryStr = (target.category || '').toLowerCase();
+  let pairingCategories = [];
+
+  if (categoryStr.includes('gemstone') || categoryStr.includes('turquoise') || categoryStr.includes('crystal')) {
+    // Beads pair with Clasps, Connectors & Pewter Spacers
+    pairingCategories = ['jewelry-connectors', 'jewelry-spacers', 'jewelry-findings', 'jewelry-pendants'];
+  } else if (categoryStr.includes('finding') || categoryStr.includes('connector') || categoryStr.includes('spacer') || categoryStr.includes('charm')) {
+    // Findings pair with Natural Gemstone strands & Faceted Crystals
+    pairingCategories = ['natural-gemstone-beads', 'turquoise-beads', 'crystal-beads', 'cubic-zirconia'];
+  } else if (categoryStr.includes('pendant')) {
+    // Pendants pair with Chains/Findings & Gemstone bead strands
+    pairingCategories = ['jewelry-findings', 'natural-gemstone-beads', 'jewelry-connectors'];
+  } else {
+    pairingCategories = ['natural-gemstone-beads', 'jewelry-connectors', 'jewelry-spacers'];
+  }
+
+  const pairings = products.filter(p => 
+    p.id !== target.id && pairingCategories.includes(p.category)
+  ).slice(0, 8);
+
+  // 3. Frequently Bought Together Bundle (1 complementary clasp/finding + 1 bead/spacer)
+  const bundleClasp = products.find(p => p.id !== target.id && (p.category === 'jewelry-connectors' || p.category === 'jewelry-findings')) || pairings[0];
+  const bundleSpacer = products.find(p => p.id !== target.id && (p.category === 'jewelry-spacers' || p.category === 'cubic-zirconia')) || related[0];
+  const frequentlyBoughtTogether = [bundleClasp, bundleSpacer].filter(Boolean);
+
+  // 4. Trending and Best Sellers Fallback
+  const trending = products.filter(p => p.id !== target.id && (p.isBestSeller || (p.rating || 5) >= 4.8)).slice(0, 6);
+
+  res.json({
+    productId: target.id,
+    productName: target.name,
+    related: related.length > 0 ? related : trending.slice(0, 4),
+    pairings: pairings.length > 0 ? pairings : trending.slice(2, 6),
+    frequentlyBoughtTogether,
+    trending
+  });
+});
+
+// General Recommendation API by category / cart items
+app.get('/api/recommendations', (req, res) => {
+  const products = readData('products.json').filter(p => (p.status || 'published') === 'published');
+  const { category, excludeIds, limit } = req.query;
+  const excluded = (excludeIds || '').split(',').filter(Boolean);
+  const maxItems = parseInt(limit, 10) || 6;
+
+  let candidates = products.filter(p => !excluded.includes(p.id));
+
+  if (category && category !== 'all') {
+    candidates = candidates.filter(p => p.category === category);
+  }
+
+  // Rank by rating and best sellers
+  candidates.sort((a, b) => (b.rating || 5) - (a.rating || 5));
+
+  res.json(candidates.slice(0, maxItems));
 });
 
 // Admin/Manager: Create Product
@@ -843,6 +969,120 @@ app.put('/api/content', (req, res) => {
   writeData('content.json', updated);
   logAudit(user?.name || 'Administrator', user?.role || 'admin', 'CONTENT_UPDATE', 'CMS Content', 'Updated homepage banners and FAQs');
   res.json(updated);
+});
+
+// ==========================================
+// 9B. PRODUCT ADVERTISING & CAMPAIGNS API (Pinterest-Inspired Discovery)
+// ==========================================
+app.get('/api/campaigns', (req, res) => {
+  const campaigns = readData('campaigns.json');
+  const { placement, activeOnly } = req.query;
+  let filtered = [...campaigns];
+
+  if (activeOnly === 'true') {
+    filtered = filtered.filter(c => c.active !== false);
+  }
+  if (placement && placement !== 'all') {
+    filtered = filtered.filter(c => c.placement === placement);
+  }
+
+  // Sort by priority ascending
+  filtered.sort((a, b) => (a.priority || 99) - (b.priority || 99));
+  res.json(filtered);
+});
+
+app.post('/api/campaigns', requireRoles(['super_admin', 'admin', 'product_manager']), (req, res) => {
+  const campaigns = readData('campaigns.json');
+  const user = getAuthUser(req);
+
+  const newCampaign = {
+    id: `camp-${Date.now().toString().slice(-4)}`,
+    title: req.body.title || 'Curated Collection',
+    subtitle: req.body.subtitle || '',
+    badge: req.body.badge || 'Artisan Spotlight',
+    tag: req.body.tag || 'Fine Jewelry',
+    image: req.body.image || 'https://beadssource.com/wp-content/uploads/DSC_2552-scaled-1-1536x1025-1-300x300.jpg',
+    cardSize: req.body.cardSize || 'standard', // tall, standard, wide
+    placement: req.body.placement || 'discovery_masonry',
+    productId: req.body.productId || null,
+    categorySlug: req.body.categorySlug || 'natural-gemstone-beads',
+    ctaText: req.body.ctaText || 'Explore Collection',
+    priority: parseInt(req.body.priority, 10) || campaigns.length + 1,
+    active: req.body.active !== false,
+    impressions: 0,
+    clicks: 0,
+    cartAdds: 0,
+    rfqClicks: 0,
+    createdAt: new Date().toISOString()
+  };
+
+  campaigns.push(newCampaign);
+  writeData('campaigns.json', campaigns);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'CAMPAIGN_CREATE', `Campaign ${newCampaign.title}`, `Created visual advertising campaign ${newCampaign.id}`);
+
+  res.status(201).json(newCampaign);
+});
+
+app.put('/api/campaigns/:id', requireRoles(['super_admin', 'admin', 'product_manager']), (req, res) => {
+  const campaigns = readData('campaigns.json');
+  const user = getAuthUser(req);
+  const index = campaigns.findIndex(c => c.id === req.params.id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Campaign not found' });
+  }
+
+  campaigns[index] = {
+    ...campaigns[index],
+    ...req.body,
+    id: campaigns[index].id // immutable
+  };
+
+  writeData('campaigns.json', campaigns);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'CAMPAIGN_UPDATE', `Campaign ${campaigns[index].title}`, `Updated visual advertising campaign ${campaigns[index].id}`);
+
+  res.json(campaigns[index]);
+});
+
+app.delete('/api/campaigns/:id', requireRoles(['super_admin', 'admin']), (req, res) => {
+  let campaigns = readData('campaigns.json');
+  const user = getAuthUser(req);
+  const target = campaigns.find(c => c.id === req.params.id);
+
+  if (!target) {
+    return res.status(404).json({ error: 'Campaign not found' });
+  }
+
+  campaigns = campaigns.filter(c => c.id !== req.params.id);
+  writeData('campaigns.json', campaigns);
+  logAudit(user?.name || 'Administrator', user?.role || 'admin', 'CAMPAIGN_DELETE', `Campaign ${target.title}`, `Deleted advertising campaign ${target.id}`);
+
+  res.json({ success: true, message: 'Campaign deleted' });
+});
+
+// Analytics tracking endpoint (public, debounced)
+app.post('/api/campaigns/:id/track', (req, res) => {
+  const campaigns = readData('campaigns.json');
+  const target = campaigns.find(c => c.id === req.params.id);
+
+  if (target) {
+    const { event, eventType } = req.body || {};
+    const evt = event || eventType;
+    if (evt === 'click') target.clicks = (target.clicks || 0) + 1;
+    else if (evt === 'cartAdd') target.cartAdds = (target.cartAdds || 0) + 1;
+    else if (evt === 'rfqClick') target.rfqClicks = (target.rfqClicks || 0) + 1;
+    else target.impressions = (target.impressions || 0) + 1;
+
+    writeData('campaigns.json', campaigns);
+  }
+
+  res.json({ 
+    success: true, 
+    clicks: target ? target.clicks : 0, 
+    impressions: target ? target.impressions : 0,
+    cartAdds: target ? target.cartAdds : 0,
+    rfqClicks: target ? target.rfqClicks : 0
+  });
 });
 
 // ==========================================

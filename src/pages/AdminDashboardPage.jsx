@@ -36,11 +36,13 @@ import {
   Archive,
   Star,
   Activity,
-  Globe
+  Globe,
+  Sparkles
 } from 'lucide-react';
 import { api } from '../utils/api';
 import { useCurrency } from '../context/CurrencyContext';
 import { useAuth } from '../context/AuthContext';
+import ImageUploadInput from '../components/common/ImageUploadInput';
 
 export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, initialTab = 'overview' }) {
   const { formatPrice } = useCurrency();
@@ -62,6 +64,23 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
   const [auditLogs, setAuditLogs] = useState([]);
   const [storeSettings, setStoreSettings] = useState(null);
   const [siteContent, setSiteContent] = useState(null);
+  const [campaigns, setCampaigns] = useState([]);
+  const [campaignModalOpen, setCampaignModalOpen] = useState(false);
+  const [editingCampaign, setEditingCampaign] = useState(null);
+  const [campaignForm, setCampaignForm] = useState({
+    title: '',
+    subtitle: '',
+    badge: 'Artisan Spotlight',
+    tag: 'Gemstones',
+    image: '',
+    cardSize: 'standard',
+    placement: 'discovery_masonry',
+    productId: '',
+    categorySlug: '',
+    ctaText: 'Explore Component',
+    priority: 1,
+    active: true
+  });
 
   const [loading, setLoading] = useState(true);
   const [actionMessage, setActionMessage] = useState(null);
@@ -160,7 +179,8 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
         reviewsData,
         logsData,
         settingsData,
-        contentData
+        contentData,
+        campaignsData
       ] = await Promise.all([
         api.getAdminStats(),
         api.getProducts(),
@@ -172,7 +192,8 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
         api.getReviews(),
         api.getAuditLogs(),
         api.getSettings(),
-        api.getContent()
+        api.getContent(),
+        api.getCampaigns().catch(() => [])
       ]);
 
       setStats(statsData);
@@ -186,6 +207,7 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
       setAuditLogs(logsData);
       setStoreSettings(settingsData);
       setSiteContent(contentData);
+      setCampaigns(campaignsData || []);
     } catch (err) {
       console.error('Failed to load admin data:', err);
     } finally {
@@ -323,6 +345,74 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
         loadAllData();
       } catch (err) {
         alert('Failed to delete category');
+      }
+    }
+  };
+
+  // --- ADVERTISING & CAMPAIGN MANAGEMENT ---
+  const handleOpenAddCampaign = () => {
+    setEditingCampaign(null);
+    setCampaignForm({
+      title: '',
+      subtitle: '',
+      badge: 'Artisan Spotlight',
+      tag: 'Gemstones',
+      image: '',
+      cardSize: 'standard',
+      placement: 'discovery_masonry',
+      productId: products[0]?.id || '',
+      categorySlug: categories[0]?.slug || 'natural-gemstone-beads',
+      ctaText: 'Explore Component',
+      priority: campaigns.length + 1,
+      active: true
+    });
+    setCampaignModalOpen(true);
+  };
+
+  const handleOpenEditCampaign = (camp) => {
+    setEditingCampaign(camp);
+    setCampaignForm({
+      title: camp.title || '',
+      subtitle: camp.subtitle || '',
+      badge: camp.badge || 'Curated Pin',
+      tag: camp.tag || 'Design Idea',
+      image: camp.image || '',
+      cardSize: camp.cardSize || 'standard',
+      placement: camp.placement || 'discovery_masonry',
+      productId: camp.productId || '',
+      categorySlug: camp.categorySlug || '',
+      ctaText: camp.ctaText || 'Explore Component',
+      priority: camp.priority || 1,
+      active: camp.active !== false
+    });
+    setCampaignModalOpen(true);
+  };
+
+  const handleSaveCampaign = async (e) => {
+    e.preventDefault();
+    try {
+      if (editingCampaign) {
+        await api.updateCampaign(editingCampaign.id, campaignForm);
+        showAction(`Campaign "${campaignForm.title}" updated!`);
+      } else {
+        await api.createCampaign(campaignForm);
+        showAction(`Created campaign "${campaignForm.title}"!`);
+      }
+      setCampaignModalOpen(false);
+      loadAllData();
+    } catch (err) {
+      alert('Error saving campaign pin: ' + (err.message || ''));
+    }
+  };
+
+  const handleDeleteCampaign = async (campId, title) => {
+    if (window.confirm(`Delete advertising campaign pin "${title}"?`)) {
+      try {
+        await api.deleteCampaign(campId);
+        showAction(`Deleted campaign "${title}"`);
+        loadAllData();
+      } catch (err) {
+        alert('Failed to delete campaign');
       }
     }
   };
@@ -541,6 +631,7 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
     { id: 'customers', label: 'Customers', icon: <Users className="w-4 h-4" />, count: customers.length, perm: 'customers' },
     { id: 'reviews', label: 'Reviews', icon: <Star className="w-4 h-4" />, count: reviews.length, perm: 'reviews' },
     { id: 'content', label: 'Content (CMS)', icon: <Globe className="w-4 h-4" />, perm: 'content' },
+    { id: 'advertising', label: 'Advertising & Pins', icon: <Sparkles className="w-4 h-4" />, count: campaigns.length, perm: 'content' },
     { id: 'coupons', label: 'Promotions', icon: <Tag className="w-4 h-4" />, count: coupons.length, perm: 'orders' },
     { id: 'reports', label: 'Reports & Analytics', icon: <BarChart2 className="w-4 h-4" />, perm: 'reports' },
     { id: 'users', label: 'Roles & Staff', icon: <ShieldCheck className="w-4 h-4" />, perm: 'roles' },
@@ -1640,6 +1731,201 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
           )}
 
           {/* ========================================================= */}
+          {/* TAB 9b: PRODUCT ADVERTISING & PINS */}
+          {/* ========================================================= */}
+          {activeTab === 'advertising' && (
+            <div className="space-y-6">
+              {/* Header and action bar */}
+              <div className="bg-white p-6 rounded-3xl border border-[#E9E3D8] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Sparkles className="w-5 h-5 text-[#C49A3A]" />
+                    <h3 className="font-serif font-bold text-xl text-[#191919]">
+                      Product Advertising &amp; Visual Pin Campaigns
+                    </h3>
+                  </div>
+                  <p className="text-xs text-gray-500 max-w-2xl">
+                    Manage Pinterest-style visual campaigns, artisan pairing moodboards, and placement targets for the homepage discovery masonry and smart cross-sell engine.
+                  </p>
+                </div>
+                <button
+                  onClick={handleOpenAddCampaign}
+                  className="px-5 py-2.5 bg-[#191919] hover:bg-[#303030] text-white text-xs font-bold rounded-xl flex items-center gap-2 shadow-sm transition-transform hover:scale-105 shrink-0"
+                >
+                  <Plus className="w-4 h-4 text-[#C49A3A]" />
+                  <span>Create Campaign Pin</span>
+                </button>
+              </div>
+
+              {/* Live Analytics Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="bg-white p-5 rounded-2xl border border-[#E9E3D8] shadow-xs space-y-1">
+                  <span className="text-[10px] uppercase font-bold text-gray-400">Total Pin Impressions</span>
+                  <p className="text-2xl font-serif font-bold text-[#191919]">
+                    {campaigns.reduce((acc, c) => acc + (c.impressions || 0), 0).toLocaleString()}
+                  </p>
+                  <p className="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>100% Organic B2B Reach</span>
+                  </p>
+                </div>
+
+                <div className="bg-white p-5 rounded-2xl border border-[#E9E3D8] shadow-xs space-y-1">
+                  <span className="text-[10px] uppercase font-bold text-gray-400">Total Pin Engagements</span>
+                  <p className="text-2xl font-serif font-bold text-[#191919]">
+                    {campaigns.reduce((acc, c) => acc + (c.clicks || 0), 0).toLocaleString()}
+                  </p>
+                  <p className="text-[11px] text-blue-600 font-semibold">
+                    Clicks &amp; Component Inquiries
+                  </p>
+                </div>
+
+                <div className="bg-white p-5 rounded-2xl border border-[#E9E3D8] shadow-xs space-y-1">
+                  <span className="text-[10px] uppercase font-bold text-gray-400">Average Click-Through (CTR)</span>
+                  <p className="text-2xl font-serif font-bold text-[#C49A3A]">
+                    {(() => {
+                      const totalImpr = campaigns.reduce((acc, c) => acc + (c.impressions || 0), 0);
+                      const totalClicks = campaigns.reduce((acc, c) => acc + (c.clicks || 0), 0);
+                      return totalImpr > 0 ? `${((totalClicks / totalImpr) * 100).toFixed(1)}%` : '0.0%';
+                    })()}
+                  </p>
+                  <p className="text-[11px] text-gray-500 font-semibold">
+                    Benchmark: 8.5% industry standard
+                  </p>
+                </div>
+
+                <div className="bg-white p-5 rounded-2xl border border-[#E9E3D8] shadow-xs space-y-1">
+                  <span className="text-[10px] uppercase font-bold text-gray-400">Cart &amp; RFQ Conversions</span>
+                  <p className="text-2xl font-serif font-bold text-emerald-700">
+                    {campaigns.reduce((acc, c) => acc + (c.cartAdds || 0) + (c.rfqClicks || 0), 0).toLocaleString()}
+                  </p>
+                  <p className="text-[11px] text-emerald-600 font-semibold">
+                    Direct commercial purchases
+                  </p>
+                </div>
+              </div>
+
+              {/* Campaigns Table / Cards */}
+              <div className="bg-white rounded-3xl border border-[#E9E3D8] shadow-xs overflow-hidden">
+                <div className="p-5 border-b border-[#F0EBE1] flex items-center justify-between">
+                  <h4 className="font-serif font-bold text-base text-[#191919]">
+                    Active Visual Pins ({campaigns.length})
+                  </h4>
+                  <span className="text-[11px] text-gray-400">
+                    Auto-served on Discovery Masonry &amp; Recommendation Engine
+                  </span>
+                </div>
+
+                <div className="divide-y divide-[#F0EBE1]">
+                  {campaigns.map(camp => (
+                    <div key={camp.id} className="p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:bg-[#FAF9F5] transition-colors">
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={camp.image}
+                          alt={camp.title}
+                          className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-[#E9E3D8] shrink-0"
+                        />
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className="px-2 py-0.5 rounded-full bg-[#191919] text-[#C49A3A] font-bold text-[9px] uppercase tracking-wider">
+                              {camp.tag || 'General'}
+                            </span>
+                            <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[9px] border border-emerald-200">
+                              {camp.badge || 'Active'}
+                            </span>
+                            <span className="text-[10px] text-gray-400 font-mono">
+                              Size: {camp.cardSize || 'standard'}
+                            </span>
+                          </div>
+                          <h5 className="font-serif font-bold text-sm text-[#191919]">{camp.title}</h5>
+                          <p className="text-xs text-gray-500 line-clamp-1 max-w-xl">{camp.subtitle}</p>
+                          <p className="text-[11px] text-gray-400">
+                            CTA: <span className="font-semibold text-gray-600">{camp.ctaText}</span> &bull; Linked Product: <span className="font-mono text-gray-600">{camp.productId || 'N/A'}</span>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-6 sm:gap-8 self-end sm:self-center shrink-0">
+                        <div className="text-right">
+                          <p className="text-xs font-bold text-[#191919]">{(camp.impressions || 0).toLocaleString()} impr.</p>
+                          <p className="text-[11px] text-emerald-700 font-semibold">{(camp.clicks || 0).toLocaleString()} clicks ({camp.impressions ? ((camp.clicks / camp.impressions) * 100).toFixed(1) : 0}%)</p>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handleOpenEditCampaign(camp)}
+                            className="p-2 bg-[#F8F6F1] hover:bg-[#E9E3D8] text-[#191919] rounded-xl transition-colors"
+                            title="Edit Campaign Pin"
+                          >
+                            <Edit3 className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteCampaign(camp.id, camp.title)}
+                            className="p-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl transition-colors"
+                            title="Delete Campaign Pin"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  {campaigns.length === 0 && (
+                    <div className="p-12 text-center text-gray-400 space-y-2">
+                      <Sparkles className="w-8 h-8 mx-auto text-gray-300" />
+                      <p className="font-semibold text-sm">No advertising campaigns found</p>
+                      <p className="text-xs">Click "Create Campaign Pin" above to add your first Pinterest visual showcase.</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Recommendation Engine Cross-Selling Matrix Summary */}
+              <div className="bg-[#191919] text-white p-6 sm:p-8 rounded-3xl border border-[#2C2C2C] shadow-xl space-y-4">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-[#C49A3A]/20 flex items-center justify-center text-[#C49A3A]">
+                      <Sparkles className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif font-bold text-base text-white">
+                        Smart Product Recommendation Engine (Matrix Rules)
+                      </h4>
+                      <p className="text-xs text-gray-400">
+                        Algorithmic component pairing logic active on Product Detail, Cart Drawer, and RFQ builder.
+                      </p>
+                    </div>
+                  </div>
+                  <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                    Engine Active &bull; ML Rule-Based
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 text-xs">
+                  <div className="bg-[#242424] p-4 rounded-2xl border border-white/5 space-y-2">
+                    <p className="font-bold text-[#C49A3A] uppercase tracking-wider text-[10px]">Rule 1: Gemstones to Closures</p>
+                    <p className="text-gray-300 leading-relaxed">
+                      Whenever a customer views natural gemstone strands, the engine automatically recommends matching micro-pave toggle clasps, spacers, and beading cord bundles.
+                    </p>
+                  </div>
+                  <div className="bg-[#242424] p-4 rounded-2xl border border-white/5 space-y-2">
+                    <p className="font-bold text-[#C49A3A] uppercase tracking-wider text-[10px]">Rule 2: Findings to Complementary Spacers</p>
+                    <p className="text-gray-300 leading-relaxed">
+                      Whenever findings or clasps are selected, lead-free pewter antique spacers and calibrated round beads are suggested to complete the assembly kit.
+                    </p>
+                  </div>
+                  <div className="bg-[#242424] p-4 rounded-2xl border border-white/5 space-y-2">
+                    <p className="font-bold text-[#C49A3A] uppercase tracking-wider text-[10px]">Rule 3: Master Lot Volume Incentives</p>
+                    <p className="text-gray-300 leading-relaxed">
+                      Bulk quotation requests and cart amounts exceeding $500 trigger discounted master lot suggestions with up to 40% wholesale pricing savings.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ========================================================= */}
           {/* TAB 10: PROMOTIONS & COUPONS */}
           {/* ========================================================= */}
           {activeTab === 'coupons' && (
@@ -2329,16 +2615,23 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-[#303030] mb-1">Primary Image URL</label>
+                  <label className="block font-semibold text-[#303030] mb-1">Low Stock Warning Threshold</label>
                   <input
-                    type="url"
-                    required
-                    value={productForm.image}
-                    onChange={(e) => setProductForm({ ...productForm, image: e.target.value })}
+                    type="number"
+                    value={productForm.lowStockThreshold}
+                    onChange={(e) => setProductForm({ ...productForm, lowStockThreshold: parseInt(e.target.value) || 0 })}
                     className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl focus:outline-none focus:border-[#C49A3A]"
                   />
                 </div>
               </div>
+
+              <ImageUploadInput
+                label="Product Primary Image Asset *"
+                value={productForm.image}
+                onChange={(url) => setProductForm({ ...productForm, image: url, images: [url] })}
+                required
+                placeholder="Upload high-res product photo from computer or enter URL"
+              />
 
               <div>
                 <label className="block font-semibold text-[#303030] mb-1">Description</label>
@@ -2685,7 +2978,7 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
       {/* ========================================================= */}
       {categoryModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl shadow-2xl border border-[#E9E3D8] w-full max-w-lg overflow-hidden flex flex-col">
+          <div className="bg-white rounded-3xl shadow-2xl border border-[#E9E3D8] w-full max-w-lg overflow-hidden max-h-[90vh] flex flex-col">
             <div className="p-6 bg-[#191919] text-white flex items-center justify-between">
               <h3 className="font-serif font-bold text-lg">
                 {editingCategory ? `Edit Category: ${editingCategory.name}` : 'Create Category'}
@@ -2693,7 +2986,7 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
               <button onClick={() => setCategoryModalOpen(false)} className="text-gray-400 hover:text-white">✕</button>
             </div>
 
-            <form onSubmit={handleSaveCategory} className="p-6 space-y-4 text-xs">
+            <form onSubmit={handleSaveCategory} className="p-6 overflow-y-auto space-y-4 text-xs">
               <div>
                 <label className="block font-semibold text-[#303030] mb-1">Category Title *</label>
                 <input
@@ -2716,16 +3009,13 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
                 />
               </div>
 
-              <div>
-                <label className="block font-semibold text-[#303030] mb-1">Banner Image URL</label>
-                <input
-                  type="url"
-                  required
-                  value={categoryForm.image}
-                  onChange={(e) => setCategoryForm({ ...categoryForm, image: e.target.value })}
-                  className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl"
-                />
-              </div>
+              <ImageUploadInput
+                label="Category Banner Image Asset *"
+                value={categoryForm.image}
+                onChange={(url) => setCategoryForm({ ...categoryForm, image: url })}
+                required
+                placeholder="Upload banner from computer or enter web URL"
+              />
 
               <div>
                 <label className="block font-semibold text-[#303030] mb-1">Description</label>
@@ -2750,6 +3040,182 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
                   className="px-6 py-2 bg-[#191919] hover:bg-[#303030] text-white font-bold rounded-xl"
                 >
                   Save Category
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================= */}
+      {/* MODAL 6: ADD / EDIT ADVERTISING PIN CAMPAIGN */}
+      {/* ========================================================= */}
+      {campaignModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+          <div className="bg-white rounded-3xl shadow-2xl border border-[#E9E3D8] w-full max-w-xl overflow-hidden max-h-[90vh] flex flex-col">
+            <div className="p-6 bg-[#191919] text-white flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-[#C49A3A]" />
+                <h3 className="font-serif font-bold text-lg">
+                  {editingCampaign ? `Edit Campaign Pin: ${editingCampaign.title}` : 'Create Visual Pin Campaign'}
+                </h3>
+              </div>
+              <button onClick={() => setCampaignModalOpen(false)} className="text-gray-400 hover:text-white">✕</button>
+            </div>
+
+            <form onSubmit={handleSaveCampaign} className="p-6 overflow-y-auto space-y-4 text-xs">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block font-semibold text-[#303030] mb-1">Campaign Headline *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Micro-Pavé CZ Bridal Clasps"
+                    value={campaignForm.title}
+                    onChange={(e) => setCampaignForm({ ...campaignForm, title: e.target.value })}
+                    className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl font-medium"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-[#303030] mb-1">Badge Tagline</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Artisan Spotlight"
+                    value={campaignForm.badge}
+                    onChange={(e) => setCampaignForm({ ...campaignForm, badge: e.target.value })}
+                    className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block font-semibold text-[#303030] mb-1">Subtitle / Pairing Pitch *</label>
+                <textarea
+                  rows="2"
+                  required
+                  placeholder="Detail the materials, plating specifications, or studio pairing ideas..."
+                  value={campaignForm.subtitle}
+                  onChange={(e) => setCampaignForm({ ...campaignForm, subtitle: e.target.value })}
+                  className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl"
+                />
+              </div>
+
+              {/* Image Upload Component */}
+              <ImageUploadInput
+                label="Visual Pin Media Asset *"
+                value={campaignForm.image}
+                onChange={(url) => setCampaignForm({ ...campaignForm, image: url })}
+                required
+                placeholder="Upload high-res pin photograph or enter web URL"
+              />
+
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <label className="block font-semibold text-[#303030] mb-1">Category Filter Tag</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Gemstones, Connectors"
+                    value={campaignForm.tag}
+                    onChange={(e) => setCampaignForm({ ...campaignForm, tag: e.target.value })}
+                    className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-[#303030] mb-1">Card Layout Size</label>
+                  <select
+                    value={campaignForm.cardSize}
+                    onChange={(e) => setCampaignForm({ ...campaignForm, cardSize: e.target.value })}
+                    className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl"
+                  >
+                    <option value="standard">Standard (Square/Compact)</option>
+                    <option value="tall">Tall (Pinterest Portrait)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-[#303030] mb-1">Priority (1-10)</label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="100"
+                    value={campaignForm.priority}
+                    onChange={(e) => setCampaignForm({ ...campaignForm, priority: parseInt(e.target.value) || 1 })}
+                    className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block font-semibold text-[#303030] mb-1">Linked Catalog Product</label>
+                  <select
+                    value={campaignForm.productId}
+                    onChange={(e) => setCampaignForm({ ...campaignForm, productId: e.target.value })}
+                    className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl"
+                  >
+                    <option value="">-- None / Category Only --</option>
+                    {products.map(p => (
+                      <option key={p.id} value={p.id}>{p.sku} - {p.name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-[#303030] mb-1">Target Category Landing</label>
+                  <select
+                    value={campaignForm.categorySlug}
+                    onChange={(e) => setCampaignForm({ ...campaignForm, categorySlug: e.target.value })}
+                    className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl"
+                  >
+                    <option value="">-- All Categories --</option>
+                    {categories.map(c => (
+                      <option key={c.id} value={c.slug || c.id}>{c.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 items-center">
+                <div>
+                  <label className="block font-semibold text-[#303030] mb-1">CTA Button Text</label>
+                  <input
+                    type="text"
+                    value={campaignForm.ctaText}
+                    onChange={(e) => setCampaignForm({ ...campaignForm, ctaText: e.target.value })}
+                    placeholder="e.g. Explore Gemstones"
+                    className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-xl"
+                  />
+                </div>
+
+                <div className="pt-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={campaignForm.active}
+                      onChange={(e) => setCampaignForm({ ...campaignForm, active: e.target.checked })}
+                      className="rounded text-[#C49A3A] focus:ring-[#C49A3A] w-4 h-4"
+                    />
+                    <span className="font-semibold text-gray-700">Active (Served to Customers)</span>
+                  </label>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-[#F0EBE1] flex justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={() => setCampaignModalOpen(false)}
+                  className="px-4 py-2 bg-[#F8F6F1] text-[#303030] font-semibold rounded-xl"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-[#191919] hover:bg-[#303030] text-white font-bold rounded-xl flex items-center gap-2"
+                >
+                  <Save className="w-3.5 h-3.5 text-[#C49A3A]" />
+                  <span>Save Campaign Pin</span>
                 </button>
               </div>
             </form>

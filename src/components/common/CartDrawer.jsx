@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   Trash2, 
@@ -9,8 +9,10 @@ import {
   Sparkles, 
   Truck, 
   Tag, 
-  FileText 
+  FileText,
+  Check
 } from 'lucide-react';
+import { api } from '../../utils/api';
 import { useCart } from '../../context/CartContext';
 import { useQuote } from '../../context/QuoteContext';
 import { useCurrency } from '../../context/CurrencyContext';
@@ -23,6 +25,7 @@ export default function CartDrawer({ onNavigate }) {
     updateQuantity, 
     removeFromCart, 
     clearCart,
+    addToCart,
     itemsCount,
     rawSubtotal,
     tieredSubtotal,
@@ -43,6 +46,29 @@ export default function CartDrawer({ onNavigate }) {
   const { formatPrice } = useCurrency();
   const [couponInput, setCouponInput] = useState('');
   const [couponLoading, setCouponLoading] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
+  const [addedRecomId, setAddedRecomId] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (isCartDrawerOpen && cart.length > 0) {
+      const excludeIds = cart.map(i => i.id).join(',');
+      api.getRecommendations({ excludeIds, limit: 3 })
+        .then(data => {
+          if (isMounted && Array.isArray(data)) {
+            setRecommendations(data);
+          }
+        })
+        .catch(() => {});
+    }
+    return () => { isMounted = false; };
+  }, [isCartDrawerOpen, cart.length]);
+
+  const handleAddRecom = (prod) => {
+    addToCart(prod, prod.moq || 5, 'Standard', 'Standard');
+    setAddedRecomId(prod.id);
+    setTimeout(() => setAddedRecomId(null), 2000);
+  };
 
   if (!isCartDrawerOpen) return null;
 
@@ -216,6 +242,46 @@ export default function CartDrawer({ onNavigate }) {
                   </div>
                 </div>
               ))
+            )}
+
+            {/* Pair With Your Order Cross-Sell Recommendations */}
+            {cart.length > 0 && recommendations.length > 0 && (
+              <div className="pt-4 mt-4 border-t border-[#EAE4D5] space-y-2.5">
+                <div className="flex items-center gap-1.5 text-[#C49A3A]">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#191919]">
+                    Pair With Your Order (Wholesale Components)
+                  </span>
+                </div>
+                
+                <div className="space-y-2">
+                  {recommendations.slice(0, 2).map(recom => (
+                    <div key={recom.id} className="p-2.5 bg-[#FAF8F5] rounded-xl border border-[#EAE4D5] flex items-center justify-between gap-3">
+                      <img
+                        src={recom.image}
+                        alt={recom.name}
+                        className="w-11 h-11 rounded-lg object-cover bg-white shrink-0"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <h5 className="font-serif font-bold text-xs text-[#191919] truncate">{recom.name}</h5>
+                        <p className="text-[10px] text-gray-500 font-mono">MOQ: {recom.moq || 5} pk &bull; {formatPrice(recom.salePrice || recom.price)}/pk</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleAddRecom(recom)}
+                        className={`p-1.5 rounded-lg text-xs font-bold transition-all shrink-0 ${
+                          addedRecomId === recom.id
+                            ? 'bg-emerald-600 text-white'
+                            : 'bg-[#191919] hover:bg-[#C49A3A] text-white'
+                        }`}
+                        title="Add recommended item to cart"
+                      >
+                        {addedRecomId === recom.id ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
 

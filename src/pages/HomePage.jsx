@@ -13,6 +13,7 @@ import WhyChooseSection from '../components/home/WhyChooseSection';
 import WholesaleInfoSection from '../components/home/WholesaleInfoSection';
 import TestimonialsSection from '../components/home/TestimonialsSection';
 import NewsletterSection from '../components/home/NewsletterSection';
+import PinterestDiscoverySection from '../components/home/PinterestDiscoverySection';
 
 export default function HomePage({ 
   products = [], 
@@ -64,6 +65,13 @@ export default function HomePage({
       {/* 10. Featured Collections (Curated Editorial Grids) */}
       <FeaturedCollections 
         onNavigate={onNavigate} 
+      />
+
+      {/* 10b. Pinterest Visual Discovery & Campaign Inspiration Gallery */}
+      <PinterestDiscoverySection
+        onNavigate={onNavigate}
+        onSelectProduct={onSelectProduct}
+        onQuickView={onQuickView}
       />
 
       {/* 11. Natural Gemstone Collection Spotlight */}

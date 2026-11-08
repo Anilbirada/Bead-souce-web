@@ -433,5 +433,118 @@ export const api = {
     });
     if (!res.ok) throw new Error('Failed to load stats');
     return await res.json();
+  },
+
+  // --- IMAGE UPLOAD ---
+  async uploadImage(imageData, filename = 'uploaded-image.jpg') {
+    try {
+      const res = await fetch(`${API_BASE}/upload`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: imageData, filename })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Upload failed');
+      return data.url;
+    } catch (err) {
+      console.warn('Backend upload fallback:', err);
+      // Return direct base64 data URL if server unreachable
+      return imageData;
+    }
+  },
+
+  // --- RECOMMENDATION ENGINE ---
+  async getProductRecommendations(idOrSlug) {
+    try {
+      const res = await fetch(`${API_BASE}/products/${idOrSlug}/recommendations`);
+      if (!res.ok) throw new Error('Failed to fetch recommendations');
+      const data = await res.json();
+      if (Array.isArray(data)) return data;
+      const combined = [
+        ...(data.pairings || []),
+        ...(data.frequentlyBoughtTogether || []),
+        ...(data.related || []),
+        ...(data.trending || [])
+      ];
+      const seen = new Set();
+      return combined.filter(p => {
+        if (!p || seen.has(p.id)) return false;
+        seen.add(p.id);
+        return true;
+      });
+    } catch (err) {
+      console.warn('Recommendation API fallback to local computation:', err);
+      return [];
+    }
+  },
+
+  async getRecommendations(params = {}) {
+    const query = new URLSearchParams();
+    if (params.category) query.append('category', params.category);
+    if (params.excludeIds) query.append('excludeIds', params.excludeIds);
+    if (params.limit) query.append('limit', params.limit);
+
+    try {
+      const res = await fetch(`${API_BASE}/recommendations?${query.toString()}`);
+      if (!res.ok) throw new Error('Failed to fetch recommendations');
+      return await res.json();
+    } catch (err) {
+      return [];
+    }
+  },
+
+  // --- CAMPAIGNS & VISUAL ADS ---
+  async getCampaigns(params = {}) {
+    const query = new URLSearchParams();
+    if (params.placement) query.append('placement', params.placement);
+    if (params.activeOnly !== undefined) query.append('activeOnly', params.activeOnly);
+
+    try {
+      const res = await fetch(`${API_BASE}/campaigns?${query.toString()}`);
+      if (!res.ok) throw new Error('Failed to fetch campaigns');
+      return await res.json();
+    } catch (err) {
+      return [];
+    }
+  },
+
+  async createCampaign(campaignData) {
+    const res = await fetch(`${API_BASE}/campaigns`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(campaignData)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to create campaign');
+    return data;
+  },
+
+  async updateCampaign(id, campaignData) {
+    const res = await fetch(`${API_BASE}/campaigns/${id}`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(campaignData)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to update campaign');
+    return data;
+  },
+
+  async deleteCampaign(id) {
+    const res = await fetch(`${API_BASE}/campaigns/${id}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders()
+    });
+    return await res.json();
+  },
+
+  async trackCampaign(id, event = 'impression') {
+    try {
+      await fetch(`${API_BASE}/campaigns/${id}/track`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event })
+      });
+    } catch (err) {}
   }
 };

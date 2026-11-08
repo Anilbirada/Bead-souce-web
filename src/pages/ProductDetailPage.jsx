@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Heart, 
   ShoppingBag, 
@@ -14,8 +14,11 @@ import {
   Check, 
   ZoomIn, 
   X,
-  Scale
+  Scale,
+  Layers,
+  ArrowRight
 } from 'lucide-react';
+import { api } from '../utils/api';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useQuote } from '../context/QuoteContext';
@@ -61,10 +64,42 @@ export default function ProductDetailPage({
   const tier2Price = Number((basePrice * 0.85).toFixed(2)); // 10-49 pk
   const tier3Price = Number((basePrice * 0.70).toFixed(2)); // 50+ pk
 
-  // Related products from same category
-  const relatedProducts = allProducts
-    .filter(p => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
+  // Smart Dynamic Recommendations
+  const [recommendations, setRecommendations] = useState([]);
+  const [bundleAdded, setBundleAdded] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (product?.id) {
+      api.getProductRecommendations(product.id)
+        .then(data => {
+          if (isMounted && Array.isArray(data) && data.length > 0) {
+            setRecommendations(data);
+          }
+        })
+        .catch(() => {});
+    }
+    return () => { isMounted = false; };
+  }, [product?.id]);
+
+  // Fallback to related category products if needed
+  const displayRecommendations = recommendations.length > 0 
+    ? recommendations 
+    : allProducts.filter(p => p.id !== product.id).slice(0, 4);
+
+  // Frequently Bought Together Bundle Product
+  const bundleProduct = displayRecommendations[0];
+  const bundleTotalPrice = bundleProduct 
+    ? (basePrice * (product.moq || 5)) + ((bundleProduct.salePrice || bundleProduct.price) * (bundleProduct.moq || 5))
+    : null;
+
+  const handleAddBundleToCart = () => {
+    if (!bundleProduct) return;
+    addToCart(product, product.moq || 5, selectedFinish, selectedSize);
+    addToCart(bundleProduct, bundleProduct.moq || 5, 'Standard', 'Standard');
+    setBundleAdded(true);
+    setTimeout(() => setBundleAdded(false), 3000);
+  };
 
   const handleShare = () => {
     navigator.clipboard?.writeText(window.location.href);
@@ -549,28 +584,133 @@ export default function ProductDetailPage({
 
         </div>
 
-        {/* Related Products Carousel */}
-        {relatedProducts.length > 0 && (
+        {/* ========================================================= */}
+        {/* FREQUENTLY BOUGHT TOGETHER / BUNDLE PAIRING */}
+        {/* ========================================================= */}
+        {bundleProduct && (
+          <div className="mt-16 bg-white rounded-3xl p-6 sm:p-8 border border-[#EAE4D5] shadow-xs">
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="w-4 h-4 text-[#C49A3A]" />
+              <span className="text-[11px] uppercase font-bold text-[#C49A3A] tracking-wider">
+                Wholesale Perfect Pairings
+              </span>
+            </div>
+            <h3 className="font-serif text-2xl font-bold text-[#191919] mb-6">
+              Frequently Bought Together
+            </h3>
+
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+              {/* Visual bundle items */}
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                {/* Current Item */}
+                <div className="flex items-center gap-3 p-3 bg-[#FAF8F5] rounded-2xl border border-[#EAE4D5]">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover"
+                  />
+                  <div>
+                    <span className="text-[10px] font-bold uppercase text-gray-500 font-mono">This Item</span>
+                    <h4 className="font-serif font-bold text-xs sm:text-sm text-[#191919] max-w-[180px] line-clamp-1">
+                      {product.name}
+                    </h4>
+                    <p className="text-xs font-bold text-[#C49A3A] mt-0.5">
+                      {formatPrice(basePrice)} <span className="text-[10px] text-gray-500 font-normal">/ pk (MOQ: {product.moq || 5})</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-8 h-8 rounded-full bg-[#FAF8F5] border border-[#DDD6C8] flex items-center justify-center font-bold text-gray-600">
+                  +
+                </div>
+
+                {/* Paired Cross-Sell Item */}
+                <div 
+                  onClick={() => onSelectProduct && onSelectProduct(bundleProduct.id)}
+                  className="flex items-center gap-3 p-3 bg-[#FAF8F5] rounded-2xl border border-[#EAE4D5] hover:border-[#C49A3A] cursor-pointer transition-colors"
+                >
+                  <img
+                    src={bundleProduct.image}
+                    alt={bundleProduct.name}
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover"
+                  />
+                  <div>
+                    <span className="text-[10px] font-bold uppercase text-[#C49A3A] font-mono">Recommended Pairing</span>
+                    <h4 className="font-serif font-bold text-xs sm:text-sm text-[#191919] max-w-[180px] line-clamp-1">
+                      {bundleProduct.name}
+                    </h4>
+                    <p className="text-xs font-bold text-[#C49A3A] mt-0.5">
+                      {formatPrice(bundleProduct.salePrice || bundleProduct.price)}{' '}
+                      <span className="text-[10px] text-gray-500 font-normal">/ pk (MOQ: {bundleProduct.moq || 5})</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bundle Pricing & 1-Click Action */}
+              <div className="w-full lg:w-auto p-4 bg-[#FAF8F5] rounded-2xl border border-[#EAE4D5] flex flex-col sm:flex-row lg:flex-col items-center justify-between gap-4 text-center lg:text-right">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-gray-500">Combined Wholesale Total</span>
+                  <div className="font-serif font-bold text-xl sm:text-2xl text-[#191919]">
+                    {formatPrice(bundleTotalPrice)}
+                  </div>
+                  <p className="text-[10px] text-emerald-700 font-semibold mt-0.5">
+                    Includes factory MOQs &bull; Tier discounts applied
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleAddBundleToCart}
+                  className={`w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all ${
+                    bundleAdded
+                      ? 'bg-emerald-600 text-white'
+                      : 'bg-[#191919] hover:bg-[#303030] text-white hover:scale-102'
+                  }`}
+                >
+                  {bundleAdded ? (
+                    <>
+                      <Check className="w-4 h-4" />
+                      <span>Added Both to Order!</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingBag className="w-4 h-4 text-[#C49A3A]" />
+                      <span>Add Both to Cart</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================= */}
+        {/* SMART PRODUCT RECOMMENDATIONS & YOU MAY ALSO LIKE */}
+        {/* ========================================================= */}
+        {displayRecommendations.length > 0 && (
           <div className="mt-16">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <span className="text-xs uppercase font-bold text-[#8C6D2B] tracking-wider">
-                  Complementary Wholesale Components
+                <span className="text-xs uppercase font-bold text-[#8C6D2B] tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Smart Recommendation Engine</span>
                 </span>
-                <h3 className="font-serif text-2xl font-bold text-[#1A1A1A] mt-1">
-                  Related Products
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A1A] mt-1">
+                  You May Also Like &bull; Complete Your Collection
                 </h3>
               </div>
               <button
                 onClick={() => onNavigate('catalog', { category: product.category })}
-                className="text-xs font-bold text-[#8C6D2B] hover:underline"
+                className="text-xs font-bold text-[#8C6D2B] hover:underline flex items-center gap-1"
               >
-                View all in {product.category?.replace(/-/g, ' ')}
+                <span>View Full Catalog</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-              {relatedProducts.map((rel) => (
+              {displayRecommendations.map((rel) => (
                 <ProductCard
                   key={rel.id}
                   product={rel}
