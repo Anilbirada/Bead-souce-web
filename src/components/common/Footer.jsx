@@ -26,54 +26,54 @@ export default function Footer({ onNavigate }) {
   };
 
   return (
-    <footer className="bg-[#141210] text-[#D8D2C4] border-t border-[#2D2821] pt-16 pb-12">
+    <footer className="bg-[#40362F] text-[#EDE5D8] border-t border-[#52463D] pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Trust Pillars Banner */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-12 border-b border-[#2B2620]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-12 border-b border-[#52463D]">
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#242019] flex items-center justify-center shrink-0 border border-[#3D372D]">
-              <ShieldCheck className="w-5 h-5 text-[#D4AF37]" />
+            <div className="w-10 h-10 rounded-xl bg-[#52463D] flex items-center justify-center shrink-0 border border-[#EDE5D8]/20">
+              <ShieldCheck className="w-5 h-5 text-[#C6A66B]" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-white">Direct Factory Sourcing</h4>
-              <p className="text-xs text-[#9E9789] mt-0.5">True manufacturer pricing with zero middleman markups.</p>
+              <h4 className="text-sm font-semibold text-[#FAF8F3]">Direct Factory Sourcing</h4>
+              <p className="text-xs text-[#EDE5D8]/80 mt-0.5">True manufacturer pricing with zero middleman markups.</p>
             </div>
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#242019] flex items-center justify-center shrink-0 border border-[#3D372D]">
-              <Award className="w-5 h-5 text-[#D4AF37]" />
+            <div className="w-10 h-10 rounded-xl bg-[#52463D] flex items-center justify-center shrink-0 border border-[#EDE5D8]/20">
+              <Award className="w-5 h-5 text-[#C6A66B]" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-white">Tested Genuine Minerals</h4>
-              <p className="text-xs text-[#9E9789] mt-0.5">100% authentic gemstones & certified lead-free pewter.</p>
+              <h4 className="text-sm font-semibold text-[#FAF8F3]">Tested Genuine Minerals</h4>
+              <p className="text-xs text-[#EDE5D8]/80 mt-0.5">100% authentic gemstones &amp; certified lead-free pewter.</p>
             </div>
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#242019] flex items-center justify-center shrink-0 border border-[#3D372D]">
-              <Truck className="w-5 h-5 text-[#D4AF37]" />
+            <div className="w-10 h-10 rounded-xl bg-[#52463D] flex items-center justify-center shrink-0 border border-[#EDE5D8]/20">
+              <Truck className="w-5 h-5 text-[#C6A66B]" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-white">Worldwide Fast Dispatch</h4>
-              <p className="text-xs text-[#9E9789] mt-0.5">Express DHL/FedEx worldwide delivery with tracking.</p>
+              <h4 className="text-sm font-semibold text-[#FAF8F3]">Worldwide Fast Dispatch</h4>
+              <p className="text-xs text-[#EDE5D8]/80 mt-0.5">Express DHL/FedEx worldwide delivery with tracking.</p>
             </div>
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#242019] flex items-center justify-center shrink-0 border border-[#3D372D]">
-              <FileText className="w-5 h-5 text-[#D4AF37]" />
+            <div className="w-10 h-10 rounded-xl bg-[#52463D] flex items-center justify-center shrink-0 border border-[#EDE5D8]/20">
+              <FileText className="w-5 h-5 text-[#C6A66B]" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-white">Dedicated RFQ Desk</h4>
-              <p className="text-xs text-[#9E9789] mt-0.5">Custom gemstone cuts, bulk orders & OEM casting.</p>
+              <h4 className="text-sm font-semibold text-[#FAF8F3]">Dedicated RFQ Desk</h4>
+              <p className="text-xs text-[#EDE5D8]/80 mt-0.5">Custom gemstone cuts, bulk orders &amp; OEM casting.</p>
             </div>
           </div>
         </div>
 
         {/* Main Footer Links & Information */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 py-12 border-b border-[#2B2620]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 py-12 border-b border-[#52463D]">
           
           {/* Col 1: Brand & International Operations */}
           <div className="lg:col-span-2 space-y-4">
@@ -84,21 +84,21 @@ export default function Footer({ onNavigate }) {
               <BrandLogo variant="dark" size="lg" withSubtitle={true} />
             </div>
 
-            <p className="text-xs text-[#9E9789] leading-relaxed max-w-sm">
+            <p className="text-xs text-[#EDE5D8]/80 leading-relaxed max-w-sm">
               BeadsSource is an international manufacturer and wholesale exporter of natural gemstone beads, pavé cubic zirconia, lead-free pewter components, and finished artisanal jewelry.
             </p>
 
-            <div className="space-y-2 text-xs text-[#B8B2A4] pt-2">
+            <div className="space-y-2 text-xs text-[#EDE5D8] pt-2">
               <p className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#C49A3A] shrink-0" />
+                <MapPin className="w-4 h-4 text-[#C6A66B] shrink-0" />
                 <span>Central International Distribution &amp; Sourcing Operations</span>
               </p>
               <p className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#C49A3A] shrink-0" />
+                <Phone className="w-4 h-4 text-[#C6A66B] shrink-0" />
                 <span>+1 (800) 555-0199 &bull; Global Wholesale Desk</span>
               </p>
               <p className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#C49A3A] shrink-0" />
+                <Mail className="w-4 h-4 text-[#C6A66B] shrink-0" />
                 <span>wholesale@beadssource.com &bull; support@beadssource.com</span>
               </p>
             </div>
@@ -106,12 +106,12 @@ export default function Footer({ onNavigate }) {
 
           {/* Col 2: Wholesale Categories */}
           <div className="space-y-3">
-            <h4 className="text-xs uppercase font-bold tracking-widest text-[#E6C687]">Product Catalogue</h4>
-            <ul className="space-y-2 text-xs text-[#A8A193]">
+            <h4 className="text-xs uppercase font-bold tracking-widest text-[#C6A66B]">Product Catalogue</h4>
+            <ul className="space-y-2 text-xs text-[#EDE5D8]/80">
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'natural-gemstone-beads' })} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Natural Gemstones
                 </button>
@@ -119,7 +119,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'turquoise-beads' })} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Turquoise Beads &amp; Slabs
                 </button>
@@ -127,7 +127,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'cubic-zirconia' })} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Micro Pave CZ Spacers
                 </button>
@@ -135,7 +135,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'charms' })} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Lead-Free Pewter Charms
                 </button>
@@ -143,7 +143,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'jewelry-findings' })} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Lobster Clasps &amp; Findings
                 </button>
@@ -151,7 +151,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'handmade-necklaces' })} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Handmade Knotted Necklaces
                 </button>
@@ -161,12 +161,12 @@ export default function Footer({ onNavigate }) {
 
           {/* Col 3: Wholesale B2B Services */}
           <div className="space-y-3">
-            <h4 className="text-xs uppercase font-bold tracking-widest text-[#E6C687]">Wholesale Desk</h4>
-            <ul className="space-y-2 text-xs text-[#A8A193]">
+            <h4 className="text-xs uppercase font-bold tracking-widest text-[#C6A66B]">Wholesale Desk</h4>
+            <ul className="space-y-2 text-xs text-[#EDE5D8]/80">
               <li>
                 <button 
                   onClick={() => onNavigate('quote')} 
-                  className="hover:text-white transition-colors text-[#D4AF37] font-semibold"
+                  className="hover:text-white transition-colors text-[#C6A66B] font-semibold cursor-pointer"
                 >
                   Submit Bulk RFQ Quotation
                 </button>
@@ -174,7 +174,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'all' })} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Tiered Volume Pricing
                 </button>
@@ -182,7 +182,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('about')} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Custom OEM Bead Sourcing
                 </button>
@@ -190,7 +190,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('contact')} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Private Showroom Visits
                 </button>
@@ -198,7 +198,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('dashboard')} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Track Purchase Orders
                 </button>
@@ -208,13 +208,13 @@ export default function Footer({ onNavigate }) {
 
           {/* Col 4: Newsletter */}
           <div className="space-y-3">
-            <h4 className="text-xs uppercase font-bold tracking-widest text-[#E6C687]">Wholesale Insider</h4>
-            <p className="text-xs text-[#9E9789]">
+            <h4 className="text-xs uppercase font-bold tracking-widest text-[#C6A66B]">Wholesale Insider</h4>
+            <p className="text-xs text-[#EDE5D8]/80 leading-relaxed">
               Receive priority alerts for new container shipments, rare gemstone arrivals, and private bulk discounts.
             </p>
             {subscribed ? (
-              <div className="p-3 bg-[#24211A] border border-[#3E382D] rounded-lg text-xs text-[#E6C687] flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
+              <div className="p-3 bg-[#52463D] border border-[#EDE5D8]/30 rounded-xl text-xs text-[#D8C49A] flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#C6A66B]" />
                 <span>Thank you! You are subscribed to Wholesale Alerts.</span>
               </div>
             ) : (
@@ -225,11 +225,11 @@ export default function Footer({ onNavigate }) {
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="Enter business email..."
-                  className="w-full px-3 py-2 bg-[#201D18] border border-[#383227] rounded-lg text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
+                  className="w-full px-3.5 py-2.5 bg-[#52463D] border border-[#EDE5D8]/30 rounded-xl text-xs text-[#FAF8F3] placeholder-[#EDE5D8]/60 focus:outline-none focus:border-[#C6A66B]"
                 />
                 <button
                   type="submit"
-                  className="w-full py-2 bg-[#D4AF37] hover:bg-[#AA771C] text-black font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="w-full py-2.5 bg-[#C6A66B] hover:bg-[#D8C49A] text-[#40362F] font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                 >
                   <span>Subscribe for Bulk Alerts</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -241,7 +241,7 @@ export default function Footer({ onNavigate }) {
         </div>
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#80796C] gap-4">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#EDE5D8]/70 gap-4">
           <p>
             &copy; 2026 BeadsSource LLC &bull; All Rights Reserved.
           </p>
@@ -252,14 +252,14 @@ export default function Footer({ onNavigate }) {
             <span>US &amp; EU REACH Compliant</span>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] bg-[#221F19] px-2 py-0.5 rounded border border-[#383227]">
+          <div className="flex items-center gap-2.5">
+            <span className="text-[11px] bg-[#52463D] px-2.5 py-1 rounded-lg border border-[#EDE5D8]/20 text-[#D8C49A]">
               Bank Wire / TT
             </span>
-            <span className="text-[11px] bg-[#221F19] px-2 py-0.5 rounded border border-[#383227]">
+            <span className="text-[11px] bg-[#52463D] px-2.5 py-1 rounded-lg border border-[#EDE5D8]/20 text-[#D8C49A]">
               UPI / Net Banking
             </span>
-            <span className="text-[11px] bg-[#221F19] px-2 py-0.5 rounded border border-[#383227]">
+            <span className="text-[11px] bg-[#52463D] px-2.5 py-1 rounded-lg border border-[#EDE5D8]/20 text-[#D8C49A]">
               DHL / FedEx
             </span>
           </div>

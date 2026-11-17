@@ -50,45 +50,45 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
       {/* Drawer content */}
       <div className="relative w-full max-w-xs bg-white h-full shadow-2xl flex flex-col z-10 overflow-y-auto">
         {/* Header */}
-        <div className="p-4 bg-[#1C1A17] text-white flex items-center justify-between">
+        <div className="p-4 bg-[#40362F] text-[#FAF8F3] flex items-center justify-between border-b border-[#52463D]">
           <button 
             onClick={() => { onClose(); onNavigate('home'); }}
-            className="text-left focus:outline-none"
+            className="text-left focus:outline-none cursor-pointer"
           >
             <BrandLogo variant="dark" size="sm" withSubtitle={true} />
           </button>
           <button 
             onClick={onClose}
-            className="p-1.5 text-gray-400 hover:text-white rounded-lg"
+            className="p-1.5 text-[#EDE5D8] hover:text-[#C6A66B] rounded-lg cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* User Card / Login Banner */}
-        <div className="p-4 bg-[#FAF7F0] border-b border-[#EAE4D5]">
+        <div className="p-4 bg-[#FAF8F3] border-b border-[#EDE5D8]">
           {user ? (
             <div className="space-y-1">
-              <p className="text-xs font-semibold text-[#1A1A1A]">{user.name || user.company || user.email || 'Customer'}</p>
-              <p className="text-[11px] text-[#6B6557]">{user.company || user.email}</p>
+              <p className="text-xs font-semibold text-[#292723]">{user.name || user.company || user.email || 'Customer'}</p>
+              <p className="text-[11px] text-[#8B8175]">{user.company || user.email}</p>
               <div className="flex items-center gap-3 pt-2">
                 <button
                   onClick={() => { onClose(); onNavigate('dashboard'); }}
-                  className="text-xs text-[#B38F26] font-semibold hover:underline"
+                  className="text-xs text-[#C6A66B] font-semibold hover:underline cursor-pointer"
                 >
                   My Orders &bull; Dashboard
                 </button>
                 {isAdmin && (
                   <button
                     onClick={() => { onClose(); onNavigate('admin'); }}
-                    className="text-xs text-[#967117] font-bold hover:underline"
+                    className="text-xs text-[#C6A66B] font-bold hover:underline cursor-pointer"
                   >
                     Admin Suite
                   </button>
                 )}
                 <button
                   onClick={() => { logout(); onClose(); }}
-                  className="text-xs text-red-600 hover:underline ml-auto"
+                  className="text-xs text-red-600 hover:underline ml-auto cursor-pointer"
                 >
                   Sign Out
                 </button>
@@ -97,12 +97,12 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
           ) : (
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs font-semibold text-[#1A1A1A]">Wholesale B2B Account</p>
-                <p className="text-[11px] text-[#736B5E]">Access bulk volume discounts</p>
+                <p className="text-xs font-semibold text-[#292723]">Wholesale B2B Account</p>
+                <p className="text-[11px] text-[#8B8175]">Access bulk volume discounts</p>
               </div>
               <button
                 onClick={() => { onClose(); onOpenAuth(); }}
-                className="px-3 py-1.5 bg-[#1C1A17] text-white text-xs font-semibold rounded-lg hover:bg-[#332E26]"
+                className="px-3.5 py-1.5 bg-[#40362F] text-[#FAF8F3] text-xs font-bold rounded-xl hover:bg-[#52463D] cursor-pointer shadow-xs"
               >
                 Sign In
               </button>
@@ -111,21 +111,21 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
         </div>
 
         {/* Currency Switcher */}
-        <div className="px-4 py-2.5 bg-white border-b border-[#F0EBE1] flex items-center justify-between text-xs">
-          <span className="text-gray-500 flex items-center gap-1.5">
-            <Globe className="w-3.5 h-3.5 text-[#C4A052]" />
+        <div className="px-4 py-2.5 bg-white border-b border-[#EDE5D8] flex items-center justify-between text-xs">
+          <span className="text-[#8B8175] flex items-center gap-1.5 font-medium">
+            <Globe className="w-3.5 h-3.5 text-[#C6A66B]" />
             <span>Currency:</span>
           </span>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setCurrency('USD')}
-              className={`px-2 py-0.5 rounded text-xs font-bold ${currency === 'USD' ? 'bg-[#C4A052] text-white' : 'bg-gray-100 text-gray-700'}`}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-colors ${currency === 'USD' ? 'bg-[#C6A66B] text-white shadow-xs' : 'bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8]'}`}
             >
               USD ($)
             </button>
             <button
               onClick={() => setCurrency('INR')}
-              className={`px-2 py-0.5 rounded text-xs font-bold ${currency === 'INR' ? 'bg-[#C4A052] text-white' : 'bg-gray-100 text-gray-700'}`}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-colors ${currency === 'INR' ? 'bg-[#C6A66B] text-white shadow-xs' : 'bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8]'}`}
             >
               INR (₹)
             </button>
@@ -136,40 +136,40 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
         <div className="py-2 flex-1">
           <button
             onClick={() => { onClose(); onNavigate('home'); }}
-            className="w-full px-4 py-2.5 text-left text-xs font-semibold text-[#1A1A1A] hover:bg-[#FAF8F5] flex items-center justify-between"
+            className="w-full px-4 py-2.5 text-left text-xs font-semibold text-[#292723] hover:bg-[#FAF8F3] flex items-center justify-between cursor-pointer"
           >
             <span>Home</span>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <ChevronRight className="w-4 h-4 text-[#8B8175]" />
           </button>
 
           <button
             onClick={() => { onClose(); onNavigate('catalog', { category: 'all' }); }}
-            className="w-full px-4 py-2.5 text-left text-xs font-semibold text-[#1A1A1A] hover:bg-[#FAF8F5] flex items-center justify-between"
+            className="w-full px-4 py-2.5 text-left text-xs font-semibold text-[#292723] hover:bg-[#FAF8F3] flex items-center justify-between cursor-pointer"
           >
             <span>Complete Wholesale Catalogue</span>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <ChevronRight className="w-4 h-4 text-[#8B8175]" />
           </button>
 
           {/* Categories Accordion */}
           <div>
             <button
               onClick={() => setCategoriesOpen(!categoriesOpen)}
-              className="w-full px-4 py-2.5 text-left text-xs font-semibold text-[#8C6D2B] bg-[#FDFBF7] hover:bg-[#FAF5E8] flex items-center justify-between border-y border-[#F0EBE1]"
+              className="w-full px-4 py-2.5 text-left text-xs font-semibold text-[#C6A66B] bg-[#FAF8F3] hover:bg-[#EDE5D8]/50 flex items-center justify-between border-y border-[#EDE5D8] cursor-pointer"
             >
               <span>Wholesale Categories (12)</span>
               {categoriesOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
             </button>
 
             {categoriesOpen && (
-              <div className="bg-[#FAF8F5] py-1 pl-4">
+              <div className="bg-[#FAF8F3]/60 py-1 pl-4">
                 {CATEGORIES.map(cat => (
                   <button
                     key={cat.id}
                     onClick={() => { onClose(); onNavigate('catalog', { category: cat.id }); }}
-                    className="w-full px-4 py-2 text-left text-xs text-[#4A453A] hover:text-[#B38F26] flex items-center justify-between"
+                    className="w-full px-4 py-2 text-left text-xs text-[#40362F] hover:text-[#C6A66B] flex items-center justify-between cursor-pointer"
                   >
                     <span>{cat.name}</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-gray-300" />
+                    <ChevronRight className="w-3.5 h-3.5 text-[#EDE5D8]" />
                   </button>
                 ))}
               </div>
@@ -178,55 +178,55 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
 
           <button
             onClick={() => { onClose(); onNavigate('quote'); }}
-            className="w-full px-4 py-2.5 text-left text-xs font-bold text-[#967117] hover:bg-[#FDFBF7] flex items-center justify-between mt-1"
+            className="w-full px-4 py-2.5 text-left text-xs font-bold text-[#C6A66B] hover:bg-[#FAF8F3] flex items-center justify-between mt-1 cursor-pointer"
           >
             <span className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#C4A052]" />
+              <Sparkles className="w-4 h-4 text-[#C6A66B]" />
               <span>Request Wholesale Quotation (RFQ)</span>
             </span>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <ChevronRight className="w-4 h-4 text-[#8B8175]" />
           </button>
 
           <button
             onClick={() => { onClose(); onNavigate('wishlist'); }}
-            className="w-full px-4 py-2.5 text-left text-xs text-[#4A453A] hover:bg-[#FAF8F5] flex items-center justify-between"
+            className="w-full px-4 py-2.5 text-left text-xs text-[#40362F] hover:bg-[#FAF8F3] flex items-center justify-between cursor-pointer"
           >
             <span className="flex items-center gap-2">
-              <Heart className="w-4 h-4 text-gray-400" />
+              <Heart className="w-4 h-4 text-[#8B8175]" />
               <span>Saved Wishlist</span>
             </span>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <ChevronRight className="w-4 h-4 text-[#8B8175]" />
           </button>
 
           <button
             onClick={() => { onClose(); onNavigate('about'); }}
-            className="w-full px-4 py-2.5 text-left text-xs text-[#4A453A] hover:bg-[#FAF8F5] flex items-center justify-between"
+            className="w-full px-4 py-2.5 text-left text-xs text-[#40362F] hover:bg-[#FAF8F3] flex items-center justify-between cursor-pointer"
           >
             <span>Our Heritage &amp; Craft</span>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <ChevronRight className="w-4 h-4 text-[#8B8175]" />
           </button>
 
           <button
             onClick={() => { onClose(); onNavigate('contact'); }}
-            className="w-full px-4 py-2.5 text-left text-xs text-[#4A453A] hover:bg-[#FAF8F5] flex items-center justify-between"
+            className="w-full px-4 py-2.5 text-left text-xs text-[#40362F] hover:bg-[#FAF8F3] flex items-center justify-between cursor-pointer"
           >
             <span>Contact &amp; Support Desk</span>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <ChevronRight className="w-4 h-4 text-[#8B8175]" />
           </button>
         </div>
 
         {/* Footer Contact Info */}
-        <div className="p-4 bg-[#F5F2EB] border-t border-[#E8E2D3] text-[11px] text-[#635C4E] space-y-2">
-          <p className="flex items-center gap-1.5 font-medium">
-            <MapPin className="w-3.5 h-3.5 text-[#C4A052]" />
+        <div className="p-4 bg-[#FAF8F3] border-t border-[#EDE5D8] text-[11px] text-[#8B8175] space-y-2">
+          <p className="flex items-center gap-1.5 font-medium text-[#40362F]">
+            <MapPin className="w-3.5 h-3.5 text-[#C6A66B]" />
             <span>Central International Logistics Center</span>
           </p>
-          <p className="flex items-center gap-1.5 font-medium">
-            <Phone className="w-3.5 h-3.5 text-[#C4A052]" />
+          <p className="flex items-center gap-1.5 font-medium text-[#40362F]">
+            <Phone className="w-3.5 h-3.5 text-[#C6A66B]" />
             <span>+1 (800) 555-0199 &bull; support@beadssource.com</span>
           </p>
-          <p className="flex items-center gap-1.5 text-[10px] text-gray-500">
-            <ShieldCheck className="w-3.5 h-3.5 text-green-700" />
+          <p className="flex items-center gap-1.5 text-[10px] text-[#8B8175]">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#C6A66B]" />
             <span>100% Genuine Mineral Certification Guaranteed</span>
           </p>
         </div>

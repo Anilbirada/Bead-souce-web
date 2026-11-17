@@ -164,28 +164,28 @@ export default function PinterestDiscoverySection({ onNavigate, onSelectProduct,
     : pins.filter(p => p.tag === activeFilter || p.categorySlug?.toLowerCase().includes(activeFilter.toLowerCase()));
 
   return (
-    <section className="py-20 bg-[#FAF9F5] border-t border-[#E9E3D8] relative overflow-hidden">
+    <section className="py-20 bg-[#FAF8F3] border-t border-[#EDE5D8] relative overflow-hidden">
       {/* Decorative ambient background */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#C49A3A]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#191919]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#C6A66B]/8 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#EDE5D8]/50 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Editorial Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#DDD6C8] shadow-xs mb-4">
-            <Sparkles className="w-4 h-4 text-[#C49A3A]" />
-            <span className="text-[11px] font-bold tracking-widest text-[#191919] uppercase">
-              Pinterest &bull; Visual Inspiration Gallery
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#EDE5D8] shadow-xs mb-4">
+            <Sparkles className="w-4 h-4 text-[#C6A66B]" />
+            <span className="text-[11px] font-bold tracking-widest text-[#292723] uppercase">
+              Editorial Inspiration &bull; Visual Discovery Gallery
             </span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#191919] tracking-tight mb-4">
-            DISCOVER YOUR NEXT CREATION
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#292723] tracking-tight mb-4">
+            DISCOVER THE BEAUTY OF NATURAL GEMSTONES
           </h2>
 
-          <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-sans">
-            Explore curated design pairings, artisan moodboards, and direct factory wholesale components. 
+          <p className="text-sm sm:text-base text-[#8B8175] leading-relaxed font-sans">
+            Elevate your jewellery creations with curated design pairings, artisan moodboards, and direct factory wholesale components. 
             Click any pin to inspect verified specs, calculate bulk tiered volume, or request sample lots.
           </p>
 
@@ -195,10 +195,10 @@ export default function PinterestDiscoverySection({ onNavigate, onSelectProduct,
               <button
                 key={f.id}
                 onClick={() => setActiveFilter(f.id)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                   activeFilter === f.id
-                    ? 'bg-[#191919] text-white shadow-md'
-                    : 'bg-white text-gray-700 border border-[#E9E3D8] hover:border-[#191919] hover:text-[#191919]'
+                    ? 'bg-[#40362F] text-[#FAF8F3] shadow-md border border-[#52463D]'
+                    : 'bg-white text-[#8B8175] border border-[#EDE5D8] hover:border-[#C6A66B] hover:text-[#292723]'
                 }`}
               >
                 {f.label}
@@ -283,10 +283,10 @@ export default function PinterestDiscoverySection({ onNavigate, onSelectProduct,
                         e.stopPropagation();
                         handlePinAction(pin);
                       }}
-                      className="flex-1 py-2 px-3 bg-[#191919] hover:bg-[#C49A3A] text-white text-xs font-bold rounded-xl shadow-lg flex items-center justify-center gap-1.5 transition-colors"
+                      className="flex-1 py-2 px-3 bg-[#40362F] hover:bg-[#C6A66B] text-white text-xs font-bold rounded-xl shadow-lg flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <span>{pin.ctaText || 'View Details'}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#C6A66B] group-hover:text-white" />
                     </button>
                   </div>
                 </div>
@@ -295,30 +295,30 @@ export default function PinterestDiscoverySection({ onNavigate, onSelectProduct,
                 <div className="p-5 flex flex-col justify-between flex-1 bg-white">
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <span className="text-[10px] font-bold text-[#C49A3A] tracking-wider uppercase font-mono">
+                      <span className="text-[10px] font-bold text-[#C6A66B] tracking-wider uppercase font-mono">
                         {pin.tag || 'Design Idea'}
                       </span>
-                      <span className="text-[10px] text-gray-600 flex items-center gap-1">
-                        <Pin className="w-2.5 h-2.5 text-[#C49A3A]" />
+                      <span className="text-[10px] text-[#8B8175] flex items-center gap-1">
+                        <Pin className="w-2.5 h-2.5 text-[#C6A66B]" />
                         <span>Idea Board</span>
                       </span>
                     </div>
 
-                    <h3 className="font-serif font-bold text-base text-[#191919] group-hover:text-[#C49A3A] transition-colors leading-snug line-clamp-1 mb-1.5">
+                    <h3 className="font-serif font-bold text-base text-[#292723] group-hover:text-[#C6A66B] transition-colors leading-snug line-clamp-1 mb-1.5">
                       {pin.title}
                     </h3>
 
-                    <p className="text-xs text-gray-700 leading-relaxed line-clamp-2">
+                    <p className="text-xs text-[#8B8175] leading-relaxed line-clamp-2">
                       {pin.subtitle}
                     </p>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-[#F0EBE1] flex items-center justify-between text-xs font-semibold text-gray-500">
-                    <span className="group-hover:text-[#191919] transition-colors flex items-center gap-1">
+                  <div className="pt-4 mt-4 border-t border-[#EDE5D8] flex items-center justify-between text-xs font-semibold text-[#8B8175]">
+                    <span className="group-hover:text-[#C6A66B] transition-colors flex items-center gap-1">
                       <span>Explore Component</span>
                       <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </span>
-                    <span className="text-[10px] text-gray-600 bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#E9E3D8]">
+                    <span className="text-[10px] text-[#40362F] bg-[#FAF8F3] px-2 py-0.5 rounded border border-[#EDE5D8]">
                       B2B Direct
                     </span>
                   </div>
@@ -329,32 +329,32 @@ export default function PinterestDiscoverySection({ onNavigate, onSelectProduct,
         </div>
 
         {/* Bottom Call to Action Banner */}
-        <div className="mt-16 bg-[#191919] text-white rounded-3xl p-8 sm:p-10 border border-[#2C2C2C] shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-16 bg-[#40362F] text-[#FAF8F3] rounded-3xl p-8 sm:p-12 border border-[#52463D] shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
-            <span className="text-[10px] font-bold text-[#C49A3A] uppercase tracking-widest">
+            <span className="text-[10px] font-bold text-[#C6A66B] uppercase tracking-widest">
               Custom Jewelry Production &amp; Material Sourcing
             </span>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
               Looking for a custom gemstone cut or proprietary metal finding?
             </h3>
-            <p className="text-xs sm:text-sm text-gray-300 max-w-xl">
-              Submit your CAD drawings, reference images, or Pinterest moodboards directly to our factory sourcing engineers for wholesale sample production.
+            <p className="text-xs sm:text-sm text-[#EDE5D8] max-w-xl">
+              Submit your CAD drawings, reference images, or design moodboards directly to our factory sourcing engineers for wholesale sample production.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => onNavigate && onNavigate('quote')}
-              className="px-6 py-3 bg-[#C49A3A] hover:bg-[#b0872e] text-[#191919] font-bold text-xs rounded-xl shadow-lg transition-transform hover:scale-105 flex items-center gap-2"
+              className="px-6 py-3.5 bg-[#C6A66B] hover:bg-[#B89354] text-white font-bold text-xs rounded-xl shadow-lg transition-transform hover:scale-105 flex items-center gap-2 cursor-pointer"
             >
               <FileText className="w-4 h-4" />
-              <span>Submit RFQ Moodboard</span>
+              <span>Submit Custom RFQ</span>
             </button>
             <button
               onClick={() => onNavigate && onNavigate('catalog')}
-              className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl border border-white/20 transition-colors"
+              className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-[#FAF8F3] font-bold text-xs rounded-xl border border-white/20 transition-colors cursor-pointer"
             >
-              Browse Full Catalog
+              Browse Full Catalogue
             </button>
           </div>
         </div>

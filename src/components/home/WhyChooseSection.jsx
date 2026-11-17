@@ -7,75 +7,72 @@ import {
   Scale, 
   CheckCircle2, 
   FileText,
-  BadgeCheck
+  BadgeCheck,
+  Headphones,
+  Award
 } from 'lucide-react';
 
 export default function WhyChooseSection({ onNavigate }) {
   const reasons = [
     {
-      icon: <Building2 className="w-6 h-6 text-[#D4AF37]" />,
-      title: "Direct Factory Pricing",
-      desc: "Eliminate trading middlemen. Our direct manufacturing relationships give you true wholesale container pricing with transparent volume tier discounts."
+      icon: <Award className="w-6 h-6 text-[#C6A66B]" />,
+      title: "Premium Product Selection",
+      desc: "Curated collection of imperial-grade natural gemstone strands, calibrated African turquoise, lustrous freshwater pearls, and AAA micro-pavé elements selected specifically for professional jewelers."
     },
     {
-      icon: <ShieldCheck className="w-6 h-6 text-[#D4AF37]" />,
-      title: "100% Certified Lead-Free Pewter",
-      desc: "All metal charms and spacers comply strictly with California Prop 65, US CPSIA, and EU REACH standards for jewelry safety."
+      icon: <Building2 className="w-6 h-6 text-[#C6A66B]" />,
+      title: "Wholesale Purchasing & Factory Pricing",
+      desc: "Direct-from-manufacturer wholesale pricing eliminating distributor markups. Transparent volume tiers reward studio growth with discounts reaching up to 30% on master lot purchases."
     },
     {
-      icon: <Scale className="w-6 h-6 text-[#D4AF37]" />,
-      title: "Genuine Natural Minerals",
-      desc: "We verify every mineral strand. Natural turquoise, amethyst, rose quartz, lapis, and jasper hand-inspected for color, matrix, and calibrated drill sizes."
+      icon: <ShieldCheck className="w-6 h-6 text-[#C6A66B]" />,
+      title: "Quality-Focused Collections & Compliance",
+      desc: "100% certified lead-free (<90ppm) and cadmium-free pewter findings compliant with EU REACH and US CPSIA regulations, with mineral strands verified for drill gauge precision and color authenticity."
     },
     {
-      icon: <Truck className="w-6 h-6 text-[#D4AF37]" />,
-      title: "3-5 Day Worldwide Express Dispatch",
-      desc: "Shipments dispatched via DHL Express and FedEx International with live door-to-door tracking. Complimentary shipping on orders above $500."
+      icon: <FileText className="w-6 h-6 text-[#C6A66B]" />,
+      title: "Bulk Order & Bespoke RFQ Support",
+      desc: "Dedicated Request for Quotation desk for custom casting, proprietary plating, master packs, and high-volume production orders with tailored payment and shipping terms."
     },
     {
-      icon: <FileText className="w-6 h-6 text-[#C49A3A]" />,
-      title: "Custom OEM Casting & RFQ Desk",
-      desc: "Have a custom design or need 10,000+ units? Submit your specifications directly to our engineering desk for custom casting, plating, and bespoke volume pricing."
-    },
-    {
-      icon: <BadgeCheck className="w-6 h-6 text-[#C49A3A]" />,
-      title: "International Manufacturing Heritage",
-      desc: "Backed by decades of fine lapidary craftsmanship and precision component manufacturing, offering verified wholesale assurance and seamless international logistics."
+      icon: <Headphones className="w-6 h-6 text-[#C6A66B]" />,
+      title: "Dedicated Customer Assistance & Concierge",
+      desc: "White-glove trade support with experienced jewelry supply specialists to assist with custom specifications, sample verification, and rapid door-to-door express delivery across 40+ countries."
     }
   ];
 
   return (
-    <section className="py-20 bg-white border-b border-[#ECE7DC]">
+    <section className="py-20 bg-white border-b border-[#EDE5D8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-1.5 text-xs uppercase font-bold tracking-widest text-[#967117]">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>The BeadsSource Difference</span>
+          <div className="inline-flex items-center gap-1.5 text-xs uppercase font-bold tracking-widest text-[#8B8175]">
+            <Sparkles className="w-3.5 h-3.5 text-[#C6A66B]" />
+            <span>The BeadsSource Standard</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1A1A] tracking-tight">
-            Why Wholesale Buyers Trust BeadsSource
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#292723] tracking-tight">
+            Why Wholesale Jewelers Choose BeadsSource
           </h2>
-          <p className="text-xs sm:text-sm text-[#6E6759]">
-            Partnering with over 5,000 professional jewelry designers, boutique chains, and independent studios in 40+ countries.
+          <p className="text-xs sm:text-sm text-[#8B8175]">
+            Partnering with over 5,000 independent jewelry studios, design ateliers, and luxury retail boutiques worldwide.
           </p>
         </div>
 
-        {/* 6 Grid Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 5 Grid Cards (Spacious layout) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {reasons.map((item, idx) => (
             <div
               key={idx}
-              className="p-7 rounded-2xl bg-[#FAF8F5] border border-[#EAE4D5] hover:border-[#D4AF37] transition-all duration-300 hover:shadow-lg space-y-3.5"
+              className="p-8 rounded-2xl bg-[#FAF8F3] border border-[#EDE5D8] hover:border-[#C6A66B] transition-all duration-300 hover:shadow-xl space-y-4 group"
             >
-              <div className="w-12 h-12 rounded-xl bg-white border border-[#EAE4D5] flex items-center justify-center shadow-xs">
+              <div className="w-12 h-12 rounded-xl bg-white border border-[#EDE5D8] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
                 {item.icon}
               </div>
-              <h3 className="font-serif font-bold text-lg text-[#1A1A1A]">
+              <h3 className="font-serif font-bold text-lg text-[#292723] group-hover:text-[#C6A66B] transition-colors">
                 {item.title}
               </h3>
-              <p className="text-xs text-[#6B6557] leading-relaxed">
+              <p className="text-xs text-[#8B8175] leading-relaxed">
                 {item.desc}
               </p>
             </div>

@@ -119,41 +119,41 @@ export default function ProductDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] pb-24">
+    <div className="min-h-screen bg-[#FAF8F3] pb-24">
       
       {/* Breadcrumbs & Navigation Bar */}
-      <div className="bg-white border-b border-[#EAE4D5] py-3.5 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs text-[#7A7366]">
+      <div className="bg-white border-b border-[#EDE5D8] py-3.5 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs text-[#8B8175]">
           <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap py-1">
             <button 
               onClick={() => onNavigate('home')} 
-              className="hover:text-black transition-colors"
+              className="hover:text-[#C6A66B] transition-colors"
             >
               Home
             </button>
             <span>/</span>
             <button 
               onClick={() => onNavigate('catalog', { category: 'all' })} 
-              className="hover:text-black transition-colors"
+              className="hover:text-[#C6A66B] transition-colors"
             >
               Wholesale Catalogue
             </button>
             <span>/</span>
             <button 
               onClick={() => onNavigate('catalog', { category: product.category })} 
-              className="hover:text-black transition-colors uppercase tracking-wider text-[11px]"
+              className="hover:text-[#C6A66B] transition-colors uppercase tracking-wider text-[11px]"
             >
               {product.category?.replace(/-/g, ' ')}
             </button>
             <span>/</span>
-            <span className="font-semibold text-[#1A1A1A] truncate max-w-[200px] sm:max-w-none">
+            <span className="font-semibold text-[#292723] truncate max-w-[200px] sm:max-w-none">
               {product.name}
             </span>
           </div>
 
           <button
             onClick={() => onNavigate('catalog', { category: product.category })}
-            className="hidden sm:flex items-center gap-1.5 text-[#8C6D2B] hover:text-[#5E481B] font-semibold transition-colors"
+            className="hidden sm:flex items-center gap-1.5 text-[#C6A66B] hover:text-[#B89354] font-semibold transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Category</span>
@@ -169,7 +169,7 @@ export default function ProductDetailPage({
           <div className="lg:col-span-6 space-y-4">
             
             {/* Main Stage Image with Zoom Button */}
-            <div className="relative aspect-square rounded-3xl overflow-hidden bg-white border border-[#EAE4D5] shadow-sm group">
+            <div className="relative aspect-square rounded-3xl overflow-hidden bg-white border border-[#EDE5D8] shadow-sm group">
               <img
                 src={selectedImage}
                 alt={product.name}
@@ -180,22 +180,22 @@ export default function ProductDetailPage({
               {/* Zoom Trigger Button */}
               <button
                 onClick={() => setZoomModalOpen(true)}
-                className="absolute bottom-4 right-4 bg-white/90 hover:bg-white text-gray-700 p-2.5 rounded-full shadow-lg border border-gray-200 transition-colors flex items-center gap-1 text-xs font-semibold"
+                className="absolute bottom-4 right-4 bg-white/95 hover:bg-white text-[#40362F] p-2.5 rounded-full shadow-lg border border-[#EDE5D8] transition-colors flex items-center gap-1 text-xs font-semibold cursor-pointer"
                 title="Open Zoom Lightbox"
               >
-                <ZoomIn className="w-4 h-4 text-[#8C6D2B]" />
+                <ZoomIn className="w-4 h-4 text-[#C6A66B]" />
                 <span className="hidden sm:inline">Zoom</span>
               </button>
 
               {/* Badges */}
               <div className="absolute top-4 left-4 flex flex-col gap-1.5">
                 {product.isBestSeller && (
-                  <span className="bg-[#1C1A17] text-[#E6C687] text-[10px] font-bold px-2.5 py-1 rounded shadow-sm uppercase tracking-wider">
+                  <span className="bg-[#40362F] text-[#C6A66B] text-[10px] font-bold px-2.5 py-1 rounded shadow-sm uppercase tracking-wider border border-[#52463D]">
                     Best Seller
                   </span>
                 )}
                 {product.isNewArrival && (
-                  <span className="bg-[#B38F26] text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm uppercase tracking-wider">
+                  <span className="bg-[#C6A66B] text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm uppercase tracking-wider">
                     New Arrival
                   </span>
                 )}
@@ -210,7 +210,7 @@ export default function ProductDetailPage({
                     key={idx}
                     onClick={() => setSelectedImage(img)}
                     className={`w-20 h-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 bg-white ${
-                      selectedImage === img ? 'border-[#C4A052] scale-105 shadow-md' : 'border-[#EAE4D5] opacity-75 hover:opacity-100'
+                      selectedImage === img ? 'border-[#C6A66B] scale-105 shadow-md' : 'border-[#EDE5D8] opacity-75 hover:opacity-100'
                     }`}
                   >
                     <img src={img} alt={`Angle ${idx + 1}`} className="w-full h-full object-cover" />
@@ -220,19 +220,19 @@ export default function ProductDetailPage({
             )}
 
             {/* Quality Seals */}
-            <div className="grid grid-cols-2 gap-3 pt-2 text-xs text-[#524B3E]">
-              <div className="p-3 bg-white rounded-xl border border-[#EAE4D5] flex items-center gap-2.5">
-                <ShieldCheck className="w-5 h-5 text-green-700 shrink-0" />
+            <div className="grid grid-cols-2 gap-3 pt-2 text-xs text-[#8B8175]">
+              <div className="p-3 bg-white rounded-xl border border-[#EDE5D8] flex items-center gap-2.5 shadow-2xs">
+                <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0" />
                 <div>
-                  <p className="font-semibold text-[#1A1A1A]">100% Lead-Free Pewter</p>
-                  <p className="text-[10px] text-gray-500">CPSIA &amp; REACH Compliant</p>
+                  <p className="font-semibold text-[#292723]">100% Lead-Free Pewter</p>
+                  <p className="text-[10px] text-[#8B8175]">CPSIA &amp; REACH Compliant</p>
                 </div>
               </div>
-              <div className="p-3 bg-white rounded-xl border border-[#EAE4D5] flex items-center gap-2.5">
-                <Scale className="w-5 h-5 text-[#C4A052] shrink-0" />
+              <div className="p-3 bg-white rounded-xl border border-[#EDE5D8] flex items-center gap-2.5 shadow-2xs">
+                <Scale className="w-5 h-5 text-[#C6A66B] shrink-0" />
                 <div>
-                  <p className="font-semibold text-[#1A1A1A]">Authentic Mineral</p>
-                  <p className="text-[10px] text-gray-500">Calibrated Sizing &bull; Lab Verified</p>
+                  <p className="font-semibold text-[#292723]">Authentic Minerals</p>
+                  <p className="text-[10px] text-[#8B8175]">Calibrated Sizing &bull; Lab Verified</p>
                 </div>
               </div>
             </div>
@@ -246,11 +246,11 @@ export default function ProductDetailPage({
             <div>
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono bg-[#EAE5D8] text-[#554F42] text-xs px-2.5 py-0.5 rounded font-bold">
+                  <span className="font-mono bg-[#EDE5D8] text-[#40362F] text-xs px-2.5 py-0.5 rounded font-bold">
                     SKU: {product.sku}
                   </span>
-                  <span className="text-xs text-green-700 font-semibold flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-xs text-emerald-800 font-semibold flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     <span>In Stock ({product.stock} units)</span>
                   </span>
                 </div>
@@ -258,15 +258,15 @@ export default function ProductDetailPage({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleShare}
-                    className="p-2 rounded-full hover:bg-white text-gray-500 hover:text-black border border-transparent hover:border-[#DDD6C8] transition-colors"
+                    className="p-2 rounded-full hover:bg-white text-[#8B8175] hover:text-[#292723] border border-transparent hover:border-[#EDE5D8] transition-colors cursor-pointer"
                     title="Share product link"
                   >
-                    {copiedLink ? <Check className="w-4 h-4 text-green-600" /> : <Share2 className="w-4 h-4" />}
+                    {copiedLink ? <Check className="w-4 h-4 text-emerald-600" /> : <Share2 className="w-4 h-4" />}
                   </button>
                   <button
                     onClick={() => toggleWishlist(product)}
-                    className={`p-2 rounded-full border transition-colors ${
-                      isSaved ? 'bg-red-50 text-red-600 border-red-200' : 'bg-white text-gray-500 border-[#DDD6C8] hover:text-red-600'
+                    className={`p-2 rounded-full border transition-colors cursor-pointer ${
+                      isSaved ? 'bg-red-50 text-red-600 border-red-200' : 'bg-white text-[#8B8175] border-[#EDE5D8] hover:text-red-600'
                     }`}
                     title={isSaved ? "Remove from Saved" : "Save to Wishlist"}
                   >
@@ -275,11 +275,11 @@ export default function ProductDetailPage({
                 </div>
               </div>
 
-              <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A1A] mt-2.5 leading-snug">
+              <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#292723] mt-2.5 leading-snug">
                 {product.name}
               </h1>
 
-              <p className="text-xs sm:text-sm text-[#61594B] mt-3 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#8B8175] mt-3 leading-relaxed">
                 {product.description}
               </p>
             </div>
@@ -432,27 +432,27 @@ export default function ProductDetailPage({
             <div className="space-y-3 pt-4">
               <button
                 onClick={handleAddToCart}
-                className="w-full py-4 bg-[#1C1A17] hover:bg-[#332E26] text-white text-sm font-bold rounded-2xl transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-4 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-sm font-bold rounded-2xl transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer border border-[#52463D] group"
               >
-                <ShoppingBag className="w-5 h-5 text-[#D4AF37]" />
+                <ShoppingBag className="w-5 h-5 text-[#C6A66B] group-hover:scale-105 transition-transform" />
                 <span>Add {quantity} Packs to Order &bull; {formatPrice((quantity >= 50 ? tier3Price : (quantity >= 10 ? tier2Price : tier1Price)) * quantity)}</span>
               </button>
 
               <button
                 onClick={() => setQuoteModalOpen(true)}
-                className="w-full py-3.5 bg-white hover:bg-[#FAF7F0] text-[#8C6D2B] border border-[#D5C6A3] text-xs font-bold rounded-2xl transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                className="w-full py-3.5 bg-white hover:bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8] hover:border-[#C6A66B] text-xs font-bold rounded-2xl transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs group"
               >
-                <FileText className="w-4 h-4 text-[#AA771C]" />
+                <FileText className="w-4 h-4 text-[#C6A66B]" />
                 <span>Request a Custom Bulk Quote (RFQ)</span>
               </button>
             </div>
 
             {/* Express Dispatch Note */}
-            <div className="p-4 bg-[#FAF7F0] border border-[#EBE4D5] rounded-2xl flex items-center gap-3 text-xs text-[#635B4E]">
-              <Truck className="w-5 h-5 text-[#C4A052] shrink-0" />
+            <div className="p-4 bg-[#FAF8F3] border border-[#EDE5D8] rounded-2xl flex items-center gap-3 text-xs text-[#8B8175]">
+              <Truck className="w-5 h-5 text-[#C6A66B] shrink-0" />
               <div>
-                <p className="font-semibold text-[#1A1A1A]">Worldwide Courier Dispatch in 24-48 Hours</p>
-                <p className="text-[11px] text-gray-500">DHL Express / FedEx tracking provided. Free shipping over $500.</p>
+                <p className="font-semibold text-[#292723]">Worldwide Courier Dispatch in 24-48 Hours</p>
+                <p className="text-[11px] text-[#8B8175]">DHL Express / FedEx tracking provided. Complimentary shipping over $500.</p>
               </div>
             </div>
 
@@ -461,36 +461,36 @@ export default function ProductDetailPage({
         </div>
 
         {/* Tabbed Specifications & Shipping Section */}
-        <div className="mt-16 bg-white rounded-3xl border border-[#EAE4D5] shadow-xs overflow-hidden">
+        <div className="mt-16 bg-white rounded-3xl border border-[#EDE5D8] shadow-xs overflow-hidden">
           
           {/* Tab Navigation */}
-          <div className="flex border-b border-[#EAE4D5] bg-[#FAF8F5] text-xs sm:text-sm font-semibold">
+          <div className="flex border-b border-[#EDE5D8] bg-[#FAF8F3] text-xs sm:text-sm font-semibold">
             <button
               onClick={() => setActiveTab('specs')}
-              className={`px-6 py-4 transition-colors ${
+              className={`px-6 py-4 transition-colors cursor-pointer ${
                 activeTab === 'specs' 
-                  ? 'bg-white text-[#8C6D2B] border-b-2 border-[#8C6D2B] font-bold' 
-                  : 'text-gray-500 hover:text-black'
+                  ? 'bg-white text-[#C6A66B] border-b-2 border-[#C6A66B] font-bold' 
+                  : 'text-[#8B8175] hover:text-[#292723]'
               }`}
             >
               Product Specifications &bull; Technical Details
             </button>
             <button
               onClick={() => setActiveTab('shipping')}
-              className={`px-6 py-4 transition-colors ${
+              className={`px-6 py-4 transition-colors cursor-pointer ${
                 activeTab === 'shipping' 
-                  ? 'bg-white text-[#8C6D2B] border-b-2 border-[#8C6D2B] font-bold' 
-                  : 'text-gray-500 hover:text-black'
+                  ? 'bg-white text-[#C6A66B] border-b-2 border-[#C6A66B] font-bold' 
+                  : 'text-[#8B8175] hover:text-[#292723]'
               }`}
             >
               Wholesale Shipping &amp; Packaging
             </button>
             <button
               onClick={() => setActiveTab('care')}
-              className={`px-6 py-4 transition-colors ${
+              className={`px-6 py-4 transition-colors cursor-pointer ${
                 activeTab === 'care' 
-                  ? 'bg-white text-[#8C6D2B] border-b-2 border-[#8C6D2B] font-bold' 
-                  : 'text-gray-500 hover:text-black'
+                  ? 'bg-white text-[#C6A66B] border-b-2 border-[#C6A66B] font-bold' 
+                  : 'text-[#8B8175] hover:text-[#292723]'
               }`}
             >
               Material Compliance &amp; Care
@@ -500,39 +500,39 @@ export default function ProductDetailPage({
           {/* Tab 1: Product Specifications */}
           {activeTab === 'specs' && (
             <div className="p-8">
-              <h3 className="font-serif font-bold text-lg text-[#1A1A1A] mb-4">
+              <h3 className="font-serif font-bold text-lg text-[#292723] mb-4">
                 Detailed Product Specifications
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#EAE4D5]">
-                  <span className="text-gray-500 block text-[10px] uppercase font-bold">Base Material</span>
-                  <span className="font-semibold text-[#1A1A1A] text-sm mt-0.5 block">{product.materials || 'Hypoallergenic Jewelry Metal / Natural Stone'}</span>
+                <div className="p-3.5 bg-[#FAF8F3] rounded-xl border border-[#EDE5D8]">
+                  <span className="text-[#8B8175] block text-[10px] uppercase font-bold tracking-wider">Base Material</span>
+                  <span className="font-semibold text-[#292723] text-sm mt-0.5 block">{product.materials || 'Hypoallergenic Jewelry Metal / Natural Stone'}</span>
                 </div>
-                <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#EAE4D5]">
-                  <span className="text-gray-500 block text-[10px] uppercase font-bold">Hole Drill Size</span>
-                  <span className="font-semibold text-[#1A1A1A] text-sm mt-0.5 block">{product.holeSize || 'Standard 1.0mm - 1.5mm'}</span>
+                <div className="p-3.5 bg-[#FAF8F3] rounded-xl border border-[#EDE5D8]">
+                  <span className="text-[#8B8175] block text-[10px] uppercase font-bold tracking-wider">Hole Drill Size</span>
+                  <span className="font-semibold text-[#292723] text-sm mt-0.5 block">{product.holeSize || 'Standard 1.0mm - 1.5mm'}</span>
                 </div>
-                <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#EAE4D5]">
-                  <span className="text-gray-500 block text-[10px] uppercase font-bold">Available Finishes</span>
-                  <span className="font-semibold text-[#1A1A1A] text-sm mt-0.5 block">{product.finish ? product.finish.join(', ') : 'Antique Gold, Antique Silver'}</span>
+                <div className="p-3.5 bg-[#FAF8F3] rounded-xl border border-[#EDE5D8]">
+                  <span className="text-[#8B8175] block text-[10px] uppercase font-bold tracking-wider">Available Finishes</span>
+                  <span className="font-semibold text-[#292723] text-sm mt-0.5 block">{product.finish ? product.finish.join(', ') : 'Antique Gold, Antique Silver'}</span>
                 </div>
-                <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#EAE4D5]">
-                  <span className="text-gray-500 block text-[10px] uppercase font-bold">Minimum Wholesale Order (MOQ)</span>
-                  <span className="font-semibold text-[#1A1A1A] text-sm mt-0.5 block">{product.moq || 1} Pack(s)</span>
+                <div className="p-3.5 bg-[#FAF8F3] rounded-xl border border-[#EDE5D8]">
+                  <span className="text-[#8B8175] block text-[10px] uppercase font-bold tracking-wider">Minimum Wholesale Order (MOQ)</span>
+                  <span className="font-semibold text-[#292723] text-sm mt-0.5 block">{product.moq || 1} Pack(s)</span>
                 </div>
               </div>
 
               {/* Dynamic specs if available */}
               {product.specs && (
-                <div className="mt-6 pt-6 border-t border-[#F0EBE1]">
-                  <h4 className="text-xs uppercase font-bold text-gray-500 tracking-wider mb-3">
+                <div className="mt-6 pt-6 border-t border-[#EDE5D8]">
+                  <h4 className="text-xs uppercase font-bold text-[#8B8175] tracking-wider mb-3">
                     Factory Technical Specs
                   </h4>
                   <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-xs">
                     {Object.entries(product.specs).map(([key, val]) => (
                       <div key={key} className="flex justify-between py-1.5 border-b border-[#F5F2EB]">
-                        <dt className="text-gray-500">{key}:</dt>
-                        <dd className="font-semibold text-[#1A1A1A]">{val}</dd>
+                        <dt className="text-[#8B8175]">{key}:</dt>
+                        <dd className="font-semibold text-[#292723]">{val}</dd>
                       </div>
                     ))}
                   </dl>
@@ -543,40 +543,40 @@ export default function ProductDetailPage({
 
           {/* Tab 2: Wholesale Shipping & Packaging */}
           {activeTab === 'shipping' && (
-            <div className="p-8 space-y-4 text-xs text-[#524B3E] leading-relaxed">
-              <h3 className="font-serif font-bold text-lg text-[#1A1A1A]">
+            <div className="p-8 space-y-4 text-xs text-[#8B8175] leading-relaxed">
+              <h3 className="font-serif font-bold text-lg text-[#292723]">
                 Wholesale Shipping, Packaging &amp; Customs
               </h3>
-              <p>
+              <p className="text-[#40362F]">
                 All orders are inspected and packed with shock-resistant export bubble wraps and sealed polyethylene bags to guarantee intact delivery of delicate gemstone beads and pave crystals.
               </p>
-              <ul className="space-y-2 pl-4 list-disc">
-                <li><strong>Dispatch Hub:</strong> Central International Logistics Center.</li>
-                <li><strong>International Couriers:</strong> DHL Express Worldwide, FedEx International Priority, and UPS Air Freight.</li>
-                <li><strong>Transit Times:</strong> 3-5 business days to North America, Europe, Australia, and Middle East.</li>
-                <li><strong>Regional Deliveries:</strong> Express air couriers and warehouse distribution pickup.</li>
-                <li><strong>Free Shipping:</strong> Automatically activated on all wholesale purchases over $500 USD.</li>
+              <ul className="space-y-2 pl-4 list-disc text-[#40362F]">
+                <li><strong className="text-[#292723]">Dispatch Hub:</strong> Central International Logistics Center.</li>
+                <li><strong className="text-[#292723]">International Couriers:</strong> DHL Express Worldwide, FedEx International Priority, and UPS Air Freight.</li>
+                <li><strong className="text-[#292723]">Transit Times:</strong> 3-5 business days to North America, Europe, Australia, and Middle East.</li>
+                <li><strong className="text-[#292723]">Regional Deliveries:</strong> Express air couriers and warehouse distribution pickup.</li>
+                <li><strong className="text-[#292723]">Free Shipping:</strong> Automatically activated on all wholesale purchases over $500 USD.</li>
               </ul>
             </div>
           )}
 
           {/* Tab 3: Care & Compliance */}
           {activeTab === 'care' && (
-            <div className="p-8 space-y-4 text-xs text-[#524B3E] leading-relaxed">
-              <h3 className="font-serif font-bold text-lg text-[#1A1A1A]">
+            <div className="p-8 space-y-4 text-xs text-[#8B8175] leading-relaxed">
+              <h3 className="font-serif font-bold text-lg text-[#292723]">
                 Safety Testing &amp; Component Care
               </h3>
-              <p>
+              <p className="text-[#40362F]">
                 Our pewter charms, spacers, and findings are 100% certified lead-free and cadmium-free, meeting the stringent standards of the US Consumer Product Safety Improvement Act (CPSIA) and California Proposition 65.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="p-4 bg-[#FAF8F5] rounded-xl border border-[#EAE4D5]">
-                  <h4 className="font-bold text-[#1A1A1A] mb-1">Cubic Zirconia &amp; Plating Care</h4>
-                  <p className="text-[11px] text-gray-600">Store in dry containers. Avoid direct contact with harsh perfumes, chlorine, and chemical cleaners to preserve high-luster electroplating.</p>
+                <div className="p-4 bg-[#FAF8F3] rounded-xl border border-[#EDE5D8]">
+                  <h4 className="font-bold text-[#292723] mb-1">Cubic Zirconia &amp; Plating Care</h4>
+                  <p className="text-[11px] text-[#8B8175]">Store in dry containers. Avoid direct contact with harsh perfumes, chlorine, and chemical cleaners to preserve high-luster electroplating.</p>
                 </div>
-                <div className="p-4 bg-[#FAF8F5] rounded-xl border border-[#EAE4D5]">
-                  <h4 className="font-bold text-[#1A1A1A] mb-1">Natural Gemstone Preservation</h4>
-                  <p className="text-[11px] text-gray-600">Clean natural stones gently with a soft microfiber cloth. Do not use ultrasonic baths on porous minerals like turquoise or howlite.</p>
+                <div className="p-4 bg-[#FAF8F3] rounded-xl border border-[#EDE5D8]">
+                  <h4 className="font-bold text-[#292723] mb-1">Natural Gemstone Preservation</h4>
+                  <p className="text-[11px] text-[#8B8175]">Clean natural stones gently with a soft microfiber cloth. Do not use ultrasonic baths on porous minerals like turquoise or howlite.</p>
                 </div>
               </div>
             </div>
@@ -588,14 +588,14 @@ export default function ProductDetailPage({
         {/* FREQUENTLY BOUGHT TOGETHER / BUNDLE PAIRING */}
         {/* ========================================================= */}
         {bundleProduct && (
-          <div className="mt-16 bg-white rounded-3xl p-6 sm:p-8 border border-[#EAE4D5] shadow-xs">
+          <div className="mt-16 bg-white rounded-3xl p-6 sm:p-8 border border-[#EDE5D8] shadow-xs">
             <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="w-4 h-4 text-[#C49A3A]" />
-              <span className="text-[11px] uppercase font-bold text-[#C49A3A] tracking-wider">
+              <Sparkles className="w-4 h-4 text-[#C6A66B]" />
+              <span className="text-[11px] uppercase font-bold text-[#C6A66B] tracking-wider">
                 Wholesale Perfect Pairings
               </span>
             </div>
-            <h3 className="font-serif text-2xl font-bold text-[#191919] mb-6">
+            <h3 className="font-serif text-2xl font-bold text-[#292723] mb-6">
               Frequently Bought Together
             </h3>
 
@@ -603,31 +603,31 @@ export default function ProductDetailPage({
               {/* Visual bundle items */}
               <div className="flex flex-wrap items-center gap-4 sm:gap-6">
                 {/* Current Item */}
-                <div className="flex items-center gap-3 p-3 bg-[#FAF8F5] rounded-2xl border border-[#EAE4D5]">
+                <div className="flex items-center gap-3 p-3 bg-[#FAF8F3] rounded-2xl border border-[#EDE5D8]">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover"
                   />
                   <div>
-                    <span className="text-[10px] font-bold uppercase text-gray-500 font-mono">This Item</span>
-                    <h4 className="font-serif font-bold text-xs sm:text-sm text-[#191919] max-w-[180px] line-clamp-1">
+                    <span className="text-[10px] font-bold uppercase text-[#8B8175] font-mono">This Item</span>
+                    <h4 className="font-serif font-bold text-xs sm:text-sm text-[#292723] max-w-[180px] line-clamp-1">
                       {product.name}
                     </h4>
-                    <p className="text-xs font-bold text-[#C49A3A] mt-0.5">
-                      {formatPrice(basePrice)} <span className="text-[10px] text-gray-500 font-normal">/ pk (MOQ: {product.moq || 5})</span>
+                    <p className="text-xs font-bold text-[#C6A66B] mt-0.5">
+                      {formatPrice(basePrice)} <span className="text-[10px] text-[#8B8175] font-normal">/ pk (MOQ: {product.moq || 5})</span>
                     </p>
                   </div>
                 </div>
 
-                <div className="w-8 h-8 rounded-full bg-[#FAF8F5] border border-[#DDD6C8] flex items-center justify-center font-bold text-gray-600">
+                <div className="w-8 h-8 rounded-full bg-[#FAF8F3] border border-[#EDE5D8] flex items-center justify-center font-bold text-[#8B8175]">
                   +
                 </div>
 
                 {/* Paired Cross-Sell Item */}
                 <div 
                   onClick={() => onSelectProduct && onSelectProduct(bundleProduct.id)}
-                  className="flex items-center gap-3 p-3 bg-[#FAF8F5] rounded-2xl border border-[#EAE4D5] hover:border-[#C49A3A] cursor-pointer transition-colors"
+                  className="flex items-center gap-3 p-3 bg-[#FAF8F3] rounded-2xl border border-[#EDE5D8] hover:border-[#C6A66B] cursor-pointer transition-colors"
                 >
                   <img
                     src={bundleProduct.image}
@@ -635,26 +635,26 @@ export default function ProductDetailPage({
                     className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover"
                   />
                   <div>
-                    <span className="text-[10px] font-bold uppercase text-[#C49A3A] font-mono">Recommended Pairing</span>
-                    <h4 className="font-serif font-bold text-xs sm:text-sm text-[#191919] max-w-[180px] line-clamp-1">
+                    <span className="text-[10px] font-bold uppercase text-[#C6A66B] font-mono">Recommended Pairing</span>
+                    <h4 className="font-serif font-bold text-xs sm:text-sm text-[#292723] max-w-[180px] line-clamp-1">
                       {bundleProduct.name}
                     </h4>
-                    <p className="text-xs font-bold text-[#C49A3A] mt-0.5">
+                    <p className="text-xs font-bold text-[#C6A66B] mt-0.5">
                       {formatPrice(bundleProduct.salePrice || bundleProduct.price)}{' '}
-                      <span className="text-[10px] text-gray-500 font-normal">/ pk (MOQ: {bundleProduct.moq || 5})</span>
+                      <span className="text-[10px] text-[#8B8175] font-normal">/ pk (MOQ: {bundleProduct.moq || 5})</span>
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Bundle Pricing & 1-Click Action */}
-              <div className="w-full lg:w-auto p-4 bg-[#FAF8F5] rounded-2xl border border-[#EAE4D5] flex flex-col sm:flex-row lg:flex-col items-center justify-between gap-4 text-center lg:text-right">
+              <div className="w-full lg:w-auto p-4 bg-[#FAF8F3] rounded-2xl border border-[#EDE5D8] flex flex-col sm:flex-row lg:flex-col items-center justify-between gap-4 text-center lg:text-right">
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-gray-500">Combined Wholesale Total</span>
-                  <div className="font-serif font-bold text-xl sm:text-2xl text-[#191919]">
+                  <span className="text-[10px] uppercase font-bold text-[#8B8175]">Combined Wholesale Total</span>
+                  <div className="font-serif font-bold text-xl sm:text-2xl text-[#292723]">
                     {formatPrice(bundleTotalPrice)}
                   </div>
-                  <p className="text-[10px] text-emerald-700 font-semibold mt-0.5">
+                  <p className="text-[10px] text-[#C6A66B] font-semibold mt-0.5">
                     Includes factory MOQs &bull; Tier discounts applied
                   </p>
                 </div>
@@ -662,10 +662,10 @@ export default function ProductDetailPage({
                 <button
                   type="button"
                   onClick={handleAddBundleToCart}
-                  className={`w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all ${
+                  className={`w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer ${
                     bundleAdded
                       ? 'bg-emerald-600 text-white'
-                      : 'bg-[#191919] hover:bg-[#303030] text-white hover:scale-102'
+                      : 'bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3]'
                   }`}
                 >
                   {bundleAdded ? (
@@ -675,7 +675,7 @@ export default function ProductDetailPage({
                     </>
                   ) : (
                     <>
-                      <ShoppingBag className="w-4 h-4 text-[#C49A3A]" />
+                      <ShoppingBag className="w-4 h-4 text-[#C6A66B]" />
                       <span>Add Both to Cart</span>
                     </>
                   )}
@@ -692,17 +692,17 @@ export default function ProductDetailPage({
           <div className="mt-16">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <span className="text-xs uppercase font-bold text-[#8C6D2B] tracking-wider flex items-center gap-1.5">
+                <span className="text-xs uppercase font-bold text-[#C6A66B] tracking-wider flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Smart Recommendation Engine</span>
                 </span>
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A1A] mt-1">
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#292723] mt-1">
                   You May Also Like &bull; Complete Your Collection
                 </h3>
               </div>
               <button
                 onClick={() => onNavigate('catalog', { category: product.category })}
-                className="text-xs font-bold text-[#8C6D2B] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#C6A66B] hover:text-[#40362F] transition-colors flex items-center gap-1 cursor-pointer"
               >
                 <span>View Full Catalog</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -726,17 +726,17 @@ export default function ProductDetailPage({
 
       {/* Full-Screen Image Zoom Lightbox Modal */}
       {zoomModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#292723]/90 backdrop-blur-sm flex items-center justify-center p-4">
           <button
             onClick={() => setZoomModalOpen(false)}
-            className="absolute top-4 right-4 text-white hover:text-gray-300 p-2 rounded-full bg-white/20"
+            className="absolute top-4 right-4 text-white hover:text-[#C6A66B] p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
           >
             <X className="w-6 h-6" />
           </button>
           <img
             src={selectedImage}
             alt={product.name}
-            className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+            className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl border border-[#EDE5D8]/20"
           />
         </div>
       )}
@@ -744,74 +744,74 @@ export default function ProductDetailPage({
       {/* Dedicated Bulk Quotation (RFQ) Modal */}
       {quoteModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="fixed inset-0 bg-black/60" onClick={() => setQuoteModalOpen(false)} />
-          <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-[#EAE4D5] p-6 z-10 animate-fade-in space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-[#EAE4D5]">
-              <div className="flex items-center gap-2 text-[#8C6D2B]">
+          <div className="fixed inset-0 bg-[#292723]/60 backdrop-blur-sm" onClick={() => setQuoteModalOpen(false)} />
+          <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-[#EDE5D8] p-6 sm:p-8 z-10 animate-fade-in space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-[#EDE5D8]">
+              <div className="flex items-center gap-2 text-[#C6A66B]">
                 <FileText className="w-5 h-5" />
-                <h3 className="font-serif font-bold text-lg text-[#1A1A1A]">Request a Bulk Quotation (RFQ)</h3>
+                <h3 className="font-serif font-bold text-xl text-[#292723]">Request a Bulk Quotation (RFQ)</h3>
               </div>
-              <button onClick={() => setQuoteModalOpen(false)} className="p-1 text-gray-400 hover:text-black">
+              <button onClick={() => setQuoteModalOpen(false)} className="p-1 text-[#8B8175] hover:text-[#292723] cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="flex gap-3 bg-[#FAF8F5] p-3 rounded-xl border border-[#EAE4D5]">
-              <img src={product.image} alt={product.name} className="w-14 h-14 rounded-lg object-cover bg-white" />
+            <div className="flex gap-3 bg-[#FAF8F3] p-3.5 rounded-2xl border border-[#EDE5D8]">
+              <img src={product.image} alt={product.name} className="w-14 h-14 rounded-xl object-cover bg-white border border-[#EDE5D8]" />
               <div className="text-xs">
-                <p className="font-semibold text-[#1A1A1A]">{product.name}</p>
-                <p className="font-mono text-gray-500 text-[10px]">SKU: {product.sku}</p>
-                <p className="text-gray-500 text-[11px]">Catalog Price: {formatPrice(basePrice)} / pack</p>
+                <p className="font-semibold text-[#292723]">{product.name}</p>
+                <p className="font-mono text-[#8B8175] text-[10px]">SKU: {product.sku}</p>
+                <p className="text-[#C6A66B] font-bold text-[11px] mt-0.5">Catalog Price: {formatPrice(basePrice)} / pack</p>
               </div>
             </div>
 
-            <form onSubmit={handleDirectQuoteSubmit} className="space-y-3 text-xs">
+            <form onSubmit={handleDirectQuoteSubmit} className="space-y-4 text-xs">
               <div>
-                <label className="block font-semibold text-[#3D372E] mb-1">Requested Quantity (Packs)</label>
+                <label className="block font-semibold text-[#40362F] mb-1">Requested Quantity (Packs)</label>
                 <input
                   type="number"
                   min="1"
                   required
                   value={quoteQty}
                   onChange={(e) => setQuoteQty(parseInt(e.target.value) || 1)}
-                  className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-lg text-xs"
+                  className="w-full px-3.5 py-2.5 bg-[#FAF8F3] border border-[#EDE5D8] focus:border-[#C6A66B] rounded-xl text-xs text-[#292723] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#3D372E] mb-1">Target Price per Pack (USD / Optional)</label>
+                <label className="block font-semibold text-[#40362F] mb-1">Target Price per Pack (USD / Optional)</label>
                 <input
                   type="text"
                   placeholder="e.g. $1.20"
-                  className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-lg text-xs"
+                  className="w-full px-3.5 py-2.5 bg-[#FAF8F3] border border-[#EDE5D8] focus:border-[#C6A66B] rounded-xl text-xs text-[#292723] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#3D372E] mb-1">Specific Customization / Remarks</label>
+                <label className="block font-semibold text-[#40362F] mb-1">Specific Customization / Remarks</label>
                 <textarea
                   rows="3"
                   value={quoteNotes}
                   onChange={(e) => setQuoteNotes(e.target.value)}
                   placeholder="Mention finish preferences, plating thickness, packaging or delivery timeline..."
-                  className="w-full px-3 py-2 bg-[#FAF8F5] border border-[#DDD6C8] rounded-lg text-xs"
+                  className="w-full px-3.5 py-2.5 bg-[#FAF8F3] border border-[#EDE5D8] focus:border-[#C6A66B] rounded-xl text-xs text-[#292723] focus:outline-none resize-none"
                 />
               </div>
 
-              <div className="pt-2 flex gap-2">
+              <div className="pt-2 flex gap-3">
                 <button
                   type="button"
                   onClick={() => setQuoteModalOpen(false)}
-                  className="flex-1 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl"
+                  className="flex-1 py-3 bg-[#FAF8F3] hover:bg-[#EDE5D8] text-[#40362F] font-semibold rounded-xl border border-[#EDE5D8] cursor-pointer transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-2.5 bg-[#1C1A17] hover:bg-[#332E26] text-white font-bold rounded-xl flex items-center justify-center gap-1.5"
+                  className="flex-1 py-3 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] font-bold rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors"
                 >
                   <span>Submit to RFQ Builder</span>
-                  <FileText className="w-4 h-4 text-[#D4AF37]" />
+                  <FileText className="w-4 h-4 text-[#C6A66B]" />
                 </button>
               </div>
             </form>

@@ -19,19 +19,19 @@ import {
 
 export default function AboutPage({ onNavigate }) {
   return (
-    <div className="min-h-screen bg-[#FAF9F5] pb-24">
+    <div className="min-h-screen bg-[#FAF8F3] pb-24">
       {/* Banner */}
-      <div className="bg-[#191919] text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-[#2C2C2C] text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#C49A3A_1px,transparent_1px)] [background-size:16px_16px]" />
+      <div className="bg-[#40362F] text-[#FAF8F3] py-16 px-4 sm:px-6 lg:px-8 border-b border-[#52463D] text-center relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#C6A66B_1px,transparent_1px)] [background-size:16px_16px]" />
         <div className="max-w-3xl mx-auto space-y-3 relative z-10">
-          <span className="text-xs uppercase font-bold tracking-widest text-[#C49A3A] flex items-center justify-center gap-1.5">
-            <Sparkles className="w-4 h-4 text-[#C49A3A]" />
+          <span className="text-xs uppercase font-bold tracking-widest text-[#C6A66B] flex items-center justify-center gap-1.5">
+            <Sparkles className="w-4 h-4 text-[#C6A66B]" />
             <span>Master Engineering &bull; International Lapidary Heritage</span>
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white tracking-tight">
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#FAF8F3] tracking-tight">
             About BeadsSource &bull; Engineering &amp; Heritage
           </h1>
-          <p className="text-xs sm:text-sm text-[#D8D2C4] leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm text-[#EDE5D8] leading-relaxed max-w-2xl mx-auto">
             A production-ready international wholesale e-commerce platform engineered for high-throughput jewelry component manufacturing, gemstone grading, and global distribution.
           </p>
         </div>
@@ -40,17 +40,17 @@ export default function AboutPage({ onNavigate }) {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 space-y-12">
         
         {/* Project Genesis & Manufacturing Profile */}
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#E9E3D8] shadow-xs space-y-6">
-          <div className="flex items-center gap-2 text-xs uppercase font-bold tracking-widest text-[#8C6D2B]">
-            <Building2 className="w-4 h-4 text-[#C49A3A]" />
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#EDE5D8] shadow-xs space-y-6">
+          <div className="flex items-center gap-2 text-xs uppercase font-bold tracking-widest text-[#C6A66B]">
+            <Building2 className="w-4 h-4 text-[#C6A66B]" />
             <span>Global Manufacturing &bull; Wholesale Operations</span>
           </div>
 
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#191919]">
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#292723]">
             The BeadsSource Platform &bull; Precision Wholesale Architecture
           </h2>
 
-          <div className="space-y-4 text-xs sm:text-sm text-[#5C5547] leading-relaxed">
+          <div className="space-y-4 text-xs sm:text-sm text-[#40362F] leading-relaxed">
             <p>
               Operating as an essential primary manufacturer and wholesale export supplier of natural gemstone bead strands, certified lead-free pewter charms, pavé cubic zirconia findings, and finished artisanal jewelry for more than twenty years, <strong>BeadsSource</strong> delivers factory-direct supplies to professional jewelers and design ateliers worldwide.
             </p>
@@ -62,18 +62,18 @@ export default function AboutPage({ onNavigate }) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-[#F0EBE1]">
-            <div className="p-4 bg-[#F8F6F1] rounded-2xl border border-[#E9E3D8]">
-              <p className="font-serif font-bold text-2xl text-[#191919]">20+ Years</p>
-              <p className="text-xs text-gray-500 mt-1">Wholesale Export &amp; Manufacturing</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-[#EDE5D8]">
+            <div className="p-4 bg-[#FAF8F3] rounded-2xl border border-[#EDE5D8]">
+              <p className="font-serif font-bold text-2xl text-[#292723]">20+ Years</p>
+              <p className="text-xs text-[#8B8175] mt-1">Wholesale Export &amp; Manufacturing</p>
             </div>
-            <div className="p-4 bg-[#F8F6F1] rounded-2xl border border-[#E9E3D8]">
-              <p className="font-serif font-bold text-2xl text-[#8C6D2B]">5,000+</p>
-              <p className="text-xs text-gray-500 mt-1">Verified International Jewelry Buyers</p>
+            <div className="p-4 bg-[#FAF8F3] rounded-2xl border border-[#EDE5D8]">
+              <p className="font-serif font-bold text-2xl text-[#C6A66B]">5,000+</p>
+              <p className="text-xs text-[#8B8175] mt-1">Verified International Jewelry Buyers</p>
             </div>
-            <div className="p-4 bg-[#F8F6F1] rounded-2xl border border-[#E9E3D8]">
-              <p className="font-serif font-bold text-2xl text-[#191919]">100%</p>
-              <p className="text-xs text-gray-500 mt-1">Certified Lead &amp; Cadmium Free (CPSIA)</p>
+            <div className="p-4 bg-[#FAF8F3] rounded-2xl border border-[#EDE5D8]">
+              <p className="font-serif font-bold text-2xl text-[#292723]">100%</p>
+              <p className="text-xs text-[#8B8175] mt-1">Certified Lead &amp; Cadmium Free (CPSIA)</p>
             </div>
           </div>
         </div>

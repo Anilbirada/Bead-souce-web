@@ -36,18 +36,18 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] pb-24">
+    <div className="min-h-screen bg-[#FAF8F3] pb-24">
       {/* Banner */}
-      <div className="bg-[#191919] text-white py-14 px-4 sm:px-6 lg:px-8 border-b border-[#2C2C2C] text-center relative overflow-hidden">
+      <div className="bg-[#40362F] text-[#FAF8F3] py-14 px-4 sm:px-6 lg:px-8 border-b border-[#52463D] text-center relative overflow-hidden">
         <div className="max-w-3xl mx-auto space-y-3 relative z-10">
-          <span className="text-xs uppercase font-bold tracking-widest text-[#C49A3A] flex items-center justify-center gap-1.5">
+          <span className="text-xs uppercase font-bold tracking-widest text-[#C6A66B] flex items-center justify-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Direct Manufacturer Assistance</span>
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#FAF8F3] tracking-tight">
             Wholesale Customer Support &amp; Consultation
           </h1>
-          <p className="text-xs sm:text-sm text-[#D8D2C4] max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-[#EDE5D8] max-w-lg mx-auto">
             Connect directly with our international wholesale support representatives and component specialists.
           </p>
         </div>

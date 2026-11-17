@@ -108,17 +108,17 @@ export default function CartDrawer({ onNavigate }) {
         <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col">
           
           {/* Header */}
-          <div className="p-4 sm:p-5 bg-[#1C1A17] text-white flex items-center justify-between border-b border-[#38332A]">
+          <div className="p-4 sm:p-5 bg-[#40362F] text-[#FAF8F3] flex items-center justify-between border-b border-[#52463D]">
             <div className="flex items-center gap-2.5">
-              <ShoppingBag className="w-5 h-5 text-[#D4AF37]" />
-              <h2 className="font-serif font-bold text-lg text-white">Wholesale Cart</h2>
-              <span className="text-xs bg-[#302B24] text-[#E6C687] px-2 py-0.5 rounded-full font-semibold">
+              <ShoppingBag className="w-5 h-5 text-[#C6A66B]" />
+              <h2 className="font-serif font-bold text-lg text-[#FAF8F3]">Wholesale Cart</h2>
+              <span className="text-xs bg-[#52463D] text-[#D8C49A] px-2.5 py-0.5 rounded-full font-semibold">
                 {itemsCount} {itemsCount === 1 ? 'pack' : 'packs'}
               </span>
             </div>
             <button
               onClick={closeCartDrawer}
-              className="p-1.5 text-gray-400 hover:text-white rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 text-[#EDE5D8] hover:text-[#C6A66B] rounded-lg transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -126,27 +126,27 @@ export default function CartDrawer({ onNavigate }) {
 
           {/* Toast Notification inside drawer */}
           {toastMessage && (
-            <div className="bg-[#FAF3E0] border-b border-[#E8DCC0] p-2 text-center text-xs font-semibold text-[#8C6D2B] animate-fade-in">
+            <div className="bg-[#FAF8F3] border-b border-[#EDE5D8] p-2 text-center text-xs font-semibold text-[#C6A66B] animate-fade-in">
               {toastMessage}
             </div>
           )}
 
           {/* Free Shipping Progress Meter */}
-          <div className="p-4 bg-[#FAF7F0] border-b border-[#EBE4D5] text-xs">
+          <div className="p-4 bg-[#FAF8F3] border-b border-[#EDE5D8] text-xs">
             <div className="flex items-center justify-between font-semibold mb-1.5">
-              <span className="flex items-center gap-1.5 text-[#363229]">
-                <Truck className="w-4 h-4 text-[#C4A052]" />
+              <span className="flex items-center gap-1.5 text-[#40362F]">
+                <Truck className="w-4 h-4 text-[#C6A66B]" />
                 {isFreeShipping ? (
-                  <span className="text-green-700 font-bold">🎉 FREE Worldwide Express Shipping Unlocked!</span>
+                  <span className="text-[#C6A66B] font-bold">🎉 FREE Worldwide Express Shipping Unlocked!</span>
                 ) : (
-                  <span>Add <strong className="text-[#8C6D2B]">{formatPrice(amountToFreeShipping)}</strong> more for Free Worldwide Express Delivery</span>
+                  <span>Add <strong className="text-[#C6A66B] font-bold">{formatPrice(amountToFreeShipping)}</strong> more for Free Worldwide Express Delivery</span>
                 )}
               </span>
-              <span className="text-gray-500 text-[11px]">{freeShippingProgress}%</span>
+              <span className="text-[#8B8175] text-[11px] font-bold">{freeShippingProgress}%</span>
             </div>
-            <div className="w-full bg-[#E5DDC9] h-2 rounded-full overflow-hidden">
+            <div className="w-full bg-[#EDE5D8] h-2 rounded-full overflow-hidden">
               <div 
-                className="bg-linear-to-r from-[#D4AF37] to-[#8C6212] h-full rounded-full transition-all duration-500"
+                className="bg-gradient-to-r from-[#C6A66B] to-[#D8C49A] h-full rounded-full transition-all duration-500"
                 style={{ width: `${freeShippingProgress}%` }}
               />
             </div>
@@ -154,29 +154,29 @@ export default function CartDrawer({ onNavigate }) {
 
           {/* Volume Tier Discount Banner */}
           {tierSavings > 0 && (
-            <div className="px-4 py-2 bg-[#F3F9EE] border-b border-[#D8ECD0] text-xs flex items-center justify-between text-[#2D5A1E]">
+            <div className="px-4 py-2.5 bg-[#FAF8F3] border-b border-[#EDE5D8] text-xs flex items-center justify-between text-[#40362F]">
               <span className="flex items-center gap-1.5 font-medium">
-                <Sparkles className="w-3.5 h-3.5 text-green-600" />
-                <span>Wholesale volume discount applied!</span>
+                <Sparkles className="w-3.5 h-3.5 text-[#C6A66B]" />
+                <span className="text-[#292723]">Wholesale volume discount applied!</span>
               </span>
-              <span className="font-bold">-{formatPrice(tierSavings)}</span>
+              <span className="font-bold text-[#C6A66B]">-{formatPrice(tierSavings)}</span>
             </div>
           )}
 
           {/* Cart Items List */}
-          <div className="flex-1 overflow-y-auto p-4 divide-y divide-[#F0EBE1]">
+          <div className="flex-1 overflow-y-auto p-4 divide-y divide-[#EDE5D8]">
             {cart.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-6 space-y-3">
-                <div className="w-16 h-16 rounded-full bg-[#FAF7F0] flex items-center justify-center text-gray-400 border border-[#EAE4D5]">
-                  <ShoppingBag className="w-8 h-8" />
+                <div className="w-16 h-16 rounded-full bg-[#FAF8F3] flex items-center justify-center text-[#8B8175] border border-[#EDE5D8]">
+                  <ShoppingBag className="w-8 h-8 text-[#C6A66B]" />
                 </div>
-                <h3 className="font-serif font-bold text-lg text-[#1A1A1A]">Your Wholesale Cart is Empty</h3>
-                <p className="text-xs text-[#736B5E] max-w-xs">
+                <h3 className="font-serif font-bold text-lg text-[#292723]">Your Wholesale Cart is Empty</h3>
+                <p className="text-xs text-[#8B8175] max-w-xs">
                   Browse our genuine gemstone beads, lead-free pewter charms, and jewelry findings to build your wholesale order.
                 </p>
                 <button
                   onClick={() => { closeCartDrawer(); onNavigate('catalog', { category: 'all' }); }}
-                  className="px-5 py-2.5 bg-[#1C1A17] text-[#D4AF37] text-xs font-bold rounded-lg hover:bg-[#332E26] transition-colors cursor-pointer mt-2"
+                  className="px-5 py-2.5 bg-[#40362F] text-[#FAF8F3] hover:bg-[#52463D] text-xs font-bold rounded-xl transition-colors cursor-pointer mt-2 shadow-sm"
                 >
                   Explore Wholesale Catalogue
                 </button>
@@ -187,43 +187,43 @@ export default function CartDrawer({ onNavigate }) {
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-16 h-16 rounded-lg object-cover border border-[#EAE4D5] bg-white shrink-0"
+                    className="w-16 h-16 rounded-xl object-cover border border-[#EDE5D8] bg-white shrink-0"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-1">
-                      <h4 className="text-xs font-semibold text-[#1A1A1A] line-clamp-2 leading-snug">
+                      <h4 className="text-xs font-semibold text-[#292723] line-clamp-2 leading-snug">
                         {item.name}
                       </h4>
                       <button
                         onClick={() => removeFromCart(item.id, item.selectedFinish, item.selectedSize)}
-                        className="text-gray-400 hover:text-red-600 p-1 transition-colors"
+                        className="text-[#8B8175] hover:text-red-600 p-1 transition-colors cursor-pointer"
                         title="Remove item"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
 
-                    <div className="flex items-center gap-2 text-[10px] text-[#736B5E] mt-1">
-                      <span className="font-mono bg-[#EAE5D8] px-1.5 py-0.5 rounded">{item.sku}</span>
+                    <div className="flex items-center gap-2 text-[10px] text-[#8B8175] mt-1">
+                      <span className="font-mono bg-[#FAF8F3] border border-[#EDE5D8] px-1.5 py-0.5 rounded text-[#40362F] font-bold">{item.sku}</span>
                       <span>{item.selectedFinish}</span>
                       {item.selectedSize && <span>&bull; {item.selectedSize}</span>}
                     </div>
 
                     <div className="flex items-center justify-between mt-2.5">
                       {/* Quantity Modifiers */}
-                      <div className="flex items-center border border-[#DDD6C8] rounded-md bg-[#FAF8F5]">
+                      <div className="flex items-center border border-[#EDE5D8] rounded-lg bg-[#FAF8F3]">
                         <button
                           onClick={() => updateQuantity(item.id, item.selectedFinish, item.selectedSize, item.quantity - 1)}
-                          className="p-1 hover:bg-[#EBE5D8] text-gray-600 transition-colors"
+                          className="p-1 hover:bg-[#EDE5D8] text-[#40362F] transition-colors cursor-pointer"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="px-2.5 text-xs font-bold text-[#1A1A1A] min-w-[28px] text-center">
+                        <span className="px-2.5 text-xs font-bold text-[#292723] min-w-[28px] text-center">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() => updateQuantity(item.id, item.selectedFinish, item.selectedSize, item.quantity + 1)}
-                          className="p-1 hover:bg-[#EBE5D8] text-gray-600 transition-colors"
+                          className="p-1 hover:bg-[#EDE5D8] text-[#40362F] transition-colors cursor-pointer"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
@@ -231,10 +231,10 @@ export default function CartDrawer({ onNavigate }) {
 
                       {/* Line Item Total */}
                       <div className="text-right">
-                        <span className="text-xs font-bold text-[#1A1A1A]">
+                        <span className="text-xs font-bold text-[#292723]">
                           {formatPrice((item.salePrice || item.price) * item.quantity)}
                         </span>
-                        <div className="text-[10px] text-gray-500">
+                        <div className="text-[10px] text-[#8B8175]">
                           {formatPrice(item.salePrice || item.price)} / pk
                         </div>
                       </div>
@@ -246,33 +246,33 @@ export default function CartDrawer({ onNavigate }) {
 
             {/* Pair With Your Order Cross-Sell Recommendations */}
             {cart.length > 0 && recommendations.length > 0 && (
-              <div className="pt-4 mt-4 border-t border-[#EAE4D5] space-y-2.5">
-                <div className="flex items-center gap-1.5 text-[#C49A3A]">
+              <div className="pt-4 mt-4 border-t border-[#EDE5D8] space-y-2.5">
+                <div className="flex items-center gap-1.5 text-[#C6A66B]">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#191919]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#292723]">
                     Pair With Your Order (Wholesale Components)
                   </span>
                 </div>
                 
                 <div className="space-y-2">
                   {recommendations.slice(0, 2).map(recom => (
-                    <div key={recom.id} className="p-2.5 bg-[#FAF8F5] rounded-xl border border-[#EAE4D5] flex items-center justify-between gap-3">
+                    <div key={recom.id} className="p-2.5 bg-[#FAF8F3] rounded-xl border border-[#EDE5D8] flex items-center justify-between gap-3">
                       <img
                         src={recom.image}
                         alt={recom.name}
-                        className="w-11 h-11 rounded-lg object-cover bg-white shrink-0"
+                        className="w-11 h-11 rounded-lg object-cover bg-white shrink-0 border border-[#EDE5D8]"
                       />
                       <div className="flex-1 min-w-0">
-                        <h5 className="font-serif font-bold text-xs text-[#191919] truncate">{recom.name}</h5>
-                        <p className="text-[10px] text-gray-500 font-mono">MOQ: {recom.moq || 5} pk &bull; {formatPrice(recom.salePrice || recom.price)}/pk</p>
+                        <h5 className="font-serif font-bold text-xs text-[#292723] truncate">{recom.name}</h5>
+                        <p className="text-[10px] text-[#8B8175] font-mono">MOQ: {recom.moq || 5} pk &bull; {formatPrice(recom.salePrice || recom.price)}/pk</p>
                       </div>
                       <button
                         type="button"
                         onClick={() => handleAddRecom(recom)}
-                        className={`p-1.5 rounded-lg text-xs font-bold transition-all shrink-0 ${
+                        className={`p-1.5 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${
                           addedRecomId === recom.id
                             ? 'bg-emerald-600 text-white'
-                            : 'bg-[#191919] hover:bg-[#C49A3A] text-white'
+                            : 'bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3]'
                         }`}
                         title="Add recommended item to cart"
                       >
@@ -287,18 +287,18 @@ export default function CartDrawer({ onNavigate }) {
 
           {/* Cart Footer */}
           {cart.length > 0 && (
-            <div className="p-4 bg-[#FAF8F5] border-t border-[#EAE4D5] space-y-3">
+            <div className="p-4 bg-[#FAF8F3] border-t border-[#EDE5D8] space-y-3">
               
               {/* Coupon input */}
               {coupon ? (
-                <div className="p-2 bg-[#F3F9EE] border border-[#D8ECD0] rounded-lg flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-1.5 text-[#2D5A1E]">
+                <div className="p-2.5 bg-white border border-[#EDE5D8] rounded-xl flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-1.5 text-[#C6A66B]">
                     <Tag className="w-3.5 h-3.5" />
-                    <span>Coupon <strong>{coupon.code}</strong> applied (-{coupon.discountValue}%)</span>
+                    <span className="text-[#292723]">Coupon <strong>{coupon.code}</strong> applied (-{coupon.discountValue}%)</span>
                   </div>
                   <button 
                     onClick={removeCoupon}
-                    className="text-red-600 hover:underline text-[11px] font-semibold"
+                    className="text-red-600 hover:underline text-[11px] font-semibold cursor-pointer"
                   >
                     Remove
                   </button>
@@ -310,12 +310,12 @@ export default function CartDrawer({ onNavigate }) {
                     value={couponInput}
                     onChange={(e) => setCouponInput(e.target.value)}
                     placeholder="Enter Coupon (e.g. WHOLESALE10)"
-                    className="flex-1 px-3 py-1.5 text-xs bg-white border border-[#DDD6C8] rounded-md focus:outline-none focus:border-[#C4A052] uppercase font-mono"
+                    className="flex-1 px-3 py-2 text-xs bg-white border border-[#EDE5D8] rounded-xl focus:outline-none focus:border-[#C6A66B] uppercase font-mono text-[#292723]"
                   />
                   <button
                     type="submit"
                     disabled={couponLoading}
-                    className="px-3 py-1.5 bg-[#2B2721] text-[#E6C687] text-xs font-bold rounded-md hover:bg-[#3E382E] transition-colors"
+                    className="px-3 py-2 bg-[#40362F] text-[#FAF8F3] text-xs font-bold rounded-xl hover:bg-[#52463D] transition-colors cursor-pointer"
                   >
                     Apply
                   </button>
@@ -323,32 +323,32 @@ export default function CartDrawer({ onNavigate }) {
               )}
 
               {/* Price Breakdown */}
-              <div className="space-y-1.5 text-xs text-[#524C40]">
+              <div className="space-y-1.5 text-xs text-[#8B8175]">
                 <div className="flex justify-between">
                   <span>Subtotal:</span>
-                  <span className="font-semibold text-[#1A1A1A]">{formatPrice(rawSubtotal)}</span>
+                  <span className="font-semibold text-[#292723]">{formatPrice(rawSubtotal)}</span>
                 </div>
                 {tierSavings > 0 && (
-                  <div className="flex justify-between text-green-700">
+                  <div className="flex justify-between text-[#C6A66B]">
                     <span>Wholesale Tier Savings:</span>
                     <span className="font-semibold">-{formatPrice(tierSavings)}</span>
                   </div>
                 )}
                 {couponDiscount > 0 && (
-                  <div className="flex justify-between text-green-700">
+                  <div className="flex justify-between text-[#C6A66B]">
                     <span>Coupon Promo:</span>
                     <span className="font-semibold">-{formatPrice(couponDiscount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between">
                   <span>Worldwide Express Shipping:</span>
-                  <span className="font-semibold text-[#1A1A1A]">
-                    {isFreeShipping ? <span className="text-green-700 font-bold">FREE</span> : formatPrice(shippingFee)}
+                  <span className="font-semibold text-[#292723]">
+                    {isFreeShipping ? <span className="text-[#C6A66B] font-bold">FREE</span> : formatPrice(shippingFee)}
                   </span>
                 </div>
-                <div className="flex justify-between text-sm font-bold text-[#1A1A1A] pt-2 border-t border-[#EAE4D5]">
+                <div className="flex justify-between text-sm font-bold text-[#292723] pt-2 border-t border-[#EDE5D8]">
                   <span>Estimated Total:</span>
-                  <span className="text-base text-[#1A1A1A]">{formatPrice(finalTotal)}</span>
+                  <span className="text-base text-[#292723] font-serif">{formatPrice(finalTotal)}</span>
                 </div>
               </div>
 
@@ -359,10 +359,10 @@ export default function CartDrawer({ onNavigate }) {
                     closeCartDrawer();
                     onNavigate('checkout');
                   }}
-                  className="w-full py-3 bg-[#191919] hover:bg-[#303030] text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border border-[#191919]"
+                  className="w-full py-3.5 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border border-[#52463D]"
                 >
                   <span>Proceed to Checkout</span>
-                  <ArrowRight className="w-4 h-4 text-[#C49A3A]" />
+                  <ArrowRight className="w-4 h-4 text-[#C6A66B]" />
                 </button>
 
                 <div className="grid grid-cols-2 gap-2">
@@ -371,17 +371,17 @@ export default function CartDrawer({ onNavigate }) {
                       closeCartDrawer();
                       onNavigate('catalog');
                     }}
-                    className="py-2.5 bg-[#F8F6F1] hover:bg-[#EAE4D5] text-[#303030] border border-[#E9E3D8] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center cursor-pointer"
+                    className="py-2.5 bg-white hover:bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center cursor-pointer"
                   >
                     <span>Continue Shopping</span>
                   </button>
 
                   <button
                     onClick={handleConvertToQuote}
-                    className="py-2.5 bg-white hover:bg-[#FAF6ED] text-[#8C6D2B] border border-[#D5C6A3] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                    className="py-2.5 bg-white hover:bg-[#FAF8F3] text-[#C6A66B] border border-[#EDE5D8] hover:border-[#C6A66B] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                     title="Request special custom wholesale rate for bulk production"
                   >
-                    <FileText className="w-3.5 h-3.5 text-[#C49A3A]" />
+                    <FileText className="w-3.5 h-3.5 text-[#C6A66B]" />
                     <span>Convert to RFQ</span>
                   </button>
                 </div>

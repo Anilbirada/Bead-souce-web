@@ -249,25 +249,25 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
   const activeQuotesCount = quotes.filter(q => q.status !== 'Accepted' && q.status !== 'Rejected').length;
 
   return (
-    <div className="min-h-screen bg-[#F8F6F1] py-8 sm:py-12">
+    <div className="min-h-screen bg-[#FAF8F3] py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Wholesale Profile Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E9E5DC] shadow-xs mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#176B68]/5 rounded-full blur-2xl pointer-events-none" />
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EDE5D8] shadow-xs mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#C6A66B]/5 rounded-full blur-2xl pointer-events-none" />
           
           <div className="flex items-center gap-4 sm:gap-6 relative z-10">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#EBF4F3] border border-[#CADEDD] text-[#176B68] flex items-center justify-center font-serif text-2xl sm:text-3xl font-bold shadow-inner">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#FAF8F3] border border-[#EDE5D8] text-[#C6A66B] flex items-center justify-center font-serif text-2xl sm:text-3xl font-bold shadow-inner">
               {((activeCustomer?.name && activeCustomer.name[0]) || activeCustomer?.email?.[0] || 'C').toUpperCase()}
             </div>
             
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
-                <h1 className="font-serif text-xl sm:text-2xl font-bold text-[#191F23]">
+                <h1 className="font-serif text-xl sm:text-2xl font-bold text-[#292723]">
                   {activeCustomer?.company || activeCustomer?.name || 'Wholesale Client'}
                 </h1>
-                <span className="bg-[#EBF4F3] text-[#176B68] text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 border border-[#CADEDD]">
-                  <ShieldCheck className="w-3 h-3 text-[#176B68]" />
+                <span className="bg-[#FAF8F3] text-[#C6A66B] text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 border border-[#EDE5D8]">
+                  <ShieldCheck className="w-3 h-3 text-[#C6A66B]" />
                   <span>Verified B2B Wholesale Tier</span>
                 </span>
                 {impersonatedCustomer && (
@@ -276,11 +276,11 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                   </span>
                 )}
               </div>
-              <p className="text-xs text-[#657078]">
-                {activeCustomer?.email} &bull; Tax/Resale ID: <span className="font-mono text-[#191F23]">{activeCustomer?.taxId || 'TAX-8921094'}</span>
+              <p className="text-xs text-[#8B8175]">
+                {activeCustomer?.email} &bull; Tax/Resale ID: <span className="font-mono text-[#292723] font-semibold">{activeCustomer?.taxId || 'TAX-8921094'}</span>
               </p>
-              <p className="text-[11px] text-[#8C7E6C]">
-                Corporate Status: <span className="text-emerald-700 font-semibold">Active Net 30 Terms Approved</span> &bull; CPSIA &amp; REACH Compliant
+              <p className="text-[11px] text-[#8B8175]">
+                Corporate Status: <span className="text-[#C6A66B] font-semibold">Active Net 30 Terms Approved</span> &bull; CPSIA &amp; REACH Compliant
               </p>
             </div>
           </div>
@@ -288,14 +288,14 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
           <div className="flex flex-wrap items-center gap-3 relative z-10">
             <button
               onClick={() => onNavigate('quote')}
-              className="px-4 py-2.5 bg-[#176B68] hover:bg-[#125250] text-white text-xs font-bold rounded-xl transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+              className="px-5 py-3 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-xs font-bold rounded-xl transition-all shadow-sm flex items-center gap-2 cursor-pointer border border-[#52463D]"
             >
-              <FileText className="w-3.5 h-3.5 text-[#C3A36B]" />
+              <FileText className="w-3.5 h-3.5 text-[#C6A66B]" />
               <span>Create Custom RFQ</span>
             </button>
             <button
               onClick={() => onNavigate('catalog', { category: 'all' })}
-              className="px-4 py-2.5 bg-[#FAF8F5] hover:bg-[#EAE4D5] text-[#191F23] border border-[#E9E5DC] text-xs font-bold rounded-xl transition-colors cursor-pointer"
+              className="px-5 py-3 bg-white hover:bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8] hover:border-[#C6A66B] text-xs font-bold rounded-xl transition-colors cursor-pointer"
             >
               <span>Catalog</span>
             </button>
@@ -304,10 +304,10 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
 
         {/* Impersonation Banner for Super Admin */}
         {(isAdmin || isSuperAdmin) && (
-          <div className="mb-8 p-4 bg-[#FAF5E8] border border-[#E8DAB7] rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-2 text-[#8C6D2B] font-semibold">
-              <Users className="w-4 h-4 text-[#176B68]" />
-              <span>
+          <div className="mb-8 p-4 bg-[#FAF8F3] border border-[#EDE5D8] rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2 text-[#C6A66B] font-semibold">
+              <Users className="w-4 h-4 text-[#C6A66B]" />
+              <span className="text-[#40362F]">
                 Administrative Client Inspection: Switch between wholesale customer accounts to review specific quotes and orders.
               </span>
             </div>
@@ -319,7 +319,7 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                   const target = customersList.find(c => c.id === e.target.value);
                   if (target) startImpersonating(target);
                 }}
-                className="bg-white border border-[#DDD6C8] px-3 py-1.5 rounded-lg text-xs font-medium focus:outline-none focus:border-[#176B68]"
+                className="bg-white border border-[#EDE5D8] px-3 py-1.5 rounded-xl text-xs font-medium text-[#292723] focus:outline-none focus:border-[#C6A66B]"
               >
                 <option value="">-- Inspect Customer Account --</option>
                 {customersList.map(c => (
@@ -332,7 +332,7 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
               {impersonatedCustomer && (
                 <button
                   onClick={stopImpersonating}
-                  className="px-3 py-1.5 bg-[#191F23] hover:bg-[#303030] text-white text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer"
+                  className="px-3.5 py-1.5 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-xs font-bold rounded-xl flex items-center gap-1.5 cursor-pointer shadow-xs"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Exit View</span>
@@ -344,8 +344,8 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
 
         {/* Global Alert Messages */}
         {saveMessage && (
-          <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs flex items-center gap-2 font-medium animate-fade-in">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+          <div className="mb-6 p-4 bg-[#FAF8F3] border border-[#EDE5D8] text-[#C6A66B] rounded-2xl text-xs flex items-center gap-2 font-medium animate-fade-in">
+            <CheckCircle2 className="w-4 h-4 text-[#C6A66B] shrink-0" />
             <span>{saveMessage}</span>
           </div>
         )}
@@ -357,7 +357,7 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
         )}
 
         {/* Navigation Tabs Bar */}
-        <div className="bg-white p-1.5 rounded-2xl border border-[#E9E5DC] shadow-xs mb-8 flex overflow-x-auto gap-1 text-xs">
+        <div className="bg-white p-1.5 rounded-2xl border border-[#EDE5D8] shadow-xs mb-8 flex overflow-x-auto gap-1 text-xs">
           {[
             { id: 'overview', label: 'Executive Overview', icon: Sparkles },
             { id: 'orders', label: `Orders (${orders.length})`, icon: Package },
@@ -375,11 +375,11 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                 onClick={() => setActiveTab(tab.id)}
                 className={`py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer ${
                   isActive 
-                    ? 'bg-[#176B68] text-white font-bold shadow-xs' 
-                    : 'text-[#657078] hover:text-[#191F23] hover:bg-[#FAF8F5]'
+                    ? 'bg-[#40362F] text-[#FAF8F3] font-bold shadow-xs' 
+                    : 'text-[#8B8175] hover:text-[#292723] hover:bg-[#FAF8F3]'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-[#C3A36B]' : ''}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-[#C6A66B]' : ''}`} />
                 <span>{tab.label}</span>
               </button>
             );
