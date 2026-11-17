@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useCurrency } from '../../context/CurrencyContext';
+import BrandLogo from './BrandLogo';
 
 const CATEGORIES = [
   { id: 'natural-gemstone-beads', name: 'Natural Gemstone Beads' },
@@ -50,15 +51,12 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
       <div className="relative w-full max-w-xs bg-white h-full shadow-2xl flex flex-col z-10 overflow-y-auto">
         {/* Header */}
         <div className="p-4 bg-[#1C1A17] text-white flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-linear-to-br from-[#D4AF37] to-[#8C6212] flex items-center justify-center font-serif font-bold text-sm">
-              B
-            </div>
-            <div>
-              <p className="font-serif font-bold text-base leading-tight">BEADSSOURCE</p>
-              <p className="text-[9px] uppercase tracking-widest text-[#D4AF37]">Wholesale Platform</p>
-            </div>
-          </div>
+          <button 
+            onClick={() => { onClose(); onNavigate('home'); }}
+            className="text-left focus:outline-none"
+          >
+            <BrandLogo variant="dark" size="sm" withSubtitle={true} />
+          </button>
           <button 
             onClick={onClose}
             className="p-1.5 text-gray-400 hover:text-white rounded-lg"

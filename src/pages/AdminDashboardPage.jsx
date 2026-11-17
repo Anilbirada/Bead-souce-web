@@ -43,6 +43,7 @@ import { api } from '../utils/api';
 import { useCurrency } from '../context/CurrencyContext';
 import { useAuth } from '../context/AuthContext';
 import ImageUploadInput from '../components/common/ImageUploadInput';
+import BrandLogo from '../components/common/BrandLogo';
 
 export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, initialTab = 'overview' }) {
   const { formatPrice } = useCurrency();
@@ -660,15 +661,13 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
             <Menu className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => onNavigate('home')}>
-            <div className="w-8 h-8 rounded-full bg-linear-to-br from-[#191919] via-[#2A2A2A] to-[#C49A3A] flex items-center justify-center font-serif font-bold text-sm text-[#F8F6F1] border border-[#C49A3A]/40">
-              B
-            </div>
-            <div>
-              <span className="font-serif font-bold text-sm tracking-tight text-white block">
-                BeadsSource <span className="text-[#C49A3A]">Admin Management</span>
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('home')}>
+            <BrandLogo variant="dark" size="sm" withSubtitle={false} />
+            <div className="hidden sm:block border-l border-[#3A3A3A] pl-3 py-0.5">
+              <span className="font-medium text-xs tracking-tight text-white block">
+                Admin <span className="text-[#F87A02] font-semibold">Management</span>
               </span>
-              <span className="text-[10px] text-gray-400 block -mt-0.5">Enterprise Administration Suite</span>
+              <span className="text-[9px] text-gray-400 block tracking-wide uppercase">Enterprise Suite</span>
             </div>
           </div>
         </div>

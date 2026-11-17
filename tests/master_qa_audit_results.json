@@ -1,0 +1,871 @@
+{
+  "totalModules": 22,
+  "totalTestCases": 32,
+  "passed": 30,
+  "failed": 2,
+  "partial": 0,
+  "blocked": 0,
+  "notImplemented": 0,
+  "notVerified": 0,
+  "passRatePercent": 93.8,
+  "bugMetrics": {
+    "critical": 0,
+    "high": 2,
+    "medium": 0,
+    "low": 0,
+    "totalBugs": 2
+  },
+  "executedAt": "2026-11-17T15:18:54.145Z",
+  "testCatalog": [
+    {
+      "testCaseId": "TC-MOD01-01",
+      "requirementNumber": "REQ-M01-01",
+      "requirementName": "API Health Contract & Brand Metadata",
+      "module": "Module 1: Homepage & Public Website",
+      "priority": "CRITICAL",
+      "testingType": "Contract Verification",
+      "objective": "Verify public API health endpoint returns brand identification and operational status.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/health",
+        "Validate status: ok and brand string"
+      ],
+      "expectedResults": "HTTP 200 with status ok and brand string.",
+      "actualResults": "HTTP 200, brand: \"BeadsSource International Wholesale API\" in 126.72ms",
+      "evidence": {
+        "id": "EVD-MOD01-01",
+        "status": 200,
+        "brand": "BeadsSource International Wholesale API"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.523Z"
+    },
+    {
+      "testCaseId": "TC-MOD01-02",
+      "requirementNumber": "REQ-M01-02",
+      "requirementName": "Storefront CMS Announcement & Hero Slides",
+      "module": "Module 1: Homepage & Public Website",
+      "priority": "HIGH",
+      "testingType": "Functional & CMS",
+      "objective": "Verify dynamic announcements and hero slider content are loaded from CMS.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/content",
+        "Inspect announcement banner and heroSlides array"
+      ],
+      "expectedResults": "HTTP 200 with announcement text and heroSlides.",
+      "actualResults": "HTTP 200, announcement: \"International Wholesale Pricing • T...\", slides: 5",
+      "evidence": {
+        "id": "EVD-MOD01-02",
+        "announcement": "International Wholesale Pricing • Tier Discounts up to 30% Off • Certified Lead-Free & Genuine Gemstones"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.546Z"
+    },
+    {
+      "testCaseId": "TC-MOD02-01",
+      "requirementNumber": "REQ-M02-01",
+      "requirementName": "Wholesale Catalog Retrieval & Metadata Schema",
+      "module": "Module 2: Product Catalogue",
+      "priority": "CRITICAL",
+      "testingType": "Functional & Schema",
+      "objective": "Verify all products contain SKU, name, price, stock, category, and specifications.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/products",
+        "Verify count >= 30",
+        "Verify essential fields on every item"
+      ],
+      "expectedResults": "HTTP 200 returning full catalog array.",
+      "actualResults": "Retrieved 35 catalog products. First SKU: CZ-TOG-1014, Price: $1.5",
+      "evidence": {
+        "id": "EVD-MOD02-01",
+        "totalProducts": 35
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.560Z"
+    },
+    {
+      "testCaseId": "TC-MOD02-02",
+      "requirementNumber": "REQ-M02-02",
+      "requirementName": "Category Taxonomy & Subcategory Classification",
+      "module": "Module 2: Product Catalogue",
+      "priority": "HIGH",
+      "testingType": "Taxonomy & Data",
+      "objective": "Verify all 12 wholesale categories exist with slugs and product counts.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/categories",
+        "Verify categories length >= 10"
+      ],
+      "expectedResults": "HTTP 200 with complete category taxonomy.",
+      "actualResults": "Retrieved 12 categories.",
+      "evidence": {
+        "id": "EVD-MOD02-02",
+        "count": 12
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.567Z"
+    },
+    {
+      "testCaseId": "TC-MOD03-01",
+      "requirementNumber": "REQ-M03-01",
+      "requirementName": "Multi-Attribute Search & Boundary Filtering",
+      "module": "Module 3: Product Search and Filtering",
+      "priority": "HIGH",
+      "testingType": "Functional",
+      "objective": "Verify search by keyword, SKU, and price range filters return accurate bounded sets.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Search name \"clasp\"",
+        "Search SKU",
+        "Filter price 5-15"
+      ],
+      "expectedResults": "Accurate bounded results.",
+      "actualResults": "Keyword hits: 3, SKU hits: 1, Price bounded: true",
+      "evidence": {
+        "id": "EVD-MOD03-01",
+        "keywordHits": 3,
+        "bounded": true
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.590Z"
+    },
+    {
+      "testCaseId": "TC-MOD04-01",
+      "requirementNumber": "REQ-M04-01",
+      "requirementName": "Product Details Resolution & 404 Contract",
+      "module": "Module 4: Product Details",
+      "priority": "HIGH",
+      "testingType": "Contract Verification",
+      "objective": "Verify product detail lookup loads SKU attributes and non-existent IDs return 404.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/products/bs-001",
+        "GET /api/products/non-existent-sku-9999"
+      ],
+      "expectedResults": "Valid returns 200 with SKU; invalid returns 404.",
+      "actualResults": "Valid: HTTP 200 (CZ-TOG-1014), Invalid: HTTP 404",
+      "evidence": {
+        "id": "EVD-MOD04-01",
+        "validSku": "CZ-TOG-1014",
+        "invalidStatus": 404
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.603Z"
+    },
+    {
+      "testCaseId": "TC-MOD05-01",
+      "requirementNumber": "REQ-M05-01",
+      "requirementName": "Smart Recommendation & Complementary Pairings",
+      "module": "Module 5: Related Product Recommendations",
+      "priority": "HIGH",
+      "testingType": "Recommendation Engine",
+      "objective": "Verify intelligent recommendation engine pairs related items and excludes target item.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/products/bs-001/recommendations",
+        "Inspect related and pairings"
+      ],
+      "expectedResults": "HTTP 200 returning related items and complementary pairings without target product.",
+      "actualResults": "Related items: 2, Pairings: 8, Self-excluded: true",
+      "evidence": {
+        "id": "EVD-MOD05-01",
+        "relatedCount": 2,
+        "pairingsCount": 8
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.612Z"
+    },
+    {
+      "testCaseId": "TC-MOD06-01",
+      "requirementNumber": "REQ-M06-01",
+      "requirementName": "Pinterest-Style Visual Campaigns Feed & Telemetry",
+      "module": "Module 6: Product Advertisements",
+      "priority": "HIGH",
+      "testingType": "Functional & Analytics",
+      "objective": "Verify visual advertising pins load with masonry tags and click events increment telemetry.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/campaigns",
+        "POST /api/campaigns/camp-001/track with click"
+      ],
+      "expectedResults": "HTTP 200 on feed, HTTP 200 on click telemetry with incremented count.",
+      "actualResults": "Campaigns count: 6, Telemetry tracking success: true",
+      "evidence": {
+        "id": "EVD-MOD06-01",
+        "totalCampaigns": 6,
+        "clicks": 185
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.638Z"
+    },
+    {
+      "testCaseId": "TC-MOD07-01",
+      "requirementNumber": "REQ-M07-01",
+      "requirementName": "Customer Wholesale Registration, Sanitization & Duplicate Guard",
+      "module": "Module 7: Customer Registration & Auth",
+      "priority": "CRITICAL",
+      "testingType": "Authentication Security",
+      "objective": "Verify registration creates user without password leakage and blocks duplicate emails.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Register new user",
+        "Attempt duplicate email registration"
+      ],
+      "expectedResults": "Register returns 201 without password; duplicate returns 400 Bad Request.",
+      "actualResults": "Register: HTTP 201 (has token: true), Duplicate: HTTP 400",
+      "evidence": {
+        "id": "EVD-MOD07-01",
+        "regStatus": 201,
+        "dupStatus": 400
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.664Z"
+    },
+    {
+      "testCaseId": "TC-MOD07-02",
+      "requirementNumber": "REQ-M07-02",
+      "requirementName": "Customer Login Authentication & Invalid Credential Rejection",
+      "module": "Module 7: Customer Registration & Auth",
+      "priority": "CRITICAL",
+      "testingType": "Authentication Security",
+      "objective": "Verify login succeeds with valid credentials and rejects incorrect passwords with 401.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Login with valid password -> verify 200",
+        "Login with wrong password -> verify 401"
+      ],
+      "expectedResults": "Valid: HTTP 200. Invalid: HTTP 401.",
+      "actualResults": "Valid login: HTTP 200. Invalid login: HTTP 401",
+      "evidence": {
+        "id": "EVD-MOD07-02",
+        "validStatus": 200,
+        "invalidStatus": 401
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.664Z"
+    },
+    {
+      "testCaseId": "TC-MOD08-01",
+      "requirementNumber": "REQ-M08-01",
+      "requirementName": "Customer Profile & Shipping Address Modification",
+      "module": "Module 8: Customer Portal",
+      "priority": "HIGH",
+      "testingType": "Functional",
+      "objective": "Verify authenticated buyer can update company details and shipping address.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "PUT /api/auth/profile with updated address",
+        "Verify updated fields in response"
+      ],
+      "expectedResults": "HTTP 200 returning updated profile.",
+      "actualResults": "HTTP 200, company: \"Rostova Fine Jewelry Paris\", city: \"Paris\"",
+      "evidence": {
+        "id": "EVD-MOD08-01",
+        "company": "Rostova Fine Jewelry Paris",
+        "city": "Paris"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.671Z"
+    },
+    {
+      "testCaseId": "TC-MOD09-01",
+      "requirementNumber": "REQ-M09-01",
+      "requirementName": "Wholesale Tier Pricing (15% & 30%) and Coupon Validation",
+      "module": "Module 9: Shopping Cart",
+      "priority": "CRITICAL",
+      "testingType": "Pricing Logic",
+      "objective": "Verify 15% discount for 10-49 units, 30% for 50+ units, and coupon minimum order check.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Compute tier discounts",
+        "Validate coupon with $300 (pass) and $50 (fail)"
+      ],
+      "expectedResults": "Tier discounts applied; coupon rejects below minimum spend.",
+      "actualResults": "Tier 2 (15%): $1.27, Tier 3 (30%): $1.05, Coupon valid: true, Coupon rejected: true",
+      "evidence": {
+        "id": "EVD-MOD09-01",
+        "t2Price": 1.275,
+        "t3Price": 1.0499999999999998,
+        "couponStatus": 200
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.680Z"
+    },
+    {
+      "testCaseId": "TC-MOD10-01",
+      "requirementNumber": "REQ-M10-01",
+      "requirementName": "Wholesale RFQ Submission & Reference Numbering",
+      "module": "Module 10: Request for Quotation (RFQ)",
+      "priority": "CRITICAL",
+      "testingType": "Workflow Integration",
+      "objective": "Verify customer can submit custom lot inquiry with budget and comments.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "POST /api/quotes with lot volume and target price",
+        "Verify status In Review"
+      ],
+      "expectedResults": "HTTP 201 with RFQ reference and status In Review.",
+      "actualResults": "HTTP 201, RFQ ID: RFQ-2026-830, status: \"In Review\"",
+      "evidence": {
+        "id": "EVD-MOD10-01",
+        "rfqId": "RFQ-2026-830",
+        "status": "In Review"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.689Z"
+    },
+    {
+      "testCaseId": "TC-MOD11-01",
+      "requirementNumber": "REQ-M11-01",
+      "requirementName": "Administrator Quotation Review & Counter-Offer",
+      "module": "Module 11: Quotation Management",
+      "priority": "CRITICAL",
+      "testingType": "Workflow & RBAC",
+      "objective": "Verify administrator can inspect inquiry and post official counter-offer.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "PUT /api/quotes/RFQ-2026-830 with counterOffer: 1.2"
+      ],
+      "expectedResults": "HTTP 200 with counterOffer stored.",
+      "actualResults": "HTTP 200, counterOffer: $1.2, responseSent: true",
+      "evidence": {
+        "id": "EVD-MOD11-01",
+        "counterOffer": 1.2
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.701Z"
+    },
+    {
+      "testCaseId": "TC-MOD12-01",
+      "requirementNumber": "REQ-M12-01",
+      "requirementName": "Quotation-to-Order Auto-Conversion, Stock Decrement & Idempotency",
+      "module": "Module 12: Quotation-to-Order Conversion",
+      "priority": "CRITICAL",
+      "testingType": "Core Business Workflow",
+      "objective": "Verify quotation acceptance generates confirmed order, deducts stock, and rejects duplicate acceptance.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "POST /api/quotes/RFQ-2026-830/accept -> verify order created",
+        "Check inventory decremented by 100",
+        "POST duplicate acceptance -> verify 400 rejection"
+      ],
+      "expectedResults": "Order created, stock decremented, duplicate acceptance rejected with 400.",
+      "actualResults": "Order created: ORD-2026-3054, Stock reduced: 319 -> 219, Duplicate reject: HTTP 400",
+      "evidence": {
+        "id": "EVD-MOD12-01",
+        "orderId": "ORD-2026-3054",
+        "initialStock": 319,
+        "updatedStock": 219,
+        "dupStatus": 400
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.738Z"
+    },
+    {
+      "testCaseId": "TC-MOD13-01",
+      "requirementNumber": "REQ-M13-01",
+      "requirementName": "Order Fulfillment Pipeline & Tracking Dispatch",
+      "module": "Module 13: Order Management",
+      "priority": "HIGH",
+      "testingType": "Workflow & Operations",
+      "objective": "Verify Order Manager can transition status to Shipped and record courier tracking number.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "PUT /api/orders/ORD-2026-3054/status with status: Shipped and tracking"
+      ],
+      "expectedResults": "HTTP 200 with status Shipped.",
+      "actualResults": "HTTP 200, status: \"Shipped\", tracking: EXP-88991122",
+      "evidence": {
+        "id": "EVD-MOD13-01",
+        "orderId": "ORD-2026-3054",
+        "status": "Shipped"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.748Z"
+    },
+    {
+      "testCaseId": "TC-MOD14-01",
+      "requirementNumber": "REQ-M14-01",
+      "requirementName": "Payment Method Handling & PO Approval State",
+      "module": "Module 14: Payment Management",
+      "priority": "HIGH",
+      "testingType": "Financial Logic",
+      "objective": "Verify Purchase Order method initializes paymentStatus as \"Pending Approval\" rather than Paid.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "POST /api/orders with paymentMethod: Purchase Order"
+      ],
+      "expectedResults": "HTTP 201 with paymentStatus: \"Pending Approval\".",
+      "actualResults": "HTTP 201, paymentStatus: \"Pending Approval\"",
+      "evidence": {
+        "id": "EVD-MOD14-01",
+        "orderId": "ORD-2026-3782",
+        "paymentStatus": "Pending Approval"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.762Z"
+    },
+    {
+      "testCaseId": "TC-MOD15-01",
+      "requirementNumber": "REQ-M15-01",
+      "requirementName": "Warehouse Inventory Restocking Adjustment",
+      "module": "Module 15: Inventory Management",
+      "priority": "HIGH",
+      "testingType": "Operations",
+      "objective": "Verify Inventory Manager can execute manual stock adjustments and update warehouse records.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/inventory",
+        "PUT /api/inventory/:id with +25 units"
+      ],
+      "expectedResults": "HTTP 200 with updated stock count.",
+      "actualResults": "Retrieved 35 inventory items. Restocked count: 234",
+      "evidence": {
+        "id": "EVD-MOD15-01",
+        "adjustedStock": 234
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.783Z"
+    },
+    {
+      "testCaseId": "TC-MOD16-01",
+      "requirementNumber": "REQ-M16-01",
+      "requirementName": "Automated $500 Free International Express Threshold",
+      "module": "Module 16: Shipping and Delivery",
+      "priority": "HIGH",
+      "testingType": "Logistics Business Rule",
+      "objective": "Verify orders >= $500 qualify for free express shipping, while orders < $500 calculate $35 courier fee.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Evaluate freight calculation for $300 order vs $600 order"
+      ],
+      "expectedResults": "Subtotal < 500: $35. Subtotal >= 500: $0.",
+      "actualResults": "Under $500: $35, Over $500: $0",
+      "evidence": {
+        "id": "EVD-MOD16-01",
+        "under500": 35,
+        "over500": 0
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.783Z"
+    },
+    {
+      "testCaseId": "TC-MOD17-01",
+      "requirementNumber": "REQ-M17-01",
+      "requirementName": "Executive KPI Dashboard & Activity Audit Trail",
+      "module": "Module 17: Admin Management Suite",
+      "priority": "HIGH",
+      "testingType": "Analytics & Auditing",
+      "objective": "Verify executive metrics endpoint returns revenue and audit log records actor and timestamp.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/admin/stats",
+        "GET /api/audit-logs"
+      ],
+      "expectedResults": "HTTP 200 on stats and audit logs with chronological events.",
+      "actualResults": "Revenue: $903.60, Audit entries: 9",
+      "evidence": {
+        "id": "EVD-MOD17-01",
+        "revenue": 903.6,
+        "logCount": 9
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.806Z"
+    },
+    {
+      "testCaseId": "TC-MOD18-01",
+      "requirementNumber": "REQ-M18-01",
+      "requirementName": "RBAC Privilege Enforcement (401 / 403 / 200)",
+      "module": "Module 18: Role-Based Access Control",
+      "priority": "CRITICAL",
+      "testingType": "Authorization Security",
+      "objective": "Verify unauthenticated requests return 401, customer tokens return 403, and admin tokens return 200.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/audit-logs unauthenticated",
+        "GET with customer token",
+        "GET with admin token"
+      ],
+      "expectedResults": "Unauth: 401, Customer: 403, Admin: 200.",
+      "actualResults": "Unauth: HTTP 401, Customer: HTTP 403, Admin: HTTP 200",
+      "evidence": {
+        "id": "EVD-MOD18-01",
+        "unauth": 401,
+        "cust": 403,
+        "admin": 200
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.820Z"
+    },
+    {
+      "testCaseId": "TC-MOD19-01",
+      "requirementNumber": "REQ-M19-01",
+      "requirementName": "Customer Password Masking & Credential Sanitization",
+      "module": "Module 19: Customer Data Privacy",
+      "priority": "CRITICAL",
+      "testingType": "Data Privacy",
+      "objective": "Verify user query responses strip plain text passwords from JSON payloads.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "GET /api/users with admin token",
+        "Inspect user objects for password field"
+      ],
+      "expectedResults": "Zero user objects contain password property.",
+      "actualResults": "Password leak detected: false",
+      "evidence": {
+        "id": "EVD-MOD19-01",
+        "passwordExposed": false
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.833Z"
+    },
+    {
+      "testCaseId": "TC-MOD19-02",
+      "requirementNumber": "REQ-M19-02",
+      "requirementName": "Cross-Tenant Customer Order History Isolation",
+      "module": "Module 19: Customer Data Privacy",
+      "priority": "HIGH",
+      "testingType": "Data Privacy & Authorization",
+      "objective": "Audit whether GET /api/orders without query filters leaks orders belonging to other customers.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Customer A queries GET /api/orders without email param",
+        "Verify if orders of Customer B are returned"
+      ],
+      "expectedResults": "Endpoint should automatically scope orders to authenticated customer or require admin role.",
+      "actualResults": "VULNERABILITY IDENTIFIED: GET /api/orders returned 5 orders from all customers.",
+      "evidence": {
+        "id": "EVD-MOD19-02",
+        "totalReturned": 5,
+        "leaksOtherOrders": true
+      },
+      "testStatus": "FAIL",
+      "securityFindings": "Broken Object-Level Authorization (BOLA): GET /api/orders without role check returns cross-tenant order history.",
+      "recommendedFix": "Enforce authentication middleware on GET /api/orders: if role is customer, automatically filter by req.currentUser.email.",
+      "executedAt": "2026-11-17T15:18:53.833Z"
+    },
+    {
+      "testCaseId": "TC-MOD20-01",
+      "requirementNumber": "REQ-M20-01",
+      "requirementName": "OWASP Security Headers & Malicious File Upload Rejection",
+      "module": "Module 20: API Security",
+      "priority": "CRITICAL",
+      "testingType": "Defensive Security",
+      "objective": "Verify defensive HTTP security headers and rejection of non-image MIME executable uploads.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Inspect headers on GET /api/health",
+        "POST /api/upload with javascript data URL"
+      ],
+      "expectedResults": "Security headers present, no x-powered-by, executable upload rejected with 400.",
+      "actualResults": "Headers verified: true, Upload rejection: HTTP 400",
+      "evidence": {
+        "id": "EVD-MOD20-01",
+        "uploadStatus": 400,
+        "headers": {
+          "access-control-allow-origin": "*",
+          "connection": "keep-alive",
+          "content-length": "126",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Tue, 17 Nov 2026 15:18:53 GMT",
+          "etag": "W/\"7e-ZfGbr222/Ojp0FR7FvjyWUXWkT8\"",
+          "keep-alive": "timeout=5",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "x-xss-protection": "1; mode=block"
+        }
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.836Z"
+    },
+    {
+      "testCaseId": "TC-MOD21-01",
+      "requirementNumber": "REQ-M21-01",
+      "requirementName": "Relational Foreign Key Consistency (Quote <-> Order)",
+      "module": "Module 21: Database Integrity",
+      "priority": "CRITICAL",
+      "testingType": "Database Integrity",
+      "objective": "Verify bidirectional foreign key integrity between Quotation record and Confirmed Order.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Verify quote.orderId === order.id",
+        "Verify order.quoteId === quote.id"
+      ],
+      "expectedResults": "Bidirectional foreign key match.",
+      "actualResults": "quote.orderId: ORD-2026-3054, order.quoteId: RFQ-2026-830",
+      "evidence": {
+        "id": "EVD-MOD21-01",
+        "quoteOrderId": "ORD-2026-3054",
+        "orderQuoteId": "RFQ-2026-830"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:53.844Z"
+    },
+    {
+      "testCaseId": "TC-MOD22-01",
+      "requirementNumber": "REQ-M22-01",
+      "requirementName": "API Latency Benchmark & Parallel Concurrency Burst",
+      "module": "Module 22: Responsive & Performance",
+      "priority": "HIGH",
+      "testingType": "Performance Benchmark",
+      "objective": "Verify average latency < 80ms and server completes 20 parallel requests with 0 dropped packets.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Execute 30 sequential requests",
+        "Dispatch 20 parallel requests via Promise.all"
+      ],
+      "expectedResults": "Avg latency < 80ms, 100% burst success in < 800ms.",
+      "actualResults": "Avg latency: 1.76ms (P95: 4.04ms), Burst: 20/20 in 113.57ms (All OK: true)",
+      "evidence": {
+        "id": "EVD-MOD22-01",
+        "avgLatency": 1.76,
+        "p95": 4.04,
+        "burstDurationMs": 113.57,
+        "burstAllOk": true
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:54.019Z"
+    },
+    {
+      "testCaseId": "TC-E2E-01",
+      "requirementNumber": "REQ-WF-01",
+      "requirementName": "End-to-End Wholesale Commercial Purchase Lifecycle",
+      "module": "Phase 3: Business Workflow Testing",
+      "priority": "CRITICAL",
+      "testingType": "End-to-End Business Workflow",
+      "objective": "Verify complete lifecycle: RFQ submission -> admin counter-offer -> acceptance -> order generation.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Submit RFQ",
+        "Admin counter-offers $1.15",
+        "Accept quotation",
+        "Verify order generated"
+      ],
+      "expectedResults": "Confirmed Order generated with Net 30 terms and DHL tracking.",
+      "actualResults": "Created Order ORD-2026-2243 ($207.5) from RFQ RFQ-2026-982",
+      "evidence": {
+        "id": "EVD-E2E-01",
+        "orderId": "ORD-2026-2243",
+        "quoteId": "RFQ-2026-982"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:54.059Z"
+    },
+    {
+      "testCaseId": "TC-E2E-02",
+      "requirementNumber": "REQ-WF-02",
+      "requirementName": "Edge Case: Empty RFQ Items Rejection",
+      "module": "Phase 3: Business Workflow Testing",
+      "priority": "HIGH",
+      "testingType": "Validation & Edge Case",
+      "objective": "Verify RFQ submission with zero items is gracefully handled or flagged.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "POST /api/quotes with items: []"
+      ],
+      "expectedResults": "HTTP response handles empty items without server crash.",
+      "actualResults": "Server responded with HTTP 201. RFQ ID: RFQ-2026-652",
+      "evidence": {
+        "id": "EVD-E2E-02",
+        "status": 201
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:54.068Z"
+    },
+    {
+      "testCaseId": "TC-E2E-03",
+      "requirementNumber": "REQ-WF-03",
+      "requirementName": "Quotation Price Negotiation & Revision Pipeline",
+      "module": "Phase 3: Business Workflow Testing",
+      "priority": "HIGH",
+      "testingType": "Workflow & Negotiation",
+      "objective": "Verify customer can submit formal price revision request and update quotation state.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "POST /api/quotes/RFQ-2026-486/revision with revision notes"
+      ],
+      "expectedResults": "HTTP 200 with quotation status \"Revision Requested\".",
+      "actualResults": "HTTP 200, quote status: \"Revision Requested\"",
+      "evidence": {
+        "id": "EVD-E2E-03",
+        "quoteId": "RFQ-2026-486",
+        "status": "Revision Requested"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:54.108Z"
+    },
+    {
+      "testCaseId": "TC-E2E-04",
+      "requirementNumber": "REQ-WF-04",
+      "requirementName": "Duplicate Order Generation Prevention (Idempotency Guard)",
+      "module": "Phase 3: Business Workflow Testing",
+      "priority": "CRITICAL",
+      "testingType": "Integrity Guard",
+      "objective": "Verify system rejects secondary acceptance requests on previously converted quotes.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "POST /api/quotes/RFQ-2026-982/accept a second time"
+      ],
+      "expectedResults": "HTTP 400 Bad Request with already accepted rejection message.",
+      "actualResults": "HTTP 400, error: \"Quotation RFQ-2026-982 has already been accepted and converted into Order ORD-2026-2243.\"",
+      "evidence": {
+        "id": "EVD-E2E-04",
+        "status": 400,
+        "error": "Quotation RFQ-2026-982 has already been accepted and converted into Order ORD-2026-2243."
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:54.116Z"
+    },
+    {
+      "testCaseId": "TC-E2E-05",
+      "requirementNumber": "REQ-WF-05",
+      "requirementName": "Inventory Conflict & Negative Integer Floor Protection",
+      "module": "Phase 3: Business Workflow Testing",
+      "priority": "HIGH",
+      "testingType": "Data Consistency",
+      "objective": "Verify excessive order quantities cannot drive warehouse stock below zero.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Order stock + 999 units",
+        "Inspect stock floor"
+      ],
+      "expectedResults": "Stock floored at 0 without negative number corruption.",
+      "actualResults": "Stock floored at: 0 (>= 0: true)",
+      "evidence": {
+        "id": "EVD-E2E-05",
+        "stockAfter": 0
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T15:18:54.134Z"
+    },
+    {
+      "testCaseId": "TC-E2E-06",
+      "requirementNumber": "REQ-WF-06",
+      "requirementName": "Unauthorized Cross-Tenant Access Audit (BOLA / IDOR)",
+      "module": "Phase 3: Business Workflow Testing",
+      "priority": "HIGH",
+      "testingType": "Security / Authorization (BOLA)",
+      "objective": "Verify whether Customer A can retrieve Customer B orders by querying with Customer B email.",
+      "preconditions": "Server online",
+      "testProcedure": [
+        "Customer A queries GET /api/orders?email=e2e.master@luxuryatelier.com"
+      ],
+      "expectedResults": "System rejects unauthorized cross-tenant read with 403 Forbidden.",
+      "actualResults": "DEFECT FOUND: Customer A successfully retrieved 1 orders belonging to Buyer Master.",
+      "evidence": {
+        "id": "EVD-E2E-06",
+        "status": 200,
+        "returnedOrders": 1
+      },
+      "testStatus": "FAIL",
+      "securityFindings": "BOLA / IDOR: Arbitrary cross-tenant order access via query parameter.",
+      "recommendedFix": "Enforce tenant ownership: if caller is customer, ignore req.query.email and filter strictly by caller token email.",
+      "executedAt": "2026-11-17T15:18:54.138Z"
+    }
+  ],
+  "bugLog": [
+    {
+      "bugId": "BUG-M19-BOLA-01",
+      "testCaseId": "TC-MOD19-02",
+      "module": "Module 19: Customer Data Privacy",
+      "feature": "Order History Scoping (GET /api/orders)",
+      "severity": "HIGH",
+      "priority": "HIGH",
+      "description": "Broken Object-Level Authorization (BOLA) in GET /api/orders: Public or customer callers without email filter can view other companies orders.",
+      "preconditions": "Orders from multiple companies exist in database.",
+      "stepsToReproduce": [
+        "Send GET /api/orders without email parameter",
+        "Inspect returned list of orders"
+      ],
+      "expectedResult": "Customer should only see their own orders, or receive 401/403 without admin credentials.",
+      "actualResult": "Returns all orders across all wholesale buyers.",
+      "evidence": "EVD-MOD19-02",
+      "rootCause": "server/index.js lines 644-657 filters by email only if req.query.email is explicitly passed by caller.",
+      "recommendedFix": "Bind filtering to authenticated user session: const user = getAuthUser(req); if (user?.role === \"customer\") filtered = filtered.filter(o => o.customer?.email === user.email);",
+      "retestStatus": "Documented in Initial Audit"
+    },
+    {
+      "bugId": "BUG-E2E-BOLA-02",
+      "testCaseId": "TC-E2E-06",
+      "module": "Phase 3: Business Workflow Testing",
+      "feature": "Cross-Tenant Order Isolation (GET /api/orders)",
+      "severity": "HIGH",
+      "priority": "HIGH",
+      "description": "Customer A can view Customer B orders by querying /api/orders?email=target@company.com.",
+      "preconditions": "Orders exist for target customer account.",
+      "stepsToReproduce": [
+        "Log in as Customer A",
+        "Send GET /api/orders?email=customerB@example.com"
+      ],
+      "expectedResult": "HTTP 403 Forbidden or empty array.",
+      "actualResult": "HTTP 200 OK returning Customer B private order and shipping address details.",
+      "evidence": "EVD-E2E-06",
+      "rootCause": "server/index.js lines 644-657 filters solely by req.query.email without verifying if requester owns that email or has admin role.",
+      "recommendedFix": "Enforce tenant ownership: if (user.role === \"customer\") { email = user.email; }",
+      "retestStatus": "Documented in Initial Audit"
+    }
+  ]
+}

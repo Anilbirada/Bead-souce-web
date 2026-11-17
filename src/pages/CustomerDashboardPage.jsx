@@ -34,6 +34,7 @@ import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useWishlist } from '../context/WishlistContext';
 import { api } from '../utils/api';
+import BrandLogo from '../components/common/BrandLogo';
 
 export default function CustomerDashboardPage({ onNavigate, initialTab = 'overview' }) {
   const { 
@@ -1355,13 +1356,10 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
               {/* Header with BeadsSource Branding */}
               <div className="flex flex-col sm:flex-row justify-between items-start gap-4 pb-6 border-b border-[#E9E5DC]">
                 <div>
-                  <h2 className="font-serif text-2xl font-bold tracking-tight text-[#176B68]">
-                    BEADSSOURCE
-                  </h2>
-                  <p className="text-[10px] text-gray-500 uppercase tracking-widest font-semibold">
-                    Wholesale Fine Jewellery &amp; Gemstone Export
-                  </p>
-                  <p className="text-gray-500 mt-1">Direct Factory Export Division</p>
+                  <div className="mb-2">
+                    <BrandLogo variant="default" size="md" withSubtitle={true} />
+                  </div>
+                  <p className="text-gray-500 mt-2">Direct Factory Export Division</p>
                   <p className="text-gray-500">support@beadssource.com &bull; +1 (800) 555-0199</p>
                 </div>
 

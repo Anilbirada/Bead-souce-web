@@ -31,6 +31,7 @@ import { useQuote } from '../../context/QuoteContext';
 import { useAuth } from '../../context/AuthContext';
 import { useCurrency } from '../../context/CurrencyContext';
 import { api } from '../../utils/api';
+import BrandLogo from './BrandLogo';
 
 export default function Header({ 
   currentPage, 
@@ -169,22 +170,12 @@ export default function Header({
               <Menu className="w-6 h-6" />
             </button>
 
-            {/* BeadsSource Brand Logo */}
+            {/* Real Official BeadsSource Brand Logo */}
             <div 
               onClick={() => onNavigate('home')}
-              className="cursor-pointer group flex items-center gap-3 select-none"
+              className="cursor-pointer group flex items-center select-none py-1"
             >
-              <div className="w-10 h-10 rounded-full bg-linear-to-br from-[#191919] via-[#2D2A26] to-[#C49A3A] flex items-center justify-center text-white shadow-sm shadow-[#C49A3A]/20 group-hover:scale-105 transition-transform border border-[#C49A3A]/30">
-                <span className="font-serif font-bold text-xl tracking-tighter text-[#F8F6F1]">B</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif text-2xl font-bold tracking-tight text-[#191919] group-hover:text-[#C49A3A] transition-colors">
-                  BEADS<span className="text-[#C49A3A]">SOURCE</span>
-                </span>
-                <span className="text-[9.5px] uppercase tracking-[0.28em] text-[#78716C] font-semibold -mt-1">
-                  Fine Wholesale Jewelry
-                </span>
-              </div>
+              <BrandLogo variant="default" size="md" withSubtitle={true} />
             </div>
           </div>
 

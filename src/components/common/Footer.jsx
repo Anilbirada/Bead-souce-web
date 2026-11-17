@@ -11,6 +11,7 @@ import {
   CheckCircle2, 
   FileText 
 } from 'lucide-react';
+import BrandLogo from './BrandLogo';
 
 export default function Footer({ onNavigate }) {
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -76,13 +77,11 @@ export default function Footer({ onNavigate }) {
           
           {/* Col 1: Brand & International Operations */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-linear-to-br from-[#D4AF37] to-[#8C6212] flex items-center justify-center text-white font-serif font-bold text-lg shadow-sm">
-                B
-              </div>
-              <span className="font-serif text-2xl font-bold tracking-tight text-white">
-                BEADS<span className="text-[#C49A3A]">SOURCE</span>
-              </span>
+            <div 
+              onClick={() => onNavigate && onNavigate('home')}
+              className="cursor-pointer inline-block"
+            >
+              <BrandLogo variant="dark" size="lg" withSubtitle={true} />
             </div>
 
             <p className="text-xs text-[#9E9789] leading-relaxed max-w-sm">
