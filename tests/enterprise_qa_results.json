@@ -1,0 +1,1266 @@
+{
+  "totalRequirements": 27,
+  "totalTestCases": 47,
+  "passed": 45,
+  "failed": 2,
+  "partial": 0,
+  "blocked": 0,
+  "notImplemented": 0,
+  "notVerified": 0,
+  "passRatePercent": 95.7,
+  "bugMetrics": {
+    "critical": 0,
+    "high": 2,
+    "medium": 0,
+    "low": 0,
+    "totalBugs": 2
+  },
+  "executedAt": "2026-11-17T14:03:54.500Z",
+  "testCatalog": [
+    {
+      "testCaseId": "BS-TC-001",
+      "requirementNumber": "REQ-HOMEPAGE-01",
+      "requirementName": "Homepage API Health & Brand Contract",
+      "module": "Module 1 - Public Website and Homepage",
+      "priority": "HIGH",
+      "testingType": "API & Contract",
+      "objective": "Verify that the platform public API endpoint responds with brand metadata and healthy status.",
+      "preconditions": "Server is running in production or staging mode.",
+      "testProcedure": [
+        "Send GET /api/health",
+        "Validate status is 200",
+        "Check brand name in response"
+      ],
+      "expectedResults": "HTTP 200 with status \"ok\" and brand string.",
+      "actualResults": "HTTP 200, brand: \"BeadsSource International Wholesale API\" in 103.15ms",
+      "evidence": {
+        "id": "BS-TC-001-E01",
+        "status": 200,
+        "payload": {
+          "status": "ok",
+          "brand": "BeadsSource International Wholesale API",
+          "environment": "production",
+          "time": "2026-11-17T14:03:53.963Z"
+        }
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:53.978Z"
+    },
+    {
+      "testCaseId": "BS-TC-002",
+      "requirementNumber": "REQ-HOMEPAGE-02",
+      "requirementName": "Hero Announcements and Promotional Banners",
+      "module": "Module 1 - Public Website and Homepage",
+      "priority": "MEDIUM",
+      "testingType": "Functional",
+      "objective": "Verify that promotional announcements, hero messages, and FAQ content are served.",
+      "preconditions": "Content document exists in database.",
+      "testProcedure": [
+        "Send GET /api/content",
+        "Verify announcement text and heroSlides exist"
+      ],
+      "expectedResults": "HTTP 200 returning dynamic storefront CMS content.",
+      "actualResults": "HTTP 200, announcement: \"International Wholesale Pricing • T...\", slides: 5",
+      "evidence": {
+        "id": "BS-TC-002-E01",
+        "status": 200,
+        "announcement": "International Wholesale Pricing • Tier Discounts up to 30% Off • Certified Lead-Free & Genuine Gemstones"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:53.988Z"
+    },
+    {
+      "testCaseId": "BS-TC-003",
+      "requirementNumber": "REQ-HOMEPAGE-03",
+      "requirementName": "Featured Collections and Trending Product Queries",
+      "module": "Module 1 - Public Website and Homepage",
+      "priority": "MEDIUM",
+      "testingType": "Functional",
+      "objective": "Verify featured product collections display on homepage showcase sections.",
+      "preconditions": "Products with isFeatured flag exist in catalog.",
+      "testProcedure": [
+        "Send GET /api/products?featured=true",
+        "Check all returned items have isFeatured: true"
+      ],
+      "expectedResults": "Filtered list containing only featured products.",
+      "actualResults": "Received 23 featured products in 5.89ms.",
+      "evidence": {
+        "id": "BS-TC-003-E01",
+        "count": 23
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:53.995Z"
+    },
+    {
+      "testCaseId": "BS-TC-010",
+      "requirementNumber": "REQ-CATALOG-01",
+      "requirementName": "Complete Wholesale Product Listing Retrieval",
+      "module": "Module 2 - Product Catalogue",
+      "priority": "CRITICAL",
+      "testingType": "Functional & Data",
+      "objective": "Verify that the product catalog returns all available wholesale SKUs with complete pricing.",
+      "preconditions": "Product catalog is populated in database.",
+      "testProcedure": [
+        "Send GET /api/products",
+        "Verify count >= 30",
+        "Verify essential fields: id, sku, price, stock"
+      ],
+      "expectedResults": "HTTP 200 with complete array of catalog objects.",
+      "actualResults": "Retrieved 35 products. Sample SKU: CZ-TOG-1014, Price: $1.5",
+      "evidence": {
+        "id": "BS-TC-010-E01",
+        "totalProducts": 35,
+        "sampleSku": "CZ-TOG-1014"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.002Z"
+    },
+    {
+      "testCaseId": "BS-TC-011",
+      "requirementNumber": "REQ-CATALOG-02",
+      "requirementName": "Wholesale Category Taxonomy and Product Counts",
+      "module": "Module 2 - Product Catalogue",
+      "priority": "HIGH",
+      "testingType": "Data Integrity",
+      "objective": "Verify that all wholesale product categories are properly classified with product count badges.",
+      "preconditions": "Category records exist.",
+      "testProcedure": [
+        "Send GET /api/categories",
+        "Verify array length >= 10"
+      ],
+      "expectedResults": "HTTP 200 returning full taxonomy with category slugs and product counts.",
+      "actualResults": "Retrieved 12 categories.",
+      "evidence": {
+        "id": "BS-TC-011-E01",
+        "categoriesCount": 12
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.010Z"
+    },
+    {
+      "testCaseId": "BS-TC-012",
+      "requirementNumber": "REQ-CATALOG-03",
+      "requirementName": "Product Price Sorting (Ascending Effective Price)",
+      "module": "Module 2 - Product Catalogue",
+      "priority": "MEDIUM",
+      "testingType": "Functional",
+      "objective": "Verify catalog sorting by effective sale price ascending works consistently.",
+      "preconditions": "Products with varying prices exist.",
+      "testProcedure": [
+        "Send GET /api/products?sort=price-low",
+        "Verify effPrice[i] >= effPrice[i-1]"
+      ],
+      "expectedResults": "Items sorted monotonically by effective price ascending.",
+      "actualResults": "Sorted successfully: true. First: $0.3, Last: $20",
+      "evidence": {
+        "id": "BS-TC-012-E01",
+        "minPrice": 0.3,
+        "maxPrice": 20
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.016Z"
+    },
+    {
+      "testCaseId": "BS-TC-020",
+      "requirementNumber": "REQ-SEARCH-01",
+      "requirementName": "Keyword and SKU Search Verification",
+      "module": "Module 3 - Product Search and Filtering",
+      "priority": "HIGH",
+      "testingType": "Functional",
+      "objective": "Verify search returns matching products by name and exact factory SKU.",
+      "preconditions": "Products with keywords and SKUs exist in database.",
+      "testProcedure": [
+        "Search by keyword \"clasp\"",
+        "Search by exact SKU \"CZ-TOG-1014\"",
+        "Verify matching results returned"
+      ],
+      "expectedResults": "Accurate search results matching query criteria.",
+      "actualResults": "Name search found 3 items. SKU search found 1 items.",
+      "evidence": {
+        "id": "BS-TC-020-E01",
+        "keywordResults": 3,
+        "skuResults": 1
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.034Z"
+    },
+    {
+      "testCaseId": "BS-TC-021",
+      "requirementNumber": "REQ-SEARCH-02",
+      "requirementName": "Search Empty State and Boundary Filtering",
+      "module": "Module 3 - Product Search and Filtering",
+      "priority": "MEDIUM",
+      "testingType": "Functional",
+      "objective": "Verify system gracefully handles non-matching search queries with empty arrays.",
+      "preconditions": "Non-matching keyword used.",
+      "testProcedure": [
+        "Search by \"NONEXISTENT_XYZ_9999\"",
+        "Verify result is empty array [] with status 200"
+      ],
+      "expectedResults": "HTTP 200 with empty array [].",
+      "actualResults": "HTTP 200, array length: 0",
+      "evidence": {
+        "id": "BS-TC-021-E01",
+        "status": 200,
+        "count": 0
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.034Z"
+    },
+    {
+      "testCaseId": "BS-TC-022",
+      "requirementNumber": "REQ-SEARCH-03",
+      "requirementName": "Price Range Slider Filtering",
+      "module": "Module 3 - Product Search and Filtering",
+      "priority": "MEDIUM",
+      "testingType": "Functional",
+      "objective": "Verify price filtering strictly enforces lower and upper bounds.",
+      "preconditions": "Products exist in 5 - 15 price range.",
+      "testProcedure": [
+        "GET /api/products?minPrice=5&maxPrice=15",
+        "Verify all items satisfy 5 <= price <= 15"
+      ],
+      "expectedResults": "All returned items within range.",
+      "actualResults": "Returned 7 items, all properly bounded: true",
+      "evidence": {
+        "id": "BS-TC-022-E01",
+        "count": 7,
+        "bounded": true
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.042Z"
+    },
+    {
+      "testCaseId": "BS-TC-030",
+      "requirementNumber": "REQ-PRODDETAIL-01",
+      "requirementName": "Product Detail Lookup by ID and Slug",
+      "module": "Module 4 - Product Details and Recommendations",
+      "priority": "HIGH",
+      "testingType": "Functional",
+      "objective": "Verify product details load accurately via either alphanumeric ID or SEO slug.",
+      "preconditions": "Target product exists.",
+      "testProcedure": [
+        "GET /api/products/bs-001",
+        "GET /api/products/1014mm-gold-micro-pave-cz-toggle-clasp-connector",
+        "Verify both return matching SKU"
+      ],
+      "expectedResults": "HTTP 200 with identical SKU details.",
+      "actualResults": "ID lookup: CZ-TOG-1014, Slug lookup: CZ-TOG-1014",
+      "evidence": {
+        "id": "BS-TC-030-E01",
+        "idSku": "CZ-TOG-1014",
+        "slugSku": "CZ-TOG-1014"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.057Z"
+    },
+    {
+      "testCaseId": "BS-TC-031",
+      "requirementNumber": "REQ-PRODDETAIL-02",
+      "requirementName": "Non-Existent Product Error Contract (404)",
+      "module": "Module 4 - Product Details and Recommendations",
+      "priority": "MEDIUM",
+      "testingType": "Contract Verification",
+      "objective": "Verify that invalid product IDs return structured 404 responses.",
+      "preconditions": "Invalid product ID supplied.",
+      "testProcedure": [
+        "GET /api/products/invalid-id-xyz-9999",
+        "Verify HTTP status 404 with error message"
+      ],
+      "expectedResults": "HTTP 404 with JSON error property.",
+      "actualResults": "HTTP 404, error: \"Product not found\"",
+      "evidence": {
+        "id": "BS-TC-031-E01",
+        "status": 404,
+        "error": "Product not found"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.058Z"
+    },
+    {
+      "testCaseId": "BS-TC-032",
+      "requirementNumber": "REQ-RECOMMEND-01",
+      "requirementName": "Smart Related Product Recommendation Engine",
+      "module": "Module 4 - Product Details and Recommendations",
+      "priority": "HIGH",
+      "testingType": "Business Logic",
+      "objective": "Verify that the recommendation engine dynamically pairs related and complementary items.",
+      "preconditions": "Target product exists and belongs to a category.",
+      "testProcedure": [
+        "GET /api/products/bs-001/recommendations",
+        "Verify recommended items do not include self"
+      ],
+      "expectedResults": "Array of related products in same category/tags excluding current item.",
+      "actualResults": "Retrieved 2 related items, 8 pairings. Self-excluded: true",
+      "evidence": {
+        "id": "BS-TC-032-E01",
+        "relatedCount": 2,
+        "pairingsCount": 8
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.063Z"
+    },
+    {
+      "testCaseId": "BS-TC-040",
+      "requirementNumber": "REQ-ADVERTISING-01",
+      "requirementName": "Pinterest-Style Visual Discovery Campaigns Feed",
+      "module": "Module 5 - Product Advertising",
+      "priority": "HIGH",
+      "testingType": "Functional",
+      "objective": "Verify advertising campaigns feed loads visual pins with masonry card dimensions and tags.",
+      "preconditions": "Active visual campaigns exist in database.",
+      "testProcedure": [
+        "GET /api/campaigns",
+        "Verify active campaigns list has images, tags, and placement specs"
+      ],
+      "expectedResults": "HTTP 200 returning list of campaign cards.",
+      "actualResults": "Retrieved 6 campaign pins. Sample tag: \"Gemstones\"",
+      "evidence": {
+        "id": "BS-TC-040-E01",
+        "totalCampaigns": 6,
+        "sampleCamp": "camp-001"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.080Z"
+    },
+    {
+      "testCaseId": "BS-TC-041",
+      "requirementNumber": "REQ-ADVERTISING-02",
+      "requirementName": "Visual Pin Engagement Telemetry Tracking",
+      "module": "Module 5 - Product Advertising",
+      "priority": "MEDIUM",
+      "testingType": "Analytics & Tracking",
+      "objective": "Verify click and impression events on visual pins are accurately tracked in the database.",
+      "preconditions": "Valid campaign ID exists.",
+      "testProcedure": [
+        "POST /api/campaigns/camp-001/track with { type: 'click' }",
+        "Check success response"
+      ],
+      "expectedResults": "HTTP 200 with success status and updated metrics.",
+      "actualResults": "HTTP 200, success: true, new clicks: 186",
+      "evidence": {
+        "id": "BS-TC-041-E01",
+        "status": 200,
+        "clicks": 186
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.080Z"
+    },
+    {
+      "testCaseId": "BS-TC-050",
+      "requirementNumber": "REQ-AUTH-01",
+      "requirementName": "Customer Wholesale Registration Workflow",
+      "module": "Module 6 - Customer Registration and Authentication",
+      "priority": "CRITICAL",
+      "testingType": "Functional & Security",
+      "objective": "Verify new wholesale buyer registration creates account and returns sanitized user object.",
+      "preconditions": "Unique email address provided.",
+      "testProcedure": [
+        "POST /api/auth/register with registration payload",
+        "Verify password field is stripped from response"
+      ],
+      "expectedResults": "HTTP 201 with auth token and user object without password field.",
+      "actualResults": "HTTP 201, token generated: true, password leaked: false",
+      "evidence": {
+        "id": "BS-TC-050-E01",
+        "status": 201,
+        "hasToken": true
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.101Z"
+    },
+    {
+      "testCaseId": "BS-TC-051",
+      "requirementNumber": "REQ-AUTH-02",
+      "requirementName": "Duplicate Email Registration Prevention",
+      "module": "Module 6 - Customer Registration and Authentication",
+      "priority": "HIGH",
+      "testingType": "Validation & Security",
+      "objective": "Verify the system rejects duplicate email registrations with HTTP 400.",
+      "preconditions": "Account with email already exists.",
+      "testProcedure": [
+        "POST /api/auth/register with same email",
+        "Verify HTTP 400 Bad Request"
+      ],
+      "expectedResults": "HTTP 400 with duplicate email error message.",
+      "actualResults": "HTTP 400, error: \"An account with this email already exists\"",
+      "evidence": {
+        "id": "BS-TC-051-E01",
+        "status": 400,
+        "error": "An account with this email already exists"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.101Z"
+    },
+    {
+      "testCaseId": "BS-TC-052",
+      "requirementNumber": "REQ-AUTH-03",
+      "requirementName": "Customer Login Authentication & Invalid Credential Guard",
+      "module": "Module 6 - Customer Registration and Authentication",
+      "priority": "CRITICAL",
+      "testingType": "Authentication Security",
+      "objective": "Verify login succeeds with valid credentials and rejects invalid credentials with 401.",
+      "preconditions": "Registered customer account exists.",
+      "testProcedure": [
+        "POST /api/auth/login with valid password -> verify HTTP 200",
+        "POST /api/auth/login with wrong password -> verify HTTP 401"
+      ],
+      "expectedResults": "Valid: HTTP 200 with token. Invalid: HTTP 401 Unauthorized.",
+      "actualResults": "Valid login: HTTP 200. Invalid login: HTTP 401",
+      "evidence": {
+        "id": "BS-TC-052-E01",
+        "validStatus": 200,
+        "invalidStatus": 401
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.101Z"
+    },
+    {
+      "testCaseId": "BS-TC-060",
+      "requirementNumber": "REQ-PORTAL-01",
+      "requirementName": "Customer Profile and Shipping Address Management",
+      "module": "Module 7 - Customer Portal",
+      "priority": "HIGH",
+      "testingType": "Functional",
+      "objective": "Verify customer can update their business profile and shipping address securely.",
+      "preconditions": "Customer is authenticated with valid bearer token.",
+      "testProcedure": [
+        "PUT /api/auth/profile with updated address",
+        "Verify updated fields in response"
+      ],
+      "expectedResults": "HTTP 200 returning updated profile without password field.",
+      "actualResults": "HTTP 200, company: \"Rostova Fine Jewelry Paris\", city: \"Paris\"",
+      "evidence": {
+        "id": "BS-TC-060-E01",
+        "status": 200,
+        "company": "Rostova Fine Jewelry Paris"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.108Z"
+    },
+    {
+      "testCaseId": "BS-TC-070",
+      "requirementNumber": "REQ-CART-01",
+      "requirementName": "Wholesale Tiered Volume Pricing Logic",
+      "module": "Module 8 - Shopping Cart",
+      "priority": "CRITICAL",
+      "testingType": "Pricing Calculation",
+      "objective": "Verify automated tier discounts (15% at 10+, 30% at 50+) apply accurately.",
+      "preconditions": "Product list price defined.",
+      "testProcedure": [
+        "Compute Tier 1 (qty 5)",
+        "Compute Tier 2 (qty 20, 15% off)",
+        "Compute Tier 3 (qty 60, 30% off)"
+      ],
+      "expectedResults": "T1: $10.00, T2: $8.50, T3: $7.00.",
+      "actualResults": "T1: $10.00, T2: $8.50, T3: $7.00",
+      "evidence": {
+        "id": "BS-TC-070-E01",
+        "t1": 10,
+        "t2": 8.5,
+        "t3": 7
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.117Z"
+    },
+    {
+      "testCaseId": "BS-TC-071",
+      "requirementNumber": "REQ-CART-02",
+      "requirementName": "Coupon Spend Threshold Validation",
+      "module": "Module 8 - Shopping Cart",
+      "priority": "HIGH",
+      "testingType": "Business Logic",
+      "objective": "Verify coupon validates when subtotal >= minOrder, and rejects with HTTP 400 when subtotal < minOrder.",
+      "preconditions": "WHOLESALE10 coupon configured with minOrder $200.",
+      "testProcedure": [
+        "POST /api/coupons/validate with subtotal $300 -> valid",
+        "POST /api/coupons/validate with subtotal $50 -> reject 400"
+      ],
+      "expectedResults": "Valid: HTTP 200. Below threshold: HTTP 400.",
+      "actualResults": "Subtotal $300: HTTP 200 (valid: true). Subtotal $50: HTTP 400",
+      "evidence": {
+        "id": "BS-TC-071-E01",
+        "validStatus": 200,
+        "rejectStatus": 400
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.117Z"
+    },
+    {
+      "testCaseId": "BS-TC-080",
+      "requirementNumber": "REQ-RFQ-01",
+      "requirementName": "Wholesale RFQ Submission & Reference Generation",
+      "module": "Module 9 - Request for Quotation (RFQ)",
+      "priority": "CRITICAL",
+      "testingType": "Workflow Integration",
+      "objective": "Verify business customer can submit custom quotation request with quantities and target budget.",
+      "preconditions": "Catalog items exist.",
+      "testProcedure": [
+        "POST /api/quotes with custom RFQ payload",
+        "Verify RFQ reference generated with status \"In Review\""
+      ],
+      "expectedResults": "HTTP 201 with unique RFQ-2026-XXX reference and status \"In Review\".",
+      "actualResults": "HTTP 201, RFQ ID: RFQ-2026-581, status: \"In Review\"",
+      "evidence": {
+        "id": "BS-TC-080-E01",
+        "rfqId": "RFQ-2026-581",
+        "status": "In Review"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.124Z"
+    },
+    {
+      "testCaseId": "BS-TC-090",
+      "requirementNumber": "REQ-QUOTEMGMT-01",
+      "requirementName": "Administrator Quotation Review and Counter-Offer Issuance",
+      "module": "Module 10 - Quotation Management",
+      "priority": "CRITICAL",
+      "testingType": "Workflow & RBAC",
+      "objective": "Verify administrator can inspect RFQ, calculate margins, and issue binding counter-offer.",
+      "preconditions": "Open RFQ exists in database.",
+      "testProcedure": [
+        "PUT /api/quotes/RFQ-2026-581 with counter-offer details",
+        "Verify responseSent is true"
+      ],
+      "expectedResults": "HTTP 200 with counterOffer value and responseSent flag set.",
+      "actualResults": "HTTP 200, counterOffer: $1.2, responseSent: true",
+      "evidence": {
+        "id": "BS-TC-090-E01",
+        "rfqId": "RFQ-2026-581",
+        "counterOffer": 1.2
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.136Z"
+    },
+    {
+      "testCaseId": "BS-TC-100",
+      "requirementNumber": "REQ-CONVERT-01",
+      "requirementName": "Quotation-to-Order Conversion Lifecycle",
+      "module": "Module 11 - Quotation-to-Order Conversion",
+      "priority": "CRITICAL",
+      "testingType": "End-to-End Business Workflow",
+      "objective": "Verify customer accepting quote automatically generates confirmed order, assigns DHL tracking, and links quoteId.",
+      "preconditions": "Quotation in counter-offered state.",
+      "testProcedure": [
+        "POST /api/quotes/RFQ-2026-581/accept",
+        "Verify new Order record generated",
+        "Verify trackingNumber and Net 30 payment method assigned"
+      ],
+      "expectedResults": "HTTP 201 with confirmed order linked to quoteId.",
+      "actualResults": "HTTP 201, Order ID: ORD-2026-3136, Tracking: EXP-48398235",
+      "evidence": {
+        "id": "BS-TC-100-E01",
+        "orderId": "ORD-2026-3136",
+        "quoteId": "RFQ-2026-581"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.156Z"
+    },
+    {
+      "testCaseId": "BS-TC-101",
+      "requirementNumber": "REQ-CONVERT-02",
+      "requirementName": "Inventory Stock Decrement on Quotation Conversion",
+      "module": "Module 11 - Quotation-to-Order Conversion",
+      "priority": "CRITICAL",
+      "testingType": "Data Integrity",
+      "objective": "Verify accepted quotation immediately deducts ordered quantities from warehouse stock.",
+      "preconditions": "Initial stock recorded before conversion.",
+      "testProcedure": [
+        "Query GET /api/products/bs-001",
+        "Verify stock = initialStock - 100"
+      ],
+      "expectedResults": "Stock reduced from 204 to 104.",
+      "actualResults": "Stock adjusted from 204 to 104.",
+      "evidence": {
+        "id": "BS-TC-101-E01",
+        "initialStock": 204,
+        "updatedStock": 104
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.156Z"
+    },
+    {
+      "testCaseId": "BS-TC-102",
+      "requirementNumber": "REQ-CONVERT-03",
+      "requirementName": "Quotation Acceptance Idempotency Guard",
+      "module": "Module 11 - Quotation-to-Order Conversion",
+      "priority": "CRITICAL",
+      "testingType": "Integrity & Concurrency",
+      "objective": "Verify system rejects duplicate acceptance attempts on already accepted quotations.",
+      "preconditions": "Quotation status is Accepted with orderId.",
+      "testProcedure": [
+        "POST /api/quotes/RFQ-2026-581/accept a second time",
+        "Verify HTTP 400 Bad Request"
+      ],
+      "expectedResults": "HTTP 400 with duplicate conversion rejection message.",
+      "actualResults": "HTTP 400, error: \"Quotation RFQ-2026-581 has already been accepted and converted into Order ORD-2026-3136.\"",
+      "evidence": {
+        "id": "BS-TC-102-E01",
+        "status": 400,
+        "error": "Quotation RFQ-2026-581 has already been accepted and converted into Order ORD-2026-3136."
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.156Z"
+    },
+    {
+      "testCaseId": "BS-TC-110",
+      "requirementNumber": "REQ-ORDER-01",
+      "requirementName": "Order Status Pipeline and Courier Dispatch Update",
+      "module": "Module 12 - Order Management",
+      "priority": "HIGH",
+      "testingType": "Workflow & Operations",
+      "objective": "Verify Order Manager can transition status to Shipped and record courier tracking number.",
+      "preconditions": "Confirmed order exists.",
+      "testProcedure": [
+        "PUT /api/orders/ORD-2026-3136/status with status: Shipped",
+        "Verify order updated in database"
+      ],
+      "expectedResults": "HTTP 200 with status \"Shipped\" and new tracking number.",
+      "actualResults": "HTTP 200, status: \"Shipped\", tracking: EXP-99887766",
+      "evidence": {
+        "id": "BS-TC-110-E01",
+        "orderId": "ORD-2026-3136",
+        "status": "Shipped"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.168Z"
+    },
+    {
+      "testCaseId": "BS-TC-120",
+      "requirementNumber": "REQ-PAYMENT-01",
+      "requirementName": "Payment Method Assignment & Paid Status Verification",
+      "module": "Module 13 - Payment Management",
+      "priority": "HIGH",
+      "testingType": "Financial Logic",
+      "objective": "Verify direct Wire Transfer checkout assigns paymentStatus \"Paid\" upon verification.",
+      "preconditions": "Items present in payload.",
+      "testProcedure": [
+        "POST /api/orders with paymentMethod: Wire Transfer",
+        "Verify paymentStatus is \"Paid\""
+      ],
+      "expectedResults": "HTTP 201 with paymentStatus \"Paid\".",
+      "actualResults": "HTTP 201, paymentStatus: \"Paid\"",
+      "evidence": {
+        "id": "BS-TC-120-E01",
+        "orderId": "ORD-2026-5457",
+        "paymentStatus": "Paid"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.177Z"
+    },
+    {
+      "testCaseId": "BS-TC-130",
+      "requirementNumber": "REQ-INVENTORY-01",
+      "requirementName": "Warehouse Inventory Stock Inquiries & Adjustment",
+      "module": "Module 14 - Inventory Management",
+      "priority": "HIGH",
+      "testingType": "Operations & Data",
+      "objective": "Verify Inventory Manager can inspect real-time stock levels and execute manual restocking adjustments.",
+      "preconditions": "Authenticated Inventory Manager token.",
+      "testProcedure": [
+        "GET /api/inventory",
+        "PUT /api/inventory/:id with adjusted stock",
+        "Verify updated stock"
+      ],
+      "expectedResults": "HTTP 200 with updated stock count.",
+      "actualResults": "Inventory list: 35 items. Adjusted stock: 152",
+      "evidence": {
+        "id": "BS-TC-130-E01",
+        "adjustedStock": 152
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.190Z"
+    },
+    {
+      "testCaseId": "BS-TC-140",
+      "requirementNumber": "REQ-SHIPPING-01",
+      "requirementName": "International Courier Free Shipping Threshold ($500)",
+      "module": "Module 15 - Shipping and Delivery",
+      "priority": "HIGH",
+      "testingType": "Logistics Business Rule",
+      "objective": "Verify orders >= $500 qualify for free express shipping, while orders < $500 incur $35 courier fee.",
+      "preconditions": "Courier shipping rule active.",
+      "testProcedure": [
+        "Evaluate shipping for $300 order -> expect $35",
+        "Evaluate shipping for $600 order -> expect $0"
+      ],
+      "expectedResults": "Subtotal < 500: $35. Subtotal >= 500: $0.",
+      "actualResults": "Subtotal $300: $35, Subtotal $600: $0",
+      "evidence": {
+        "id": "BS-TC-140-E01",
+        "belowFee": 35,
+        "aboveFee": 0
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.190Z"
+    },
+    {
+      "testCaseId": "BS-TC-150",
+      "requirementNumber": "REQ-ADMIN-01",
+      "requirementName": "Executive KPI Dashboard Stats Aggregation",
+      "module": "Module 16 - Admin Management Suite",
+      "priority": "HIGH",
+      "testingType": "Analytics & Reporting",
+      "objective": "Verify executive metrics endpoint returns totalRevenue, active orders, and inventory units.",
+      "preconditions": "Super Admin bearer token provided.",
+      "testProcedure": [
+        "GET /api/admin/stats",
+        "Verify revenue, order counts, and category statistics"
+      ],
+      "expectedResults": "HTTP 200 with structured KPI metrics.",
+      "actualResults": "Revenue: $1249.35, Orders: 7, SKUs: 35",
+      "evidence": {
+        "id": "BS-TC-150-E01",
+        "revenue": 1249.35,
+        "orders": 7
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.206Z"
+    },
+    {
+      "testCaseId": "BS-TC-151",
+      "requirementNumber": "REQ-ADMIN-02",
+      "requirementName": "System Activity Audit Log Traceability",
+      "module": "Module 16 - Admin Management Suite",
+      "priority": "HIGH",
+      "testingType": "Compliance & Audit",
+      "objective": "Verify immutable audit logs track administrative actions with actor, role, and timestamp.",
+      "preconditions": "System events recorded.",
+      "testProcedure": [
+        "GET /api/audit-logs",
+        "Verify entries have actor, role, action, and timestamp"
+      ],
+      "expectedResults": "HTTP 200 returning chronological audit log entries.",
+      "actualResults": "Retrieved 13 audit log entries. Latest action: \"STOCK_ADJUSTMENT\"",
+      "evidence": {
+        "id": "BS-TC-151-E01",
+        "totalLogs": 13,
+        "latestAction": "STOCK_ADJUSTMENT"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.206Z"
+    },
+    {
+      "testCaseId": "BS-TC-160",
+      "requirementNumber": "REQ-RBAC-01",
+      "requirementName": "Unauthenticated Request Rejection (401 Unauthorized)",
+      "module": "Module 17 - Role-Based Access Control",
+      "priority": "CRITICAL",
+      "testingType": "Security / Authentication",
+      "objective": "Verify unauthenticated requests to protected management endpoints return HTTP 401.",
+      "preconditions": "No authorization header supplied.",
+      "testProcedure": [
+        "GET /api/audit-logs without token",
+        "Verify HTTP 401 Unauthorized"
+      ],
+      "expectedResults": "HTTP 401 Unauthorized.",
+      "actualResults": "HTTP 401",
+      "evidence": {
+        "id": "BS-TC-160-E01",
+        "status": 401
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.217Z"
+    },
+    {
+      "testCaseId": "BS-TC-161",
+      "requirementNumber": "REQ-RBAC-02",
+      "requirementName": "Customer Role Privilege Escalation Prevention (403 Forbidden)",
+      "module": "Module 17 - Role-Based Access Control",
+      "priority": "CRITICAL",
+      "testingType": "Security / Authorization",
+      "objective": "Verify customer role tokens attempting administrative endpoints are rejected with HTTP 403.",
+      "preconditions": "Customer bearer token used.",
+      "testProcedure": [
+        "GET /api/audit-logs with customer token",
+        "Verify HTTP 403 Forbidden"
+      ],
+      "expectedResults": "HTTP 403 Forbidden.",
+      "actualResults": "HTTP 403",
+      "evidence": {
+        "id": "BS-TC-161-E01",
+        "status": 403
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.217Z"
+    },
+    {
+      "testCaseId": "BS-TC-162",
+      "requirementNumber": "REQ-RBAC-03",
+      "requirementName": "Super Administrator Role Authorization Grant",
+      "module": "Module 17 - Role-Based Access Control",
+      "priority": "HIGH",
+      "testingType": "Authorization",
+      "objective": "Verify super_admin role token is authorized for management endpoints.",
+      "preconditions": "Super administrator bearer token used.",
+      "testProcedure": [
+        "GET /api/audit-logs with Super Admin token",
+        "Verify HTTP 200 OK"
+      ],
+      "expectedResults": "HTTP 200 OK.",
+      "actualResults": "HTTP 200",
+      "evidence": {
+        "id": "BS-TC-162-E01",
+        "status": 200
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.217Z"
+    },
+    {
+      "testCaseId": "BS-TC-170",
+      "requirementNumber": "REQ-PRIVACY-01",
+      "requirementName": "User Password Stripping & PII Protection",
+      "module": "Module 18 - Customer Data Privacy",
+      "priority": "CRITICAL",
+      "testingType": "Data Privacy & Security",
+      "objective": "Verify user query responses strip plain text passwords from JSON payloads.",
+      "preconditions": "Super Admin accessing user listings.",
+      "testProcedure": [
+        "GET /api/users",
+        "Inspect every user object for password field"
+      ],
+      "expectedResults": "Zero user objects contain password property.",
+      "actualResults": "Password leak detected: false",
+      "evidence": {
+        "id": "BS-TC-170-E01",
+        "passwordExposed": false
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.225Z"
+    },
+    {
+      "testCaseId": "BS-TC-171",
+      "requirementNumber": "REQ-PRIVACY-02",
+      "requirementName": "Cross-Tenant Customer Order Isolation Audit",
+      "module": "Module 18 - Customer Data Privacy",
+      "priority": "HIGH",
+      "testingType": "Data Privacy & Authorization",
+      "objective": "Audit whether GET /api/orders without query filters leaks orders belonging to other customers.",
+      "preconditions": "Multiple customers have orders in database.",
+      "testProcedure": [
+        "Customer A queries GET /api/orders without email param",
+        "Verify if orders of Customer B are returned"
+      ],
+      "expectedResults": "Endpoint should automatically scope orders to authenticated customer or require admin role.",
+      "actualResults": "VULNERABILITY IDENTIFIED: GET /api/orders returned 7 orders from all customers.",
+      "evidence": {
+        "id": "BS-TC-171-E01",
+        "totalReturned": 7,
+        "leaksOtherOrders": true
+      },
+      "testStatus": "FAIL",
+      "securityFindings": "BOLA / IDOR: GET /api/orders without role check returns cross-tenant order history.",
+      "recommendedFix": "Enforce authentication middleware on GET /api/orders: if role is customer, automatically filter by req.currentUser.email.",
+      "executedAt": "2026-11-17T14:03:54.229Z"
+    },
+    {
+      "testCaseId": "BS-TC-180",
+      "requirementNumber": "REQ-SEC-01",
+      "requirementName": "OWASP Security Response Headers & Fingerprint Removal",
+      "module": "Module 19 - API Security",
+      "priority": "HIGH",
+      "testingType": "Defensive Security",
+      "objective": "Verify API returns OWASP-recommended security headers and suppresses X-Powered-By fingerprint.",
+      "preconditions": "Express security middleware active.",
+      "testProcedure": [
+        "Inspect headers on GET /api/health",
+        "Verify nosniff, SAMEORIGIN, x-xss-protection, no x-powered-by"
+      ],
+      "expectedResults": "All 4 security header assertions satisfied.",
+      "actualResults": "nosniff: true, SAMEORIGIN: true, xss: true, noPoweredBy: true",
+      "evidence": {
+        "id": "BS-TC-180-E01",
+        "headers": {
+          "access-control-allow-origin": "*",
+          "connection": "keep-alive",
+          "content-length": "126",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Tue, 17 Nov 2026 14:03:53 GMT",
+          "etag": "W/\"7e-d/QMkIDzeXn35Tk81H9i+v9QGJU\"",
+          "keep-alive": "timeout=5",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "x-xss-protection": "1; mode=block"
+        }
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.229Z"
+    },
+    {
+      "testCaseId": "BS-TC-181",
+      "requirementNumber": "REQ-SEC-02",
+      "requirementName": "Malicious File Upload MIME Validation & Rejection",
+      "module": "Module 19 - API Security",
+      "priority": "CRITICAL",
+      "testingType": "Upload Security",
+      "objective": "Verify upload endpoint rejects non-image MIME types (e.g. JavaScript, executables) with HTTP 400.",
+      "preconditions": "Upload payload contains executable javascript data URL.",
+      "testProcedure": [
+        "POST /api/upload with data:application/javascript base64",
+        "Verify HTTP 400 Bad Request"
+      ],
+      "expectedResults": "HTTP 400 with invalid MIME rejection.",
+      "actualResults": "HTTP 400, error: \"Only valid image data URLs (data:image/...) are permitted\"",
+      "evidence": {
+        "id": "BS-TC-181-E01",
+        "status": 400,
+        "error": "Only valid image data URLs (data:image/...) are permitted"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.231Z"
+    },
+    {
+      "testCaseId": "BS-TC-190",
+      "requirementNumber": "REQ-DATA-01",
+      "requirementName": "Relational Foreign Key Integrity (Quote <-> Order Link)",
+      "module": "Module 20 - Database Integrity",
+      "priority": "CRITICAL",
+      "testingType": "Database Relational Consistency",
+      "objective": "Verify bidirectional foreign key integrity between Quotation record and Confirmed Order.",
+      "preconditions": "Converted order exists.",
+      "testProcedure": [
+        "Inspect quote.orderId in quotes store",
+        "Inspect order.quoteId in orders store",
+        "Verify bidirectional match"
+      ],
+      "expectedResults": "Both records maintain valid reciprocal foreign keys.",
+      "actualResults": "quote.orderId: ORD-2026-3136, order.quoteId: RFQ-2026-581",
+      "evidence": {
+        "id": "BS-TC-190-E01",
+        "quoteOrderId": "ORD-2026-3136",
+        "orderQuoteId": "RFQ-2026-581"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.239Z"
+    },
+    {
+      "testCaseId": "BS-TC-200",
+      "requirementNumber": "REQ-RESPONSIVE-01",
+      "requirementName": "5-Viewport Device Layout Matrix Verification",
+      "module": "Module 21 - Responsive and UI/UX Testing",
+      "priority": "HIGH",
+      "testingType": "UI/UX & Responsive",
+      "objective": "Verify application layout adapts across 5 standardized device categories with zero horizontal overflow.",
+      "preconditions": "Tailwind responsive breakpoints configured (sm, md, lg, xl).",
+      "testProcedure": [
+        "Verify breakpoints for Desktop (1920), Laptop (1366), Tablet (768), Mobile (390), Small Mobile (360)"
+      ],
+      "expectedResults": "All 5 viewports fully supported with adaptive mobile drawer and bottom dock.",
+      "actualResults": "Verified responsive grid scaling, MobileBottomBar dock, and MobileNavDrawer on mobile/tablet viewports.",
+      "evidence": {
+        "id": "BS-TC-200-E01",
+        "viewports": [
+          "Desktop",
+          "Laptop",
+          "Tablet",
+          "Mobile",
+          "Small Mobile"
+        ]
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.239Z"
+    },
+    {
+      "testCaseId": "BS-TC-210",
+      "requirementNumber": "REQ-PERF-01",
+      "requirementName": "API Latency Benchmark & Core Performance Metrics",
+      "module": "Module 22 - Performance Testing",
+      "priority": "HIGH",
+      "testingType": "Performance Benchmark",
+      "objective": "Verify average API response latency remains below 80ms under sequential load.",
+      "preconditions": "Backend server active.",
+      "testProcedure": [
+        "Execute 30 sequential requests",
+        "Calculate Avg, P50, and P95 response times"
+      ],
+      "expectedResults": "Average latency < 80ms, P95 < 120ms.",
+      "actualResults": "Avg: 1.27ms, P50: 1.13ms, P95: 2.31ms (Target: < 80ms)",
+      "evidence": {
+        "id": "BS-TC-210-E01",
+        "avgLatency": 1.27,
+        "p50": 1.13,
+        "p95": 2.31
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.384Z"
+    },
+    {
+      "testCaseId": "BS-TC-211",
+      "requirementNumber": "REQ-PERF-02",
+      "requirementName": "Parallel Burst Concurrency Load Test",
+      "module": "Module 22 - Performance Testing",
+      "priority": "HIGH",
+      "testingType": "Concurrency & Load",
+      "objective": "Verify server handles 20 concurrent parallel burst requests with zero dropped packets.",
+      "preconditions": "Multiple simultaneous connections initiated.",
+      "testProcedure": [
+        "Dispatch 20 parallel GET /api/products requests via Promise.all",
+        "Verify 100% status 200"
+      ],
+      "expectedResults": "100% success rate (0 dropped requests) in < 800ms.",
+      "actualResults": "20/20 succeeded in 99.95ms (All OK: true).",
+      "evidence": {
+        "id": "BS-TC-211-E01",
+        "totalRequests": 20,
+        "completedMs": 99.95,
+        "success": true
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.384Z"
+    },
+    {
+      "testCaseId": "BS-E2E-A",
+      "requirementNumber": "REQ-E2E-SCENARIO-A",
+      "requirementName": "Scenario A: Normal Wholesale Purchase Lifecycle",
+      "module": "Special Requirement: E2E Business Testing",
+      "priority": "CRITICAL",
+      "testingType": "End-to-End Business Scenario",
+      "objective": "Verify complete transaction flow: RFQ -> Counter-Offer -> Accept -> Order Creation -> Inventory Decrement.",
+      "preconditions": "Fresh quotation created for Buyer A.",
+      "testProcedure": [
+        "Customer submits RFQ",
+        "Administrator prepares counter-offer ($1.25)",
+        "Customer accepts quotation",
+        "System generates Confirmed Order",
+        "Verify order status is Confirmed with DHL tracking"
+      ],
+      "expectedResults": "Order created with confirmed status and commercial terms without data inconsistencies.",
+      "actualResults": "Created Order ORD-2026-5512 ($97.5) from RFQ RFQ-2026-719",
+      "evidence": {
+        "id": "BS-E2E-A-E01",
+        "quoteId": "RFQ-2026-719",
+        "orderId": "ORD-2026-5512"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.414Z"
+    },
+    {
+      "testCaseId": "BS-E2E-B",
+      "requirementNumber": "REQ-E2E-SCENARIO-B",
+      "requirementName": "Scenario B: Quotation Negotiation & Revision Workflow",
+      "module": "Special Requirement: E2E Business Testing",
+      "priority": "CRITICAL",
+      "testingType": "End-to-End Business Scenario",
+      "objective": "Verify customer can request changes, administrator can revise offer, and revised terms convert to order.",
+      "preconditions": "RFQ submitted and counter-offered.",
+      "testProcedure": [
+        "Customer submits revision request via POST /api/quotes/:id/revision",
+        "Administrator posts revised counter-offer ($1.20)",
+        "Customer accepts revised offer",
+        "Verify order reflects revised unit price ($1.20)"
+      ],
+      "expectedResults": "Order created reflecting approved revised unit price ($1.20).",
+      "actualResults": "Revision accepted. Order item unit price: $1.2",
+      "evidence": {
+        "id": "BS-E2E-B-E01",
+        "quoteId": "RFQ-2026-552",
+        "orderPrice": 1.2
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.461Z"
+    },
+    {
+      "testCaseId": "BS-E2E-C",
+      "requirementNumber": "REQ-E2E-SCENARIO-C",
+      "requirementName": "Scenario C: Unauthorized Cross-Tenant Record Access",
+      "module": "Special Requirement: E2E Business Testing",
+      "priority": "HIGH",
+      "testingType": "Security / Authorization (BOLA)",
+      "objective": "Verify whether Customer A can retrieve Customer B quotation or order details without authorization.",
+      "preconditions": "Order exists belonging to Customer B (buyerB@atelier.fr).",
+      "testProcedure": [
+        "Customer A authenticates with valid customer bearer token",
+        "Customer A queries GET /api/orders?email=buyerB@atelier.fr",
+        "Verify if system rejects unauthorized cross-tenant read with 403 Forbidden"
+      ],
+      "expectedResults": "System rejects unauthorized access with 403 Forbidden or filters strictly by authenticated user.",
+      "actualResults": "DEFECT FOUND: Customer A successfully retrieved 1 orders belonging to Buyer B.",
+      "evidence": {
+        "id": "BS-E2E-C-E01",
+        "status": 200,
+        "returnedOrders": 1
+      },
+      "testStatus": "FAIL",
+      "securityFindings": "Broken Object-Level Authorization (BOLA): GET /api/orders allows any authenticated caller to read another company's purchase history.",
+      "recommendedFix": "In GET /api/orders, check caller role: if role is customer, ignore req.query.email and strictly enforce filtered = filtered.filter(o => o.customer?.email === req.currentUser.email).",
+      "executedAt": "2026-11-17T14:03:54.464Z"
+    },
+    {
+      "testCaseId": "BS-E2E-D",
+      "requirementNumber": "REQ-E2E-SCENARIO-D",
+      "requirementName": "Scenario D: Inventory Conflict & Negative Floor Protection",
+      "module": "Special Requirement: E2E Business Testing",
+      "priority": "HIGH",
+      "testingType": "Data Consistency",
+      "objective": "Verify that excessive order quantities cannot drive warehouse stock below zero (Math.max floor guard).",
+      "preconditions": "Current stock known.",
+      "testProcedure": [
+        "Place order for currentStock + 999 units",
+        "Verify inventory stock is floored at 0 and not negative"
+      ],
+      "expectedResults": "Inventory stock floored at 0 without negative number corruption.",
+      "actualResults": "Stock floored at: 0 (>= 0: true)",
+      "evidence": {
+        "id": "BS-E2E-D-E01",
+        "stockAfter": 0
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.484Z"
+    },
+    {
+      "testCaseId": "BS-E2E-E",
+      "requirementNumber": "REQ-E2E-SCENARIO-E",
+      "requirementName": "Scenario E: Payment Pending & Approval State Integrity",
+      "module": "Special Requirement: E2E Business Testing",
+      "priority": "HIGH",
+      "testingType": "Financial & Workflow State",
+      "objective": "Verify that unconfirmed/PO payment methods correctly initialize paymentStatus as \"Pending Approval\" rather than \"Paid\".",
+      "preconditions": "Purchase order checkout.",
+      "testProcedure": [
+        "POST /api/orders with paymentMethod: \"Purchase Order\"",
+        "Inspect paymentStatus in response"
+      ],
+      "expectedResults": "paymentStatus initialized as \"Pending Approval\".",
+      "actualResults": "Order ORD-2026-7578 paymentStatus: \"Pending Approval\"",
+      "evidence": {
+        "id": "BS-E2E-E-E01",
+        "paymentStatus": "Pending Approval"
+      },
+      "testStatus": "PASS",
+      "securityFindings": "None",
+      "recommendedFix": "None",
+      "executedAt": "2026-11-17T14:03:54.494Z"
+    }
+  ],
+  "bugLog": [
+    {
+      "bugId": "BUG-PRIV-01",
+      "testCaseId": "BS-TC-171",
+      "module": "Module 18 - Customer Data Privacy",
+      "feature": "Order History Scoping (GET /api/orders)",
+      "severity": "HIGH",
+      "priority": "HIGH",
+      "description": "Broken Object-Level Authorization (BOLA) in GET /api/orders: Public or customer callers without email filter can view other companies orders.",
+      "preconditions": "Orders from multiple companies exist in database.",
+      "stepsToReproduce": [
+        "Send GET /api/orders without email parameter",
+        "Inspect returned list of orders"
+      ],
+      "expectedResult": "Customer should only see their own orders, or receive 401/403 without admin credentials.",
+      "actualResult": "Returns all orders across all wholesale buyers.",
+      "evidence": "BS-TC-171-E01",
+      "rootCause": "server/index.js lines 644-657 filters by email only if req.query.email is explicitly passed by caller.",
+      "recommendedFix": "Bind filtering to authenticated user session: const user = getAuthUser(req); if (user?.role === \"customer\") filtered = filtered.filter(o => o.customer?.email === user.email);",
+      "retestStatus": "Pending Fix / Documented in Audit"
+    },
+    {
+      "bugId": "BUG-SEC-BOLA-02",
+      "testCaseId": "BS-E2E-C",
+      "module": "Special Requirement: E2E Business Testing",
+      "feature": "Cross-Tenant Order Retrieval (GET /api/orders)",
+      "severity": "HIGH",
+      "priority": "HIGH",
+      "description": "Customer A can view Customer B orders by querying /api/orders?email=target@company.com.",
+      "preconditions": "Orders exist for target customer account.",
+      "stepsToReproduce": [
+        "Log in as Customer A",
+        "Send GET /api/orders?email=customerB@example.com"
+      ],
+      "expectedResult": "HTTP 403 Forbidden or empty array.",
+      "actualResult": "HTTP 200 OK returning Customer B private order and shipping address details.",
+      "evidence": "BS-E2E-C-E01",
+      "rootCause": "server/index.js lines 644-657 filters solely by req.query.email without verifying if requester owns that email or has admin role.",
+      "recommendedFix": "Enforce tenant ownership: if (user.role === \"customer\") { email = user.email; }",
+      "retestStatus": "Pending Fix / Documented in Audit"
+    }
+  ]
+}
