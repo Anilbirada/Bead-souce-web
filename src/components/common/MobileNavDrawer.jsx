@@ -225,19 +225,27 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
 
         {/* Main Navigation Links */}
         <div className="py-2 flex-1">
+          {/* 1. Home */}
           <button
             onClick={() => { onClose(); onNavigate('home'); }}
             className="w-full px-4 py-2.5 text-left text-xs font-semibold text-[#292723] hover:bg-[#FAF8F3] flex items-center justify-between cursor-pointer"
           >
-            <span>Home</span>
+            <span className="flex items-center gap-2">
+              <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#cb0000] fill-[#cb0000]" stroke="currentColor" strokeWidth="0.5">
+                <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" />
+                <rect x="10" y="14" width="4" height="6" fill="#ffffff" />
+              </svg>
+              <span>Home</span>
+            </span>
             <ChevronRight className="w-4 h-4 text-[#8B8175]" />
           </button>
 
+          {/* 9. Best Sellers */}
           <button
-            onClick={() => { onClose(); onNavigate('catalog', { category: 'all' }); }}
+            onClick={() => { onClose(); onNavigate('catalog', { category: 'best-sellers', sort: 'popular' }); }}
             className="w-full px-4 py-2.5 text-left text-xs font-semibold text-[#292723] hover:bg-[#FAF8F3] flex items-center justify-between cursor-pointer"
           >
-            <span>Complete Wholesale Catalogue</span>
+            <span>Best Sellers</span>
             <ChevronRight className="w-4 h-4 text-[#8B8175]" />
           </button>
 

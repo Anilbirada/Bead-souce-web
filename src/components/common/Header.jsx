@@ -218,6 +218,36 @@ export default function Header({
         { label: "Druzy & European Style", category: "seasonal-trends", subcategory: "druzy-jewelry" },
         { label: "Crosheted & Layery Jewelry", category: "seasonal-trends", subcategory: "crosheted-jewelry" }
       ]
+    },
+    accessories: {
+      title: "Jewelry Accessories, Line & Pave CZ",
+      featured: [
+        { name: "12mm Round Micro Pave CZ Ball Spacer Bead", sku: "A28104", img: "/products/catalog/cat-acc-001.png" },
+        { name: "Micro Pave CZ Carabiner Screw Lock Connector", sku: "A28105", img: "/products/catalog/cat-acc-002.png" }
+      ],
+      links: [
+        { label: "Line & Beading Cord (Acrylic & Leather)", category: "accessories", subcategory: "line" },
+        { label: "Pave CZ Clasps & Carabiners", category: "accessories", subcategory: "pave-cz" },
+        { label: "Jewelry Pendants & Focal Charms", category: "accessories", subcategory: "pendants" },
+        { label: "Flower Charms & Botanical Links", category: "accessories", subcategory: "flower-charm" },
+        { label: "Rhinestone Rondelles & Crystal Spacers", category: "accessories", subcategory: "rhinestone" },
+        { label: "Handmade Tassels & Silk Fringe", category: "accessories", subcategory: "tassels" }
+      ]
+    },
+    newArrivals: {
+      title: "New Sea Container Arrivals",
+      featured: [
+        { name: "147 Sea Shipment Natural Gemstone Lot", sku: "A39817", img: "/products/catalog/cat-fj-001.png" },
+        { name: "146 Sea Shipment Cultured Pearl Lot", sku: "A43052", img: "/products/catalog/cat-beads-001.png" }
+      ],
+      links: [
+        { label: "147 Sea Shipment (Latest Container Arrival)", category: "new-arrivals", subcategory: "147-sea-shipment" },
+        { label: "146 Sea Shipment (Freshwater Pearls & Strands)", category: "new-arrivals", subcategory: "146-sea-shipment" },
+        { label: "145 Sea Shipment (Lead-Free Pewter & Crosses)", category: "new-arrivals", subcategory: "145-sea-shipment" },
+        { label: "144 Sea Shipment (Findings, Wire & Clasps)", category: "new-arrivals", subcategory: "144-sea-shipment" },
+        { label: "143 Sea Shipment (Micro Pave CZ & Pendants)", category: "new-arrivals", subcategory: "143-sea-shipment" },
+        { label: "142 Sea Shipment (Boutique Artisan Jewelry)", category: "new-arrivals", subcategory: "142-sea-shipment" }
+      ]
     }
   };
 
@@ -625,199 +655,215 @@ export default function Header({
           </div>
         </div>
 
-        {/* NAVIGATION CATEGORIES (Desktop Mega Navigation) */}
-        <nav className="hidden lg:flex items-center justify-between border-t border-[#EDE5D8] py-2.5 text-xs font-medium text-[#40362F] relative">
-          <div className="flex items-center gap-6" ref={megaMenuRef}>
+      </div>
+
+      {/* SIGNATURE BLUE NAVIGATION BAR (Matching beadssource.com reference) */}
+      <div className="hidden lg:block bg-[#014b92] border-t border-[#003d78] shadow-md relative z-30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center justify-between h-11 text-xs font-semibold text-white relative select-none" ref={megaMenuRef}>
             
-            <button
-              onClick={() => onNavigate('home')}
-              className={`hover:text-[#C6A66B] transition-colors py-1 font-semibold ${currentPage === 'home' ? 'text-[#C6A66B] border-b-2 border-[#C6A66B]' : ''}`}
-            >
-              Home
-            </button>
-
-            <button
-              onClick={() => onNavigate('catalog', { category: 'all' })}
-              className={`hover:text-[#C6A66B] transition-colors py-1 font-semibold ${currentPage === 'catalog' ? 'text-[#C6A66B] border-b-2 border-[#C6A66B]' : ''}`}
-            >
-              Shop
-            </button>
-
-            {/* Categories (Master Catalogue Trigger) */}
-            <div className="relative group">
+            {/* Left Items Group: Home + Categories + Best Sellers */}
+            <div className="flex items-center space-x-0.5 xl:space-x-1">
+              
+              {/* 1. Red Home Icon with White Door */}
               <button
-                onClick={() => onNavigate('catalog', { category: 'all' })}
-                onMouseEnter={() => setMegaMenuCategory('categories')}
-                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
+                onClick={() => onNavigate('home')}
+                className="px-2.5 py-1.5 hover:bg-[#003d78] rounded transition-colors flex items-center justify-center cursor-pointer mr-1"
+                title="Home"
+                aria-label="Home"
               >
-                <span>Catalogue</span>
-                <ChevronDown className="w-3 h-3 text-[#8B8175]" />
+                <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#cb0000] fill-[#cb0000] drop-shadow-xs" stroke="currentColor" strokeWidth="0.5">
+                  <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" />
+                  <rect x="10" y="14" width="4" height="6" fill="#ffffff" />
+                </svg>
               </button>
+
+              {/* 2. Finished Jewelry ▾ */}
+              <div className="relative group">
+                <button
+                  onClick={() => onNavigate('catalog', { category: 'finished-jewelry' })}
+                  onMouseEnter={() => setMegaMenuCategory('finishedJewelry')}
+                  className={`px-2.5 py-2 hover:bg-[#003d78] rounded text-white hover:text-[#ffd778] transition-colors flex items-center gap-1 cursor-pointer ${megaMenuCategory === 'finishedJewelry' ? 'bg-[#003d78] text-[#ffd778]' : ''}`}
+                >
+                  <span>Finished Jewelry</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-white/80" />
+                </button>
+              </div>
+
+              {/* 3. Beads ▾ */}
+              <div className="relative group">
+                <button
+                  onClick={() => onNavigate('catalog', { category: 'beads' })}
+                  onMouseEnter={() => setMegaMenuCategory('beads')}
+                  className={`px-2.5 py-2 hover:bg-[#003d78] rounded text-white hover:text-[#ffd778] transition-colors flex items-center gap-1 cursor-pointer ${megaMenuCategory === 'beads' ? 'bg-[#003d78] text-[#ffd778]' : ''}`}
+                >
+                  <span>Beads</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-white/80" />
+                </button>
+              </div>
+
+              {/* 4. Pewter ▾ */}
+              <div className="relative group">
+                <button
+                  onClick={() => onNavigate('catalog', { category: 'pewter' })}
+                  onMouseEnter={() => setMegaMenuCategory('pewter')}
+                  className={`px-2.5 py-2 hover:bg-[#003d78] rounded text-white hover:text-[#ffd778] transition-colors flex items-center gap-1 cursor-pointer ${megaMenuCategory === 'pewter' ? 'bg-[#003d78] text-[#ffd778]' : ''}`}
+                >
+                  <span>Pewter</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-white/80" />
+                </button>
+              </div>
+
+              {/* 5. Finding ▾ */}
+              <div className="relative group">
+                <button
+                  onClick={() => onNavigate('catalog', { category: 'finding' })}
+                  onMouseEnter={() => setMegaMenuCategory('finding')}
+                  className={`px-2.5 py-2 hover:bg-[#003d78] rounded text-white hover:text-[#ffd778] transition-colors flex items-center gap-1 cursor-pointer ${megaMenuCategory === 'finding' ? 'bg-[#003d78] text-[#ffd778]' : ''}`}
+                >
+                  <span>Finding</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-white/80" />
+                </button>
+              </div>
+
+              {/* 6. Accessories ▾ */}
+              <div className="relative group">
+                <button
+                  onClick={() => onNavigate('catalog', { category: 'accessories' })}
+                  onMouseEnter={() => setMegaMenuCategory('accessories')}
+                  className={`px-2.5 py-2 hover:bg-[#003d78] rounded text-white hover:text-[#ffd778] transition-colors flex items-center gap-1 cursor-pointer ${megaMenuCategory === 'accessories' ? 'bg-[#003d78] text-[#ffd778]' : ''}`}
+                >
+                  <span>Accessories</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-white/80" />
+                </button>
+              </div>
+
+              {/* 7. Seasonal Trends ▾ */}
+              <div className="relative group">
+                <button
+                  onClick={() => onNavigate('catalog', { category: 'seasonal-trends' })}
+                  onMouseEnter={() => setMegaMenuCategory('trends')}
+                  className={`px-2.5 py-2 hover:bg-[#003d78] rounded text-white hover:text-[#ffd778] transition-colors flex items-center gap-1 cursor-pointer ${megaMenuCategory === 'trends' ? 'bg-[#003d78] text-[#ffd778]' : ''}`}
+                >
+                  <span>Seasonal Trends</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-white/80" />
+                </button>
+              </div>
+
+              {/* 8. New Arrivals ▾ */}
+              <div className="relative group">
+                <button
+                  onClick={() => onNavigate('catalog', { category: 'new-arrivals', sort: 'newest' })}
+                  onMouseEnter={() => setMegaMenuCategory('newArrivals')}
+                  className={`px-2.5 py-2 hover:bg-[#003d78] rounded text-white hover:text-[#ffd778] transition-colors flex items-center gap-1 cursor-pointer ${megaMenuCategory === 'newArrivals' ? 'bg-[#003d78] text-[#ffd778]' : ''}`}
+                >
+                  <span>New Arrivals</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-white/80" />
+                </button>
+              </div>
+
+              {/* 9. Best Sellers */}
+              <button
+                onClick={() => onNavigate('catalog', { category: 'best-sellers', sort: 'popular' })}
+                className="px-2.5 py-2 hover:bg-[#003d78] rounded text-white hover:text-[#ffd778] transition-colors cursor-pointer"
+              >
+                Best Sellers
+              </button>
+
             </div>
 
-            {/* Finished Jewelry */}
-            <div className="relative group">
+            {/* Right Items Group: 10. My Account & 11. Request a Quote */}
+            <div className="flex items-center space-x-2">
+              
+              {/* 10. My Account */}
               <button
-                onClick={() => onNavigate('catalog', { category: 'finished-jewelry' })}
-                onMouseEnter={() => setMegaMenuCategory('finishedJewelry')}
-                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
+                onClick={() => {
+                  if (user) {
+                    onNavigate('dashboard');
+                  } else {
+                    onOpenAuth();
+                  }
+                }}
+                className="px-3 py-1.5 hover:bg-[#003d78] rounded text-white hover:text-[#ffd778] transition-colors flex items-center gap-1.5 cursor-pointer font-medium"
               >
-                <span>Finished Jewelry</span>
-                <ChevronDown className="w-3 h-3 text-[#8B8175]" />
+                <User className="w-3.5 h-3.5 text-white/90" />
+                <span>My Account</span>
               </button>
+
+              {/* 11. Request a Quote */}
+              <button
+                onClick={() => onNavigate('quote')}
+                className="px-3.5 py-1.5 bg-[#c6a66b] hover:bg-[#d8c49a] text-[#40362f] font-bold rounded transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+              >
+                <FileText className="w-3.5 h-3.5 text-[#40362f]" />
+                <span>Request a Quote</span>
+              </button>
+
             </div>
 
-            {/* Beads */}
-            <div className="relative group">
-              <button
-                onClick={() => onNavigate('catalog', { category: 'beads' })}
-                onMouseEnter={() => setMegaMenuCategory('beads')}
-                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
+            {/* Mega Menu Dropdown Panel */}
+            {megaMenuCategory && megaMenuData[megaMenuCategory] && (
+              <div 
+                onMouseLeave={() => setMegaMenuCategory(null)}
+                className="absolute left-0 top-full w-full bg-white rounded-b-2xl shadow-2xl border border-[#EDE5D8] p-6 z-50 text-[#292723] animate-fade-in"
               >
-                <span>Beads</span>
-                <ChevronDown className="w-3 h-3 text-[#8B8175]" />
-              </button>
-            </div>
+                <div className="grid grid-cols-12 gap-8">
+                  <div className="col-span-5 space-y-3">
+                    <h4 className="font-serif font-bold text-lg text-[#292723]">
+                      {megaMenuData[megaMenuCategory].title}
+                    </h4>
+                    <ul className="space-y-2 text-xs text-[#40362F]">
+                      {megaMenuData[megaMenuCategory].links.map((link, idx) => (
+                        <li key={idx}>
+                          <button
+                            onClick={() => {
+                              setMegaMenuCategory(null);
+                              onNavigate('catalog', { category: link.category, subcategory: link.subcategory });
+                            }}
+                            className="hover:text-[#014b92] flex items-center gap-2 transition-colors group py-0.5 text-left"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#014b92] group-hover:scale-125 transition-transform" />
+                            <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-            {/* Pewter */}
-            <div className="relative group">
-              <button
-                onClick={() => onNavigate('catalog', { category: 'pewter' })}
-                onMouseEnter={() => setMegaMenuCategory('pewter')}
-                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
-              >
-                <span>Pewter</span>
-                <ChevronDown className="w-3 h-3 text-[#8B8175]" />
-              </button>
-            </div>
-
-            {/* Finding */}
-            <div className="relative group">
-              <button
-                onClick={() => onNavigate('catalog', { category: 'finding' })}
-                onMouseEnter={() => setMegaMenuCategory('finding')}
-                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
-              >
-                <span>Finding</span>
-                <ChevronDown className="w-3 h-3 text-[#8B8175]" />
-              </button>
-            </div>
-
-            {/* Seasonal Trends */}
-            <div className="relative group">
-              <button
-                onClick={() => onNavigate('catalog', { category: 'seasonal-trends' })}
-                onMouseEnter={() => setMegaMenuCategory('trends')}
-                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
-              >
-                <span>Seasonal Trends</span>
-                <ChevronDown className="w-3 h-3 text-[#8B8175]" />
-              </button>
-            </div>
-
-            <button
-              onClick={() => onNavigate('catalog', { category: 'new-arrivals', sort: 'newest' })}
-              className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-semibold text-[#8B8175] hover:text-[#C6A66B]"
-            >
-              <Sparkles className="w-3 h-3 text-[#C6A66B]" />
-              <span>New Arrivals</span>
-            </button>
-
-            <button
-              onClick={() => onNavigate('catalog', { category: 'best-sellers', sort: 'popular' })}
-              className="hover:text-[#C6A66B] transition-colors py-1 font-medium"
-            >
-              Best Sellers
-            </button>
-
-            <button
-              onClick={() => onNavigate('quote')}
-              className="text-[#40362F] font-semibold hover:text-[#292723] transition-colors py-1 flex items-center gap-1 bg-[#FAF8F3] px-3.5 py-1 rounded-full border border-[#EDE5D8] hover:border-[#C6A66B] shadow-xs"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C6A66B] animate-pulse" />
-              <span>Request a Quote (RFQ)</span>
-            </button>
-          </div>
-
-          {/* Right Navigation: About & Contact */}
-          <div className="flex items-center gap-5 text-[#8B8175]">
-            <button 
-              onClick={() => onNavigate('about')}
-              className="hover:text-[#C6A66B] transition-colors"
-            >
-              About Us
-            </button>
-            <button 
-              onClick={() => onNavigate('contact')}
-              className="hover:text-[#C6A66B] transition-colors flex items-center gap-1"
-            >
-              <HelpCircle className="w-3.5 h-3.5 text-[#C6A66B]" />
-              <span>Contact</span>
-            </button>
-          </div>
-
-          {/* Mega Menu Dropdown Panel */}
-          {megaMenuCategory && megaMenuData[megaMenuCategory] && (
-            <div 
-              onMouseLeave={() => setMegaMenuCategory(null)}
-              className="absolute left-0 top-full mt-1 w-full bg-white rounded-2xl shadow-2xl border border-[#EDE5D8] p-6 z-50 animate-fade-in"
-            >
-              <div className="grid grid-cols-12 gap-8">
-                <div className="col-span-5 space-y-3">
-                  <h4 className="font-serif font-bold text-lg text-[#292723]">
-                    {megaMenuData[megaMenuCategory].title}
-                  </h4>
-                  <ul className="space-y-2 text-xs text-[#40362F]">
-                    {megaMenuData[megaMenuCategory].links.map((link, idx) => (
-                      <li key={idx}>
-                        <button
-                          onClick={() => {
-                            setMegaMenuCategory(null);
-                            onNavigate('catalog', { category: link.category, subcategory: link.subcategory });
-                          }}
-                          className="hover:text-[#C6A66B] flex items-center gap-2 transition-colors group py-0.5 text-left"
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#C6A66B] group-hover:scale-125 transition-transform" />
-                          <span>{link.label}</span>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="col-span-7 grid grid-cols-2 gap-4">
-                  {megaMenuData[megaMenuCategory].featured.map((item, idx) => (
-                    <div 
-                      key={idx}
-                      onClick={() => {
-                        setMegaMenuCategory(null);
-                        onNavigate('catalog', { search: item.sku });
-                      }}
-                      className="group cursor-pointer rounded-xl overflow-hidden border border-[#EDE5D8] hover:border-[#C6A66B] transition-all bg-[#FAF8F3] p-3 flex items-center gap-3 shadow-xs hover:shadow-md"
-                    >
-                      <img 
-                        src={item.img} 
-                        alt={item.name} 
-                        className="w-14 h-14 object-cover rounded-lg group-hover:scale-105 transition-transform" 
-                      />
-                      <div>
-                        <span className="text-[10px] font-mono text-[#C6A66B] font-bold block">{item.sku}</span>
-                        <p className="font-semibold text-xs text-[#292723] group-hover:text-[#C6A66B] transition-colors">{item.name}</p>
-                        <span className="text-[10px] text-[#8B8175] flex items-center gap-1 mt-0.5">
-                          <span>View Details</span>
-                          <ArrowRight className="w-2.5 h-2.5 text-[#C6A66B]" />
-                        </span>
+                  <div className="col-span-7 grid grid-cols-2 gap-4">
+                    {megaMenuData[megaMenuCategory].featured.map((item, idx) => (
+                      <div 
+                        key={idx}
+                        onClick={() => {
+                          setMegaMenuCategory(null);
+                          onNavigate('catalog', { search: item.sku });
+                        }}
+                        className="group cursor-pointer rounded-xl overflow-hidden border border-[#EDE5D8] hover:border-[#014b92] transition-all bg-[#FAF8F3] p-3 flex items-center gap-3 shadow-xs hover:shadow-md"
+                      >
+                        <img 
+                          src={item.img} 
+                          alt={item.name} 
+                          className="w-14 h-14 object-cover rounded-lg group-hover:scale-105 transition-transform bg-white" 
+                        />
+                        <div>
+                          <span className="text-[10px] font-mono text-[#014b92] font-bold block">{item.sku}</span>
+                          <p className="font-semibold text-xs text-[#292723] group-hover:text-[#014b92] transition-colors">{item.name}</p>
+                          <span className="text-[10px] text-[#8B8175] flex items-center gap-1 mt-0.5">
+                            <span>View Details</span>
+                            <ArrowRight className="w-2.5 h-2.5 text-[#014b92]" />
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-        </nav>
-
+          </nav>
+        </div>
       </div>
+
     </header>
   );
 }
