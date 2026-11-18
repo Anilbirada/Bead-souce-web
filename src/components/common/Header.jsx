@@ -330,8 +330,10 @@ export default function Header({
                         <p className="font-semibold text-[#292723] truncate text-xs mt-0.5">{item.name}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-bold text-[#C6A66B] text-sm">{formatPrice(item.salePrice || item.price)}</p>
-                        <p className="text-[10px] text-gray-500">Stock: {item.stock}</p>
+                        <span className="text-[10px] font-semibold text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-1.5 py-0.5 rounded inline-block">
+                          Wholesale RFQ
+                        </span>
+                        <p className="text-[10px] text-gray-500 mt-1">Stock: {item.stock}</p>
                       </div>
                     </div>
                   ))}
@@ -633,22 +635,23 @@ export default function Header({
               )}
             </div>
 
-            {/* SHOPPING CART BUTTON (Icon, Count, Subtotal) */}
+            {/* WHOLESALE QUOTE LIST BUTTON */}
             <button
               onClick={openCartDrawer}
-              className="flex items-center gap-2.5 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] px-4 py-2.5 rounded-full transition-all shadow-sm hover:shadow-md cursor-pointer ml-1 border border-[#52463D] group"
-              aria-label="Shopping Cart"
+              className="flex items-center gap-2 bg-[#014b92] hover:bg-[#003d78] text-white px-3.5 py-2 rounded-full transition-all shadow-sm hover:shadow-md cursor-pointer ml-1 border border-[#003d78] group"
+              aria-label="Wholesale Quote List"
+              title="View Wholesale Quote List"
             >
               <div className="relative">
-                <ShoppingBag className="w-4 h-4 text-[#C6A66B] group-hover:scale-105 transition-transform" />
+                <FileText className="w-4 h-4 text-[#ffd778] group-hover:scale-110 transition-transform" />
                 {itemsCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-[#C6A66B] text-[#40362F] text-[10px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                  <span className="absolute -top-2 -right-2 bg-[#cb0000] text-white text-[10px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
                     {itemsCount}
                   </span>
                 )}
               </div>
-              <span className="text-xs font-semibold text-[#FAF8F3] hidden sm:inline">
-                {formatPrice(tieredSubtotal)}
+              <span className="text-xs font-bold text-white hidden sm:inline">
+                Quote List
               </span>
             </button>
 

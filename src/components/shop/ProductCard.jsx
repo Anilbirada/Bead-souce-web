@@ -137,42 +137,36 @@ export default function ProductCard({
             {product.name}
           </h3>
 
-          {/* Pricing Row */}
-          <div className="mt-2.5 flex items-baseline gap-2">
-            <span className="text-lg font-bold text-[#292723]">
-              {formatPrice(basePrice)}
-            </span>
-            {product.salePrice && (
-              <span className="text-sm text-gray-400 line-through">
-                {formatPrice(product.price)}
-              </span>
-            )}
-            <span className="text-xs text-[#8B8175]">/ wholesale pack</span>
+          {/* Pricing Row: Confidential B2B Wholesale Pricing */}
+          <div className="mt-3 flex items-center justify-between">
+            <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2.5 py-1 rounded-lg">
+              <Sparkles className="w-3.5 h-3.5 text-[#014b92]" />
+              <span>Wholesale RFQ &bull; Price on Request</span>
+            </div>
           </div>
 
           {/* Wholesale Volume Tier Hint */}
-          <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[#8B8175] font-medium">
-            <Sparkles className="w-3.5 h-3.5 text-[#C6A66B]" />
-            <span>50+ packs: <strong className="text-[#C6A66B] font-bold">{formatPrice(tier3Price)}</strong> (-30%)</span>
+          <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-[#8B8175] font-medium">
+            <span>Volume Discounts Applied on Quotation (10+ pk &bull; 50+ pk)</span>
           </div>
         </div>
 
-        {/* Bottom CTA Button */}
+        {/* Bottom CTA Button: Add to Quote */}
         <div className="mt-4 pt-3 border-t border-[#EDE5D8] flex items-center gap-2">
           <button
             onClick={() => addToCart(product, 1)}
-            className="flex-1 py-2.5 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border border-[#52463D] group"
+            className="flex-1 py-2.5 bg-[#014b92] hover:bg-[#003d78] text-white text-xs sm:text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border border-[#003d78] group"
           >
-            <ShoppingBag className="w-4 h-4 text-[#C6A66B] group-hover:scale-110 transition-transform" />
-            <span>Add to Cart</span>
+            <FileText className="w-4 h-4 text-[#ffd778] group-hover:scale-110 transition-transform" />
+            <span>Add to Quote</span>
           </button>
 
           <button
             onClick={() => onSelectProduct(product)}
-            className="px-3.5 py-2.5 border border-[#EDE5D8] hover:border-[#C6A66B] hover:bg-[#FAF8F3] text-[#40362F] text-sm font-semibold rounded-xl transition-colors cursor-pointer"
-            title="View Specifications & Wholesale Tiers"
+            className="px-3 py-2.5 border border-[#EDE5D8] hover:border-[#014b92] hover:bg-[#FAF8F3] text-[#40362F] text-xs font-semibold rounded-xl transition-colors cursor-pointer"
+            title="View Specifications & Wholesale Details"
           >
-            Details
+            Specs
           </button>
         </div>
 

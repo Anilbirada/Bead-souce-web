@@ -432,10 +432,12 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                   Total Wholesale Volume
                 </span>
                 <div className="flex items-baseline justify-between">
-                  <span className="font-serif text-3xl font-bold text-[#191F23]">{formatPrice(totalSpend)}</span>
-                  <DollarSign className="w-5 h-5 text-[#176B68]" />
+                  <span className="font-serif text-3xl font-bold text-[#191F23]">
+                    {orders.reduce((acc, o) => acc + (o.items?.reduce((s, i) => s + (i.quantity || 1), 0) || 0), 0)}
+                  </span>
+                  <Package className="w-5 h-5 text-[#014b92]" />
                 </div>
-                <p className="text-[11px] text-[#8C6D2B] font-semibold">Tier 3 (30% off) Qualified</p>
+                <p className="text-[11px] text-[#014b92] font-semibold">Wholesale Packs Verified</p>
               </div>
             </div>
 
@@ -476,12 +478,14 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                           </p>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="font-bold text-sm text-[#191F23]">{formatPrice(order.total)}</span>
+                          <span className="font-bold text-xs text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2.5 py-1 rounded-md">
+                            {order.items?.reduce((s, i) => s + (i.quantity || 1), 0) || 1} Packs
+                          </span>
                           <button
                             onClick={() => setSelectedOrderForInvoice(order)}
-                            className="px-3 py-1.5 bg-white border border-[#E9E5DC] hover:border-[#176B68] rounded-lg text-xs font-semibold cursor-pointer"
+                            className="px-3 py-1.5 bg-white border border-[#E9E5DC] hover:border-[#014b92] rounded-lg text-xs font-semibold cursor-pointer"
                           >
-                            Invoice
+                            Details
                           </button>
                         </div>
                       </div>
@@ -584,8 +588,10 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
 
                       <div className="flex items-center gap-3">
                         <div className="text-right">
-                          <span className="text-xs text-gray-500 block">Total Order</span>
-                          <span className="font-bold text-base text-[#191F23]">{formatPrice(order.total)}</span>
+                          <span className="text-xs text-gray-500 block">Total Volume</span>
+                          <span className="font-bold text-xs text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2 py-0.5 rounded inline-block">
+                            {order.items?.reduce((s, i) => s + (i.quantity || 1), 0) || 1} Wholesale Packs
+                          </span>
                         </div>
                         <button
                           onClick={() => setSelectedOrderForInvoice(order)}
@@ -627,7 +633,9 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                             </div>
                           </div>
                           <div className="text-right">
-                            <span className="font-bold text-[#191F23]">{formatPrice(item.price * (item.quantity || 1))}</span>
+                            <span className="font-bold text-xs text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2 py-0.5 rounded">
+                              {item.quantity || 1} pk (Wholesale)
+                            </span>
                           </div>
                         </div>
                       ))}
@@ -690,9 +698,9 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
 
                         {quote.counterOffer && (
                           <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#E9E5DC] text-right">
-                            <span className="text-[10px] text-[#657078] block">Administrator Approved Unit Rate</span>
-                            <span className="text-base font-bold text-[#176B68]">
-                              {formatPrice(quote.counterOffer)} / unit
+                            <span className="text-[10px] text-[#657078] block">Administrator Status</span>
+                            <span className="text-sm font-bold text-[#176B68]">
+                              Wholesale Rate Approved &bull; Ready to Order
                             </span>
                           </div>
                         )}
@@ -725,8 +733,10 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                               </p>
                             </div>
                             <div className="text-right">
-                              <span className="text-gray-500 block text-[10px]">Target Rate</span>
-                              <span className="font-bold text-[#191F23]">{formatPrice(item.targetPrice || item.catalogPrice)} / unit</span>
+                              <span className="text-gray-500 block text-[10px]">Pricing Status</span>
+                              <span className="font-bold text-xs text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2 py-0.5 rounded">
+                                Confirmed on RFQ
+                              </span>
                             </div>
                           </div>
                         ))}
@@ -843,7 +853,7 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                             {order.paymentMethod || 'Wire Transfer / Net 30'}
                           </td>
                           <td className="py-3.5 px-3 text-right font-bold text-[#191F23]">
-                            {formatPrice(order.total)}
+                            {order.items?.reduce((acc, i) => acc + (i.quantity || 1), 0)} pk (Wholesale Lot)
                           </td>
                           <td className="py-3.5 px-3 text-center">
                             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">
@@ -928,7 +938,7 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                 <div className="space-y-1 text-xs">
                   <h4 className="font-bold text-[#191F23]">Net 30 Commercial Trade Credit</h4>
                   <p className="text-gray-500">
-                    Your wholesale account has an approved credit limit of <strong>$15,000 USD</strong> for eligible custom orders.
+                    Your wholesale account has an approved trade credit facility for eligible custom bulk orders.
                   </p>
                 </div>
                 <span className="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full border border-emerald-200 shrink-0">
@@ -1207,16 +1217,16 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
 
             <div className="space-y-3 text-xs text-[#657078]">
               <p>
-                You are about to accept the administrator-approved unit rate of{' '}
+                You are about to accept the administrator-approved quotation specification for{' '}
                 <strong className="text-[#176B68] font-bold text-sm">
-                  {formatPrice(acceptingQuote.counterOffer || acceptingQuote.items?.[0]?.targetPrice)} / unit
+                  Wholesale Production Allocation
                 </strong>.
               </p>
               
               <div className="bg-[#FAF8F5] p-3.5 rounded-xl border border-[#E9E5DC] space-y-1">
                 <span className="font-bold text-[#191F23] block">Quotation Summary:</span>
                 <p>&bull; Requested Item Lines: {acceptingQuote.items?.length || 0}</p>
-                <p>&bull; Courier: DHL Express Worldwide ($35.00 flat export rate)</p>
+                <p>&bull; Courier: DHL Express Worldwide (Direct Factory Export Dispatch)</p>
                 <p>&bull; Payment Terms: Net 30 Commercial Invoice</p>
               </div>
 
@@ -1429,13 +1439,13 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
                           {item.sku || 'WH-GEM-01'}
                         </td>
                         <td className="py-3 px-2 text-right font-medium">
-                          {item.quantity}
+                          {item.quantity} pk
                         </td>
                         <td className="py-3 px-2 text-right font-medium">
-                          {formatPrice(item.price)}
+                          Custom RFQ Lot
                         </td>
                         <td className="py-3 px-2 text-right font-bold text-[#191F23]">
-                          {formatPrice(item.price * item.quantity)}
+                          {item.quantity} pk (Wholesale Lot)
                         </td>
                       </tr>
                     ))}
@@ -1445,28 +1455,26 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
 
               {/* Totals Breakdown */}
               <div className="pt-4 border-t border-[#E9E5DC] flex justify-end">
-                <div className="w-64 space-y-1.5 text-xs">
+                <div className="w-80 space-y-1.5 text-xs">
                   <div className="flex justify-between text-gray-600">
-                    <span>Subtotal:</span>
-                    <span>{formatPrice(selectedOrderForInvoice.subtotal)}</span>
+                    <span>Component Lines:</span>
+                    <span className="font-semibold">{selectedOrderForInvoice.items?.length || 0} Distinct Lots</span>
                   </div>
-                  {selectedOrderForInvoice.discount > 0 && (
-                    <div className="flex justify-between text-emerald-700 font-semibold">
-                      <span>Volume Discount:</span>
-                      <span>-{formatPrice(selectedOrderForInvoice.discount)}</span>
-                    </div>
-                  )}
+                  <div className="flex justify-between text-gray-600">
+                    <span>Total Pack Volume:</span>
+                    <span className="font-semibold">{selectedOrderForInvoice.items?.reduce((s, i) => s + (i.quantity || 0), 0)} Wholesale Packs</span>
+                  </div>
                   <div className="flex justify-between text-gray-600">
                     <span>International Express Freight:</span>
-                    <span>{formatPrice(selectedOrderForInvoice.shipping || 35.00)}</span>
+                    <span className="font-semibold text-emerald-700">DHL Express Priority Included</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
-                    <span>Export Tax (Exempt B2B):</span>
-                    <span>$0.00</span>
+                    <span>Export Tax Status:</span>
+                    <span className="font-semibold">Exempt B2B Wholesale Manifest</span>
                   </div>
                   <div className="flex justify-between pt-2 border-t border-[#E9E5DC] font-bold text-sm text-[#191F23]">
-                    <span>Total Amount Due:</span>
-                    <span className="text-[#176B68]">{formatPrice(selectedOrderForInvoice.total)}</span>
+                    <span>Commercial Status:</span>
+                    <span className="text-[#176B68]">Approved Production Allocation</span>
                   </div>
                 </div>
               </div>

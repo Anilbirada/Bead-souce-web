@@ -284,47 +284,45 @@ export default function ProductDetailPage({
               </p>
             </div>
 
-            {/* Wholesale Tiered Pricing Table */}
-            <div className="bg-white p-5 rounded-2xl border border-[#EAE4D5] shadow-xs space-y-3">
-              <div className="flex items-baseline justify-between">
-                <div>
-                  <span className="text-2xl sm:text-3xl font-bold text-[#1A1A1A]">
-                    {formatPrice(basePrice)}
+            {/* Wholesale B2B Pricing Structure */}
+            <div className="bg-white p-5 rounded-2xl border border-[#EDE5D8] shadow-xs space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-[#014b92]" />
+                  <span className="text-base sm:text-lg font-bold text-[#014b92]">
+                    Wholesale Pricing &bull; Available on Quotation (RFQ)
                   </span>
-                  <span className="text-xs text-gray-500 ml-1.5 font-medium">/ wholesale pack</span>
                 </div>
-                {product.salePrice && (
-                  <span className="text-xs bg-red-100 text-red-800 font-bold px-2 py-0.5 rounded">
-                    Save {Math.round(((product.price - product.salePrice) / product.price) * 100)}%
-                  </span>
-                )}
+                <span className="text-xs bg-[#f0f5fa] border border-[#d2e2f0] text-[#014b92] font-bold px-2.5 py-1 rounded-md">
+                  Factory Direct
+                </span>
               </div>
 
               {/* Wholesale volume tier table */}
-              <div className="border border-[#EAE4D5] rounded-xl overflow-hidden text-xs">
-                <div className="grid grid-cols-3 bg-[#FAF8F5] p-2 font-bold text-center border-b border-[#EAE4D5] text-[#3D372D]">
+              <div className="border border-[#EDE5D8] rounded-xl overflow-hidden text-xs">
+                <div className="grid grid-cols-3 bg-[#FAF8F5] p-2.5 font-bold text-center border-b border-[#EDE5D8] text-[#3D372D]">
                   <div>Tier 1 (1-9 pk)</div>
-                  <div className="text-green-800">Tier 2 (10-49 pk)</div>
-                  <div className="text-green-800">Tier 3 (50+ pk)</div>
+                  <div className="text-[#014b92]">Tier 2 (10-49 pk)</div>
+                  <div className="text-emerald-800">Tier 3 (50+ pk)</div>
                 </div>
                 <div className="grid grid-cols-3 p-3 text-center bg-white divide-x divide-[#F0EBE1]">
                   <div>
-                    <span className="font-bold text-[#1A1A1A]">{formatPrice(tier1Price)}</span>
-                    <p className="text-[10px] text-gray-400 mt-0.5">Base Rate</p>
+                    <span className="font-bold text-[#1A1A1A]">Sample Lot</span>
+                    <p className="text-[10px] text-gray-500 mt-0.5">Wholesale Base Rate</p>
+                  </div>
+                  <div className="bg-[#f8faff]">
+                    <span className="font-bold text-[#014b92]">Volume Discount</span>
+                    <p className="text-[10px] text-[#014b92] mt-0.5">15% Bulk Savings</p>
                   </div>
                   <div className="bg-[#FAFDF8]">
-                    <span className="font-bold text-green-700">{formatPrice(tier2Price)}</span>
-                    <p className="text-[10px] text-green-600 mt-0.5">15% Discount</p>
-                  </div>
-                  <div className="bg-[#F5FAF1]">
-                    <span className="font-bold text-green-800">{formatPrice(tier3Price)}</span>
-                    <p className="text-[10px] text-green-700 font-semibold mt-0.5">30% Bulk Discount</p>
+                    <span className="font-bold text-emerald-800">Direct Factory Lot</span>
+                    <p className="text-[10px] text-emerald-700 font-semibold mt-0.5">30% Volume Benefit</p>
                   </div>
                 </div>
               </div>
 
-              <p className="text-[11px] text-[#7A7366] italic">
-                *Discounts apply automatically at checkout based on total quantity ordered across all sizes.
+              <p className="text-[11px] text-[#7A7366] leading-relaxed">
+                *Final wholesale rates, freight discounts, and custom plating/cut rates are confirmed via official proforma quotation after you submit your quote request.
               </p>
             </div>
 
@@ -381,9 +379,9 @@ export default function ProductDetailPage({
             {/* Wholesale Quantity Picker & Preset Increments */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-[#3D372E]">Order Quantity (Packs):</span>
-                <span className="text-[#8C6D2B] font-semibold">
-                  Total: {formatPrice((quantity >= 50 ? tier3Price : (quantity >= 10 ? tier2Price : tier1Price)) * quantity)}
+                <span className="font-bold text-[#3D372E]">Order Volume:</span>
+                <span className="text-[#014b92] font-semibold">
+                  {quantity} Wholesale Packs Selected
                 </span>
               </div>
               <div className="flex flex-wrap items-center gap-3">
@@ -417,7 +415,7 @@ export default function ProductDetailPage({
                       onClick={() => setQuantity(preset)}
                       className={`px-3 py-2 text-xs font-bold rounded-xl border transition-colors ${
                         quantity === preset 
-                          ? 'bg-[#8C6D2B] text-white border-[#8C6D2B]' 
+                          ? 'bg-[#014b92] text-white border-[#014b92]' 
                           : 'bg-white hover:bg-[#FAF7F0] text-[#4A453A] border-[#DDD6C8]'
                       }`}
                     >
@@ -428,22 +426,22 @@ export default function ProductDetailPage({
               </div>
             </div>
 
-            {/* Action Buttons: Add to Cart & Request a Quote */}
+            {/* Action Buttons: Add to Quote */}
             <div className="space-y-3 pt-4">
               <button
                 onClick={handleAddToCart}
-                className="w-full py-4 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-sm font-bold rounded-2xl transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer border border-[#52463D] group"
+                className="w-full py-4 bg-[#014b92] hover:bg-[#003d78] text-white text-sm font-bold rounded-2xl transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer border border-[#003d78] group"
               >
-                <ShoppingBag className="w-5 h-5 text-[#C6A66B] group-hover:scale-105 transition-transform" />
-                <span>Add {quantity} Packs to Order &bull; {formatPrice((quantity >= 50 ? tier3Price : (quantity >= 10 ? tier2Price : tier1Price)) * quantity)}</span>
+                <FileText className="w-5 h-5 text-[#ffd778] group-hover:scale-105 transition-transform" />
+                <span>Add {quantity} Packs to Quote Request</span>
               </button>
 
               <button
                 onClick={() => setQuoteModalOpen(true)}
-                className="w-full py-3.5 bg-white hover:bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8] hover:border-[#C6A66B] text-xs font-bold rounded-2xl transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs group"
+                className="w-full py-3.5 bg-white hover:bg-[#FAF8F3] text-[#014b92] border border-[#d2e2f0] hover:border-[#014b92] text-xs font-bold rounded-2xl transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs group"
               >
-                <FileText className="w-4 h-4 text-[#C6A66B]" />
-                <span>Request a Custom Bulk Quote (RFQ)</span>
+                <Sparkles className="w-4 h-4 text-[#014b92]" />
+                <span>Submit Direct RFQ for This Component</span>
               </button>
             </div>
 
@@ -614,8 +612,8 @@ export default function ProductDetailPage({
                     <h4 className="font-serif font-bold text-xs sm:text-sm text-[#292723] max-w-[180px] line-clamp-1">
                       {product.name}
                     </h4>
-                    <p className="text-xs font-bold text-[#C6A66B] mt-0.5">
-                      {formatPrice(basePrice)} <span className="text-[10px] text-[#8B8175] font-normal">/ pk (MOQ: {product.moq || 5})</span>
+                    <p className="text-xs font-semibold text-[#014b92] mt-0.5">
+                      Wholesale RFQ <span className="text-[10px] text-[#8B8175] font-normal">&bull; MOQ: {product.moq || 5} pk</span>
                     </p>
                   </div>
                 </div>
@@ -627,7 +625,7 @@ export default function ProductDetailPage({
                 {/* Paired Cross-Sell Item */}
                 <div 
                   onClick={() => onSelectProduct && onSelectProduct(bundleProduct.id)}
-                  className="flex items-center gap-3 p-3 bg-[#FAF8F3] rounded-2xl border border-[#EDE5D8] hover:border-[#C6A66B] cursor-pointer transition-colors"
+                  className="flex items-center gap-3 p-3 bg-[#FAF8F3] rounded-2xl border border-[#EDE5D8] hover:border-[#014b92] cursor-pointer transition-colors"
                 >
                   <img
                     src={bundleProduct.image}
@@ -635,13 +633,12 @@ export default function ProductDetailPage({
                     className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover"
                   />
                   <div>
-                    <span className="text-[10px] font-bold uppercase text-[#C6A66B] font-mono">Recommended Pairing</span>
+                    <span className="text-[10px] font-bold uppercase text-[#014b92] font-mono">Recommended Pairing</span>
                     <h4 className="font-serif font-bold text-xs sm:text-sm text-[#292723] max-w-[180px] line-clamp-1">
                       {bundleProduct.name}
                     </h4>
-                    <p className="text-xs font-bold text-[#C6A66B] mt-0.5">
-                      {formatPrice(bundleProduct.salePrice || bundleProduct.price)}{' '}
-                      <span className="text-[10px] text-[#8B8175] font-normal">/ pk (MOQ: {bundleProduct.moq || 5})</span>
+                    <p className="text-xs font-semibold text-[#014b92] mt-0.5">
+                      Wholesale RFQ <span className="text-[10px] text-[#8B8175] font-normal">&bull; MOQ: {bundleProduct.moq || 5} pk</span>
                     </p>
                   </div>
                 </div>
@@ -650,11 +647,11 @@ export default function ProductDetailPage({
               {/* Bundle Pricing & 1-Click Action */}
               <div className="w-full lg:w-auto p-4 bg-[#FAF8F3] rounded-2xl border border-[#EDE5D8] flex flex-col sm:flex-row lg:flex-col items-center justify-between gap-4 text-center lg:text-right">
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-[#8B8175]">Combined Wholesale Total</span>
-                  <div className="font-serif font-bold text-xl sm:text-2xl text-[#292723]">
-                    {formatPrice(bundleTotalPrice)}
+                  <span className="text-[10px] uppercase font-bold text-[#8B8175]">Paired Components</span>
+                  <div className="font-serif font-bold text-base sm:text-lg text-[#014b92]">
+                    Volume Lots Included
                   </div>
-                  <p className="text-[10px] text-[#C6A66B] font-semibold mt-0.5">
+                  <p className="text-[10px] text-[#8B8175] font-medium mt-0.5">
                     Includes factory MOQs &bull; Tier discounts applied
                   </p>
                 </div>
@@ -665,18 +662,18 @@ export default function ProductDetailPage({
                   className={`w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer ${
                     bundleAdded
                       ? 'bg-emerald-600 text-white'
-                      : 'bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3]'
+                      : 'bg-[#014b92] hover:bg-[#003d78] text-white'
                   }`}
                 >
                   {bundleAdded ? (
                     <>
                       <Check className="w-4 h-4" />
-                      <span>Added Both to Order!</span>
+                      <span>Added Both to Quote!</span>
                     </>
                   ) : (
                     <>
-                      <ShoppingBag className="w-4 h-4 text-[#C6A66B]" />
-                      <span>Add Both to Cart</span>
+                      <FileText className="w-4 h-4 text-[#ffd778]" />
+                      <span>Add Both to Quote Request</span>
                     </>
                   )}
                 </button>
@@ -761,7 +758,7 @@ export default function ProductDetailPage({
               <div className="text-xs">
                 <p className="font-semibold text-[#292723]">{product.name}</p>
                 <p className="font-mono text-[#8B8175] text-[10px]">SKU: {product.sku}</p>
-                <p className="text-[#C6A66B] font-bold text-[11px] mt-0.5">Catalog Price: {formatPrice(basePrice)} / pack</p>
+                <p className="text-[#014b92] font-semibold text-[11px] mt-0.5">Wholesale Quotation Request &bull; MOQ: {product.moq || 5} pk</p>
               </div>
             </div>
 

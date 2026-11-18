@@ -651,14 +651,15 @@ export default function CheckoutPage({ onNavigate }) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-xs font-bold rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer mt-4 border border-[#52463D]"
+                className="w-full py-4 bg-[#014b92] hover:bg-[#003d78] text-white text-xs font-bold rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer mt-4 border border-[#003d78]"
               >
                 {loading ? (
-                  <span>Generating Commercial Invoice...</span>
+                  <span>Generating Proforma Invoice &amp; Order...</span>
                 ) : (
                   <>
-                    <span>Confirm Wholesale Order &bull; {formatPrice(finalTotal)}</span>
-                    <ArrowRight className="w-4 h-4 text-[#C6A66B]" />
+                    <FileText className="w-4 h-4 text-[#ffd778]" />
+                    <span>Confirm Wholesale Order Specification</span>
+                    <ArrowRight className="w-4 h-4 text-[#ffd778]" />
                   </>
                 )}
               </button>

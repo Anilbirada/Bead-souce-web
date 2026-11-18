@@ -81,19 +81,20 @@ export default function WishlistPage({ onNavigate, onSelectProduct }) {
                     >
                       {item.name}
                     </h3>
-                    <p className="font-bold text-sm text-[#1A1A1A] mt-2">
-                      {formatPrice(item.salePrice || item.price)}
-                      <span className="text-[10px] text-gray-500 font-normal"> / pack</span>
-                    </p>
+                    <div className="mt-2">
+                      <span className="text-[11px] font-semibold text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2 py-0.5 rounded inline-block">
+                        Wholesale RFQ &bull; Price on Request
+                      </span>
+                    </div>
                   </div>
 
                   <div className="pt-3 border-t border-[#F0EBE1] mt-3">
                     <button
                       onClick={() => handleMoveToCart(item)}
-                      className="w-full py-2 bg-[#1C1A17] hover:bg-[#332E26] text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+                      className="w-full py-2 bg-[#014b92] hover:bg-[#003d78] text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
                     >
-                      <ShoppingBag className="w-3.5 h-3.5 text-[#D4AF37]" />
-                      <span>Move to Cart ({item.moq || 5} pk)</span>
+                      <FileText className="w-3.5 h-3.5 text-[#ffd778]" />
+                      <span>Add to Quote ({item.moq || 5} pk)</span>
                     </button>
                   </div>
                 </div>

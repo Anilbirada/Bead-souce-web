@@ -108,17 +108,17 @@ export default function CartDrawer({ onNavigate }) {
         <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col">
           
           {/* Header */}
-          <div className="p-4 sm:p-5 bg-[#40362F] text-[#FAF8F3] flex items-center justify-between border-b border-[#52463D]">
+          <div className="p-4 sm:p-5 bg-[#014b92] text-white flex items-center justify-between border-b border-[#003d78]">
             <div className="flex items-center gap-2.5">
-              <ShoppingBag className="w-5 h-5 text-[#C6A66B]" />
-              <h2 className="font-serif font-bold text-lg text-[#FAF8F3]">Wholesale Cart</h2>
-              <span className="text-xs bg-[#52463D] text-[#D8C49A] px-2.5 py-0.5 rounded-full font-semibold">
+              <FileText className="w-5 h-5 text-[#ffd778]" />
+              <h2 className="font-serif font-bold text-lg text-white">Wholesale Quote List (RFQ)</h2>
+              <span className="text-xs bg-[#003d78] text-[#ffd778] px-2.5 py-0.5 rounded-full font-semibold">
                 {itemsCount} {itemsCount === 1 ? 'pack' : 'packs'}
               </span>
             </div>
             <button
               onClick={closeCartDrawer}
-              className="p-1.5 text-[#EDE5D8] hover:text-[#C6A66B] rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 text-white/80 hover:text-white rounded-lg transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -126,42 +126,21 @@ export default function CartDrawer({ onNavigate }) {
 
           {/* Toast Notification inside drawer */}
           {toastMessage && (
-            <div className="bg-[#FAF8F3] border-b border-[#EDE5D8] p-2 text-center text-xs font-semibold text-[#C6A66B] animate-fade-in">
+            <div className="bg-[#FAF8F3] border-b border-[#EDE5D8] p-2 text-center text-xs font-semibold text-[#014b92] animate-fade-in">
               {toastMessage}
             </div>
           )}
 
-          {/* Free Shipping Progress Meter */}
-          <div className="p-4 bg-[#FAF8F3] border-b border-[#EDE5D8] text-xs">
-            <div className="flex items-center justify-between font-semibold mb-1.5">
-              <span className="flex items-center gap-1.5 text-[#40362F]">
-                <Truck className="w-4 h-4 text-[#C6A66B]" />
-                {isFreeShipping ? (
-                  <span className="text-[#C6A66B] font-bold">🎉 FREE Worldwide Express Shipping Unlocked!</span>
-                ) : (
-                  <span>Add <strong className="text-[#C6A66B] font-bold">{formatPrice(amountToFreeShipping)}</strong> more for Free Worldwide Express Delivery</span>
-                )}
-              </span>
-              <span className="text-[#8B8175] text-[11px] font-bold">{freeShippingProgress}%</span>
+          {/* Wholesale RFQ Info Meter */}
+          <div className="p-4 bg-[#f0f5fa] border-b border-[#d2e2f0] text-xs">
+            <div className="flex items-center gap-2 text-[#014b92] font-semibold mb-1">
+              <Sparkles className="w-4 h-4 text-[#014b92] shrink-0" />
+              <span>Wholesale Pricing on Quotation Submission</span>
             </div>
-            <div className="w-full bg-[#EDE5D8] h-2 rounded-full overflow-hidden">
-              <div 
-                className="bg-gradient-to-r from-[#C6A66B] to-[#D8C49A] h-full rounded-full transition-all duration-500"
-                style={{ width: `${freeShippingProgress}%` }}
-              />
-            </div>
+            <p className="text-[11px] text-[#40362f] leading-relaxed">
+              Submit your list of selected components to receive tiered volume manufacturer pricing (15% for 10+ pk, 30% for 50+ pk) and direct international courier dispatch times.
+            </p>
           </div>
-
-          {/* Volume Tier Discount Banner */}
-          {tierSavings > 0 && (
-            <div className="px-4 py-2.5 bg-[#FAF8F3] border-b border-[#EDE5D8] text-xs flex items-center justify-between text-[#40362F]">
-              <span className="flex items-center gap-1.5 font-medium">
-                <Sparkles className="w-3.5 h-3.5 text-[#C6A66B]" />
-                <span className="text-[#292723]">Wholesale volume discount applied!</span>
-              </span>
-              <span className="font-bold text-[#C6A66B]">-{formatPrice(tierSavings)}</span>
-            </div>
-          )}
 
           {/* Cart Items List */}
           <div className="flex-1 overflow-y-auto p-4 divide-y divide-[#EDE5D8]">
@@ -229,13 +208,13 @@ export default function CartDrawer({ onNavigate }) {
                         </button>
                       </div>
 
-                      {/* Line Item Total */}
+                      {/* Line Item RFQ Status */}
                       <div className="text-right">
-                        <span className="text-xs font-bold text-[#292723]">
-                          {formatPrice((item.salePrice || item.price) * item.quantity)}
+                        <span className="text-[11px] font-semibold text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2 py-0.5 rounded inline-block">
+                          Price on Request
                         </span>
-                        <div className="text-[10px] text-[#8B8175]">
-                          {formatPrice(item.salePrice || item.price)} / pk
+                        <div className="text-[10px] text-[#8B8175] mt-1 font-mono">
+                          MOQ: {item.moq || 5} pk
                         </div>
                       </div>
                     </div>
@@ -264,7 +243,7 @@ export default function CartDrawer({ onNavigate }) {
                       />
                       <div className="flex-1 min-w-0">
                         <h5 className="font-serif font-bold text-xs text-[#292723] truncate">{recom.name}</h5>
-                        <p className="text-[10px] text-[#8B8175] font-mono">MOQ: {recom.moq || 5} pk &bull; {formatPrice(recom.salePrice || recom.price)}/pk</p>
+                        <p className="text-[10px] text-[#014b92] font-semibold">Wholesale RFQ &bull; MOQ: {recom.moq || 5} pk</p>
                       </div>
                       <button
                         type="button"
@@ -272,9 +251,9 @@ export default function CartDrawer({ onNavigate }) {
                         className={`p-1.5 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${
                           addedRecomId === recom.id
                             ? 'bg-emerald-600 text-white'
-                            : 'bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3]'
+                            : 'bg-[#014b92] hover:bg-[#003d78] text-white'
                         }`}
-                        title="Add recommended item to cart"
+                        title="Add recommended item to quote list"
                       >
                         {addedRecomId === recom.id ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
                       </button>
@@ -285,106 +264,50 @@ export default function CartDrawer({ onNavigate }) {
             )}
           </div>
 
-          {/* Cart Footer */}
+          {/* Cart Footer: Wholesale RFQ Summary */}
           {cart.length > 0 && (
             <div className="p-4 bg-[#FAF8F3] border-t border-[#EDE5D8] space-y-3">
               
-              {/* Coupon input */}
-              {coupon ? (
-                <div className="p-2.5 bg-white border border-[#EDE5D8] rounded-xl flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-1.5 text-[#C6A66B]">
-                    <Tag className="w-3.5 h-3.5" />
-                    <span className="text-[#292723]">Coupon <strong>{coupon.code}</strong> applied (-{coupon.discountValue}%)</span>
-                  </div>
-                  <button 
-                    onClick={removeCoupon}
-                    className="text-red-600 hover:underline text-[11px] font-semibold cursor-pointer"
-                  >
-                    Remove
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleApplyCoupon} className="flex gap-2">
-                  <input
-                    type="text"
-                    value={couponInput}
-                    onChange={(e) => setCouponInput(e.target.value)}
-                    placeholder="Enter Coupon (e.g. WHOLESALE10)"
-                    className="flex-1 px-3 py-2 text-xs bg-white border border-[#EDE5D8] rounded-xl focus:outline-none focus:border-[#C6A66B] uppercase font-mono text-[#292723]"
-                  />
-                  <button
-                    type="submit"
-                    disabled={couponLoading}
-                    className="px-3 py-2 bg-[#40362F] text-[#FAF8F3] text-xs font-bold rounded-xl hover:bg-[#52463D] transition-colors cursor-pointer"
-                  >
-                    Apply
-                  </button>
-                </form>
-              )}
-
-              {/* Price Breakdown */}
+              {/* Specification Breakdown */}
               <div className="space-y-1.5 text-xs text-[#8B8175]">
                 <div className="flex justify-between">
-                  <span>Subtotal:</span>
-                  <span className="font-semibold text-[#292723]">{formatPrice(rawSubtotal)}</span>
+                  <span>Distinct Component Lots:</span>
+                  <span className="font-bold text-[#292723]">{cart.length} Products</span>
                 </div>
-                {tierSavings > 0 && (
-                  <div className="flex justify-between text-[#C6A66B]">
-                    <span>Wholesale Tier Savings:</span>
-                    <span className="font-semibold">-{formatPrice(tierSavings)}</span>
-                  </div>
-                )}
-                {couponDiscount > 0 && (
-                  <div className="flex justify-between text-[#C6A66B]">
-                    <span>Coupon Promo:</span>
-                    <span className="font-semibold">-{formatPrice(couponDiscount)}</span>
-                  </div>
-                )}
                 <div className="flex justify-between">
-                  <span>Worldwide Express Shipping:</span>
-                  <span className="font-semibold text-[#292723]">
-                    {isFreeShipping ? <span className="text-[#C6A66B] font-bold">FREE</span> : formatPrice(shippingFee)}
-                  </span>
+                  <span>Total Requested Volume:</span>
+                  <span className="font-bold text-[#292723]">{itemsCount} Wholesale Packs</span>
                 </div>
-                <div className="flex justify-between text-sm font-bold text-[#292723] pt-2 border-t border-[#EDE5D8]">
-                  <span>Estimated Total:</span>
-                  <span className="text-base text-[#292723] font-serif">{formatPrice(finalTotal)}</span>
+                <div className="flex justify-between text-[#014b92]">
+                  <span>Volume Tier Benefits:</span>
+                  <span className="font-bold">15% - 30% Applied on Quotation</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Courier Logistics:</span>
+                  <span className="font-semibold text-[#292723]">DHL Express / FedEx Worldwide</span>
                 </div>
               </div>
 
-              {/* Checkout & Quote Conversion Buttons */}
+              {/* Submit Quote & Continue Buttons */}
               <div className="space-y-2 pt-1">
+                <button
+                  onClick={handleConvertToQuote}
+                  className="w-full py-3.5 bg-[#014b92] hover:bg-[#003d78] text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border border-[#003d78]"
+                >
+                  <FileText className="w-4 h-4 text-[#ffd778]" />
+                  <span>Submit Wholesale Quote Request (RFQ)</span>
+                  <ArrowRight className="w-4 h-4 text-[#ffd778]" />
+                </button>
+
                 <button
                   onClick={() => {
                     closeCartDrawer();
-                    onNavigate('checkout');
+                    onNavigate('catalog');
                   }}
-                  className="w-full py-3.5 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border border-[#52463D]"
+                  className="w-full py-2.5 bg-white hover:bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center cursor-pointer"
                 >
-                  <span>Proceed to Checkout</span>
-                  <ArrowRight className="w-4 h-4 text-[#C6A66B]" />
+                  <span>Continue Adding Components</span>
                 </button>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => {
-                      closeCartDrawer();
-                      onNavigate('catalog');
-                    }}
-                    className="py-2.5 bg-white hover:bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center cursor-pointer"
-                  >
-                    <span>Continue Shopping</span>
-                  </button>
-
-                  <button
-                    onClick={handleConvertToQuote}
-                    className="py-2.5 bg-white hover:bg-[#FAF8F3] text-[#C6A66B] border border-[#EDE5D8] hover:border-[#C6A66B] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-                    title="Request special custom wholesale rate for bulk production"
-                  >
-                    <FileText className="w-3.5 h-3.5 text-[#C6A66B]" />
-                    <span>Convert to RFQ</span>
-                  </button>
-                </div>
               </div>
 
             </div>

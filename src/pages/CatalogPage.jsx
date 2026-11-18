@@ -130,18 +130,18 @@ export default function CatalogPage({
   return (
     <div className="min-h-screen bg-[#FAF8F3] pb-24">
       
-      {/* Category Banner */}
-      <div className="bg-[#40362F] text-[#FAF8F3] py-14 px-4 sm:px-6 lg:px-8 border-b border-[#52463D] relative overflow-hidden">
+      {/* Category Banner: Signature Royal Navy & Gold Wholesale Header */}
+      <div className="bg-gradient-to-r from-[#012d59] via-[#014b92] to-[#012140] text-white py-14 px-4 sm:px-6 lg:px-8 border-b border-[#013567] relative overflow-hidden shadow-inner">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <span className="text-xs uppercase font-bold tracking-widest text-[#C6A66B]">
+              <span className="text-xs uppercase font-bold tracking-widest text-[#ffd778]">
                 Wholesale Product Catalogue &bull; Gemstones &amp; Findings
               </span>
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FAF8F3] mt-2">
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-2">
                 {currentCatInfo ? currentCatInfo.name : 'All Wholesale Collections'}
               </h1>
-              <p className="text-xs sm:text-sm text-[#EDE5D8] mt-2.5 max-w-2xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-white/80 mt-2.5 max-w-2xl leading-relaxed">
                 {currentCatInfo 
                   ? currentCatInfo.description 
                   : 'Direct factory pricing across natural gemstone bead strands, imperial turquoise, cubic zirconia components, lead-free pewter charms, and jeweler findings.'}
@@ -149,15 +149,15 @@ export default function CatalogPage({
             </div>
 
             {/* Quick stats pill */}
-            <div className="bg-[#52463D]/80 backdrop-blur-sm border border-[#EDE5D8]/20 rounded-2xl p-4 sm:p-5 flex items-center gap-6 shrink-0 text-xs shadow-md">
+            <div className="bg-[#013567]/80 backdrop-blur-sm border border-white/20 rounded-2xl p-4 sm:p-5 flex items-center gap-6 shrink-0 text-xs shadow-md">
               <div>
-                <p className="text-[#EDE5D8] text-[11px] font-medium">Displaying</p>
-                <p className="text-xl font-serif font-bold text-[#FAF8F3]">{filteredProducts.length} Items</p>
+                <p className="text-white/70 text-[11px] font-medium">Displaying</p>
+                <p className="text-xl font-serif font-bold text-white">{filteredProducts.length} Items</p>
               </div>
-              <div className="h-8 w-px bg-[#EDE5D8]/30" />
+              <div className="h-8 w-px bg-white/20" />
               <div>
-                <p className="text-[#EDE5D8] text-[11px] font-medium">Wholesale Tier</p>
-                <p className="text-xs font-bold text-[#C6A66B]">Up to 30% Bulk Off</p>
+                <p className="text-white/70 text-[11px] font-medium">Wholesale Policy</p>
+                <p className="text-xs font-bold text-[#ffd778]">Direct Factory RFQ</p>
               </div>
             </div>
           </div>
@@ -208,13 +208,11 @@ export default function CatalogPage({
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none bg-[#FAF8F3] border border-[#EDE5D8] rounded-xl pl-3.5 pr-8 py-2.5 text-xs font-semibold text-[#292723] focus:outline-none focus:border-[#C6A66B] cursor-pointer"
+                  className="appearance-none bg-[#FAF8F3] border border-[#EDE5D8] rounded-xl pl-3.5 pr-8 py-2.5 text-xs font-semibold text-[#292723] focus:outline-none focus:border-[#014b92] cursor-pointer"
                 >
-                  <option value="featured">Featured Picks</option>
-                  <option value="bestseller">Best Selling</option>
-                  <option value="newest">New Arrivals</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
+                  <option value="featured">Featured Wholesale Picks</option>
+                  <option value="bestseller">Best Selling Lots</option>
+                  <option value="newest">New Sea Arrivals</option>
                   <option value="rating">Top Customer Rated</option>
                   <option value="name-asc">Alphabetical (A-Z)</option>
                 </select>
@@ -381,26 +379,19 @@ export default function CatalogPage({
               </div>
             </div>
 
-            {/* Price Filter */}
+            {/* Wholesale Policy & Pricing Notice */}
             <div className="bg-white p-6 rounded-3xl border border-[#EDE5D8] shadow-xs space-y-3">
-              <div className="flex items-center justify-between pb-2.5 border-b border-[#EDE5D8]">
-                <h3 className="font-serif font-bold text-sm text-[#292723]">
-                  Max Price / Pack
-                </h3>
-                <span className="text-xs font-bold text-[#C6A66B]">{formatPrice(priceRange)}</span>
-              </div>
-              <input
-                type="range"
-                min="1"
-                max="50"
-                step="1"
-                value={priceRange}
-                onChange={(e) => setPriceRange(Number(e.target.value))}
-                className="w-full accent-[#C6A66B] cursor-pointer"
-              />
-              <div className="flex justify-between text-[11px] text-[#8B8175] font-mono">
-                <span>{formatPrice(1)}</span>
-                <span>{formatPrice(50)}</span>
+              <h3 className="font-serif font-bold text-sm text-[#292723] pb-2.5 border-b border-[#EDE5D8]">
+                Wholesale Sourcing
+              </h3>
+              <div className="space-y-2 text-xs text-[#40362F]">
+                <div className="flex items-center gap-2 text-emerald-800">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="font-semibold">Factory Direct Inventory</span>
+                </div>
+                <p className="text-[11px] text-[#8B8175] leading-relaxed">
+                  Confidential wholesale pricing and freight quotes provided upon RFQ quotation submission.
+                </p>
               </div>
             </div>
 

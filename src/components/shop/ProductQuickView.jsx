@@ -127,26 +127,27 @@ export default function ProductQuickView({ product, onClose, onSelectProduct }) 
 
             {/* Wholesale Price & Tier Table */}
             <div className="bg-[#FAF8F3] p-3.5 rounded-2xl border border-[#EDE5D8]">
-              <div className="flex items-baseline gap-2 mb-2">
-                <span className="text-xl font-serif font-bold text-[#292723]">
-                  {formatPrice(basePrice)}
-                </span>
-                <span className="text-xs text-[#8B8175]">/ wholesale pack</span>
+              <div className="flex items-center justify-between mb-2">
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2.5 py-1 rounded-lg">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#014b92]" />
+                  <span>Wholesale RFQ &bull; Price on Request</span>
+                </div>
+                <span className="text-[11px] text-[#8B8175]">MOQ: {product.moq || 5} pk</span>
               </div>
 
               {/* Tier table */}
               <div className="grid grid-cols-3 gap-2 text-center text-xs">
                 <div className="bg-white p-2 rounded-xl border border-[#EDE5D8]">
-                  <p className="text-[10px] text-[#8B8175]">1 - 9 packs</p>
-                  <p className="font-bold text-[#292723] mt-0.5">{formatPrice(tier1)}</p>
+                  <p className="text-[10px] text-[#8B8175]">1 - 9 pk</p>
+                  <p className="font-bold text-[#292723] mt-0.5">Sample Lot</p>
                 </div>
-                <div className="bg-white p-2 rounded-xl border border-[#EDE5D8]">
-                  <p className="text-[10px] text-[#C6A66B] font-semibold">10 - 49 pk (-15%)</p>
-                  <p className="font-bold text-[#292723] mt-0.5">{formatPrice(tier2)}</p>
+                <div className="bg-[#f8faff] p-2 rounded-xl border border-[#d2e2f0]">
+                  <p className="text-[10px] text-[#014b92] font-semibold">10 - 49 pk</p>
+                  <p className="font-bold text-[#014b92] mt-0.5">15% Discount</p>
                 </div>
-                <div className="bg-white p-2 rounded-xl border border-[#EDE5D8]">
-                  <p className="text-[10px] text-[#C6A66B] font-semibold">50+ pk (-30%)</p>
-                  <p className="font-bold text-[#292723] mt-0.5">{formatPrice(tier3)}</p>
+                <div className="bg-[#FAFDF8] p-2 rounded-xl border border-[#EDE5D8]">
+                  <p className="text-[10px] text-emerald-700 font-semibold">50+ pk</p>
+                  <p className="font-bold text-emerald-800 mt-0.5">30% Bulk</p>
                 </div>
               </div>
             </div>
@@ -251,10 +252,10 @@ export default function ProductQuickView({ product, onClose, onSelectProduct }) 
             <div className="flex gap-2">
               <button
                 onClick={handleAddToCart}
-                className="flex-1 py-3 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border border-[#52463D]"
+                className="flex-1 py-3 bg-[#014b92] hover:bg-[#003d78] text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border border-[#003d78]"
               >
-                <ShoppingBag className="w-4 h-4 text-[#C6A66B]" />
-                <span>Add {quantity} packs to Order</span>
+                <FileText className="w-4 h-4 text-[#ffd778]" />
+                <span>Add {quantity} Packs to Quote</span>
               </button>
 
               <button

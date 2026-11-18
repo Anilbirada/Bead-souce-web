@@ -70,20 +70,20 @@ export default function MobileBottomBar({ currentPage, onNavigate }) {
           <span>Saved</span>
         </button>
 
-        {/* Cart */}
+        {/* Quote List */}
         <button
           onClick={openCartDrawer}
-          className="relative flex flex-col items-center gap-1 text-[10px] font-medium text-[#292723] transition-colors cursor-pointer"
+          className="relative flex flex-col items-center gap-1 text-[10px] font-medium text-[#014b92] transition-colors cursor-pointer"
         >
           <div className="relative">
-            <ShoppingBag className="w-5 h-5 text-[#C6A66B]" />
+            <FileText className="w-5 h-5 text-[#014b92]" />
             {itemsCount > 0 && (
-              <span className="absolute -top-1.5 -right-2 bg-[#40362F] text-[#FAF8F3] text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+              <span className="absolute -top-1.5 -right-2 bg-[#cb0000] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {itemsCount}
               </span>
             )}
           </div>
-          <span className="font-semibold">Cart</span>
+          <span className="font-bold">Quote List</span>
         </button>
       </div>
     </div>

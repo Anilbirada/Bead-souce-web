@@ -223,8 +223,8 @@ export default function RequestQuotePage({ onNavigate }) {
                             </button>
                           </div>
                           <p className="font-mono text-[10px] text-[#8B8175]">SKU: {item.sku}</p>
-                          <p className="text-[11px] text-[#8B8175]">
-                            Standard Catalog Price: <strong className="text-[#292723]">{formatPrice(item.catalogPrice)}</strong> / pk
+                          <p className="text-[11px] text-[#014b92] font-semibold">
+                            Wholesale Component &bull; Custom Target Rate on RFQ
                           </p>
                         </div>
                       </div>
