@@ -159,9 +159,6 @@ function MainApp() {
   return (
     <div className="flex flex-col min-h-screen selection:bg-[#C6A66B]/20 selection:text-[#292723] bg-[#FAF8F3] text-[#292723]">
       
-      {/* 0. Omnipresent Super Admin Controls */}
-      <SuperAdminBar currentPage={currentPage} onNavigate={handleNavigate} />
-
       {/* 1. Slim Announcement Bar */}
       <AnnouncementBar onOpenAuth={openLogin} />
 

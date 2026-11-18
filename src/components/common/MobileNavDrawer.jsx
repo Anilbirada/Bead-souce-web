@@ -201,26 +201,15 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
           )}
         </div>
 
-        {/* Currency Switcher */}
+        {/* Currency Display (USD Only) */}
         <div className="px-4 py-2.5 bg-white border-b border-[#EDE5D8] flex items-center justify-between text-xs">
           <span className="text-[#8B8175] flex items-center gap-1.5 font-medium">
             <Globe className="w-3.5 h-3.5 text-[#C6A66B]" />
             <span>Currency:</span>
           </span>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setCurrency('USD')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-colors ${currency === 'USD' ? 'bg-[#C6A66B] text-white shadow-xs' : 'bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8]'}`}
-            >
-              USD ($)
-            </button>
-            <button
-              onClick={() => setCurrency('INR')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-colors ${currency === 'INR' ? 'bg-[#C6A66B] text-white shadow-xs' : 'bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8]'}`}
-            >
-              INR (₹)
-            </button>
-          </div>
+          <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8]">
+            USD ($)
+          </span>
         </div>
 
         {/* Main Navigation Links */}

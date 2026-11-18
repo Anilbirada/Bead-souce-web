@@ -354,20 +354,10 @@ export default function Header({
           {/* RIGHT: Wishlist, Currency, Account Dropdown & Shopping Cart */}
           <div className="flex items-center gap-2 sm:gap-3">
             
-            {/* Currency Selector (Desktop) */}
+            {/* Currency Display (USD Only) */}
             <div className="hidden lg:flex items-center gap-1.5 bg-[#F8F6F1] px-2.5 py-1.5 rounded-full border border-[#E9E3D8] text-xs">
               <Globe className="w-3.5 h-3.5 text-[#C49A3A]" />
-              <select
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value)}
-                className="bg-transparent text-[#191919] cursor-pointer focus:outline-none text-xs font-semibold"
-                aria-label="Currency"
-              >
-                <option value="USD">USD ($)</option>
-                <option value="EUR">EUR (€)</option>
-                <option value="GBP">GBP (£)</option>
-                <option value="INR">INR (₹)</option>
-              </select>
+              <span className="text-[#191919] text-xs font-bold tracking-wide">USD ($)</span>
             </div>
 
             {/* Wishlist Button */}

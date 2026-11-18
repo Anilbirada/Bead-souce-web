@@ -4,15 +4,10 @@ import { formatPrice as formatPriceUtil } from '../utils/currency';
 const CurrencyContext = createContext();
 
 export const CurrencyProvider = ({ children }) => {
-  const [currency, setCurrency] = useState(() => {
-    return localStorage.getItem('beadssource_currency') || 'USD';
-  });
+  const currency = 'USD';
+  const setCurrency = () => {}; // Strictly locked to USD
 
-  useEffect(() => {
-    localStorage.setItem('beadssource_currency', currency);
-  }, [currency]);
-
-  const formatPrice = (amount) => formatPriceUtil(amount, currency);
+  const formatPrice = (amount) => formatPriceUtil(amount, 'USD');
 
   return (
     <CurrencyContext.Provider value={{ currency, setCurrency, formatPrice }}>

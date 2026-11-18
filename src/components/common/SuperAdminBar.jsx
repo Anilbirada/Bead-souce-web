@@ -53,7 +53,9 @@ export default function SuperAdminBar({ currentPage, onNavigate }) {
     }
   }, [impersonatedCustomer]);
 
-  // Always show toolbar if admin, super_admin, impersonating, or if signed in as demo role
+  // Only render SuperAdminBar inside the dedicated admin management suite (currentPage === 'admin')
+  // Customers on the storefront / portal must NEVER see administrative bars or controls
+  if (currentPage !== 'admin') return null;
   if (!user) return null;
 
   const handleCustomerSelect = (e) => {

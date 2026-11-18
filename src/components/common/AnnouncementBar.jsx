@@ -65,20 +65,10 @@ export default function AnnouncementBar({ onOpenAuth }) {
             <span>Atelier Concierge: +1 (800) 555-0199</span>
           </span>
 
-          {/* Currency Selector */}
+          {/* Currency Display (USD Only) */}
           <div className="flex items-center gap-1.5 bg-[#4A3E34] px-2.5 py-1 rounded-md border border-[#5E4F42]">
             <Globe className="w-3.5 h-3.5 text-[#C6A66B]" />
-            <select
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
-              className="bg-transparent text-[#FAF8F3] cursor-pointer focus:outline-none text-xs font-semibold"
-              aria-label="Select currency"
-            >
-              <option value="USD" className="bg-[#40362F] text-[#FAF8F3]">USD ($)</option>
-              <option value="EUR" className="bg-[#40362F] text-[#FAF8F3]">EUR (€)</option>
-              <option value="GBP" className="bg-[#40362F] text-[#FAF8F3]">GBP (£)</option>
-              <option value="INR" className="bg-[#40362F] text-[#FAF8F3]">INR (₹)</option>
-            </select>
+            <span className="text-[#FAF8F3] text-xs font-semibold tracking-wide">USD ($)</span>
           </div>
 
           {/* Wholesale B2B Portal Button */}
