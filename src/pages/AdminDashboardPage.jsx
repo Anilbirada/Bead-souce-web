@@ -44,6 +44,7 @@ import { useCurrency } from '../context/CurrencyContext';
 import { useAuth } from '../context/AuthContext';
 import ImageUploadInput from '../components/common/ImageUploadInput';
 import BrandLogo from '../components/common/BrandLogo';
+import EnterpriseERPSection from '../components/admin/EnterpriseERPSection';
 
 export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, initialTab = 'overview' }) {
   const { formatPrice } = useCurrency();
@@ -624,6 +625,7 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
   // Sidebar navigation items
   const sidebarItems = [
     { id: 'overview', label: 'Dashboard', icon: <BarChart2 className="w-4 h-4" />, perm: 'dashboard' },
+    { id: 'erp', label: 'Enterprise ERP', icon: <Activity className="w-4 h-4 text-emerald-400" />, perm: 'dashboard' },
     { id: 'products', label: 'Products', icon: <Archive className="w-4 h-4" />, count: products.length, perm: 'products' },
     { id: 'categories', label: 'Categories', icon: <List className="w-4 h-4" />, count: categories.length, perm: 'categories' },
     { id: 'inventory', label: 'Inventory', icon: <Layers className="w-4 h-4" />, alert: stats?.lowStockCount, perm: 'inventory' },
@@ -797,6 +799,14 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
           {activeTab === 'overview' && stats && (
             <div className="space-y-8">
               
+              {/* High-Tech Enterprise Resource Planning Console */}
+              <EnterpriseERPSection 
+                stats={stats} 
+                orders={orders} 
+                quotes={quotes} 
+                onNavigateTab={setActiveTab} 
+              />
+
               {/* Primary KPI Cards */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-white p-5 rounded-2xl border border-[#E9E3D8] shadow-xs space-y-1.5">
@@ -959,6 +969,20 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
 
               </div>
 
+            </div>
+          )}
+
+          {/* ========================================================= */}
+          {/* TAB: ENTERPRISE RESOURCE PLANNING & SOURCING INTELLIGENCE */}
+          {/* ========================================================= */}
+          {activeTab === 'erp' && (
+            <div className="space-y-8 animate-fade-in">
+              <EnterpriseERPSection 
+                stats={stats} 
+                orders={orders} 
+                quotes={quotes} 
+                onNavigateTab={setActiveTab} 
+              />
             </div>
           )}
 
@@ -2034,6 +2058,15 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
           {/* ========================================================= */}
           {activeTab === 'reports' && (
             <div className="space-y-6">
+              
+              {/* Enterprise Resource Planning Intelligence & Load Graph */}
+              <EnterpriseERPSection 
+                stats={stats} 
+                orders={orders} 
+                quotes={quotes} 
+                onNavigateTab={setActiveTab} 
+              />
+
               <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-[#E9E3D8]">
                 <div>
                   <h3 className="font-serif font-bold text-lg text-[#191919]">Wholesale Sales Performance &amp; Reports</h3>
