@@ -28,7 +28,7 @@ export default function HomePage({
   onNavigate 
 }) {
   return (
-    <div className="min-h-screen bg-[#F8F6F1]">
+    <div className="min-h-screen bg-[#F1F3F6]">
       
       {/* 1. Flipkart / Amazon Style Quick Category Icon Bar */}
       <CategoryIconBar 

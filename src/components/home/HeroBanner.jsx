@@ -158,7 +158,7 @@ export default function HeroBanner({ onNavigate, dynamicSlides = null }) {
   return (
     <section 
       aria-label="Featured Wholesale Collections Carousel"
-      className="relative overflow-hidden bg-[#FAF8F3] border-b border-[#EDE5D8] select-none"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-[#F8FAFC] to-[#F1F3F6] border-b border-slate-200 select-none"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
@@ -166,8 +166,8 @@ export default function HeroBanner({ onNavigate, dynamicSlides = null }) {
       onTouchEnd={handleTouchEnd}
     >
       {/* Background ambient lighting */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#C6A66B]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#EDE5D8]/60 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-amber-100/30 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Content Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 lg:py-20 relative z-10">

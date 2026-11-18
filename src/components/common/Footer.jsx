@@ -25,54 +25,54 @@ export default function Footer({ onNavigate }) {
   };
 
   return (
-    <footer className="bg-[#FAF8F3] text-[#292723] border-t border-[#EDE5D8] pt-16 pb-14 transition-colors">
+    <footer className="bg-[#F8FAFC] text-[#1e293b] border-t border-slate-200 pt-16 pb-14 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Trust Pillars Banner in High-Legibility Luxury Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pb-14 border-b border-[#EDE5D8]">
-          <div className="bg-white p-5 rounded-2xl border border-[#EDE5D8] shadow-xs hover:border-[#C6A66B]/60 hover:shadow-md transition-all flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#FAF8F3] flex items-center justify-center shrink-0 border border-[#EDE5D8]">
-              <ShieldCheck className="w-6 h-6 text-[#C6A66B]" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pb-14 border-b border-slate-200">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-[#014b92] hover:shadow-md transition-all flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#F1F3F6] flex items-center justify-center shrink-0 border border-slate-200">
+              <ShieldCheck className="w-6 h-6 text-[#014b92]" />
             </div>
             <div>
-              <h4 className="text-base font-bold text-[#292723]">Direct Factory Sourcing</h4>
-              <p className="text-sm text-[#5C554E] leading-relaxed mt-1">True manufacturer pricing with zero middleman markups.</p>
+              <h4 className="text-base font-bold text-[#1e293b]">Direct Factory Sourcing</h4>
+              <p className="text-sm text-slate-500 leading-relaxed mt-1">True manufacturer pricing with zero middleman markups.</p>
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#EDE5D8] shadow-xs hover:border-[#C6A66B]/60 hover:shadow-md transition-all flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#FAF8F3] flex items-center justify-center shrink-0 border border-[#EDE5D8]">
-              <Award className="w-6 h-6 text-[#C6A66B]" />
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-[#014b92] hover:shadow-md transition-all flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#F1F3F6] flex items-center justify-center shrink-0 border border-slate-200">
+              <Award className="w-6 h-6 text-[#014b92]" />
             </div>
             <div>
-              <h4 className="text-base font-bold text-[#292723]">Tested Genuine Minerals</h4>
-              <p className="text-sm text-[#5C554E] leading-relaxed mt-1">100% authentic gemstones &amp; certified lead-free pewter.</p>
+              <h4 className="text-base font-bold text-[#1e293b]">Tested Genuine Minerals</h4>
+              <p className="text-sm text-slate-500 leading-relaxed mt-1">100% authentic gemstones &amp; certified lead-free pewter.</p>
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#EDE5D8] shadow-xs hover:border-[#C6A66B]/60 hover:shadow-md transition-all flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#FAF8F3] flex items-center justify-center shrink-0 border border-[#EDE5D8]">
-              <Truck className="w-6 h-6 text-[#C6A66B]" />
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-[#014b92] hover:shadow-md transition-all flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#F1F3F6] flex items-center justify-center shrink-0 border border-slate-200">
+              <Truck className="w-6 h-6 text-[#014b92]" />
             </div>
             <div>
-              <h4 className="text-base font-bold text-[#292723]">Worldwide Fast Dispatch</h4>
-              <p className="text-sm text-[#5C554E] leading-relaxed mt-1">Express DHL/FedEx worldwide delivery with live tracking.</p>
+              <h4 className="text-base font-bold text-[#1e293b]">Worldwide Fast Dispatch</h4>
+              <p className="text-sm text-slate-500 leading-relaxed mt-1">Express DHL/FedEx worldwide delivery with live tracking.</p>
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#EDE5D8] shadow-xs hover:border-[#C6A66B]/60 hover:shadow-md transition-all flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#FAF8F3] flex items-center justify-center shrink-0 border border-[#EDE5D8]">
-              <FileText className="w-6 h-6 text-[#C6A66B]" />
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-[#014b92] hover:shadow-md transition-all flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#F1F3F6] flex items-center justify-center shrink-0 border border-slate-200">
+              <FileText className="w-6 h-6 text-[#014b92]" />
             </div>
             <div>
-              <h4 className="text-base font-bold text-[#292723]">Dedicated RFQ Desk</h4>
-              <p className="text-sm text-[#5C554E] leading-relaxed mt-1">Custom gemstone cuts, bulk orders &amp; OEM casting.</p>
+              <h4 className="text-base font-bold text-[#1e293b]">Dedicated RFQ Desk</h4>
+              <p className="text-sm text-slate-500 leading-relaxed mt-1">Custom gemstone cuts, bulk orders &amp; OEM casting.</p>
             </div>
           </div>
         </div>
 
         {/* Main Footer Links & Information */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 py-14 border-b border-[#EDE5D8]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 py-14 border-b border-slate-200">
           
           {/* Col 1: Brand & International Operations */}
           <div className="lg:col-span-2 space-y-4">
@@ -241,14 +241,14 @@ export default function Footer({ onNavigate }) {
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="Enter business email..."
-                  className="w-full px-4 py-3 bg-white border border-[#EDE5D8] rounded-xl text-sm text-[#292723] placeholder-[#8B8175] focus:outline-none focus:border-[#C6A66B] shadow-xs"
+                  className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-sm text-[#1e293b] placeholder-slate-400 focus:outline-none focus:border-[#014b92] shadow-xs"
                 />
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#C6A66B] hover:bg-[#B39358] text-[#292723] font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md"
+                  className="w-full py-3 bg-[#014b92] hover:bg-[#003d78] text-white font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md"
                 >
                   <span>Subscribe for Bulk Alerts</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 text-[#ffd778]" />
                 </button>
               </form>
             )}
@@ -257,7 +257,7 @@ export default function Footer({ onNavigate }) {
         </div>
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-[#5C554E] gap-4">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-slate-500 gap-4">
           <p className="font-medium">
             &copy; 2026 BeadsSource LLC &bull; All Rights Reserved.
           </p>
@@ -271,8 +271,8 @@ export default function Footer({ onNavigate }) {
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs bg-white px-3.5 py-1.5 rounded-lg border border-[#EDE5D8] text-[#292723] font-bold shadow-xs flex items-center gap-1.5">
-              <Truck className="w-3.5 h-3.5 text-[#C6A66B]" />
+            <span className="text-xs bg-white px-3.5 py-1.5 rounded-lg border border-slate-200 text-[#1e293b] font-bold shadow-xs flex items-center gap-1.5">
+              <Truck className="w-3.5 h-3.5 text-[#014b92]" />
               <span>DHL Express Worldwide</span>
             </span>
           </div>

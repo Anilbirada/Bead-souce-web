@@ -70,7 +70,7 @@ export default function RequestQuotePage({ onNavigate }) {
 
   if (submittedQuote) {
     return (
-      <div className="min-h-screen bg-[#FAF8F3] py-20 px-4">
+      <div className="min-h-screen bg-[#F1F3F6] py-20 px-4">
         <div className="max-w-2xl mx-auto bg-white rounded-3xl p-8 sm:p-12 border border-[#EDE5D8] shadow-xl text-center space-y-6">
           <div className="w-20 h-20 bg-[#FAF8F3] border border-[#EDE5D8] text-[#C6A66B] rounded-full flex items-center justify-center mx-auto shadow-inner">
             <CheckCircle2 className="w-10 h-10" />
@@ -133,10 +133,10 @@ export default function RequestQuotePage({ onNavigate }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-24">
+    <div className="min-h-screen bg-[#F1F3F6] pb-24">
       
       {/* Banner */}
-      <div className="bg-[#40362F] text-[#FAF8F3] py-14 px-4 sm:px-6 lg:px-8 border-b border-[#52463D]">
+      <div className="bg-gradient-to-r from-[#012d59] via-[#014b92] to-[#012140] text-white py-14 px-4 sm:px-6 lg:px-8 border-b border-[#013567]">
         <div className="max-w-7xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#52463D] border border-[#EDE5D8]/20 text-[#D8C49A] text-xs font-semibold mb-3">
             <FileText className="w-3.5 h-3.5 text-[#C6A66B]" />

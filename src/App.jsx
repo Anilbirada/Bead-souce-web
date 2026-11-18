@@ -157,7 +157,7 @@ function MainApp() {
   // STANDARD LUXURY STOREFRONT LAYOUT
   // =========================================================================
   return (
-    <div className="flex flex-col min-h-screen selection:bg-[#C6A66B]/20 selection:text-[#292723] bg-[#FAF8F3] text-[#292723]">
+    <div className="flex flex-col min-h-screen selection:bg-[#014b92]/20 selection:text-[#1e293b] bg-[#F1F3F6] text-[#1e293b]">
       
       {/* 1. Slim Announcement Bar */}
       <AnnouncementBar onOpenAuth={openLogin} />

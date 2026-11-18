@@ -114,7 +114,7 @@ export default function AmazonQuadDeals({ onNavigate, onSelectProduct }) {
   ];
 
   return (
-    <section className="py-8 bg-[#F4F1EA]">
+    <section className="py-8 bg-[#F1F3F6]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Amazon-style 4-Card Multi-Feature Grid */}
@@ -122,13 +122,13 @@ export default function AmazonQuadDeals({ onNavigate, onSelectProduct }) {
           {quadCards.map((card, idx) => (
             <div 
               key={idx}
-              className="bg-white rounded-2xl p-5 border border-[#EDE5D8] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
               <div>
-                <h3 className="font-serif font-bold text-base sm:text-lg text-[#292723] leading-snug">
+                <h3 className="font-serif font-bold text-base sm:text-lg text-[#1e293b] leading-snug">
                   {card.title}
                 </h3>
-                <p className="text-xs text-[#8B8175] mt-0.5 line-clamp-1 mb-4">
+                <p className="text-xs text-slate-500 mt-0.5 line-clamp-1 mb-4">
                   {card.subtitle}
                 </p>
 
@@ -140,7 +140,7 @@ export default function AmazonQuadDeals({ onNavigate, onSelectProduct }) {
                       onClick={() => onNavigate('catalog', { category: card.category })}
                       className="group/item cursor-pointer space-y-1"
                     >
-                      <div className="aspect-square bg-[#FAF8F3] rounded-xl overflow-hidden border border-[#EDE5D8] group-hover/item:border-[#014b92] transition-colors relative">
+                      <div className="aspect-square bg-[#F8FAFC] rounded-xl overflow-hidden border border-slate-200 group-hover/item:border-[#014b92] transition-colors relative">
                         <img 
                           src={item.image} 
                           alt={item.name} 

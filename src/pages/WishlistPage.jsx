@@ -15,7 +15,7 @@ export default function WishlistPage({ onNavigate, onSelectProduct }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] pb-24">
+    <div className="min-h-screen bg-[#F1F3F6] pb-24">
       {/* Banner */}
       <div className="bg-[#1C1A17] text-white py-12 px-4 sm:px-6 lg:px-8 border-b border-[#383227]">
         <div className="max-w-7xl mx-auto flex items-center justify-between">

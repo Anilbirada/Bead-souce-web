@@ -122,7 +122,7 @@ export default function CheckoutPage({ onNavigate }) {
   // --- ORDER SUCCESS CONFIRMATION & COMMERCIAL INVOICE SCREEN ---
   if (completedOrder) {
     return (
-      <div className="min-h-screen bg-[#FAF8F3] py-14 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-[#F1F3F6] py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto space-y-6">
           
           {/* Success Banner */}
@@ -297,10 +297,10 @@ export default function CheckoutPage({ onNavigate }) {
 
   // --- CHECKOUT FORM ---
   return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-24">
+    <div className="min-h-screen bg-[#F1F3F6] pb-24">
       
       {/* Banner */}
-      <div className="bg-[#40362F] text-[#FAF8F3] py-12 px-4 sm:px-6 lg:px-8 border-b border-[#52463D]">
+      <div className="bg-gradient-to-r from-[#012d59] via-[#014b92] to-[#012140] text-white py-12 px-4 sm:px-6 lg:px-8 border-b border-[#013567]">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
             <div className="flex items-center gap-2 text-xs text-[#C6A66B] font-semibold mb-1">

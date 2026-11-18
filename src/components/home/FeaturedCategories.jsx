@@ -47,7 +47,7 @@ export default function FeaturedCategories({ categories = [], onSelectCategory }
             <div
               key={cat.id}
               onClick={() => onSelectCategory(cat.id === 'natural-pearls' ? 'natural-gemstone-beads' : (cat.id === 'glass-beads' ? 'crystal-beads' : cat.id))}
-              className="group relative bg-[#FAF8F3] rounded-2xl overflow-hidden border border-[#EDE5D8] hover:border-[#C6A66B] transition-all duration-300 hover:shadow-xl cursor-pointer flex flex-col justify-between"
+              className="group relative bg-[#F8FAFC] rounded-2xl overflow-hidden border border-slate-200 hover:border-[#014b92] transition-all duration-300 hover:shadow-xl cursor-pointer flex flex-col justify-between"
             >
               {/* Category Image */}
               <div className="aspect-4/3 overflow-hidden bg-white relative">

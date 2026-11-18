@@ -6,7 +6,7 @@ export default function BestSellers({ products, onSelectProduct, onQuickView, on
   const bestSellers = products.filter(p => p.isBestSeller).slice(0, 8);
 
   return (
-    <section className="py-16 bg-[#FAF9F5] border-b border-[#ECE7DC]">
+    <section className="py-16 bg-[#F1F3F6] border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

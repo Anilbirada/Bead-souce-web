@@ -119,7 +119,7 @@ export default function ProductDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-24">
+    <div className="min-h-screen bg-[#F1F3F6] pb-24">
       
       {/* Breadcrumbs & Navigation Bar */}
       <div className="bg-white border-b border-[#EDE5D8] py-3.5 px-4 sm:px-6 lg:px-8">

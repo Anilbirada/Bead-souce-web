@@ -249,7 +249,7 @@ export default function CustomerDashboardPage({ onNavigate, initialTab = 'overvi
   const activeQuotesCount = quotes.filter(q => q.status !== 'Accepted' && q.status !== 'Rejected').length;
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] py-8 sm:py-12">
+    <div className="min-h-screen bg-[#F1F3F6] py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Wholesale Profile Card */}

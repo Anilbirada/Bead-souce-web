@@ -128,7 +128,7 @@ export default function CatalogPage({
   const hasActiveFilters = selectedCategory !== 'all' || selectedSubcategory !== 'all' || searchQuery || inStockOnly || selectedMaterial !== 'all' || priceRange < 50;
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-24">
+    <div className="min-h-screen bg-[#F1F3F6] pb-24">
       
       {/* Category Banner: Signature Royal Navy & Gold Wholesale Header */}
       <div className="bg-gradient-to-r from-[#012d59] via-[#014b92] to-[#012140] text-white py-14 px-4 sm:px-6 lg:px-8 border-b border-[#013567] relative overflow-hidden shadow-inner">
