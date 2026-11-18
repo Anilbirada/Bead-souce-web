@@ -42,7 +42,7 @@ function MainApp() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [catalogFilters, setCatalogFilters] = useState({ category: 'all', search: '', sort: '' });
+  const [catalogFilters, setCatalogFilters] = useState({ category: 'all', subcategory: 'all', search: '', sort: '' });
   const [siteContent, setSiteContent] = useState(null);
 
   // Load live products, categories, and content on mount
@@ -71,6 +71,7 @@ function MainApp() {
     if (page === 'catalog') {
       setCatalogFilters({
         category: params.category || 'all',
+        subcategory: params.subcategory || 'all',
         search: params.search || '',
         sort: params.sort || ''
       });
@@ -191,6 +192,7 @@ function MainApp() {
             products={products}
             categories={categories}
             initialCategory={catalogFilters.category}
+            initialSubcategory={catalogFilters.subcategory}
             initialSearch={catalogFilters.search}
             onSelectProduct={handleSelectProduct}
             onQuickView={(p) => setQuickViewProduct(p)}

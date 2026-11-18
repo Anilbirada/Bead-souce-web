@@ -109,50 +109,66 @@ export default function Footer({ onNavigate }) {
             <ul className="space-y-2.5 text-sm text-[#4A453F]">
               <li>
                 <button 
-                  onClick={() => onNavigate('catalog', { category: 'natural-gemstone-beads' })} 
-                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
+                  onClick={() => onNavigate('catalog', { category: 'finished-jewelry' })} 
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium text-left"
                 >
-                  Natural Gemstones
+                  Finished Jewelry
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => onNavigate('catalog', { category: 'turquoise-beads' })} 
-                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
+                  onClick={() => onNavigate('catalog', { category: 'beads' })} 
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium text-left"
                 >
-                  Turquoise Beads &amp; Slabs
+                  Beads &amp; Mineral Strands
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => onNavigate('catalog', { category: 'cubic-zirconia' })} 
-                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
+                  onClick={() => onNavigate('catalog', { category: 'pewter' })} 
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium text-left"
                 >
-                  Micro Pave CZ Spacers
+                  Lead-Free Pewter
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => onNavigate('catalog', { category: 'charms' })} 
-                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
+                  onClick={() => onNavigate('catalog', { category: 'finding' })} 
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium text-left"
                 >
-                  Lead-Free Pewter Charms
+                  Findings &amp; Clasps
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => onNavigate('catalog', { category: 'jewelry-findings' })} 
-                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
+                  onClick={() => onNavigate('catalog', { category: 'accessories' })} 
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium text-left"
                 >
-                  Lobster Clasps &amp; Findings
+                  Accessories &amp; Pavé CZ
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => onNavigate('catalog', { category: 'handmade-necklaces' })} 
-                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
+                  onClick={() => onNavigate('catalog', { category: 'seasonal-trends' })} 
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium text-left"
                 >
-                  Handmade Knotted Necklaces
+                  Seasonal Trends
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => onNavigate('catalog', { category: 'new-arrivals' })} 
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium text-left"
+                >
+                  New Sea Arrivals
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => onNavigate('catalog', { category: 'best-sellers' })} 
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium text-left"
+                >
+                  Volume Best Sellers
                 </button>
               </li>
             </ul>

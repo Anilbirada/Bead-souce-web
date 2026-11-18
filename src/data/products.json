@@ -4,7 +4,7 @@
     "slug": "1014mm-gold-micro-pave-cz-toggle-clasp-connector",
     "name": "10x14mm Gold Micro Pave CZ Toggle Clasp Connector",
     "sku": "CZ-TOG-1014",
-    "category": "jewelry-connectors",
+    "category": "finding",
     "price": 1.5,
     "salePrice": 1.35,
     "stock": 420,
@@ -36,14 +36,16 @@
       "Plating": "3-layer vacuum electroplating (tarnish resistant)",
       "Lead & Nickel": "100% Lead-Free & Nickel-Free",
       "Packaging": "10 pieces per sealed wholesale bag"
-    }
+    },
+    "subcategory": "chain",
+    "legacyCategory": "jewelry-connectors"
   },
   {
     "id": "bs-002",
     "slug": "12mm-round-cubic-zirconia-cz-spacer",
     "name": "12mm Round Micro Pave Cubic Zirconia (CZ) Ball Spacer",
     "sku": "CZ-SPC-12RD",
-    "category": "cubic-zirconia",
+    "category": "accessories",
     "price": 2.5,
     "salePrice": 2.2,
     "stock": 580,
@@ -76,14 +78,16 @@
       "Coating": "Protective anti-oxidation nano-coating",
       "Weight": "3.8 grams each",
       "Package": "Sold in packs of 5 pieces"
-    }
+    },
+    "subcategory": "pave-cz",
+    "legacyCategory": "cubic-zirconia"
   },
   {
     "id": "bs-003",
     "slug": "17mm-micro-pave-cz-crosses-connector",
     "name": "17mm Micro Pave CZ Religious Cross Connector",
     "sku": "CZ-CON-17CR",
-    "category": "jewelry-connectors",
+    "category": "finding",
     "price": 2.5,
     "salePrice": null,
     "stock": 310,
@@ -112,14 +116,16 @@
       "Loop ID": "1.5mm inner diameter",
       "Crystal Count": "28 pave micro crystals",
       "Hypoallergenic": "Complies with EU REACH & US CPSIA regulations"
-    }
+    },
+    "subcategory": "chain",
+    "legacyCategory": "jewelry-connectors"
   },
   {
     "id": "bs-004",
     "slug": "18x30mm-gold-micro-pave-cz-crosses-pendant",
     "name": "18x30mm Gold Micro Pave CZ Cross Pendant",
     "sku": "CZ-PND-1830",
-    "category": "jewelry-pendants",
+    "category": "accessories",
     "price": 2.25,
     "salePrice": 1.95,
     "stock": 460,
@@ -148,14 +154,16 @@
       "Width": "18mm",
       "Bail Opening": "3.5mm",
       "Unit": "5 pieces per pack"
-    }
+    },
+    "subcategory": "pendants",
+    "legacyCategory": "jewelry-pendants"
   },
   {
     "id": "bs-005",
     "slug": "28x12mm-gold-micro-pave-cz-snake-pendant",
     "name": "28x12mm Gold Micro Pave CZ Coiled Snake Pendant",
     "sku": "CZ-PND-SNK28",
-    "category": "jewelry-pendants",
+    "category": "accessories",
     "price": 4.25,
     "salePrice": null,
     "stock": 290,
@@ -184,14 +192,16 @@
       "Eye Stones": "Synthetic Emerald Nano-Crystal",
       "Body Stones": "Clear Pavé Cubic Zirconia",
       "Package": "5 pieces per pack"
-    }
+    },
+    "subcategory": "pendants",
+    "legacyCategory": "jewelry-pendants"
   },
   {
     "id": "bs-006",
     "slug": "handmade-double-knotted-matte-crystal-with-metal-beads-necklace-36-and-60-inches-long",
     "name": "Handmade Double Knotted Matte Crystal Necklace (36\" & 60\")",
     "sku": "HNM-NK-MCRYS",
-    "category": "handmade-necklaces",
+    "category": "finished-jewelry",
     "price": 8.5,
     "salePrice": 7.8,
     "stock": 140,
@@ -223,14 +233,16 @@
       "Bead Size": "8mm faceted matte crystals",
       "Cord": "Heavy duty 100% German silk cord",
       "Closure": "Continuous strand (no clasp, slips over head)"
-    }
+    },
+    "subcategory": "necklaces",
+    "legacyCategory": "handmade-necklaces"
   },
   {
     "id": "bs-007",
     "slug": "8mm-multicolor-handmade-double-knotted-gemstone-beaded-16-inch",
     "name": "8mm Multicolor Handmade Double Knotted Gemstone Beaded Strand 16\"",
     "sku": "GEM-STR-8MC",
-    "category": "natural-gemstone-beads",
+    "category": "beads",
     "price": 5.25,
     "salePrice": 4.75,
     "stock": 620,
@@ -259,14 +271,16 @@
       "Bead Diameter": "8mm Round (+/- 0.3mm)",
       "Bead Count": "~48-50 beads per strand",
       "Gemstones Included": "Amazonite, Carnelian, Yellow Jade, Sodalite, Moss Agate"
-    }
+    },
+    "subcategory": "gemstone",
+    "legacyCategory": "natural-gemstone-beads"
   },
   {
     "id": "bs-008",
     "slug": "5x8mmmulticolor-handmade-double-knotted-gemstone-beaded-16-inch-2",
     "name": "5x8mm Multicolor Rondelle Double Knotted Gemstone Strand 16\"",
     "sku": "GEM-RND-58MC",
-    "category": "natural-gemstone-beads",
+    "category": "beads",
     "price": 6.75,
     "salePrice": null,
     "stock": 490,
@@ -294,14 +308,16 @@
       "Size": "5mm thickness, 8mm diameter",
       "Length": "16 inches full strand",
       "Weight": "42 grams per strand"
-    }
+    },
+    "subcategory": "gemstone",
+    "legacyCategory": "natural-gemstone-beads"
   },
   {
     "id": "bs-009",
     "slug": "handmade-gemstone-with-crystals-knotted-necklace-36-inches-long",
     "name": "Handmade Gemstone with Crystals Knotted Necklace 36\"",
     "sku": "HNM-NK-GECRY",
-    "category": "handmade-necklaces",
+    "category": "finished-jewelry",
     "price": 3.75,
     "salePrice": null,
     "stock": 210,
@@ -330,14 +346,16 @@
       "Overall Length": "36 inches (approx 91cm)",
       "Knotting Technique": "Traditional hand-knotting between each element",
       "Versatility": "Can be worn single length or looped double"
-    }
+    },
+    "subcategory": "necklaces",
+    "legacyCategory": "handmade-necklaces"
   },
   {
     "id": "bs-010",
     "slug": "8x5mm-rondelle-gemstone-18-inches-long-necklace",
     "name": "8x5mm Rondelle Gemstone Finished Necklace 18\"",
     "sku": "HNM-NK-RND18",
-    "category": "handmade-necklaces",
+    "category": "finished-jewelry",
     "price": 11.85,
     "salePrice": 10.5,
     "stock": 175,
@@ -368,14 +386,16 @@
       "Bead Cut": "High precision calibrated abacus rondelle",
       "Clasp": "Heavy-duty lobster clasp stamped 14/20",
       "Packaging": "Velvet presentation pouch included per necklace"
-    }
+    },
+    "subcategory": "necklaces",
+    "legacyCategory": "handmade-necklaces"
   },
   {
     "id": "bs-011",
     "slug": "25x18mm-smooth-light-green-oval-turquoise-stone-bead-strand-16-inches-long",
     "name": "25x18mm Smooth Light Green Oval Turquoise Stone Strand 16\"",
     "sku": "TRQ-OVL-2518",
-    "category": "turquoise-beads",
+    "category": "beads",
     "price": 5.0,
     "salePrice": 4.5,
     "stock": 390,
@@ -404,14 +424,16 @@
       "Strand Length": "16 inches (approx 40 cm)",
       "Bead Count": "16 large focal beads per strand",
       "Matrix": "Natural earthen matrix patterns"
-    }
+    },
+    "subcategory": "gemstone",
+    "legacyCategory": "turquoise-beads"
   },
   {
     "id": "bs-012",
     "slug": "4x6mm-rondelle-howlite-beads-strand-magnesite-beads-turquoise-smooth-mala-beads",
     "name": "4x6mm Rondelle Turquoise Howlite Bead Strand 16\" Smooth Mala",
     "sku": "TRQ-RND-46",
-    "category": "turquoise-beads",
+    "category": "beads",
     "price": 3.5,
     "salePrice": null,
     "stock": 750,
@@ -439,14 +461,16 @@
       "Thickness": "4mm",
       "Count": "~100 beads per 16\" strand",
       "Color Stability": "Non-bleeding, heat and water resistant"
-    }
+    },
+    "subcategory": "gemstone",
+    "legacyCategory": "turquoise-beads"
   },
   {
     "id": "bs-013",
     "slug": "magnesite-slab-drilled-from-top-to-bottom-free-form-turquoise-bead-strand-16-inches-long",
     "name": "Magnesite Free-Form Slab Turquoise Bead Strand 16\"",
     "sku": "TRQ-SLB-FF16",
-    "category": "turquoise-beads",
+    "category": "beads",
     "price": 4.85,
     "salePrice": 4.25,
     "stock": 310,
@@ -474,14 +498,16 @@
       "Length Range": "15mm to 30mm graduated along strand",
       "Bead Count": "approx 24-28 slabs per strand",
       "Strand Length": "16 inches"
-    }
+    },
+    "subcategory": "gemstone",
+    "legacyCategory": "turquoise-beads"
   },
   {
     "id": "bs-014",
     "slug": "10-16mm-light-blue-free-form-magnesite-turquoise-nugget-bead-strand-16-inches-long",
     "name": "10-16mm Light Blue Free-Form Turquoise Nugget Bead Strand 16\"",
     "sku": "TRQ-NUG-1016",
-    "category": "turquoise-beads",
+    "category": "beads",
     "price": 7.85,
     "salePrice": null,
     "stock": 440,
@@ -508,14 +534,16 @@
       "Size Distribution": "10mm to 16mm average size",
       "Weight": "65 grams per strand",
       "Bead Count": "~28 nuggets per 16 inch strand"
-    }
+    },
+    "subcategory": "gemstone",
+    "legacyCategory": "turquoise-beads"
   },
   {
     "id": "bs-015",
     "slug": "25mm-45mm-smooth-free-form-slab-nugget-magnesite-turquoise-bead-strand-16-inches-long",
     "name": "25-45mm Statement Slab Nugget Turquoise Strand 16\"",
     "sku": "TRQ-STM-2545",
-    "category": "turquoise-beads",
+    "category": "beads",
     "price": 4.85,
     "salePrice": null,
     "stock": 260,
@@ -542,14 +570,16 @@
       "Dimensions": "25mm to 45mm x 18mm to 28mm",
       "Strand Length": "16 inches",
       "Bead Count": "12 to 14 large statement slabs"
-    }
+    },
+    "subcategory": "gemstone",
+    "legacyCategory": "turquoise-beads"
   },
   {
     "id": "bs-016",
     "slug": "gemstone-and-quartz-pave-pendant-elephant-31mm-x-35mm",
     "name": "Gemstone & Quartz Pave Elephant Pendant 31mm x 35mm",
     "sku": "PND-ELE-3135",
-    "category": "jewelry-pendants",
+    "category": "accessories",
     "price": 3.0,
     "salePrice": 2.7,
     "stock": 380,
@@ -580,14 +610,16 @@
       "Height": "31mm (38mm with bail)",
       "Stone Origin": "Madagascar Quartz",
       "Bail": "Cast brass with micro CZ pavé accent"
-    }
+    },
+    "subcategory": "pendants",
+    "legacyCategory": "jewelry-pendants"
   },
   {
     "id": "bs-017",
     "slug": "20x35mm-gemstone-pendants",
     "name": "20x35mm Teardrop Gemstone Wire-Wrapped Pendants",
     "sku": "PND-TDR-2035",
-    "category": "jewelry-pendants",
+    "category": "accessories",
     "price": 4.5,
     "salePrice": null,
     "stock": 410,
@@ -619,14 +651,16 @@
       "Cut": "Checkerboard faceted front and back",
       "Wire Gauge": "20-gauge gold-filled jeweler wire",
       "Packaging": "Set of 5 assorted or single stone packs"
-    }
+    },
+    "subcategory": "pendants",
+    "legacyCategory": "jewelry-pendants"
   },
   {
     "id": "bs-018",
     "slug": "28mm-clear-crystal-with-gold-trim-pendant",
     "name": "28mm Clear Crystal with Gold Trim Luxury Pendant",
     "sku": "PND-CRY-28GD",
-    "category": "crystal-beads",
+    "category": "beads",
     "price": 20.0,
     "salePrice": 17.5,
     "stock": 180,
@@ -655,14 +689,16 @@
       "Depth": "7mm",
       "Weight": "14 grams",
       "Bail": "Solid soldered bail for high tension necklaces"
-    }
+    },
+    "subcategory": "crystal-beads",
+    "legacyCategory": "crystal-beads"
   },
   {
     "id": "bs-019",
     "slug": "australian-emerald-perfume-bottle",
     "name": "Australian Emerald Gemstone Perfume Bottle Pendant",
     "sku": "BTL-EMR-PFM",
-    "category": "jewelry-pendants",
+    "category": "accessories",
     "price": 20.0,
     "salePrice": null,
     "stock": 110,
@@ -690,14 +726,16 @@
       "Dimensions": "38mm height x 20mm width x 12mm thickness",
       "Includes": "1x stone bottle, 1x airtight screw cap, 1x transfer dropper",
       "Packaging": "Individual padded presentation gift box"
-    }
+    },
+    "subcategory": "pendants",
+    "legacyCategory": "jewelry-pendants"
   },
   {
     "id": "bs-020",
     "slug": "flat-round-amethyst-perfume-bottle",
     "name": "Flat Round Natural Amethyst Gemstone Perfume Bottle",
     "sku": "BTL-AME-PFM",
-    "category": "jewelry-pendants",
+    "category": "accessories",
     "price": 20.0,
     "salePrice": null,
     "stock": 130,
@@ -725,14 +763,16 @@
       "Thickness": "13mm",
       "Capacity": "1.8ml liquid capacity",
       "Seal": "Silicone O-ring leak protection"
-    }
+    },
+    "subcategory": "pendants",
+    "legacyCategory": "jewelry-pendants"
   },
   {
     "id": "bs-021",
     "slug": "flat-round-rose-quartz-perfume-bottle",
     "name": "Flat Round Rose Quartz Love Gemstone Perfume Bottle",
     "sku": "BTL-RSQ-PFM",
-    "category": "jewelry-pendants",
+    "category": "accessories",
     "price": 20.0,
     "salePrice": 18.0,
     "stock": 150,
@@ -759,14 +799,16 @@
       "Bottle Dimensions": "32mm x 32mm x 12mm",
       "Stopper": "Screw-in natural quartz wand tip",
       "Function": "Wearable fragrance diffuser"
-    }
+    },
+    "subcategory": "pendants",
+    "legacyCategory": "jewelry-pendants"
   },
   {
     "id": "bs-022",
     "slug": "36x39mm-lead-free-pewter-hollow-heart-charm-a12502",
     "name": "36x39mm Lead-Free Pewter Hollow Heart Charm (SKU A12502)",
     "sku": "A12502",
-    "category": "charms",
+    "category": "pewter",
     "price": 1.25,
     "salePrice": 1.05,
     "stock": 1420,
@@ -795,14 +837,16 @@
       "Dimensions": "36mm width x 39mm height",
       "Packaging": "24 pieces per wholesale pack",
       "Safety": "California Prop 65 & CPSIA compliant lead-free pewter"
-    }
+    },
+    "subcategory": "filler-charms",
+    "legacyCategory": "charms"
   },
   {
     "id": "bs-023",
     "slug": "12x10mm-lead-free-pewter-pine-cone-charm-a5853",
     "name": "12x10mm Lead-Free Pewter 3D Pine Cone Charm (SKU A5853)",
     "sku": "A5853",
-    "category": "charms",
+    "category": "pewter",
     "price": 0.65,
     "salePrice": null,
     "stock": 2100,
@@ -831,14 +875,16 @@
       "Dimensions": "12mm height x 10mm diameter",
       "Form": "Full 3D sculptural casting",
       "Pack Size": "50 pieces per pack"
-    }
+    },
+    "subcategory": "filler-charms",
+    "legacyCategory": "charms"
   },
   {
     "id": "bs-024",
     "slug": "62x51mm-lead-free-pewter-crown-charm-a39286",
     "name": "62x51mm Lead-Free Pewter Royal Crown Statement Charm (SKU A39286)",
     "sku": "A39286",
-    "category": "charms",
+    "category": "pewter",
     "price": 2.8,
     "salePrice": 2.4,
     "stock": 650,
@@ -868,14 +914,16 @@
       "Dimensions": "62mm width x 51mm height",
       "Weight": "28 grams each",
       "Wholesale Bundle": "12 pieces per pack"
-    }
+    },
+    "subcategory": "filler-charms",
+    "legacyCategory": "charms"
   },
   {
     "id": "bs-025",
     "slug": "6x5mm-lead-free-pewter-spacers-charm-a1016",
     "name": "6x5mm Lead-Free Pewter Rondelle Spacers (SKU A1016)",
     "sku": "A1016",
-    "category": "jewelry-spacers",
+    "category": "finding",
     "price": 0.45,
     "salePrice": 0.38,
     "stock": 3500,
@@ -905,14 +953,16 @@
       "Thickness": "5mm",
       "Hole Size": "1.8mm",
       "Package": "100 pieces per bag"
-    }
+    },
+    "subcategory": "spacer",
+    "legacyCategory": "jewelry-spacers"
   },
   {
     "id": "bs-026",
     "slug": "6mm-lead-free-pewter-spacers-charm-a8283",
     "name": "6mm Thin Daisy Spacer Beads Lead-Free Pewter (SKU A8283)",
     "sku": "A8283",
-    "category": "jewelry-spacers",
+    "category": "finding",
     "price": 0.35,
     "salePrice": null,
     "stock": 4200,
@@ -941,14 +991,16 @@
       "Dimensions": "6mm outer diameter, 2mm thickness",
       "Pattern": "8-petal vintage daisy flower",
       "Pack Size": "100 pieces per bag"
-    }
+    },
+    "subcategory": "spacer",
+    "legacyCategory": "jewelry-spacers"
   },
   {
     "id": "bs-027",
     "slug": "5mm-lead-free-pewter-spacers-charm-a912",
     "name": "5mm Tiny Saucer Pewter Spacers (SKU A912)",
     "sku": "A912",
-    "category": "jewelry-spacers",
+    "category": "finding",
     "price": 0.3,
     "salePrice": null,
     "stock": 5000,
@@ -977,14 +1029,16 @@
       "SKU Code": "A912",
       "Dimensions": "5mm diameter x 2mm thickness",
       "Packaging": "100 pieces per wholesale bag"
-    }
+    },
+    "subcategory": "spacer",
+    "legacyCategory": "jewelry-spacers"
   },
   {
     "id": "bs-028",
     "slug": "76x42mm-lead-free-pewter-crosses-charm-a8223",
     "name": "76x42mm Large Ornate Crucifix Pendant (SKU A8223)",
     "sku": "A8223",
-    "category": "charms",
+    "category": "pewter",
     "price": 3.5,
     "salePrice": 3.0,
     "stock": 480,
@@ -1014,14 +1068,16 @@
       "Length": "76mm (3 inches)",
       "Width": "42mm (1.65 inches)",
       "Weight": "32g per pendant"
-    }
+    },
+    "subcategory": "filler-charms",
+    "legacyCategory": "charms"
   },
   {
     "id": "bs-029",
     "slug": "6mm-rondelle-turquoise-with-fresh-water-pearl-stretchy-bracelet-7-5-inches",
     "name": "6mm Rondelle Turquoise with Fresh Water Pearl Stretchy Bracelet 7.5\"",
     "sku": "HNM-BR-TRQP75",
-    "category": "handmade-bracelets",
+    "category": "finished-jewelry",
     "price": 4.5,
     "salePrice": 3.95,
     "stock": 320,
@@ -1050,14 +1106,16 @@
       "Pearl Grade": "AAA Natural Baroque Potato Pearls (approx 7-8mm)",
       "Turquoise": "6x4mm calibrated smooth rondelles",
       "Elastic": "0.8mm Japanese crystal stretch cord"
-    }
+    },
+    "subcategory": "bracelets",
+    "legacyCategory": "handmade-bracelets"
   },
   {
     "id": "bs-030",
     "slug": "6mm-handmade-lava-rock-with-crystal-rondelle-quatrefoil-stretchy-bracelet-oil-diffuser-bracelet-gemstone-bracelet-7-5-inches",
     "name": "6mm Handmade Lava Rock & Crystal Quatrefoil Diffuser Bracelet 7.5\"",
     "sku": "HNM-BR-LAV75",
-    "category": "handmade-bracelets",
+    "category": "finished-jewelry",
     "price": 3.9,
     "salePrice": null,
     "stock": 460,
@@ -1084,14 +1142,16 @@
       "Bead Size": "6mm round volcanic lava",
       "Feature Charm": "14mm Gold Plated Pave Quatrefoil Clover",
       "Function": "Essential Oil Aromatherapy Diffuser"
-    }
+    },
+    "subcategory": "bracelets",
+    "legacyCategory": "handmade-bracelets"
   },
   {
     "id": "bs-031",
     "slug": "12x16mm-pave-cz-clover-connector",
     "name": "12x16mm Four-Leaf Clover Micro Pave CZ Connector",
     "sku": "CZ-CON-CLV12",
-    "category": "jewelry-connectors",
+    "category": "finding",
     "price": 2.1,
     "salePrice": 1.85,
     "stock": 540,
@@ -1120,14 +1180,16 @@
       "Dimensions": "12mm clover, 16mm total width across loops",
       "Thickness": "3.5mm",
       "Packaging": "10 pieces per pack"
-    }
+    },
+    "subcategory": "chain",
+    "legacyCategory": "jewelry-connectors"
   },
   {
     "id": "bs-032",
     "slug": "8x2mm-pave-cz-rondelle-bead-spacer",
     "name": "8x2mm Slim Rondelle Pave CZ Bead Spacer",
     "sku": "CZ-SPC-8X2",
-    "category": "cubic-zirconia",
+    "category": "accessories",
     "price": 1.4,
     "salePrice": 1.2,
     "stock": 890,
@@ -1158,14 +1220,16 @@
       "Thickness": "2mm",
       "Hole Size": "2.0mm",
       "Pack Quantity": "20 pieces per pack"
-    }
+    },
+    "subcategory": "pave-cz",
+    "legacyCategory": "cubic-zirconia"
   },
   {
     "id": "bs-033",
     "slug": "12x6mm-cubic-zirconia-cz-large-hole-bead-spacer",
     "name": "12x6mm Large-Hole Rondelle Pave CZ Bead Spacer",
     "sku": "CZ-SPC-LH126",
-    "category": "cubic-zirconia",
+    "category": "accessories",
     "price": 2.95,
     "salePrice": null,
     "stock": 390,
@@ -1195,14 +1259,16 @@
       "Width": "6mm",
       "Inner Hole": "4.8mm compatible with major European charm systems",
       "Packaging": "Sold in packs of 5 pieces"
-    }
+    },
+    "subcategory": "pave-cz",
+    "legacyCategory": "cubic-zirconia"
   },
   {
     "id": "bs-034",
     "slug": "professional-brass-lobster-clasps-findings-pack",
     "name": "12mm Premium Brass Lobster Claw Clasps with Open Jump Rings",
     "sku": "FND-LOB-12PK",
-    "category": "jewelry-findings",
+    "category": "finding",
     "price": 3.8,
     "salePrice": 3.2,
     "stock": 1800,
@@ -1234,7 +1300,9 @@
       "Width": "7mm",
       "Pack Includes": "50 lobster clasps + 50 matching jump rings",
       "Durability": "Tested to 10,000+ spring cycles"
-    }
+    },
+    "subcategory": "clasps",
+    "legacyCategory": "jewelry-findings"
   },
   {
     "id": "bs-035",
@@ -1271,6 +1339,1404 @@
       "Compartment Size": "5cm x 5.5cm each",
       "Stackability": "Precision molded grooved base for vertical stacking",
       "Protection": "Treated with anti-tarnish velvet to safeguard silver and gold"
-    }
+    },
+    "subcategory": "line",
+    "legacyCategory": "accessories"
+  },
+  {
+    "id": "cat-fj-001",
+    "sku": "BS-FJ-BR-001",
+    "name": "10mm Natural Stone + Pewter Ball + Pendant Bracelet",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 2.5,
+    "salePrice": 2.25,
+    "stock": 240,
+    "lowStockThreshold": 50,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-001.png",
+    "images": [
+      "/products/catalog/cat-fj-001.png"
+    ],
+    "description": "Handcrafted stretchy bracelet featuring 10mm genuine natural gemstone beads, antique finish lead-free pewter accent ball, and polished round mineral pendant medallion.",
+    "materials": "10mm Natural Gemstones, Lead-Free Pewter, Round Pendant",
+    "dimensions": "10mm bead diameter, 7.5 inches length",
+    "weight": "32g",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": true,
+    "tags": [
+      "Bracelets",
+      "Finished Jewelry",
+      "Natural Stone"
+    ]
+  },
+  {
+    "id": "cat-fj-002",
+    "sku": "BS-FJ-BR-002",
+    "name": "10mm Natural Stone + Soft Ceramic Drill Ball + Pendant Bracelet (7.5 Inches)",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 2.5,
+    "salePrice": 2.25,
+    "stock": 210,
+    "lowStockThreshold": 50,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-002.png",
+    "images": [
+      "/products/catalog/cat-fj-002.png"
+    ],
+    "description": "Luxury 10mm natural stone beaded bracelet with sparkling pavé soft ceramic crystal drill ball and gold-rimmed round stone medallion pendant.",
+    "materials": "Natural Stone, Soft Ceramic Pave Crystal, Gold Plated Alloy",
+    "dimensions": "10mm beads, 7.5 inches",
+    "weight": "34g",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isFeatured": true,
+    "tags": [
+      "Pave Ball",
+      "Bracelets",
+      "Finished Jewelry"
+    ]
+  },
+  {
+    "id": "cat-fj-003",
+    "sku": "BS-FJ-BR-003",
+    "name": "10mm Round Beads + Turquoise Crosses + Pewter Pave Rhinestone Ball Beaded Bracelet",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 2.75,
+    "salePrice": 2.45,
+    "stock": 195,
+    "lowStockThreshold": 40,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-003.png",
+    "images": [
+      "/products/catalog/cat-fj-003.png"
+    ],
+    "description": "Artisan 10mm round stone beaded bracelet featuring carved white turquoise cross accent and sparkling pewter rhinestone disco spacer ball.",
+    "materials": "White Turquoise, Rhinestone Disco Ball, Pewter",
+    "dimensions": "10mm beads, 7.5 inches",
+    "weight": "30g",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "Crosses",
+      "Turquoise",
+      "Religious"
+    ]
+  },
+  {
+    "id": "cat-fj-004",
+    "sku": "BS-FJ-BR-004",
+    "name": "10mm Round Gemstone Stretchy Bracelet, Men and Women (7.5 Inches)",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 2.0,
+    "salePrice": null,
+    "stock": 350,
+    "lowStockThreshold": 60,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-004.png",
+    "images": [
+      "/products/catalog/cat-fj-004.png"
+    ],
+    "description": "Unisex 10mm round matte black onyx stone bracelet accented with golden tiger eye, natural wood cylinder beads, and metallic hematite spacers.",
+    "materials": "Matte Onyx, Golden Tiger Eye, Wood, Hematite",
+    "dimensions": "10mm beads, 7.5 inches",
+    "weight": "28g",
+    "moq": 10,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Unisex",
+      "Matte Onyx",
+      "Tigers Eye"
+    ]
+  },
+  {
+    "id": "cat-fj-005",
+    "sku": "BS-FJ-BR-005",
+    "name": "10mm Round Gemstone Stretchy Bracelet with Blue Tigers Eye (7.5 Inches)",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 2.0,
+    "salePrice": null,
+    "stock": 310,
+    "lowStockThreshold": 50,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-005.png",
+    "images": [
+      "/products/catalog/cat-fj-005.png"
+    ],
+    "description": "Premium 10mm matte black onyx bracelet featuring iridescent blue tigers eye beads, wooden accent tube, and silver spacer rings.",
+    "materials": "Matte Onyx, Blue Tigers Eye, Natural Wood, Silver Rondelles",
+    "dimensions": "10mm beads, 7.5 inches",
+    "weight": "29g",
+    "moq": 10,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Blue Tigers Eye",
+      "Men Bracelet",
+      "7.5 Inches"
+    ]
+  },
+  {
+    "id": "cat-fj-006",
+    "sku": "BS-FJ-BR-006",
+    "name": "10mm Round Gemstone Stretchy Bracelet with Red Jasper & Hematite (7.5 Inches)",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 2.0,
+    "salePrice": null,
+    "stock": 260,
+    "lowStockThreshold": 40,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-006.png",
+    "images": [
+      "/products/catalog/cat-fj-006.png"
+    ],
+    "description": "Natural 10mm matte black agate beaded bracelet with vibrant red jasper focal beads and faceted metallic hematite spacers.",
+    "materials": "Matte Black Agate, Red Jasper, Hematite",
+    "dimensions": "10mm beads, 7.5 inches",
+    "weight": "31g",
+    "moq": 10,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Red Jasper",
+      "Hematite",
+      "Bracelets"
+    ]
+  },
+  {
+    "id": "cat-fj-007",
+    "sku": "BS-FJ-BR-007",
+    "name": "10mm Round Gemstone Stretchy Bracelet with Charoite & Blue Tigers Eye (7.5 Inches)",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 2.5,
+    "salePrice": 2.2,
+    "stock": 190,
+    "lowStockThreshold": 30,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-007.png",
+    "images": [
+      "/products/catalog/cat-fj-007.png"
+    ],
+    "description": "Exquisite 10mm matte agate bracelet with purple charoite, blue tiger eye, and natural wood beads.",
+    "materials": "Matte Agate, Charoite, Blue Tiger Eye, Wood",
+    "dimensions": "10mm beads, 7.5 inches",
+    "weight": "30g",
+    "moq": 10,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Charoite",
+      "Blue Tiger Eye",
+      "Gemstone"
+    ]
+  },
+  {
+    "id": "cat-fj-008",
+    "sku": "BS-FJ-BR-008",
+    "name": "10mm Round Matte Gemstone and Brush Gold Spacer Bead and Cross Stretchy Bracelet",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 1.75,
+    "salePrice": null,
+    "stock": 420,
+    "lowStockThreshold": 60,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-008.png",
+    "images": [
+      "/products/catalog/cat-fj-008.png"
+    ],
+    "description": "Matte black onyx 10mm beads with brushed gold focal bead and sideways black cross.",
+    "materials": "Matte Black Onyx, Brushed Gold Bead, Cross",
+    "dimensions": "10mm beads, 7.5 inches",
+    "weight": "28g",
+    "moq": 10,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "Cross",
+      "Brushed Gold",
+      "Wholesale Lot"
+    ]
+  },
+  {
+    "id": "cat-fj-009",
+    "sku": "BS-FJ-BR-009",
+    "name": "10mm Round Matte Mystic Aura Quartz Gemstone Mermaid Bracelet",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 2.25,
+    "salePrice": null,
+    "stock": 310,
+    "lowStockThreshold": 45,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-009.png",
+    "images": [
+      "/products/catalog/cat-fj-009.png"
+    ],
+    "description": "Spectrolite holographic glowing aura moonstone and matte mystic aura quartz stretchy bracelet in vibrant rainbow pastel options.",
+    "materials": "Mystic Aura Quartz, Synthetic Moonstone, Elastic",
+    "dimensions": "10mm beads, 7.25 inches",
+    "weight": "27g",
+    "moq": 10,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": true,
+    "tags": [
+      "Mystic Quartz",
+      "Mermaid Bracelet",
+      "Holographic"
+    ]
+  },
+  {
+    "id": "cat-fj-010",
+    "sku": "BS-FJ-NK-001",
+    "name": "10mm Round Wood Bead Knotted Necklace (36 Inches Long)",
+    "category": "finished-jewelry",
+    "subcategory": "necklaces",
+    "price": 6.5,
+    "salePrice": null,
+    "stock": 180,
+    "lowStockThreshold": 30,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-010.png",
+    "images": [
+      "/products/catalog/cat-fj-010.png"
+    ],
+    "description": "Hand-knotted 36-inch continuous wood bead necklace in assorted natural wood grain stains with color seed bead knot spacers.",
+    "materials": "10mm Natural Wood Beads, Silk Cord, Seed Bead Spacers",
+    "dimensions": "10mm wood beads, 36 inches length",
+    "weight": "65g",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "Wood Beads",
+      "Knotted Necklace",
+      "36 Inches"
+    ]
+  },
+  {
+    "id": "cat-beads-001",
+    "sku": "BS-BD-CY-001",
+    "name": "10mm Smiley Face with Clay Heishi Disc and Rhinestone Spacer Adjustable Bracelet",
+    "category": "beads",
+    "subcategory": "clay-disc",
+    "price": 1.5,
+    "salePrice": null,
+    "stock": 550,
+    "lowStockThreshold": 80,
+    "status": "published",
+    "image": "/products/catalog/cat-beads-001.png",
+    "images": [
+      "/products/catalog/cat-beads-001.png"
+    ],
+    "description": "Vibrant polymer clay heishi disc beaded bracelets with 10mm white acrylic smiley face focal bead and silver rhinestone spacers.",
+    "materials": "Polymer Clay Disc, Acrylic Smiley, Rhinestone Spacers",
+    "dimensions": "6mm clay discs, 10mm smiley, adjustable pull tie",
+    "weight": "12g",
+    "moq": 15,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Clay Disc",
+      "Heishi",
+      "Smiley Face",
+      "Youth"
+    ]
+  },
+  {
+    "id": "cat-beads-002",
+    "sku": "BS-BD-CY-002",
+    "name": "10mm Smiley Face with Clay Heishi Disc Neon Cord Bracelet",
+    "category": "beads",
+    "subcategory": "clay-disc",
+    "price": 1.5,
+    "salePrice": null,
+    "stock": 480,
+    "lowStockThreshold": 75,
+    "status": "published",
+    "image": "/products/catalog/cat-beads-002.png",
+    "images": [
+      "/products/catalog/cat-beads-002.png"
+    ],
+    "description": "Neon braided cord bracelets with colorful polymer clay heishi accents and happy smiley face beads with adjustable closure.",
+    "materials": "Braided Nylon Cord, Polymer Clay, Acrylic",
+    "dimensions": "Adjustable 6 to 9 inches",
+    "weight": "10g",
+    "moq": 15,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Neon Cord",
+      "Heishi",
+      "Smiley"
+    ]
+  },
+  {
+    "id": "cat-fj-011",
+    "sku": "BS-FJ-BR-011",
+    "name": "10mm White Stone + Sticky Diamond Ball Beaded Bracelet",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 3.0,
+    "salePrice": 2.7,
+    "stock": 230,
+    "lowStockThreshold": 40,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-011.png",
+    "images": [
+      "/products/catalog/cat-fj-011.png"
+    ],
+    "description": "Pastel stone beads with sparkling pavé crystal disco focal ball on heavy elastic cord.",
+    "materials": "10mm Quartz/Agate Beads, Pave Crystal Ball",
+    "dimensions": "10mm beads, 7.5 inches",
+    "weight": "32g",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Diamond Ball",
+      "Bracelets",
+      "Pastel"
+    ]
+  },
+  {
+    "id": "cat-fj-012",
+    "sku": "BS-FJ-BR-012",
+    "name": "10x15mm Faceted Crystal Teardrop Stretchy Bracelet (7.5 Inches)",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 3.0,
+    "salePrice": 2.7,
+    "stock": 290,
+    "lowStockThreshold": 45,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-012.png",
+    "images": [
+      "/products/catalog/cat-fj-012.png"
+    ],
+    "description": "Sparkling 10x15mm faceted briolette crystal teardrops arranged vertically with tiny metallic spacer beads.",
+    "materials": "Faceted Crystal Glass Teardrops, Brass Spacers",
+    "dimensions": "10x15mm teardrops, 7.5 inches",
+    "weight": "35g",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "Crystal Teardrop",
+      "Faceted",
+      "Sparkling"
+    ]
+  },
+  {
+    "id": "cat-fj-013",
+    "sku": "BS-FJ-BR-013",
+    "name": "10x15mm Waterdrop Bracelet Golden Spacer Beads",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 2.0,
+    "salePrice": null,
+    "stock": 310,
+    "lowStockThreshold": 50,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-013.png",
+    "images": [
+      "/products/catalog/cat-fj-013.png"
+    ],
+    "description": "Smooth teardrop waterdrop beads with polished golden spacer beads in elegant neutral and jewel tone varieties.",
+    "materials": "Glass/Resin Waterdrops, Gold Plated Spacers",
+    "dimensions": "10x15mm drops, 7.5 inches",
+    "weight": "28g",
+    "moq": 10,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Waterdrop",
+      "Golden Spacers",
+      "Bracelets"
+    ]
+  },
+  {
+    "id": "cat-find-001",
+    "sku": "CZ-SPC-12RD",
+    "name": "12mm Round Cubic Zirconia (CZ) Spacer",
+    "category": "finding",
+    "subcategory": "spacer",
+    "price": 3.25,
+    "salePrice": 2.85,
+    "stock": 480,
+    "lowStockThreshold": 80,
+    "status": "published",
+    "image": "/products/catalog/cat-find-001.png",
+    "images": [
+      "/products/catalog/cat-find-001.png"
+    ],
+    "description": "AAA micro-pavé cubic zirconia large hole round spacer bead available in 14K Gold, Platinum Silver, Rose Gold, and Gunmetal Black.",
+    "materials": "Brass Core, 18K Vacuum Plating, AAA Cubic Zirconia",
+    "dimensions": "12mm outer diameter, 3.5mm inner hole",
+    "weight": "3.5g each",
+    "moq": 10,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "Cubic Zirconia",
+      "Pave Spacer",
+      "12mm Round"
+    ]
+  },
+  {
+    "id": "cat-fj-014",
+    "sku": "BS-FJ-NK-014",
+    "name": "13x24mm Handmade 36 Inches Long Aluminum Rollo Chain with Pave Rhinestone Turquoise Link Necklace",
+    "category": "finished-jewelry",
+    "subcategory": "necklaces",
+    "price": 7.25,
+    "salePrice": null,
+    "stock": 140,
+    "lowStockThreshold": 25,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-014.png",
+    "images": [
+      "/products/catalog/cat-fj-014.png"
+    ],
+    "description": "Lightweight gold anodized aluminum rollo chain statement necklace featuring faceted oval turquoise bezel station links bordered with micro pavé rhinestones.",
+    "materials": "Anodized Aluminum Rollo Chain, Turquoise Stone, Rhinestones",
+    "dimensions": "13x24mm links, 36 inches total length",
+    "weight": "58g",
+    "moq": 3,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": true,
+    "tags": [
+      "Rollo Chain",
+      "Turquoise Station",
+      "36 Inches"
+    ]
+  },
+  {
+    "id": "cat-fj-015",
+    "sku": "BS-FJ-BR-015",
+    "name": "14K Gold Filled Tubes with Black Crystal Roundels Bracelet",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 8.85,
+    "salePrice": null,
+    "stock": 160,
+    "lowStockThreshold": 30,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-015.png",
+    "images": [
+      "/products/catalog/cat-fj-015.png"
+    ],
+    "description": "High-end multi-strand wrap bracelet with curved 14K gold filled textured noodles and sparkling faceted black crystal rondelles.",
+    "materials": "14K Gold Filled Tubes, Faceted Black Crystal Rondelles, Memory Wire",
+    "dimensions": "Multi-layer wrap fits 6.5 to 7.5 inch wrists",
+    "weight": "24g",
+    "moq": 3,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "14K Gold Filled",
+      "Crystal Roundels",
+      "Wrap Bracelet"
+    ]
+  },
+  {
+    "id": "cat-fj-016",
+    "sku": "BS-FJ-ER-016",
+    "name": "14mm Gorgeous Handmade Hexagonal Crystals Wrapped in Gold Dangling Earring Pair",
+    "category": "finished-jewelry",
+    "subcategory": "earrings",
+    "price": 5.0,
+    "salePrice": null,
+    "stock": 210,
+    "lowStockThreshold": 35,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-016.png",
+    "images": [
+      "/products/catalog/cat-fj-016.png"
+    ],
+    "description": "Geometric tiered dangle earrings with triple bezel-set hexagonal faceted crystals wrapped in polished gold frames.",
+    "materials": "Faceted Glass Crystals, Gold Plated Brass, French Wire",
+    "dimensions": "14mm crystal width, 2.75 inch drop length",
+    "weight": "14g pair",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Hexagonal Crystals",
+      "Dangle Earrings",
+      "Gold Frame"
+    ]
+  },
+  {
+    "id": "cat-pewter-001",
+    "sku": "A39817",
+    "name": "18x8mm Lead Free Pewter Caps Charm A39817",
+    "category": "pewter",
+    "subcategory": "caps",
+    "price": 10.0,
+    "salePrice": null,
+    "stock": 500,
+    "lowStockThreshold": 100,
+    "status": "published",
+    "image": "/products/catalog/cat-pewter-001.png",
+    "images": [
+      "/products/catalog/cat-pewter-001.png"
+    ],
+    "description": "Certified lead-free antique finish pewter cone end caps featuring braided filigree relief texture. Ideal for tassel ends and multi-strand necklaces.",
+    "materials": "100% Certified Lead-Free Pewter (<90ppm), Antique Bronze/Silver",
+    "dimensions": "18mm length, 8mm outer base, 6mm inner opening",
+    "weight": "100g per wholesale pack (approx 20 pcs)",
+    "moq": 1,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "Caps",
+      "Pewter",
+      "A39817",
+      "Lead-Free"
+    ]
+  },
+  {
+    "id": "cat-pewter-002",
+    "sku": "A10311",
+    "name": "20cm Lead Free Pewter Metal Chain Charm Bracelets (A10311)",
+    "category": "pewter",
+    "subcategory": "toggles",
+    "price": 2.0,
+    "salePrice": null,
+    "stock": 380,
+    "lowStockThreshold": 50,
+    "status": "published",
+    "image": "/products/catalog/cat-pewter-002.png",
+    "images": [
+      "/products/catalog/cat-pewter-002.png"
+    ],
+    "description": "Heavy wheat link pewter chain charm bracelet with ornate scroll engraved filigree toggle ring and T-bar clasp.",
+    "materials": "Lead-Free Pewter Alloy, Antique Silver Finish",
+    "dimensions": "20cm (7.87 inches) length, 8mm chain gauge",
+    "weight": "36g",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "A10311",
+      "Pewter Chain",
+      "Charm Bracelet"
+    ]
+  },
+  {
+    "id": "cat-pewter-003",
+    "sku": "A43052",
+    "name": "20x9mm TH:7mm Lead Free Pewter Spacer Charm A43052",
+    "category": "pewter",
+    "subcategory": "spacers-daisies",
+    "price": 10.0,
+    "salePrice": null,
+    "stock": 450,
+    "lowStockThreshold": 80,
+    "status": "published",
+    "image": "/products/catalog/cat-pewter-003.png",
+    "images": [
+      "/products/catalog/cat-pewter-003.png"
+    ],
+    "description": "Double-sided ornate marquise shaped pewter spacer with raised rosette medallion and antique brass relief finish.",
+    "materials": "Certified Lead-Free Pewter, Antique Brass Plating",
+    "dimensions": "20mm length, 9mm width, 7mm thickness, 2mm drill hole",
+    "weight": "120g per wholesale pack",
+    "moq": 1,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "A43052",
+      "Pewter Spacer",
+      "Marquise"
+    ]
+  },
+  {
+    "id": "cat-pewter-004",
+    "sku": "A42228",
+    "name": "25x15mm Lead Free Pewter Flower Connector A42228",
+    "category": "pewter",
+    "subcategory": "butterflies-flowers",
+    "price": 10.0,
+    "salePrice": null,
+    "stock": 420,
+    "lowStockThreshold": 70,
+    "status": "published",
+    "image": "/products/catalog/cat-pewter-004.png",
+    "images": [
+      "/products/catalog/cat-pewter-004.png"
+    ],
+    "description": "Double loop filigree mandala flower connector charm in lead-free pewter. Ideal link for bracelets and drop earrings.",
+    "materials": "Lead-Free Pewter, Antique Bronze / Silver",
+    "dimensions": "25mm length with loops, 15mm width, 2.5mm hole",
+    "weight": "85g pack (20 pcs)",
+    "moq": 1,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "A42228",
+      "Flower Connector",
+      "Filigree"
+    ]
+  },
+  {
+    "id": "cat-acc-001",
+    "sku": "BS-AC-PD-001",
+    "name": "25x40mm Faux/Imitation Teardrop Leather Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 600,
+    "lowStockThreshold": 100,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-001.png",
+    "images": [
+      "/products/catalog/cat-acc-001.png"
+    ],
+    "description": "Animal print textured vegan faux leather teardrop pendant with pre-punched top hole. Available in leopard, cheetah, and spotted patterns.",
+    "materials": "Double-sided PU Vegan Leather",
+    "dimensions": "25mm width, 40mm length, 1.5mm thickness",
+    "weight": "2g each (sold in 10-packs)",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Faux Leather",
+      "Leopard Print",
+      "Teardrop Pendant"
+    ]
+  },
+  {
+    "id": "cat-pewter-005",
+    "sku": "A11685",
+    "name": "27x23mm Lead Free Pewter Christmas Star Charm A11685",
+    "category": "pewter",
+    "subcategory": "filler-charms",
+    "price": 10.0,
+    "salePrice": null,
+    "stock": 390,
+    "lowStockThreshold": 60,
+    "status": "published",
+    "image": "/products/catalog/cat-pewter-005.png",
+    "images": [
+      "/products/catalog/cat-pewter-005.png"
+    ],
+    "description": "Dimensional 5-point Christmas star charm with top hanging bail. Solid lead-free pewter casting available in polished gold and antique silver.",
+    "materials": "Lead-Free Pewter, Shiny Gold and Antique Silver Plating",
+    "dimensions": "27mm height with bail, 23mm star width",
+    "weight": "90g pack (20 pcs)",
+    "moq": 1,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "A11685",
+      "Star Charm",
+      "Christmas",
+      "Pewter"
+    ]
+  },
+  {
+    "id": "cat-pewter-006",
+    "sku": "A36288",
+    "name": "29x14.5mm Rhinestone Lead Free Pewter Religious Charm A36288",
+    "category": "pewter",
+    "subcategory": "religious",
+    "price": 10.0,
+    "salePrice": null,
+    "stock": 350,
+    "lowStockThreshold": 50,
+    "status": "published",
+    "image": "/products/catalog/cat-pewter-006.png",
+    "images": [
+      "/products/catalog/cat-pewter-006.png"
+    ],
+    "description": "Ornate Virgin Mary / Madonna religious medal connector framed with sparkling crystal rhinestones and triple connection loops.",
+    "materials": "Lead-Free Pewter, Glass Crystal Rhinestones, Antique Silver",
+    "dimensions": "29mm length, 14.5mm width, 3 loops",
+    "weight": "95g pack (15 pcs)",
+    "moq": 1,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "A36288",
+      "Religious",
+      "Virgin Mary",
+      "Rhinestone"
+    ]
+  },
+  {
+    "id": "cat-acc-002",
+    "sku": "BS-AC-PD-002",
+    "name": "30X55mm Double Sided Faux Glitter Leather Diamond Shape Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 480,
+    "lowStockThreshold": 75,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-002.png",
+    "images": [
+      "/products/catalog/cat-acc-002.png"
+    ],
+    "description": "Chunky glitter coated faux leather diamond marquise shaped pendants in dark sapphire blue, black, crimson red, and holographic silver.",
+    "materials": "Double Sided Glitter Vegan Leather",
+    "dimensions": "30mm width, 55mm height",
+    "weight": "2.5g each",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Glitter Leather",
+      "Diamond Pendant",
+      "Accessories"
+    ]
+  },
+  {
+    "id": "cat-acc-003",
+    "sku": "BS-AC-PD-003",
+    "name": "30x60mm Double Sided Faux Glitter Vegan Leather Cactus Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 510,
+    "lowStockThreshold": 80,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-003.png",
+    "images": [
+      "/products/catalog/cat-acc-003.png"
+    ],
+    "description": "Southwestern cactus silhouette glitter faux leather pendants with pre-punched hanging hole.",
+    "materials": "Double Sided Glitter PU Leather",
+    "dimensions": "30mm width, 60mm height",
+    "weight": "2.8g each",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Cactus",
+      "Glitter Leather",
+      "Southwestern"
+    ]
+  },
+  {
+    "id": "cat-fj-017",
+    "sku": "BS-FJ-ER-017",
+    "name": "30X60mm Faux Glitter Vegan Leather Cactus Earring Pair",
+    "category": "finished-jewelry",
+    "subcategory": "earrings",
+    "price": 3.5,
+    "salePrice": null,
+    "stock": 320,
+    "lowStockThreshold": 45,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-017.png",
+    "images": [
+      "/products/catalog/cat-fj-017.png"
+    ],
+    "description": "Finished lightweight statement dangle earrings featuring textured glitter and leopard pattern faux leather cactus pendants on hypoallergenic French ear wires.",
+    "materials": "PU Leather Cactus, Stainless Steel French Ear Wires",
+    "dimensions": "30x60mm drop length",
+    "weight": "6g per pair",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isFeatured": true,
+    "tags": [
+      "Cactus Earrings",
+      "Leopard Print",
+      "Southwestern"
+    ]
+  },
+  {
+    "id": "cat-acc-004",
+    "sku": "BS-AC-PD-004",
+    "name": "30X60mm Faux/Imitation Leather Cactus Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 460,
+    "lowStockThreshold": 70,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-004.png",
+    "images": [
+      "/products/catalog/cat-acc-004.png"
+    ],
+    "description": "Desert safari leopard print faux leather cactus pendants for keychains, earrings, and bohemian necklace focal pieces.",
+    "materials": "Printed Vegan Faux Leather",
+    "dimensions": "30mm x 60mm",
+    "weight": "2.5g",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Cactus",
+      "Pendants",
+      "Leopard"
+    ]
+  },
+  {
+    "id": "cat-acc-005",
+    "sku": "BS-AC-PD-005",
+    "name": "34x45mm Double Sided Faux/Imitation Oval Leather Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 390,
+    "lowStockThreshold": 60,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-005.png",
+    "images": [
+      "/products/catalog/cat-acc-005.png"
+    ],
+    "description": "Oval donut leather pendant with stitched outer perimeter in camel, black, cream, and cheetah prints.",
+    "materials": "Stitched Vegan Leather, Inner Open Ring",
+    "dimensions": "34mm width, 45mm height",
+    "weight": "3.2g",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Oval Donut",
+      "Stitched Leather",
+      "Pendants"
+    ]
+  },
+  {
+    "id": "cat-fj-018",
+    "sku": "BS-FJ-ER-018",
+    "name": "36X32mm Double Sided Faux Glitter Imitation Leather Oval Earring Pair",
+    "category": "finished-jewelry",
+    "subcategory": "earrings",
+    "price": 3.5,
+    "salePrice": null,
+    "stock": 290,
+    "lowStockThreshold": 40,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-018.png",
+    "images": [
+      "/products/catalog/cat-fj-018.png"
+    ],
+    "description": "Shimmering glitter faux leather teardrop oval earrings with gold-plated shepherd hooks. High impact, ultra featherlight weight.",
+    "materials": "Double Sided Glitter Leather, Gold Plated Hooks",
+    "dimensions": "36x32mm oval",
+    "weight": "4g pair",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Glitter Earrings",
+      "Oval Drops",
+      "Finished Jewelry"
+    ]
+  },
+  {
+    "id": "cat-acc-006",
+    "sku": "BS-AC-PD-006",
+    "name": "36X32mm Double Sided Faux Glitter Vegan Leather Oval Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 440,
+    "lowStockThreshold": 70,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-006.png",
+    "images": [
+      "/products/catalog/cat-acc-006.png"
+    ],
+    "description": "Oval glitter leather charms with clean die-cut edges in gold, cobalt, crimson, and black.",
+    "materials": "Chunky Glitter Coated PU Leather",
+    "dimensions": "36x32mm",
+    "weight": "2g",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Glitter Oval",
+      "Pendants",
+      "Craft Supplies"
+    ]
+  },
+  {
+    "id": "cat-acc-007",
+    "sku": "BS-AC-PD-007",
+    "name": "36x55mm Double Sided Faux Glitter Imitation Leather Teardrop Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 420,
+    "lowStockThreshold": 65,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-007.png",
+    "images": [
+      "/products/catalog/cat-acc-007.png"
+    ],
+    "description": "Large teardrop shaped glitter faux leather pendant blanks with pre-cut hanging hole.",
+    "materials": "Double-sided Glitter PU",
+    "dimensions": "36mm width, 55mm height",
+    "weight": "3g",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Glitter Teardrop",
+      "Large Pendant",
+      "Accessories"
+    ]
+  },
+  {
+    "id": "cat-acc-008",
+    "sku": "BS-AC-PD-008",
+    "name": "40x25mm Double Sided Faux Glitter Imitation Leather Teardrop Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 480,
+    "lowStockThreshold": 70,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-008.png",
+    "images": [
+      "/products/catalog/cat-acc-008.png"
+    ],
+    "description": "Standard 40x25mm glitter leather teardrop components in multi-color assorted packs.",
+    "materials": "Glitter Fabric, PU Backing",
+    "dimensions": "40x25mm",
+    "weight": "2g",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Teardrop Pendant",
+      "Glitter",
+      "Accessories"
+    ]
+  },
+  {
+    "id": "cat-fj-019",
+    "sku": "BS-FJ-ER-019",
+    "name": "40x25mm Faux/Imitation Leather Teardrop Earring Pair",
+    "category": "finished-jewelry",
+    "subcategory": "earrings",
+    "price": 3.5,
+    "salePrice": null,
+    "stock": 310,
+    "lowStockThreshold": 45,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-019.png",
+    "images": [
+      "/products/catalog/cat-fj-019.png"
+    ],
+    "description": "Finished animal print leopard teardrop earrings on gold fishhook ear wires in pink, tan, teal, and burgundy cheetah spots.",
+    "materials": "Animal Print Faux Suede Leather, Gold Plated Hooks",
+    "dimensions": "40x25mm drop",
+    "weight": "5g pair",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Leopard Earrings",
+      "Teardrop Drop",
+      "Boutique"
+    ]
+  },
+  {
+    "id": "cat-fj-020",
+    "sku": "BS-FJ-ER-020",
+    "name": "40x60mm Faux Imitation Leather Hollow Oval Earring Pair",
+    "category": "finished-jewelry",
+    "subcategory": "earrings",
+    "price": 3.5,
+    "salePrice": null,
+    "stock": 280,
+    "lowStockThreshold": 40,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-020.png",
+    "images": [
+      "/products/catalog/cat-fj-020.png"
+    ],
+    "description": "Open hollow oval silhouette statement hoop earrings in genuine textured animal print vegan leather.",
+    "materials": "Die-Cut Faux Leather Hollow Oval, Gold Hooks",
+    "dimensions": "40x60mm frame",
+    "weight": "5g pair",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Hollow Oval",
+      "Hoop Earrings",
+      "Animal Print"
+    ]
+  },
+  {
+    "id": "cat-acc-009",
+    "sku": "BS-AC-PD-009",
+    "name": "40X60mm Faux/Imitation Leather Hollow Oval Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 370,
+    "lowStockThreshold": 55,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-009.png",
+    "images": [
+      "/products/catalog/cat-acc-009.png"
+    ],
+    "description": "Large hollow center oval leather connector blank with pre-cut hanging perforation.",
+    "materials": "Vegan Faux Leather",
+    "dimensions": "40x60mm",
+    "weight": "2.8g",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Hollow Oval Pendant",
+      "Pendants",
+      "Crafts"
+    ]
+  },
+  {
+    "id": "cat-acc-010",
+    "sku": "BS-AC-PD-010",
+    "name": "43x40mm Faux/Imitation Texas Map Leather Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 330,
+    "lowStockThreshold": 50,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-010.png",
+    "images": [
+      "/products/catalog/cat-acc-010.png"
+    ],
+    "description": "State of Texas silhouette cut faux leather pendants featuring colorful southwestern serape Aztec blanket patterns.",
+    "materials": "Printed Faux Suede / Leather Serape Fabric",
+    "dimensions": "43mm width, 40mm height",
+    "weight": "2.6g",
+    "moq": 5,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "Texas Map",
+      "Serape",
+      "Southwestern"
+    ]
+  },
+  {
+    "id": "cat-fj-021",
+    "sku": "BS-FJ-ER-021",
+    "name": "45mmx32mm Amethyst with Pave Rhinestones Teardrop Earring Pair",
+    "category": "finished-jewelry",
+    "subcategory": "earrings",
+    "price": 8.85,
+    "salePrice": null,
+    "stock": 190,
+    "lowStockThreshold": 30,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-021.png",
+    "images": [
+      "/products/catalog/cat-fj-021.png"
+    ],
+    "description": "Stunning formal teardrop chandelier earrings featuring crushed genuine amethyst quartz crystals pavé set with sparkling gunmetal black rhinestones.",
+    "materials": "Natural Crushed Amethyst, Gunmetal Alloy, Black Pavé Rhinestones",
+    "dimensions": "45mm x 32mm teardrop, post stud backing",
+    "weight": "18g pair",
+    "moq": 3,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "Amethyst",
+      "Pave Rhinestone",
+      "Luxury Earrings"
+    ]
+  },
+  {
+    "id": "cat-fj-022",
+    "sku": "BS-FJ-ER-022",
+    "name": "45mmx32mm Blue Magnesite Turquoise with Pave Rhinestones Teardrop Earring Pair",
+    "category": "finished-jewelry",
+    "subcategory": "earrings",
+    "price": 8.85,
+    "salePrice": null,
+    "stock": 210,
+    "lowStockThreshold": 35,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-022.png",
+    "images": [
+      "/products/catalog/cat-fj-022.png"
+    ],
+    "description": "Southwestern chandelier teardrop post earrings featuring natural blue magnesite turquoise chips bordered with black gunmetal crystal pavé.",
+    "materials": "Natural Blue Magnesite Turquoise, Gunmetal Bezel, Pavé Crystals",
+    "dimensions": "45mm x 32mm teardrop",
+    "weight": "19g pair",
+    "moq": 3,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "Turquoise Earrings",
+      "Southwestern",
+      "Pave Chandelier"
+    ]
+  },
+  {
+    "id": "cat-pewter-007",
+    "sku": "A10311-NK",
+    "name": "46cm Lead Free Pewter Metal Chain Charm Necklace (A10311)",
+    "category": "pewter",
+    "subcategory": "toggles",
+    "price": 3.5,
+    "salePrice": null,
+    "stock": 270,
+    "lowStockThreshold": 45,
+    "status": "published",
+    "image": "/products/catalog/cat-pewter-007.png",
+    "images": [
+      "/products/catalog/cat-pewter-007.png"
+    ],
+    "description": "Continuous 46cm (18 inch) antique silver finish pewter wheat link chain necklace featuring ornate filigree swivel spring ring clasp.",
+    "materials": "100% Lead-Free Pewter Alloy, Antique Silver Plating",
+    "dimensions": "46cm length (18 inches), 8mm chain gauge",
+    "weight": "68g",
+    "moq": 3,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": true,
+    "tags": [
+      "A10311",
+      "Pewter Necklace",
+      "Wheat Chain"
+    ]
+  },
+  {
+    "id": "cat-beads-003",
+    "sku": "BS-BD-CY-003",
+    "name": "4mm Clay Disc Slice with Angelic Crystal Rondelle Adjustable Bracelets (7.5 Inches)",
+    "category": "beads",
+    "subcategory": "clay-disc",
+    "price": 2.0,
+    "salePrice": null,
+    "stock": 380,
+    "lowStockThreshold": 60,
+    "status": "published",
+    "image": "/products/catalog/cat-beads-003.png",
+    "images": [
+      "/products/catalog/cat-beads-003.png"
+    ],
+    "description": "Delicate 4mm polymer clay slice heishi bracelets with faceted angelic crystal rondelles and macramé slide knot cord adjustment.",
+    "materials": "4mm Polymer Clay Discs, Crystal Rondelles, Nylon Macrame Cord",
+    "dimensions": "4mm disc thickness, adjustable 6.5 to 8 inches",
+    "weight": "11g",
+    "moq": 10,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Clay Disc",
+      "Crystal Rondelle",
+      "Adjustable"
+    ]
+  },
+  {
+    "id": "cat-fj-023",
+    "sku": "BS-FJ-BR-023",
+    "name": "4mm Gold Round Hematite Crystal Stretchy Bracelet (7.5 inches)",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 1.5,
+    "salePrice": null,
+    "stock": 420,
+    "lowStockThreshold": 60,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-023.png",
+    "images": [
+      "/products/catalog/cat-fj-023.png"
+    ],
+    "description": "Dainty stackable 4mm metallic gold electroplated non-magnetic hematite beads with gemstone accents on stretch cord.",
+    "materials": "4mm Metallic Gold Hematite, Natural Gemstone Beads",
+    "dimensions": "4mm beads, 7.5 inches",
+    "weight": "12g",
+    "moq": 10,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Hematite",
+      "Gold Stretchy",
+      "Stackable"
+    ]
+  },
+  {
+    "id": "cat-fj-024",
+    "sku": "BS-FJ-BR-024",
+    "name": "4mm Round Hematite Crystal Stretchy Bracelet (7.5 inches)",
+    "category": "finished-jewelry",
+    "subcategory": "bracelets",
+    "price": 1.5,
+    "salePrice": null,
+    "stock": 450,
+    "lowStockThreshold": 65,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-024.png",
+    "images": [
+      "/products/catalog/cat-fj-024.png"
+    ],
+    "description": "Stackable 4mm polished metallic silver hematite beads paired with assorted pastel crystal rondelles.",
+    "materials": "4mm Silver Hematite, Crystal Rondelles",
+    "dimensions": "4mm beads, 7.5 inches",
+    "weight": "12g",
+    "moq": 10,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "Silver Hematite",
+      "Pastel Crystal",
+      "Stackable"
+    ]
+  },
+  {
+    "id": "cat-pewter-008",
+    "sku": "A44109",
+    "name": "50x50mm Lead Free Pewter Hollow Out Flower Charms",
+    "category": "pewter",
+    "subcategory": "butterflies-flowers",
+    "price": 10.0,
+    "salePrice": null,
+    "stock": 380,
+    "lowStockThreshold": 50,
+    "status": "published",
+    "image": "/products/catalog/cat-pewter-008.png",
+    "images": [
+      "/products/catalog/cat-pewter-008.png"
+    ],
+    "description": "Large filigree openwork medallion flower charms in antique brass, gold, and silver finishes. Perfect centerpiece for pendants or brooches.",
+    "materials": "Lead-Free Pewter, Triple Plating",
+    "dimensions": "50mm diameter (2 inches)",
+    "weight": "110g pack (10 pcs)",
+    "moq": 1,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": true,
+    "tags": [
+      "50mm Flower",
+      "Filigree Medallion",
+      "Pewter Charm"
+    ]
+  },
+  {
+    "id": "cat-fj-025",
+    "sku": "BS-FJ-ER-025",
+    "name": "55mm Faux Imitation Leather Star Earring Pair",
+    "category": "finished-jewelry",
+    "subcategory": "earrings",
+    "price": 3.5,
+    "salePrice": null,
+    "stock": 340,
+    "lowStockThreshold": 50,
+    "status": "published",
+    "image": "/products/catalog/cat-fj-025.png",
+    "images": [
+      "/products/catalog/cat-fj-025.png"
+    ],
+    "description": "Oversized 55mm leopard and cheetah spotted faux leather star dangle earrings on gold ear wires.",
+    "materials": "Printed PU Leather, Gold Plated Hooks",
+    "dimensions": "55mm star width, 75mm total drop",
+    "weight": "6g pair",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isFeatured": false,
+    "tags": [
+      "Star Earrings",
+      "Leopard Star",
+      "Statement Earrings"
+    ]
+  },
+  {
+    "id": "cat-acc-011",
+    "sku": "BS-AC-PD-011",
+    "name": "55mmX37mm Faux/Imitation Teardrop Leather Pendant",
+    "category": "accessories",
+    "subcategory": "pendants",
+    "price": 4.0,
+    "salePrice": null,
+    "stock": 460,
+    "lowStockThreshold": 70,
+    "status": "published",
+    "image": "/products/catalog/cat-acc-011.png",
+    "images": [
+      "/products/catalog/cat-acc-011.png"
+    ],
+    "description": "Extra large 55x37mm leopard and cheetah patterned teardrop faux leather craft pendants.",
+    "materials": "Double Sided Printed Vegan Leather",
+    "dimensions": "55mm height, 37mm width",
+    "weight": "3.5g each",
+    "moq": 5,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isFeatured": false,
+    "tags": [
+      "XL Teardrop",
+      "Leopard Leather",
+      "Pendants"
+    ]
   }
 ]

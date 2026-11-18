@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Raw Excel media extract scratch files
+*.xlsx
+extracted_excel_media/
+

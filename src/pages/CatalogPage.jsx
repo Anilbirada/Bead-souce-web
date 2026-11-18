@@ -18,6 +18,7 @@ export default function CatalogPage({
   products, 
   categories, 
   initialCategory = 'all', 
+  initialSubcategory = 'all',
   initialSearch = '', 
   onSelectProduct, 
   onQuickView, 
@@ -26,6 +27,7 @@ export default function CatalogPage({
   const { formatPrice } = useCurrency();
 
   const [selectedCategory, setSelectedCategory] = useState(initialCategory || 'all');
+  const [selectedSubcategory, setSelectedSubcategory] = useState(initialSubcategory || 'all');
   const [searchQuery, setSearchQuery] = useState(initialSearch || '');
   const [sortBy, setSortBy] = useState('featured');
   const [inStockOnly, setInStockOnly] = useState(false);
@@ -34,10 +36,14 @@ export default function CatalogPage({
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [gridCols, setGridCols] = useState(4); // 3 or 4
 
-  // Synchronize when initialCategory changes via navigation
+  // Synchronize when initialCategory or initialSubcategory changes via navigation
   useEffect(() => {
     if (initialCategory) setSelectedCategory(initialCategory);
   }, [initialCategory]);
+
+  useEffect(() => {
+    if (initialSubcategory !== undefined) setSelectedSubcategory(initialSubcategory);
+  }, [initialSubcategory]);
 
   useEffect(() => {
     if (initialSearch !== undefined) setSearchQuery(initialSearch);
@@ -57,9 +63,14 @@ export default function CatalogPage({
   // Filtering Logic
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
-      // Category filter
-      if (selectedCategory !== 'all' && p.category !== selectedCategory) {
-        return false;
+      // Category filter (supports master category and legacyCategory)
+      if (selectedCategory !== 'all') {
+        const catMatch = p.category === selectedCategory || p.legacyCategory === selectedCategory;
+        if (!catMatch) return false;
+      }
+      // Subcategory filter
+      if (selectedSubcategory !== 'all') {
+        if (p.subcategory !== selectedSubcategory) return false;
       }
       // Search filter
       if (searchQuery.trim()) {
@@ -99,13 +110,14 @@ export default function CatalogPage({
       if (sortBy === 'bestseller') return (b.isBestSeller ? 1 : 0) - (a.isBestSeller ? 1 : 0);
       return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
     });
-  }, [products, selectedCategory, searchQuery, inStockOnly, priceRange, selectedMaterial, sortBy]);
+  }, [products, selectedCategory, selectedSubcategory, searchQuery, inStockOnly, priceRange, selectedMaterial, sortBy]);
 
   // Find active category info
   const currentCatInfo = categories.find(c => c.id === selectedCategory);
 
   const clearAllFilters = () => {
     setSelectedCategory('all');
+    setSelectedSubcategory('all');
     setSearchQuery('');
     setInStockOnly(false);
     setPriceRange(50);
@@ -113,7 +125,7 @@ export default function CatalogPage({
     setSortBy('featured');
   };
 
-  const hasActiveFilters = selectedCategory !== 'all' || searchQuery || inStockOnly || selectedMaterial !== 'all' || priceRange < 50;
+  const hasActiveFilters = selectedCategory !== 'all' || selectedSubcategory !== 'all' || searchQuery || inStockOnly || selectedMaterial !== 'all' || priceRange < 50;
 
   return (
     <div className="min-h-screen bg-[#FAF8F3] pb-24">
@@ -239,7 +251,15 @@ export default function CatalogPage({
             {selectedCategory !== 'all' && (
               <span className="inline-flex items-center gap-1.5 bg-white border border-[#EDE5D8] px-3 py-1.5 rounded-full text-[#40362F] shadow-xs">
                 Category: <strong className="text-[#292723]">{currentCatInfo?.name || selectedCategory}</strong>
-                <button onClick={() => setSelectedCategory('all')} className="hover:text-red-500 cursor-pointer">
+                <button onClick={() => { setSelectedCategory('all'); setSelectedSubcategory('all'); }} className="hover:text-red-500 cursor-pointer">
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            )}
+            {selectedSubcategory !== 'all' && (
+              <span className="inline-flex items-center gap-1.5 bg-white border border-[#EDE5D8] px-3 py-1.5 rounded-full text-[#40362F] shadow-xs">
+                Subcategory: <strong className="text-[#292723]">{selectedSubcategory.replace(/-/g, ' ')}</strong>
+                <button onClick={() => setSelectedSubcategory('all')} className="hover:text-red-500 cursor-pointer">
                   <X className="w-3 h-3" />
                 </button>
               </span>
@@ -289,7 +309,7 @@ export default function CatalogPage({
               </h3>
               <div className="space-y-1">
                 <button
-                  onClick={() => setSelectedCategory('all')}
+                  onClick={() => { setSelectedCategory('all'); setSelectedSubcategory('all'); }}
                   className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-colors flex items-center justify-between cursor-pointer ${
                     selectedCategory === 'all' ? 'bg-[#40362F] text-[#FAF8F3]' : 'text-[#40362F] hover:bg-[#FAF8F3]'
                   }`}
@@ -297,22 +317,67 @@ export default function CatalogPage({
                   <span>All Wholesale Catalogue</span>
                   <span className="text-[10px] opacity-75 font-mono">{products.length}</span>
                 </button>
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => setSelectedCategory(cat.id)}
-                    className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-colors flex items-center justify-between cursor-pointer ${
-                      selectedCategory === cat.id 
-                        ? 'bg-[#40362F] text-[#FAF8F3] font-bold' 
-                        : 'text-[#40362F] hover:bg-[#FAF8F3]'
-                    }`}
-                  >
-                    <span>{cat.name}</span>
-                    <span className="text-[10px] text-[#8B8175] font-mono">
-                      {products.filter(p => p.category === cat.id).length || cat.itemCount}
-                    </span>
-                  </button>
-                ))}
+                {categories.map((cat) => {
+                  const isCatSelected = selectedCategory === cat.id;
+                  const catProducts = products.filter(p => p.category === cat.id || p.legacyCategory === cat.id);
+                  return (
+                    <div key={cat.id} className="space-y-0.5">
+                      <button
+                        onClick={() => {
+                          setSelectedCategory(cat.id);
+                          setSelectedSubcategory('all');
+                        }}
+                        className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-colors flex items-center justify-between cursor-pointer ${
+                          isCatSelected 
+                            ? 'bg-[#40362F] text-[#FAF8F3] font-bold' 
+                            : 'text-[#40362F] hover:bg-[#FAF8F3]'
+                        }`}
+                      >
+                        <span>{cat.name}</span>
+                        <span className={`text-[10px] font-mono ${isCatSelected ? 'text-[#C6A66B]' : 'text-[#8B8175]'}`}>
+                          {catProducts.length || cat.itemCount}
+                        </span>
+                      </button>
+
+                      {/* Expandable Subcategories when category is selected */}
+                      {isCatSelected && cat.subcategories && cat.subcategories.length > 0 && (
+                        <div className="pl-3 pr-1 py-1 space-y-0.5 border-l-2 border-[#C6A66B]/50 ml-3 my-1">
+                          <button
+                            onClick={() => setSelectedSubcategory('all')}
+                            className={`w-full text-left px-2.5 py-1 rounded-lg text-[11px] cursor-pointer flex items-center justify-between ${
+                              selectedSubcategory === 'all'
+                                ? 'text-[#C6A66B] font-bold bg-[#FAF8F3]'
+                                : 'text-[#5C554E] hover:text-[#292723]'
+                            }`}
+                          >
+                            <span>&bull; All {cat.name}</span>
+                            <span className="text-[10px] opacity-70 font-mono">{catProducts.length}</span>
+                          </button>
+                          {cat.subcategories.map((sub) => {
+                            const subCount = catProducts.filter(p => p.subcategory === sub.id).length;
+                            const isSubSelected = selectedSubcategory === sub.id;
+                            return (
+                              <button
+                                key={sub.id}
+                                onClick={() => setSelectedSubcategory(sub.id)}
+                                className={`w-full text-left px-2.5 py-1 rounded-lg text-[11px] cursor-pointer flex items-center justify-between transition-colors ${
+                                  isSubSelected
+                                    ? 'text-[#C6A66B] font-bold bg-[#FAF8F3]'
+                                    : 'text-[#5C554E] hover:text-[#292723]'
+                                }`}
+                              >
+                                <span className="truncate">{sub.name}</span>
+                                {subCount > 0 && (
+                                  <span className="text-[10px] font-mono opacity-70">{subCount}</span>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
 

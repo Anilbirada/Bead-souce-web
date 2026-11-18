@@ -128,45 +128,95 @@ export default function Header({
     categories: {
       title: "Master Wholesale Categories",
       featured: [
-        { name: "Imperial African Turquoise 8mm", sku: "A12502", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" },
-        { name: "Freshwater Baroque Pearl Strand", sku: "P8821", img: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=600&q=80" }
+        { name: "Sea Sediment Jasper 8mm Stretchy Bracelet", sku: "A39817", img: "/products/catalog/cat-fj-001.png" },
+        { name: "Potato Freshwater Pearl Strand 4-5mm", sku: "A43052", img: "/products/catalog/cat-beads-001.png" }
       ],
       links: [
-        { label: "Natural Gemstone Beads", category: "natural-gemstone-beads" },
-        { label: "Crystal & Cubic Zirconia", category: "crystal-beads" },
-        { label: "Freshwater & Baroque Pearls", category: "natural-gemstone-beads" },
-        { label: "Turquoise Calibrated Strands", category: "turquoise-beads" },
-        { label: "Certified Lead-Free Pewter Findings", category: "jewelry-findings" },
-        { label: "Micro-Pavé CZ Clasps & Connectors", category: "jewelry-connectors" },
-        { label: "Handmade Artisan Necklaces", category: "handmade-necklaces" },
-        { label: "Charms & Jewelry Pendants", category: "charms" }
+        { label: "Finished Jewelry (Bracelets, Necklaces, Rings)", category: "finished-jewelry" },
+        { label: "Beads (Gemstone, Pearl, Crystal, Clay Disc)", category: "beads" },
+        { label: "Pewter (Lead-Free Charms, Crosses, Toggles)", category: "pewter" },
+        { label: "Findings (Chains, Clasps, Pins, Jump Rings)", category: "finding" },
+        { label: "Accessories (Pave CZ, Tassels, Pendants)", category: "accessories" },
+        { label: "Seasonal Trends (Mala, Druzy, Southwestern)", category: "seasonal-trends" },
+        { label: "New Sea Arrivals (142-147 Container Shipments)", category: "new-arrivals" },
+        { label: "Best Sellers (Volume Bestsellers)", category: "best-sellers" }
       ]
     },
-    gemstones: {
-      title: "Natural Gemstone Beads & Imperial Strands",
+    finishedJewelry: {
+      title: "Finished Jewelry & Artisan Collections",
       featured: [
-        { name: "Natural African Turquoise 8mm", sku: "A12502", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" },
-        { name: "Madagascar Rose Quartz 10mm", sku: "A5853", img: "https://images.unsplash.com/photo-1611591475819-79b8b7380962?auto=format&fit=crop&w=600&q=80" }
+        { name: "Dalmatian Jasper 8mm Bead Stretchy Bracelet", sku: "A10311", img: "/products/catalog/cat-fj-002.png" },
+        { name: "Sea Sediment Jasper 8mm Bead Stretchy Bracelet", sku: "A39817", img: "/products/catalog/cat-fj-001.png" }
       ],
       links: [
-        { label: "Turquoise Strands & Slabs", category: "turquoise-beads" },
-        { label: "Amethyst & Purple Quartz", category: "natural-gemstone-beads" },
-        { label: "Jasper & Agate Calibrated Strands", category: "natural-gemstone-beads" },
-        { label: "Lapis Lazuli Grade AAA", category: "natural-gemstone-beads" },
-        { label: "Black Lava Stone & Volcanic Beads", category: "natural-gemstone-beads" }
+        { label: "Bracelets (Charm, Crystal, Gemstone)", category: "finished-jewelry", subcategory: "bracelets" },
+        { label: "Artisan Necklaces", category: "finished-jewelry", subcategory: "necklaces" },
+        { label: "Wholesale Rings", category: "finished-jewelry", subcategory: "rings" },
+        { label: "Handcrafted Earrings", category: "finished-jewelry", subcategory: "earrings" },
+        { label: "Jewelry Display & Stands", category: "finished-jewelry", subcategory: "jewelry-display" }
       ]
     },
-    findings: {
-      title: "Certified Lead-Free Pewter & Fine Findings",
+    beads: {
+      title: "Beads, Strands & Natural Gemstones",
       featured: [
-        { name: "Micro Pavé CZ Carabiner Screw Lock", sku: "A1016", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" },
-        { name: "Lead-Free Pewter Leaf Charm", sku: "A912", img: "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=600&q=80" }
+        { name: "White Potato Freshwater Pearl Strand 4-5mm", sku: "A43052", img: "/products/catalog/cat-beads-001.png" },
+        { name: "Blue Sea Sediment Jasper Flat Rondelle 3x10mm", sku: "A42228", img: "/products/catalog/cat-beads-002.png" }
       ],
       links: [
-        { label: "Screw Lock Carabiners & Clasps", category: "jewelry-connectors" },
-        { label: "Spacer Beads & Calibrated Rondelles", category: "jewelry-spacers" },
-        { label: "Certified Lead-Free Pewter Charms", category: "charms" },
-        { label: "Jump Rings, Head Pins & Wire", category: "jewelry-findings" }
+        { label: "Natural Gemstone Strands", category: "beads", subcategory: "gemstone" },
+        { label: "Freshwater Pearl Beads", category: "beads", subcategory: "pearl-beads" },
+        { label: "Crystal Beads & Rondelles", category: "beads", subcategory: "crystal-beads" },
+        { label: "Clay Disc Polymer Heishi", category: "beads", subcategory: "clay-disc" },
+        { label: "Large Hole Focal Beads", category: "beads", subcategory: "large-hole" },
+        { label: "Natural Shell Beads", category: "beads", subcategory: "shell" },
+        { label: "Acrylic Designer Beads", category: "beads", subcategory: "acrylic-beads" }
+      ]
+    },
+    pewter: {
+      title: "100% Certified Lead-Free Pewter Components",
+      featured: [
+        { name: "Antique Pewter Cross Charm Component", sku: "A11685", img: "/products/catalog/cat-pewter-001.png" },
+        { name: "Antique Silver Pewter Toggle Clasp Set", sku: "A36288", img: "/products/catalog/cat-pewter-002.png" }
+      ],
+      links: [
+        { label: "Crosses & Religious Charms", category: "pewter", subcategory: "crosses" },
+        { label: "Toggle Clasps & Toggles", category: "pewter", subcategory: "toggles" },
+        { label: "Bails, Wings & Connectors", category: "pewter", subcategory: "bails-wings" },
+        { label: "Butterflies & Botanical Flowers", category: "pewter", subcategory: "butterflies-flowers" },
+        { label: "Spacers, Daisies & Rondelles", category: "pewter", subcategory: "spacers-daisies" },
+        { label: "Bead Caps & End Caps", category: "pewter", subcategory: "caps" },
+        { label: "Western, Sports & Ocean Life", category: "pewter", subcategory: "sports-western" }
+      ]
+    },
+    finding: {
+      title: "Jewelry Findings, Clasps & Spacers",
+      featured: [
+        { name: "Gold Micro Pave CZ Toggle Clasp Connector", sku: "A44109", img: "/products/catalog/cat-find-001.png" },
+        { name: "18K Gold Plated Brass Wire & Pins", sku: "CZ-TOG-1014", img: "/products/catalog/cat-find-002.png" }
+      ],
+      links: [
+        { label: "Chains (Metal, Crystal, Gemstone)", category: "finding", subcategory: "chain" },
+        { label: "Lobster Clasps & Toggle Locks", category: "finding", subcategory: "lobster" },
+        { label: "Bead Spacers & Metal Rondelles", category: "finding", subcategory: "spacer" },
+        { label: "Earring Findings & Ear Wires", category: "finding", subcategory: "earring-findings" },
+        { label: "Head Pins, Eye Pins & Jewelry Wire", category: "finding", subcategory: "pins" },
+        { label: "Jump Rings & Split Rings", category: "finding", subcategory: "jump-split-ring" },
+        { label: "End Caps & Crimp Findings", category: "finding", subcategory: "end-caps" }
+      ]
+    },
+    trends: {
+      title: "Seasonal Trends & Curated Styles",
+      featured: [
+        { name: "Crosheted & Druzy Artisan Jewelry", sku: "A39817", img: "/products/catalog/cat-fj-001.png" },
+        { name: "Southwestern & Vintage Style Lots", sku: "A43052", img: "/products/catalog/cat-beads-001.png" }
+      ],
+      links: [
+        { label: "Gemstone & Pearl Jewelry", category: "seasonal-trends", subcategory: "gemstone-jewelry" },
+        { label: "Mala & Rosany Jewelry", category: "seasonal-trends", subcategory: "mala-jewelry" },
+        { label: "Southwestern Jewelry", category: "seasonal-trends", subcategory: "southwestern-jewelry" },
+        { label: "Vintage Style Collections", category: "seasonal-trends", subcategory: "vintage-style" },
+        { label: "Druzy & European Style", category: "seasonal-trends", subcategory: "druzy-jewelry" },
+        { label: "Crosheted & Layery Jewelry", category: "seasonal-trends", subcategory: "crosheted-jewelry" }
       ]
     }
   };
@@ -593,51 +643,80 @@ export default function Header({
               Shop
             </button>
 
-            {/* Categories (Mega Menu trigger) */}
+            {/* Categories (Master Catalogue Trigger) */}
             <div className="relative group">
               <button
                 onClick={() => onNavigate('catalog', { category: 'all' })}
                 onMouseEnter={() => setMegaMenuCategory('categories')}
                 className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
               >
-                <span>Categories</span>
+                <span>Catalogue</span>
                 <ChevronDown className="w-3 h-3 text-[#8B8175]" />
               </button>
             </div>
 
-            {/* Gemstone Beads (with Sub Mega Menu preview) */}
+            {/* Finished Jewelry */}
             <div className="relative group">
               <button
-                onClick={() => onNavigate('catalog', { category: 'natural-gemstone-beads' })}
-                onMouseEnter={() => setMegaMenuCategory('gemstones')}
-                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1"
+                onClick={() => onNavigate('catalog', { category: 'finished-jewelry' })}
+                onMouseEnter={() => setMegaMenuCategory('finishedJewelry')}
+                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
               >
-                <span>Gemstones</span>
+                <span>Finished Jewelry</span>
                 <ChevronDown className="w-3 h-3 text-[#8B8175]" />
               </button>
             </div>
 
-            {/* Metal Findings & Lead-Free Pewter */}
+            {/* Beads */}
             <div className="relative group">
               <button
-                onClick={() => onNavigate('catalog', { category: 'jewelry-findings' })}
-                onMouseEnter={() => setMegaMenuCategory('findings')}
-                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1"
+                onClick={() => onNavigate('catalog', { category: 'beads' })}
+                onMouseEnter={() => setMegaMenuCategory('beads')}
+                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
               >
-                <span>Findings &amp; Pewter</span>
+                <span>Beads</span>
+                <ChevronDown className="w-3 h-3 text-[#8B8175]" />
+              </button>
+            </div>
+
+            {/* Pewter */}
+            <div className="relative group">
+              <button
+                onClick={() => onNavigate('catalog', { category: 'pewter' })}
+                onMouseEnter={() => setMegaMenuCategory('pewter')}
+                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
+              >
+                <span>Pewter</span>
+                <ChevronDown className="w-3 h-3 text-[#8B8175]" />
+              </button>
+            </div>
+
+            {/* Finding */}
+            <div className="relative group">
+              <button
+                onClick={() => onNavigate('catalog', { category: 'finding' })}
+                onMouseEnter={() => setMegaMenuCategory('finding')}
+                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
+              >
+                <span>Finding</span>
+                <ChevronDown className="w-3 h-3 text-[#8B8175]" />
+              </button>
+            </div>
+
+            {/* Seasonal Trends */}
+            <div className="relative group">
+              <button
+                onClick={() => onNavigate('catalog', { category: 'seasonal-trends' })}
+                onMouseEnter={() => setMegaMenuCategory('trends')}
+                className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-medium"
+              >
+                <span>Seasonal Trends</span>
                 <ChevronDown className="w-3 h-3 text-[#8B8175]" />
               </button>
             </div>
 
             <button
-              onClick={() => onNavigate('catalog', { category: 'all' })}
-              className="hover:text-[#C6A66B] transition-colors py-1"
-            >
-              Collections
-            </button>
-
-            <button
-              onClick={() => onNavigate('catalog', { category: 'all', sort: 'newest' })}
+              onClick={() => onNavigate('catalog', { category: 'new-arrivals', sort: 'newest' })}
               className="hover:text-[#C6A66B] transition-colors py-1 flex items-center gap-1 font-semibold text-[#8B8175] hover:text-[#C6A66B]"
             >
               <Sparkles className="w-3 h-3 text-[#C6A66B]" />
@@ -645,7 +724,7 @@ export default function Header({
             </button>
 
             <button
-              onClick={() => onNavigate('catalog', { category: 'all', sort: 'popular' })}
+              onClick={() => onNavigate('catalog', { category: 'best-sellers', sort: 'popular' })}
               className="hover:text-[#C6A66B] transition-colors py-1 font-medium"
             >
               Best Sellers
@@ -694,9 +773,9 @@ export default function Header({
                         <button
                           onClick={() => {
                             setMegaMenuCategory(null);
-                            onNavigate('catalog', { category: link.category });
+                            onNavigate('catalog', { category: link.category, subcategory: link.subcategory });
                           }}
-                          className="hover:text-[#C6A66B] flex items-center gap-2 transition-colors group py-0.5"
+                          className="hover:text-[#C6A66B] flex items-center gap-2 transition-colors group py-0.5 text-left"
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-[#C6A66B] group-hover:scale-125 transition-transform" />
                           <span>{link.label}</span>

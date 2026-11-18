@@ -17,25 +17,116 @@ import { useAuth } from '../../context/AuthContext';
 import { useCurrency } from '../../context/CurrencyContext';
 import BrandLogo from './BrandLogo';
 
-const CATEGORIES = [
-  { id: 'natural-gemstone-beads', name: 'Natural Gemstone Beads' },
-  { id: 'turquoise-beads', name: 'Turquoise Beads' },
-  { id: 'crystal-beads', name: 'Crystal Beads' },
-  { id: 'cubic-zirconia', name: 'Cubic Zirconia (CZ)' },
-  { id: 'jewelry-pendants', name: 'Jewelry Pendants' },
-  { id: 'jewelry-connectors', name: 'Jewelry Connectors' },
-  { id: 'jewelry-spacers', name: 'Jewelry Spacers' },
-  { id: 'jewelry-findings', name: 'Jewelry Findings' },
-  { id: 'handmade-necklaces', name: 'Handmade Necklaces' },
-  { id: 'handmade-bracelets', name: 'Handmade Bracelets' },
-  { id: 'charms', name: 'Charms & Pendants' },
-  { id: 'accessories', name: 'Accessories & Displays' }
+const MASTER_CATEGORIES = [
+  {
+    id: 'finished-jewelry',
+    name: 'Finished Jewelry',
+    subcategories: [
+      { id: 'bracelets', name: 'Bracelets' },
+      { id: 'necklaces', name: 'Necklaces' },
+      { id: 'rings', name: 'Rings' },
+      { id: 'earrings', name: 'Earrings' },
+      { id: 'jewelry-display', name: 'Jewelry Display' }
+    ]
+  },
+  {
+    id: 'beads',
+    name: 'Beads',
+    subcategories: [
+      { id: 'clay-disc', name: 'Clay Disc' },
+      { id: 'acrylic-beads', name: 'Acrylic Beads' },
+      { id: 'crystal-beads', name: 'Crystal Beads' },
+      { id: 'gemstone', name: 'Gemstone' },
+      { id: 'large-hole', name: 'Large Hole' },
+      { id: 'shell', name: 'Shell' },
+      { id: 'pearl-beads', name: 'Pearl Beads' }
+    ]
+  },
+  {
+    id: 'pewter',
+    name: 'Pewter',
+    subcategories: [
+      { id: 'crosses', name: 'Crosses' },
+      { id: 'religious', name: 'Religious' },
+      { id: 'toggles', name: 'Toggles' },
+      { id: 'bails-wings', name: 'Bails & Wings' },
+      { id: 'butterflies-flowers', name: 'Butterflies & Flowers' },
+      { id: 'fleur-de-lis-feathers', name: 'Fleur De Lis / Feathers' },
+      { id: 'spacers-daisies', name: 'Spacers & Daisies' },
+      { id: 'caps', name: 'Caps & End Caps' },
+      { id: 'sports-western', name: 'Sports & Western' },
+      { id: 'filler-charms', name: 'Filler Charms' },
+      { id: 'animals-ocean-life', name: 'Animals & Ocean Life' }
+    ]
+  },
+  {
+    id: 'finding',
+    name: 'Finding',
+    subcategories: [
+      { id: 'chain', name: 'Chain' },
+      { id: 'spacer', name: 'Spacer' },
+      { id: 'lobster', name: 'Lobster' },
+      { id: 'clasps', name: 'Clasps' },
+      { id: 'pins', name: 'Pins' },
+      { id: 'earring-findings', name: 'Earring Findings' },
+      { id: 'end-caps', name: 'End Caps' },
+      { id: 'jewelry-wire', name: 'Jewelry Wire' },
+      { id: 'jump-split-ring', name: 'Jump / Split Ring' }
+    ]
+  },
+  {
+    id: 'accessories',
+    name: 'Accessories',
+    subcategories: [
+      { id: 'line', name: 'Line & Cord' },
+      { id: 'pave-cz', name: 'Pave CZ' },
+      { id: 'pendants', name: 'Pendants' },
+      { id: 'flower-charm', name: 'Flower Charm' },
+      { id: 'rhinestone', name: 'Rhinestone' },
+      { id: 'tassels', name: 'Tassels' }
+    ]
+  },
+  {
+    id: 'seasonal-trends',
+    name: 'Seasonal Trends',
+    subcategories: [
+      { id: 'gemstone-jewelry', name: 'Gemstone Jewelry' },
+      { id: 'mala-jewelry', name: 'Mala Jewelry' },
+      { id: 'rosany-jewelry', name: 'Rosany Jewelry' },
+      { id: 'southwestern-jewelry', name: 'Southwestern Jewelry' },
+      { id: 'vintage-style', name: 'Vintage Style' },
+      { id: 'druzy-jewelry', name: 'Druzy Jewelry' },
+      { id: 'crosheted-jewelry', name: 'Crosheted Jewelry' },
+      { id: 'layery-jewelry', name: 'Layery Jewelry' }
+    ]
+  },
+  {
+    id: 'new-arrivals',
+    name: 'New Arrivals',
+    subcategories: [
+      { id: '142-sea-shipment', name: '142 Sea Shipment' },
+      { id: '143-sea-shipment', name: '143 Sea Shipment' },
+      { id: '144-sea-shipment', name: '144 Sea Shipment' },
+      { id: '145-sea-shipment', name: '145 Sea Shipment' },
+      { id: '146-sea-shipment', name: '146 Sea Shipment' },
+      { id: '147-sea-shipment', name: '147 Sea Shipment' }
+    ]
+  },
+  {
+    id: 'best-sellers',
+    name: 'Best Sellers',
+    subcategories: [
+      { id: 'volume-bestsellers', name: 'Volume Bestsellers' },
+      { id: 'studio-favorites', name: 'Studio Favorites' }
+    ]
+  }
 ];
 
 export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAuth }) {
   const { user, isAdmin, logout } = useAuth();
   const { currency, setCurrency } = useCurrency();
   const [categoriesOpen, setCategoriesOpen] = useState(true);
+  const [expandedCatId, setExpandedCatId] = useState(null);
 
   if (!isOpen) return null;
 
@@ -156,22 +247,60 @@ export default function MobileNavDrawer({ isOpen, onClose, onNavigate, onOpenAut
               onClick={() => setCategoriesOpen(!categoriesOpen)}
               className="w-full px-4 py-2.5 text-left text-xs font-semibold text-[#C6A66B] bg-[#FAF8F3] hover:bg-[#EDE5D8]/50 flex items-center justify-between border-y border-[#EDE5D8] cursor-pointer"
             >
-              <span>Wholesale Categories (12)</span>
+              <span>Wholesale Master Categories (8)</span>
               {categoriesOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
             </button>
 
             {categoriesOpen && (
-              <div className="bg-[#FAF8F3]/60 py-1 pl-4">
-                {CATEGORIES.map(cat => (
-                  <button
-                    key={cat.id}
-                    onClick={() => { onClose(); onNavigate('catalog', { category: cat.id }); }}
-                    className="w-full px-4 py-2 text-left text-xs text-[#40362F] hover:text-[#C6A66B] flex items-center justify-between cursor-pointer"
-                  >
-                    <span>{cat.name}</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-[#EDE5D8]" />
-                  </button>
-                ))}
+              <div className="bg-[#FAF8F3]/60 py-1 divide-y divide-[#EDE5D8]/40">
+                {MASTER_CATEGORIES.map(cat => {
+                  const isExpanded = expandedCatId === cat.id;
+                  return (
+                    <div key={cat.id} className="text-xs">
+                      <div className="flex items-center justify-between px-4 py-2 hover:bg-[#FAF8F3]">
+                        <button
+                          onClick={() => { onClose(); onNavigate('catalog', { category: cat.id }); }}
+                          className="font-medium text-[#40362F] hover:text-[#C6A66B] text-left flex-1"
+                        >
+                          {cat.name}
+                        </button>
+                        {cat.subcategories && cat.subcategories.length > 0 && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setExpandedCatId(isExpanded ? null : cat.id);
+                            }}
+                            className="p-1 text-[#8B8175] hover:text-[#C6A66B]"
+                            aria-label={`Toggle ${cat.name} subcategories`}
+                          >
+                            {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                          </button>
+                        )}
+                      </div>
+
+                      {isExpanded && cat.subcategories && (
+                        <div className="pl-6 pr-3 py-1 bg-white space-y-1 border-t border-[#EDE5D8]/30">
+                          <button
+                            onClick={() => { onClose(); onNavigate('catalog', { category: cat.id }); }}
+                            className="w-full text-left py-1 text-[11px] font-bold text-[#C6A66B] hover:underline"
+                          >
+                            &bull; All in {cat.name}
+                          </button>
+                          {cat.subcategories.map(sub => (
+                            <button
+                              key={sub.id}
+                              onClick={() => { onClose(); onNavigate('catalog', { category: cat.id, subcategory: sub.id }); }}
+                              className="w-full text-left py-1 text-[11px] text-[#40362F] hover:text-[#C6A66B] flex items-center justify-between"
+                            >
+                              <span>{sub.name}</span>
+                              <ChevronRight className="w-2.5 h-2.5 text-[#EDE5D8]" />
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

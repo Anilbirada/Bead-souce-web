@@ -1104,6 +1104,19 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
                       </div>
                       <p className="text-xs text-gray-500 line-clamp-2">{cat.description || 'Premium wholesale category'}</p>
                       
+                      {cat.subcategories && cat.subcategories.length > 0 && (
+                        <div className="pt-2">
+                          <p className="text-[10px] font-bold text-[#8B8175] uppercase tracking-wider mb-1">Subcategories ({cat.subcategories.length}):</p>
+                          <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto">
+                            {cat.subcategories.map(s => (
+                              <span key={s.id} className="text-[10px] bg-[#FAF8F3] border border-[#EDE5D8] text-[#40362F] px-1.5 py-0.5 rounded">
+                                {s.name}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
                       <div className="pt-3 border-t border-[#F0EBE1] flex justify-between items-center text-xs">
                         <span className="text-gray-400 font-medium">Catalog items: {products.filter(p => p.category === cat.slug || p.category === cat.id).length}</span>
                         <div className="flex gap-2">

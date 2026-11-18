@@ -1,110 +1,396 @@
 [
   {
-    "id": "natural-gemstone-beads",
-    "name": "Natural Gemstone Beads",
-    "slug": "natural-gemstone-beads",
-    "description": "Authentic natural gemstone bead strands, hand-selected minerals, and artisan cuts for premium jewelry creation.",
-    "image": "https://beadssource.com/wp-content/uploads/DSC_2552-scaled-1-1536x1025-1-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 18
+    "id": "finished-jewelry",
+    "name": "Finished Jewelry",
+    "slug": "finished-jewelry",
+    "description": "Ready-to-wear boutique bracelets, hand-knotted necklaces, rings, and artisan earrings.",
+    "image": "/products/catalog/cat-fj-001.png",
+    "itemCount": 30,
+    "subcategories": [
+      {
+        "id": "bracelets",
+        "name": "Bracelets",
+        "slug": "bracelets",
+        "children": [
+          "Charm Bracelets",
+          "Crystal Bracelets",
+          "Gemstone Bracelets"
+        ]
+      },
+      {
+        "id": "necklaces",
+        "name": "Necklaces",
+        "slug": "necklaces"
+      },
+      {
+        "id": "rings",
+        "name": "Rings",
+        "slug": "rings"
+      },
+      {
+        "id": "earrings",
+        "name": "Earrings",
+        "slug": "earrings"
+      },
+      {
+        "id": "jewelry-display",
+        "name": "Jewelry Display",
+        "slug": "jewelry-display"
+      }
+    ]
   },
   {
-    "id": "turquoise-beads",
-    "name": "Turquoise Beads",
-    "slug": "turquoise-beads",
-    "description": "Natural and magnesite turquoise nuggets, smooth ovals, rondelles, and slab beads.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/il_794xN.1715404164_2dhf-1-2-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 14
+    "id": "beads",
+    "name": "Beads",
+    "slug": "beads",
+    "description": "Loose mineral strands, calibrated gemstone rounds, crystal beads, clay disc heishi, and natural freshwater pearls.",
+    "image": "/products/catalog/cat-beads-001.png",
+    "itemCount": 11,
+    "subcategories": [
+      {
+        "id": "clay-disc",
+        "name": "Clay Disc",
+        "slug": "clay-disc"
+      },
+      {
+        "id": "acrylic-beads",
+        "name": "Acrylic Beads",
+        "slug": "acrylic-beads"
+      },
+      {
+        "id": "crystal-beads",
+        "name": "Crystal Beads",
+        "slug": "crystal-beads"
+      },
+      {
+        "id": "gemstone",
+        "name": "Gemstone",
+        "slug": "gemstone"
+      },
+      {
+        "id": "large-hole",
+        "name": "Large Hole",
+        "slug": "large-hole"
+      },
+      {
+        "id": "shell",
+        "name": "Shell",
+        "slug": "shell"
+      },
+      {
+        "id": "pearl-beads",
+        "name": "Pearl Beads",
+        "slug": "pearl-beads"
+      }
+    ]
   },
   {
-    "id": "crystal-beads",
-    "name": "Crystal Beads",
-    "slug": "crystal-beads",
-    "description": "Precision faceted round, rondelle, bicone, and teardrop sparkling crystals.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/DSC_21011-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 22
+    "id": "pewter",
+    "name": "Pewter",
+    "slug": "pewter",
+    "description": "100% certified lead-free (<90ppm) antique pewter findings, crosses, toggle clasps, spacers, bails, and caps.",
+    "image": "/products/catalog/cat-pewter-001.png",
+    "itemCount": 12,
+    "subcategories": [
+      {
+        "id": "crosses",
+        "name": "Crosses",
+        "slug": "crosses"
+      },
+      {
+        "id": "religious",
+        "name": "Religious",
+        "slug": "religious"
+      },
+      {
+        "id": "toggles",
+        "name": "Toggles",
+        "slug": "toggles"
+      },
+      {
+        "id": "bails-wings",
+        "name": "Bails & Wings",
+        "slug": "bails-wings"
+      },
+      {
+        "id": "butterflies-flowers",
+        "name": "Butterflies/Flowers",
+        "slug": "butterflies-flowers"
+      },
+      {
+        "id": "fleur-de-lis-feathers",
+        "name": "Fleur De Lis/Feathers",
+        "slug": "fleur-de-lis-feathers"
+      },
+      {
+        "id": "spacers-daisies",
+        "name": "Spacers/Daisies",
+        "slug": "spacers-daisies"
+      },
+      {
+        "id": "spacer-part-2",
+        "name": "Spacer/Part 2",
+        "slug": "spacer-part-2"
+      },
+      {
+        "id": "caps",
+        "name": "Caps",
+        "slug": "caps"
+      },
+      {
+        "id": "end-caps",
+        "name": "End Caps",
+        "slug": "end-caps"
+      },
+      {
+        "id": "sports-western",
+        "name": "Sports/Western",
+        "slug": "sports-western"
+      },
+      {
+        "id": "filler-charms",
+        "name": "Filler Charms",
+        "slug": "filler-charms"
+      },
+      {
+        "id": "children-hearts",
+        "name": "Children/Hearts",
+        "slug": "children-hearts"
+      },
+      {
+        "id": "animals",
+        "name": "Animals",
+        "slug": "animals"
+      },
+      {
+        "id": "ocean-life",
+        "name": "Ocean Life",
+        "slug": "ocean-life"
+      }
+    ]
   },
   {
-    "id": "cubic-zirconia",
-    "name": "Cubic Zirconia (CZ)",
-    "slug": "cubic-zirconia",
-    "description": "Micro pave CZ balls, large hole spacers, connectors, and luxury sparkling elements.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/il_fullxfull.1769582423_mqbc-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 19
-  },
-  {
-    "id": "jewelry-pendants",
-    "name": "Jewelry Pendants",
-    "slug": "jewelry-pendants",
-    "description": "Carved gemstone pendants, perfume bottle pendants, pave crosses, and statement focal pieces.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/18x30mm微镶十字架金色白钻20包-5个每包-1-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1611591475879-da0066ec960a?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 26
-  },
-  {
-    "id": "jewelry-connectors",
-    "name": "Jewelry Connectors",
-    "slug": "jewelry-connectors",
-    "description": "Multi-strand connectors, micro-pave clover links, toggle clasps, and religious motifs.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/10mm圆14mm长棒子金色-13包-10个每包-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 15
-  },
-  {
-    "id": "jewelry-spacers",
-    "name": "Jewelry Spacers",
-    "slug": "jewelry-spacers",
-    "description": "Lead-free pewter spacers, daisy spacers, rondelles, and beaded metal separators.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/6mm厚2mmA8283古金18包-古银20包-150x150.jpg",
-    "banner": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 28
-  },
-  {
-    "id": "jewelry-findings",
-    "name": "Jewelry Findings",
-    "slug": "jewelry-findings",
-    "description": "Chains, lobster clasps, jump rings, earring hooks, bead caps, and professional wire.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/il_fullxfull-5-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 35
-  },
-  {
-    "id": "handmade-necklaces",
-    "name": "Handmade Necklaces",
-    "slug": "handmade-necklaces",
-    "description": "Hand-knotted gemstone malas, crystal long necklaces, and multi-gemstone designer strands.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/161e2bb10b664305e2d4c95829a6030-1-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 16
-  },
-  {
-    "id": "handmade-bracelets",
-    "name": "Handmade Bracelets",
-    "slug": "handmade-bracelets",
-    "description": "Stretchy gemstone bracelets, freshwater pearl combinations, and lava stone diffuser bracelets.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/14mm四叶草孔兰扁珠黑色火山石串珠7.5英寸20条-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1611591475879-da0066ec960a?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 20
-  },
-  {
-    "id": "charms",
-    "name": "Charms",
-    "slug": "charms",
-    "description": "Antique gold and silver lead-free pewter charms, crosses, animals, nature, and symbols.",
-    "image": "https://beadssource.com/wp-content/uploads/2025/09/36x39mmA12502古金30包-古银44包-24个每包-300x300.jpg",
-    "banner": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 42
+    "id": "finding",
+    "name": "Finding",
+    "slug": "finding",
+    "description": "Essential jewelry assembly components including chains, clasps, jump rings, head pins, wire, and spacers.",
+    "image": "/products/catalog/cat-find-001.png",
+    "itemCount": 8,
+    "subcategories": [
+      {
+        "id": "chain",
+        "name": "Chain",
+        "slug": "chain",
+        "children": [
+          "Metal Chain",
+          "Crystal Chain",
+          "Gemstone Chain"
+        ]
+      },
+      {
+        "id": "spacer",
+        "name": "Spacer",
+        "slug": "spacer"
+      },
+      {
+        "id": "lobster",
+        "name": "Lobster",
+        "slug": "lobster"
+      },
+      {
+        "id": "clasps",
+        "name": "Clasps",
+        "slug": "clasps"
+      },
+      {
+        "id": "pins",
+        "name": "Pins",
+        "slug": "pins"
+      },
+      {
+        "id": "earring-findings",
+        "name": "Earring/Findings",
+        "slug": "earring-findings"
+      },
+      {
+        "id": "end-caps-finding",
+        "name": "End caps",
+        "slug": "end-caps-finding"
+      },
+      {
+        "id": "jewelry-wire",
+        "name": "Jewelry Wire",
+        "slug": "jewelry-wire"
+      },
+      {
+        "id": "jump-split-ring",
+        "name": "Jump/split ring",
+        "slug": "jump-split-ring"
+      }
+    ]
   },
   {
     "id": "accessories",
-    "name": "Accessories & Displays",
+    "name": "Accessories",
     "slug": "accessories",
-    "description": "Beading cords, silk tassels, velvet jewelry displays, presentation trays, and tools.",
-    "image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
-    "banner": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=80",
-    "itemCount": 15
+    "description": "Pave cubic zirconia spacers, leather and acrylic line cords, tassels, and faux leather pendants.",
+    "image": "/products/catalog/cat-acc-001.png",
+    "itemCount": 22,
+    "subcategories": [
+      {
+        "id": "line",
+        "name": "Line",
+        "slug": "line",
+        "children": [
+          "Acrylic Line",
+          "Leather Line"
+        ]
+      },
+      {
+        "id": "pave-cz",
+        "name": "Pave CZ",
+        "slug": "pave-cz"
+      },
+      {
+        "id": "pendants",
+        "name": "Pendants",
+        "slug": "pendants"
+      },
+      {
+        "id": "flower-charm",
+        "name": "Flower Charm",
+        "slug": "flower-charm"
+      },
+      {
+        "id": "rhinestone",
+        "name": "Rhinestone",
+        "slug": "rhinestone"
+      },
+      {
+        "id": "tassels",
+        "name": "Tassels",
+        "slug": "tassels"
+      }
+    ]
+  },
+  {
+    "id": "seasonal-trends",
+    "name": "Seasonal Trends",
+    "slug": "seasonal-trends",
+    "description": "Curated seasonal wholesale trends including Mala meditation beads, Druzy crystal, and Southwestern jewelry.",
+    "image": "/products/catalog/cat-fj-001.png",
+    "itemCount": 0,
+    "subcategories": [
+      {
+        "id": "crosheted-jewelry",
+        "name": "Crosheted Jewelry",
+        "slug": "crosheted-jewelry"
+      },
+      {
+        "id": "druzy-jewelry",
+        "name": "Druzy Jewelry",
+        "slug": "druzy-jewelry"
+      },
+      {
+        "id": "european-style",
+        "name": "European Style",
+        "slug": "european-style"
+      },
+      {
+        "id": "gemstone-jewelry",
+        "name": "Gemstone Jewelry",
+        "slug": "gemstone-jewelry"
+      },
+      {
+        "id": "layery-jewelry",
+        "name": "Layery Jewelry",
+        "slug": "layery-jewelry"
+      },
+      {
+        "id": "mala-jewelry",
+        "name": "Mala Jewelry",
+        "slug": "mala-jewelry"
+      },
+      {
+        "id": "pearl-jewelry",
+        "name": "Pearl Jewelry",
+        "slug": "pearl-jewelry"
+      },
+      {
+        "id": "rosany-jewelry",
+        "name": "Rosany Jewelry",
+        "slug": "rosany-jewelry"
+      },
+      {
+        "id": "southwestern-jewelry",
+        "name": "Southwestern Jewelry",
+        "slug": "southwestern-jewelry"
+      },
+      {
+        "id": "vintage-style",
+        "name": "Vintage Style",
+        "slug": "vintage-style"
+      }
+    ]
+  },
+  {
+    "id": "new-arrivals",
+    "name": "New Arrivals",
+    "slug": "new-arrivals",
+    "description": "Direct ocean container and sea shipment arrivals for wholesale studio buyers.",
+    "image": "/products/catalog/cat-fj-001.png",
+    "itemCount": 0,
+    "subcategories": [
+      {
+        "id": "142-sea-shipment",
+        "name": "142 Sea Shipment",
+        "slug": "142-sea-shipment"
+      },
+      {
+        "id": "143-sea-shipment",
+        "name": "143 Sea Shipment",
+        "slug": "143-sea-shipment"
+      },
+      {
+        "id": "144-sea-shipment",
+        "name": "144 Sea Shipment",
+        "slug": "144-sea-shipment"
+      },
+      {
+        "id": "145-sea-shipment",
+        "name": "145 Sea Shipment",
+        "slug": "145-sea-shipment"
+      },
+      {
+        "id": "146-sea-shipment",
+        "name": "146 Sea Shipment",
+        "slug": "146-sea-shipment"
+      },
+      {
+        "id": "147-sea-shipment",
+        "name": "147 Sea Shipment",
+        "slug": "147-sea-shipment"
+      }
+    ]
+  },
+  {
+    "id": "best-sellers",
+    "name": "Best Sellers",
+    "slug": "best-sellers",
+    "description": "Top-volume master lot orders and most reordered wholesale components.",
+    "image": "/products/catalog/cat-fj-001.png",
+    "itemCount": 0,
+    "subcategories": [
+      {
+        "id": "top-volume-bestsellers",
+        "name": "Top Volume Bestsellers",
+        "slug": "top-volume-bestsellers"
+      },
+      {
+        "id": "studio-favorites",
+        "name": "Studio Favorites",
+        "slug": "studio-favorites"
+      }
+    ]
   }
 ]
