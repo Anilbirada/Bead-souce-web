@@ -322,10 +322,10 @@ export default function Header({
 
                 <div className="hidden xl:flex flex-col text-left">
                   <span className="text-[10px] text-[#8B8175] uppercase font-medium leading-tight">
-                    {user ? (isAdmin ? 'Administrator' : 'Customer') : 'Account'}
+                    {user ? (isSuperAdmin ? 'Super Admin' : (isAdmin ? 'Store Manager' : 'Buyer Portal')) : 'Account'}
                   </span>
-                  <span className="text-xs font-semibold text-[#292723] max-w-[110px] truncate leading-tight">
-                    {user ? (isAdmin ? 'Account Management' : user.company || 'Wholesale Buyer') : 'Sign In'}
+                  <span className="text-xs font-semibold text-[#292723] max-w-[120px] truncate leading-tight">
+                    {user ? (isSuperAdmin ? 'Master Control' : (isAdmin ? 'Store Operations' : user.company || user.name || 'Wholesale Buyer')) : 'Sign In'}
                   </span>
                 </div>
                 {user && <ChevronDown className="w-3.5 h-3.5 text-gray-400 hidden xl:block" />}
@@ -339,14 +339,14 @@ export default function Header({
                   <div className="px-4 py-3 border-b border-[#EDE5D8] bg-[#FAF8F3]">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-[#C6A66B]">
-                        {isSuperAdmin ? '👑 Super Admin' : (isAdmin ? '🛡️ Management' : 'Account Type')}
+                        {isSuperAdmin ? '👑 Super Admin' : (isAdmin ? '💼 Store Management' : '💎 Wholesale Buyer')}
                       </span>
                       <span className="text-[10px] bg-[#EDE5D8] text-[#40362F] px-2 py-0.5 rounded font-semibold capitalize">
-                        {user.role?.replace(/_/g, ' ') || 'Customer'}
+                        {isSuperAdmin ? 'Full Access' : (isAdmin ? 'Staff / Manager' : 'Verified B2B')}
                       </span>
                     </div>
                     <p className="font-bold text-[#292723] text-sm mt-1">
-                      {isSuperAdmin ? 'Super Administrator' : (isAdmin ? 'Administrator' : (user.company || 'Customer'))}
+                      {isSuperAdmin ? 'Super Administrator' : (isAdmin ? 'Store Administrator' : (user.company || user.name || 'Wholesale Buyer'))}
                     </p>
                     <p className="text-[#8B8175] truncate text-[11px] mt-0.5">
                       {user.email}

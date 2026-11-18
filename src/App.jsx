@@ -102,29 +102,32 @@ function MainApp() {
     // Role & Authorization Check
     if (!isAdmin) {
       return (
-        <div className="min-h-screen bg-[#191919] text-white flex items-center justify-center p-6 text-center select-none">
-          <div className="bg-[#242424] p-8 sm:p-12 rounded-3xl border border-[#383838] max-w-md space-y-5 shadow-2xl">
-            <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mx-auto">
-              <ShieldAlert className="w-8 h-8" />
-            </div>
-            <h2 className="font-serif font-bold text-2xl text-white">Administrator Access Required</h2>
-            <p className="text-xs text-gray-400 leading-relaxed">
-              This area is strictly restricted to authorized BeadsSource management and staff members. Ordinary customer accounts cannot view administrative workflows.
-            </p>
-            <div className="flex flex-col gap-3 pt-2">
-              <button
-                onClick={openLogin}
-                className="w-full py-3 bg-[#C49A3A] hover:bg-[#A9812A] text-black font-bold text-xs rounded-xl transition-all cursor-pointer"
-              >
-                Sign In with Administrator Credentials
-              </button>
-              <button
-                onClick={() => handleNavigate('home')}
-                className="w-full py-2.5 bg-transparent hover:bg-white/5 text-gray-300 text-xs font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Return to Storefront</span>
-              </button>
+        <div className="min-h-screen bg-[#FAF8F3] text-[#292723] flex flex-col">
+          <SuperAdminBar currentPage={currentPage} onNavigate={handleNavigate} />
+          <div className="flex-1 flex items-center justify-center p-6 text-center select-none">
+            <div className="bg-[#40362F] text-[#FAF8F3] p-8 sm:p-12 rounded-3xl border border-[#52463D] max-w-md space-y-5 shadow-2xl animate-fade-in">
+              <div className="w-16 h-16 rounded-2xl bg-[#C6A66B]/15 border border-[#C6A66B]/30 text-[#C6A66B] flex items-center justify-center mx-auto shadow-inner">
+                <ShieldAlert className="w-8 h-8" />
+              </div>
+              <h2 className="font-serif font-bold text-2xl text-[#FAF8F3]">Store Management Access Required</h2>
+              <p className="text-xs text-[#EDE5D8] leading-relaxed">
+                This management suite is restricted to authorized BeadsSource administrators and store managers. Ordinary customer accounts cannot view administrative workflows.
+              </p>
+              <div className="flex flex-col gap-3 pt-2">
+                <button
+                  onClick={openLogin}
+                  className="w-full py-3 bg-[#C6A66B] hover:bg-[#B39358] text-[#292723] font-bold text-xs rounded-xl transition-all cursor-pointer shadow-md"
+                >
+                  Sign In with Administrator / Manager Credentials
+                </button>
+                <button
+                  onClick={() => handleNavigate('home')}
+                  className="w-full py-2.5 bg-transparent hover:bg-white/10 text-[#EDE5D8] text-xs font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer border border-[#52463D]"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Return to Storefront</span>
+                </button>
+              </div>
             </div>
           </div>
           <AuthModal />
@@ -134,7 +137,7 @@ function MainApp() {
 
     // Render Dedicated Admin Suite
     return (
-      <div className="min-h-screen bg-[#FAF9F5] selection:bg-[#C49A3A]/30 flex flex-col">
+      <div className="min-h-screen bg-[#FAF8F3] selection:bg-[#C6A66B]/20 flex flex-col">
         <SuperAdminBar currentPage={currentPage} onNavigate={handleNavigate} />
         <AdminDashboardPage
           initialTab={adminInitialTab}
@@ -153,7 +156,7 @@ function MainApp() {
   // STANDARD LUXURY STOREFRONT LAYOUT
   // =========================================================================
   return (
-    <div className="flex flex-col min-h-screen selection:bg-[#E9E3D8] selection:text-[#191919] bg-[#FFFFFF] text-[#303030]">
+    <div className="flex flex-col min-h-screen selection:bg-[#C6A66B]/20 selection:text-[#292723] bg-[#FAF8F3] text-[#292723]">
       
       {/* 0. Omnipresent Super Admin Controls */}
       <SuperAdminBar currentPage={currentPage} onNavigate={handleNavigate} />

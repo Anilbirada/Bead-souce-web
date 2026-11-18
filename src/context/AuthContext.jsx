@@ -6,6 +6,7 @@ const AuthContext = createContext();
 const ROLE_PERMISSIONS = {
   super_admin: ['dashboard', 'products', 'categories', 'inventory', 'orders', 'quotes', 'customers', 'reviews', 'content', 'reports', 'roles', 'settings', 'help', 'audit'],
   admin: ['dashboard', 'products', 'categories', 'inventory', 'orders', 'quotes', 'customers', 'reviews', 'content', 'reports', 'settings', 'help', 'audit'],
+  store_manager: ['dashboard', 'products', 'categories', 'inventory', 'orders', 'quotes', 'customers', 'reviews', 'reports', 'help'],
   product_manager: ['dashboard', 'products', 'categories', 'inventory', 'reviews', 'help'],
   order_manager: ['dashboard', 'orders', 'quotes', 'customers', 'reports', 'help'],
   inventory_manager: ['dashboard', 'inventory', 'products', 'help'],
@@ -129,9 +130,22 @@ export const AuthProvider = ({ children }) => {
   };
 
   const userRole = user?.role || 'guest';
-  const isAdmin = ['super_admin', 'admin', 'product_manager', 'order_manager', 'inventory_manager', 'support'].includes(userRole);
+  const isAdmin = ['super_admin', 'admin', 'store_manager', 'product_manager', 'order_manager', 'inventory_manager', 'support'].includes(userRole);
   const isSuperAdmin = userRole === 'super_admin';
+  const isStoreManager = userRole === 'admin' || userRole === 'store_manager';
+  const isCustomer = userRole === 'customer' || (!isAdmin && userRole !== 'guest');
   const isWholesaleVerified = user && Boolean(user.wholesaleApproved);
+
+  const switchRole = async (targetRole) => {
+    stopImpersonating();
+    if (targetRole === 'super_admin') {
+      return login('admin@beadssource.com', 'admin');
+    } else if (targetRole === 'store_manager' || targetRole === 'admin') {
+      return login('manager@beadssource.com', 'manager');
+    } else if (targetRole === 'customer') {
+      return login('buyer@boutiquejewels.com', 'buyer');
+    }
+  };
 
   const effectiveUser = (viewMode === 'customer' && impersonatedCustomer) ? impersonatedCustomer : user;
 
@@ -154,7 +168,10 @@ export const AuthProvider = ({ children }) => {
       updateUser,
       isAdmin,
       isSuperAdmin,
+      isStoreManager,
+      isCustomer,
       userRole,
+      switchRole,
       hasPermission,
       isWholesaleVerified,
       authModalOpen,

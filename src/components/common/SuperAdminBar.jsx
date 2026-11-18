@@ -2,20 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
   Eye, 
-  ArrowRight, 
   ExternalLink, 
   UserCheck, 
   X, 
-  ChevronDown, 
   LayoutDashboard, 
-  ShoppingBag, 
-  Package, 
-  FileText, 
-  Settings, 
   Store, 
-  RotateCcw,
-  Sparkles,
-  Users
+  Users,
+  Briefcase,
+  ChevronDown,
+  Sparkles
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { api } from '../../utils/api';
@@ -25,6 +20,10 @@ export default function SuperAdminBar({ currentPage, onNavigate }) {
     user, 
     isSuperAdmin, 
     isAdmin, 
+    isStoreManager,
+    isCustomer,
+    userRole,
+    switchRole,
     impersonatedCustomer, 
     startImpersonating, 
     stopImpersonating, 
@@ -54,8 +53,8 @@ export default function SuperAdminBar({ currentPage, onNavigate }) {
     }
   }, [impersonatedCustomer]);
 
-  // Only show if Super Admin or Admin
-  if (!user || (!isSuperAdmin && !isAdmin)) return null;
+  // Always show toolbar if admin, super_admin, impersonating, or if signed in as demo role
+  if (!user) return null;
 
   const handleCustomerSelect = (e) => {
     const val = e.target.value;
@@ -70,17 +69,31 @@ export default function SuperAdminBar({ currentPage, onNavigate }) {
     }
   };
 
+  const handleRoleChange = async (e) => {
+    const target = e.target.value;
+    if (target && target !== userRole) {
+      await switchRole(target);
+      if (target === 'super_admin' || target === 'store_manager') {
+        onNavigate('admin');
+      } else {
+        onNavigate('home');
+      }
+    }
+  };
+
   if (collapsed) {
     return (
       <div className="fixed bottom-4 right-4 z-50 animate-fade-in select-none">
         <button
           onClick={() => setCollapsed(false)}
-          className="bg-[#191919] hover:bg-[#252525] text-white border-2 border-[#C49A3A] px-3.5 py-2 rounded-full shadow-2xl flex items-center gap-2 text-xs font-bold transition-all cursor-pointer"
+          className="bg-[#292723] hover:bg-[#352D26] text-[#FAF8F3] border border-[#C6A66B]/80 px-4 py-2 rounded-full shadow-2xl flex items-center gap-2.5 text-xs font-semibold transition-all cursor-pointer hover:scale-102"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span>👑 Super Admin Controls</span>
+          <span className="w-2 h-2 rounded-full bg-[#C6A66B] animate-pulse" />
+          <span>
+            {isSuperAdmin ? '👑 Super Admin' : (isStoreManager ? '💼 Store Manager' : '💎 Customer')} Controls
+          </span>
           {impersonatedCustomer && (
-            <span className="bg-[#C49A3A] text-black px-2 py-0.5 rounded-full text-[10px]">
+            <span className="bg-[#C6A66B] text-[#292723] px-2 py-0.5 rounded-full text-[10px] font-bold">
               Viewing as Customer
             </span>
           )}
@@ -91,23 +104,36 @@ export default function SuperAdminBar({ currentPage, onNavigate }) {
 
   return (
     <aside 
-      aria-label="Super Administrator Toolbar"
-      className="bg-[#111111] text-white border-b-2 border-[#C49A3A] text-xs select-none sticky top-0 z-50 shadow-xl"
+      aria-label="Role & Access Control Toolbar"
+      className="bg-[#292723] text-[#FAF8F3] border-b border-[#C6A66B]/30 text-xs select-none sticky top-0 z-50 shadow-md backdrop-blur-sm"
     >
-      <div className="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-2.5">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2.5">
         
-        {/* Left: Super Admin Identity & Status */}
-        <div className="flex items-center gap-2.5">
-          <div className="flex items-center gap-1.5 bg-[#222222] px-2.5 py-1 rounded-md border border-[#383838]">
-            <span className="text-[#C49A3A] text-sm">👑</span>
-            <span className="font-bold tracking-wide text-xs text-white uppercase">
-              {isSuperAdmin ? 'Super Administrator' : 'Administrator'}
+        {/* Left: Role Identity Badge & Switcher */}
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          {/* Active Role Badge */}
+          <div className="flex items-center gap-1.5 bg-[#40362F] px-2.5 py-1 rounded-md border border-[#C6A66B]/40 shadow-xs">
+            {isSuperAdmin && <span className="text-[#C6A66B] text-xs">👑</span>}
+            {!isSuperAdmin && isStoreManager && <Briefcase className="w-3.5 h-3.5 text-[#C6A66B]" />}
+            {!isSuperAdmin && !isStoreManager && <span className="text-[#C6A66B] text-xs">💎</span>}
+            <span className="font-bold tracking-wide text-[11px] text-[#FAF8F3] uppercase">
+              {isSuperAdmin ? 'Super Administrator' : (isStoreManager ? 'Store Management' : 'Wholesale Buyer')}
             </span>
           </div>
 
-          <div className="hidden sm:flex items-center gap-1 text-[11px] text-gray-300">
-            <span>Access:</span>
-            <span className="text-[#C49A3A] font-semibold">Entire Website &amp; Customer Views</span>
+          {/* Quick RBAC Role Switcher */}
+          <div className="flex items-center gap-1.5 bg-[#382F27] px-2 py-0.5 rounded-md border border-[#52463D]">
+            <span className="text-[10px] text-[#EDE5D8]/80 font-medium">Role:</span>
+            <select
+              value={isSuperAdmin ? 'super_admin' : (isStoreManager ? 'store_manager' : 'customer')}
+              onChange={handleRoleChange}
+              className="bg-[#292723] text-[#FAF8F3] text-[11px] font-semibold rounded px-1.5 py-0.5 border border-[#52463D] focus:outline-none focus:border-[#C6A66B] cursor-pointer"
+              aria-label="Switch RBAC Role"
+            >
+              <option value="super_admin">👑 Super Admin</option>
+              <option value="store_manager">💼 Store Manager</option>
+              <option value="customer">💎 Wholesale Customer</option>
+            </select>
           </div>
         </div>
 
@@ -115,32 +141,37 @@ export default function SuperAdminBar({ currentPage, onNavigate }) {
         <div className="flex items-center gap-2 flex-wrap">
           
           {/* Quick View Modes */}
-          <div className="flex items-center bg-[#1E1E1E] p-0.5 rounded-lg border border-[#333333]">
-            <button
-              onClick={() => {
-                stopImpersonating();
-                onNavigate('admin');
-              }}
-              className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer ${
-                currentPage === 'admin'
-                  ? 'bg-[#C49A3A] text-black shadow-xs'
-                  : 'text-gray-300 hover:text-white hover:bg-[#2A2A2A]'
-              }`}
-            >
-              <LayoutDashboard className="w-3.5 h-3.5" />
-              <span>Admin Suite</span>
-            </button>
+          <div className="flex items-center bg-[#382F27] p-0.5 rounded-lg border border-[#52463D]">
+            {/* Admin Suite shortcut (only available for Super Admin and Store Management) */}
+            {(isSuperAdmin || isStoreManager) && (
+              <button
+                onClick={() => {
+                  stopImpersonating();
+                  onNavigate('admin');
+                }}
+                className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                  currentPage === 'admin'
+                    ? 'bg-[#C6A66B] text-[#292723] shadow-xs'
+                    : 'text-[#EDE5D8] hover:text-[#FAF8F3] hover:bg-[#40362F]'
+                }`}
+                title="Open Administrative Suite"
+              >
+                <LayoutDashboard className="w-3.5 h-3.5" />
+                <span>Admin Suite</span>
+              </button>
+            )}
 
             <button
               onClick={() => {
                 setViewMode('customer');
                 onNavigate('dashboard');
               }}
-              className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer ${
+              className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 currentPage === 'dashboard'
-                  ? 'bg-[#C49A3A] text-black shadow-xs'
-                  : 'text-gray-300 hover:text-white hover:bg-[#2A2A2A]'
+                  ? 'bg-[#C6A66B] text-[#292723] shadow-xs'
+                  : 'text-[#EDE5D8] hover:text-[#FAF8F3] hover:bg-[#40362F]'
               }`}
+              title="Open Wholesale Customer Portal"
             >
               <Users className="w-3.5 h-3.5" />
               <span>Customer Portal</span>
@@ -148,47 +179,50 @@ export default function SuperAdminBar({ currentPage, onNavigate }) {
 
             <button
               onClick={() => onNavigate('home')}
-              className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer ${
+              className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 currentPage === 'home' || currentPage === 'catalog'
-                  ? 'bg-[#3A3A3A] text-[#C49A3A]'
-                  : 'text-gray-300 hover:text-white hover:bg-[#2A2A2A]'
+                  ? 'bg-[#40362F] text-[#C6A66B]'
+                  : 'text-[#EDE5D8] hover:text-[#FAF8F3] hover:bg-[#40362F]'
               }`}
+              title="Browse Luxury Storefront"
             >
               <Store className="w-3.5 h-3.5" />
               <span>Storefront</span>
             </button>
           </div>
 
-          {/* Customer View Switcher Dropdown */}
-          <div className="flex items-center gap-1.5 bg-[#1E1E1E] px-2 py-1 rounded-lg border border-[#383838]">
-            <Eye className="w-3.5 h-3.5 text-[#C49A3A]" />
-            <span className="text-[10px] text-gray-400 font-medium">View As Customer:</span>
-            <select
-              value={selectedCustomerId}
-              onChange={handleCustomerSelect}
-              className="bg-[#2A2A2A] text-white text-[11px] font-semibold rounded px-2 py-0.5 border border-[#444444] focus:outline-none focus:border-[#C49A3A] cursor-pointer"
-              aria-label="View site as customer"
-            >
-              <option value="">-- View As Super Admin --</option>
-              {customersList.map(cust => (
-                <option key={cust.id} value={cust.id}>
-                  {cust.name} ({cust.company || 'Wholesale Buyer'})
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* Customer View Switcher Dropdown (for Super Admin & Store Manager) */}
+          {(isSuperAdmin || isStoreManager) && (
+            <div className="flex items-center gap-1.5 bg-[#382F27] px-2 py-1 rounded-lg border border-[#52463D]">
+              <Eye className="w-3.5 h-3.5 text-[#C6A66B]" />
+              <span className="text-[10px] text-[#EDE5D8]/80 font-medium hidden md:inline">Impersonate:</span>
+              <select
+                value={selectedCustomerId}
+                onChange={handleCustomerSelect}
+                className="bg-[#292723] text-[#FAF8F3] text-[11px] font-medium rounded px-2 py-0.5 border border-[#52463D] focus:outline-none focus:border-[#C6A66B] cursor-pointer max-w-[170px] truncate"
+                aria-label="View site as customer"
+              >
+                <option value="">-- View As {isSuperAdmin ? 'Super Admin' : 'Manager'} --</option>
+                {customersList.map(cust => (
+                  <option key={cust.id} value={cust.id}>
+                    {cust.name} ({cust.company || 'Buyer'})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           {/* Active Impersonation Indicator & Reset */}
           {impersonatedCustomer && (
-            <div className="flex items-center gap-1 bg-[#C49A3A]/20 border border-[#C49A3A]/50 px-2.5 py-0.5 rounded-lg text-[#F2C96C] text-[11px]">
-              <UserCheck className="w-3.5 h-3.5 text-[#C49A3A]" />
-              <span className="font-semibold truncate max-w-[140px]">
+            <div className="flex items-center gap-1 bg-[#C6A66B]/20 border border-[#C6A66B]/60 px-2.5 py-0.5 rounded-lg text-[#F5E6C8] text-[11px]">
+              <UserCheck className="w-3.5 h-3.5 text-[#C6A66B]" />
+              <span className="font-semibold truncate max-w-[120px]">
                 {impersonatedCustomer.name}
               </span>
               <button
                 onClick={stopImpersonating}
-                className="ml-1 text-gray-300 hover:text-white p-0.5 rounded cursor-pointer"
-                title="Reset to Super Admin view"
+                className="ml-1 text-[#EDE5D8] hover:text-[#FAF8F3] p-0.5 rounded cursor-pointer"
+                title="Reset to Admin view"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -201,15 +235,15 @@ export default function SuperAdminBar({ currentPage, onNavigate }) {
           {/* Quick jump to catalog */}
           <button
             onClick={() => onNavigate('catalog')}
-            className="hidden lg:flex items-center gap-1 px-2 py-1 text-[11px] text-gray-300 hover:text-white rounded hover:bg-[#222222] transition-colors cursor-pointer"
+            className="hidden lg:flex items-center gap-1 px-2.5 py-1 text-[11px] text-[#EDE5D8] hover:text-[#FAF8F3] rounded hover:bg-[#40362F] transition-colors cursor-pointer"
           >
             <span>Catalogue</span>
-            <ExternalLink className="w-3 h-3 text-[#C49A3A]" />
+            <ExternalLink className="w-3 h-3 text-[#C6A66B]" />
           </button>
 
           <button
             onClick={() => onNavigate('quote')}
-            className="hidden lg:flex items-center gap-1 px-2 py-1 text-[11px] text-gray-300 hover:text-white rounded hover:bg-[#222222] transition-colors cursor-pointer"
+            className="hidden lg:flex items-center gap-1 px-2.5 py-1 text-[11px] text-[#EDE5D8] hover:text-[#FAF8F3] rounded hover:bg-[#40362F] transition-colors cursor-pointer"
           >
             <span>Wholesale RFQ</span>
           </button>
@@ -217,8 +251,9 @@ export default function SuperAdminBar({ currentPage, onNavigate }) {
           {/* Minimize button */}
           <button
             onClick={() => setCollapsed(true)}
-            className="text-gray-400 hover:text-white p-1 rounded hover:bg-[#222222] cursor-pointer"
+            className="text-[#EDE5D8]/70 hover:text-[#FAF8F3] p-1 rounded hover:bg-[#40362F] cursor-pointer transition-colors"
             title="Minimize toolbar"
+            aria-label="Minimize toolbar"
           >
             <X className="w-4 h-4" />
           </button>

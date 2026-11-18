@@ -153,19 +153,49 @@ export const api = {
       if (!res.ok) throw new Error(data.error || 'Login failed');
       return data;
     } catch (err) {
-      // Professional role-based local fallback for testing
-      if (email.toLowerCase().includes('admin') && password === 'admin') {
+      // Professional role-based local fallback for testing & offline mode
+      const lower = (email || '').toLowerCase().trim();
+      if ((lower.includes('admin') || lower === 'admin@beadssource.com') && password === 'admin') {
         return {
           user: {
             id: 'usr-super-admin',
             email: 'admin@beadssource.com',
-            name: 'Administrator',
+            name: 'Super Administrator',
             role: 'super_admin',
-            company: 'BeadsSource Wholesale Management',
+            company: 'BeadsSource Global Operations',
             wholesaleApproved: true,
             status: 'active'
           },
           token: 'jwt_usr-super-admin'
+        };
+      }
+      if ((lower.includes('manager') || lower === 'manager@beadssource.com') && password === 'manager') {
+        return {
+          user: {
+            id: 'usr-store-admin',
+            email: 'manager@beadssource.com',
+            name: 'Store Administrator',
+            role: 'admin',
+            company: 'BeadsSource Operations Desk',
+            wholesaleApproved: true,
+            status: 'active'
+          },
+          token: 'jwt_usr-store-admin'
+        };
+      }
+      if ((lower.includes('buyer') || lower === 'buyer@boutiquejewels.com') && password === 'buyer') {
+        return {
+          user: {
+            id: 'usr-buyer1',
+            email: 'buyer@boutiquejewels.com',
+            name: 'Wholesale Buyer',
+            role: 'customer',
+            company: 'Boutique Fine Jewels LLC',
+            wholesaleApproved: true,
+            taxId: 'TAX-8921094',
+            status: 'active'
+          },
+          token: 'jwt_usr-buyer1'
         };
       }
       throw err;

@@ -642,41 +642,41 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] flex flex-col">
+    <div className="min-h-screen bg-[#FAF8F3] flex flex-col selection:bg-[#C6A66B]/20">
       
       {/* Top Admin Bar */}
-      <header className="bg-[#191919] text-white px-4 sm:px-6 py-3.5 border-b border-[#2C2C2C] flex items-center justify-between sticky top-0 z-30">
+      <header className="bg-[#292723] text-[#FAF8F3] px-4 sm:px-6 py-3.5 border-b border-[#40362F] flex items-center justify-between sticky top-0 z-30 shadow-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="hidden md:flex p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#2C2C2C] transition-colors"
+            className="hidden md:flex p-1.5 rounded-lg text-[#EDE5D8] hover:text-white hover:bg-[#40362F] transition-colors"
             title="Toggle sidebar"
           >
             <Menu className="w-5 h-5" />
           </button>
           <button
             onClick={() => setMobileSidebarOpen(true)}
-            className="md:hidden p-1.5 rounded-lg text-gray-400 hover:text-white"
+            className="md:hidden p-1.5 rounded-lg text-[#EDE5D8] hover:text-white"
           >
             <Menu className="w-5 h-5" />
           </button>
 
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('home')}>
             <BrandLogo variant="dark" size="sm" withSubtitle={false} />
-            <div className="hidden sm:block border-l border-[#3A3A3A] pl-3 py-0.5">
+            <div className="hidden sm:block border-l border-[#52463D] pl-3 py-0.5">
               <span className="font-medium text-xs tracking-tight text-white block">
-                Admin <span className="text-[#F87A02] font-semibold">Management</span>
+                {isSuperAdmin ? 'Super Admin' : 'Store Management'} <span className="text-[#C6A66B] font-semibold">Desk</span>
               </span>
-              <span className="text-[9px] text-gray-400 block tracking-wide uppercase">Enterprise Suite</span>
+              <span className="text-[9px] text-[#EDE5D8]/80 block tracking-wide uppercase">Enterprise Suite</span>
             </div>
           </div>
         </div>
 
         {/* Right Admin Controls */}
         <div className="flex items-center gap-3 text-xs">
-          <div className="hidden sm:flex items-center gap-2 text-[#D0C9BD] bg-[#252525] px-3 py-1.5 rounded-full border border-[#3A3A3A]">
-            <span className="text-[#C49A3A] font-bold">👑</span>
-            <span>Role: <strong className="text-white capitalize">{userRole.replace(/_/g, ' ')}</strong></span>
+          <div className="hidden sm:flex items-center gap-2 text-[#EDE5D8] bg-[#40362F] px-3 py-1.5 rounded-full border border-[#52463D]">
+            <span className="text-[#C6A66B] font-bold">{isSuperAdmin ? '👑' : '💼'}</span>
+            <span>Role: <strong className="text-white capitalize">{userRole === 'admin' ? 'Store Manager' : userRole.replace(/_/g, ' ')}</strong></span>
           </div>
 
           <button
@@ -684,17 +684,17 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
               setViewMode('customer');
               onNavigate('dashboard');
             }}
-            className="px-3 py-1.5 bg-[#252525] hover:bg-[#353535] text-[#D0C9BD] hover:text-white rounded-lg transition-colors border border-[#3A3A3A] flex items-center gap-1.5 cursor-pointer"
+            className="px-3 py-1.5 bg-[#40362F] hover:bg-[#52463D] text-[#EDE5D8] hover:text-white rounded-lg transition-colors border border-[#52463D] flex items-center gap-1.5 cursor-pointer"
             title="Inspect Customer Experience & Orders"
           >
-            <Users className="w-3.5 h-3.5 text-[#C49A3A]" />
+            <Users className="w-3.5 h-3.5 text-[#C6A66B]" />
             <span className="hidden md:inline">Customer Portal View</span>
           </button>
 
           <button
             onClick={loadAllData}
             disabled={loading}
-            className="p-2 bg-[#252525] hover:bg-[#353535] text-[#D0C9BD] hover:text-white rounded-lg transition-colors border border-[#3A3A3A] cursor-pointer"
+            className="p-2 bg-[#40362F] hover:bg-[#52463D] text-[#EDE5D8] hover:text-white rounded-lg transition-colors border border-[#52463D] cursor-pointer"
             title="Sync live data"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
@@ -702,7 +702,7 @@ export default function AdminDashboardPage({ onNavigate, onRefreshCatalogue, ini
 
           <button
             onClick={() => onNavigate('home')}
-            className="px-3.5 py-1.5 bg-[#C49A3A] hover:bg-[#A9812A] text-black font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
+            className="px-3.5 py-1.5 bg-[#C6A66B] hover:bg-[#B39358] text-[#292723] font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer shadow-xs"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             <span>Storefront</span>
