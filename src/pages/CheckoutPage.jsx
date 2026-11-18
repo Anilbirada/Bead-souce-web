@@ -105,7 +105,7 @@ export default function CheckoutPage({ onNavigate }) {
         shipping: shippingFee,
         tax: 0,
         total: finalTotal,
-        paymentMethod: paymentMethod === 'wire_transfer' ? 'Wire Transfer / TT' : (paymentMethod === 'upi' ? 'UPI / Net Banking' : 'Credit Card (Stripe Verified)'),
+        paymentMethod: paymentMethod === 'wire_transfer' ? 'Wire Transfer / TT' : 'Credit Card (Stripe Verified)',
         notes: orderNotes
       };
 
@@ -524,27 +524,7 @@ export default function CheckoutPage({ onNavigate }) {
                   </div>
                 </label>
 
-                {/* Option 2: UPI / Domestic Net Banking */}
-                <label className={`p-4 rounded-2xl border flex items-start gap-3.5 cursor-pointer transition-colors ${
-                  paymentMethod === 'upi' ? 'bg-[#FAF8F3] border-[#C6A66B]' : 'bg-white border-[#EDE5D8]'
-                }`}>
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="upi"
-                    checked={paymentMethod === 'upi'}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="mt-1 text-[#C6A66B] focus:ring-[#C6A66B]"
-                  />
-                  <div>
-                    <span className="font-bold text-[#292723] block text-sm">UPI / Domestic Net Banking (India)</span>
-                    <span className="text-[#8B8175] text-[11px] block mt-0.5">
-                      Instant zero-surcharge settlement via Google Pay, PhonePe, Paytm or NEFT/RTGS.
-                    </span>
-                  </div>
-                </label>
-
-                {/* Option 3: Credit Card */}
+                {/* Option 2: Credit Card */}
                 <label className={`p-4 rounded-2xl border flex items-start gap-3.5 cursor-pointer transition-colors ${
                   paymentMethod === 'card' ? 'bg-[#FAF8F3] border-[#C6A66B]' : 'bg-white border-[#EDE5D8]'
                 }`}>

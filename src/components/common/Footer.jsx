@@ -271,14 +271,9 @@ export default function Footer({ onNavigate }) {
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs bg-white px-3 py-1.5 rounded-lg border border-[#EDE5D8] text-[#292723] font-semibold shadow-xs">
-              Bank Wire / TT
-            </span>
-            <span className="text-xs bg-white px-3 py-1.5 rounded-lg border border-[#EDE5D8] text-[#292723] font-semibold shadow-xs">
-              UPI / Net Banking
-            </span>
-            <span className="text-xs bg-white px-3 py-1.5 rounded-lg border border-[#EDE5D8] text-[#292723] font-semibold shadow-xs">
-              DHL / FedEx
+            <span className="text-xs bg-white px-3.5 py-1.5 rounded-lg border border-[#EDE5D8] text-[#292723] font-bold shadow-xs flex items-center gap-1.5">
+              <Truck className="w-3.5 h-3.5 text-[#C6A66B]" />
+              <span>DHL Express Worldwide</span>
             </span>
           </div>
         </div>
