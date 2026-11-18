@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, ShoppingBag, Eye, FileText, Sparkles, Star } from 'lucide-react';
+import { Heart, ShoppingBag, Eye, FileText, Sparkles, Star, Truck, ShieldCheck } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { useQuote } from '../../context/QuoteContext';
@@ -137,17 +137,26 @@ export default function ProductCard({
             {product.name}
           </h3>
 
-          {/* Pricing Row: Confidential B2B Wholesale Pricing */}
-          <div className="mt-3 flex items-center justify-between">
-            <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2.5 py-1 rounded-lg">
+          {/* Pricing & Flipkart/Amazon Assured Row */}
+          <div className="mt-3 flex items-center justify-between gap-1 flex-wrap">
+            <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-2.5 py-1 rounded-lg">
               <Sparkles className="w-3.5 h-3.5 text-[#014b92]" />
-              <span>Wholesale RFQ &bull; Price on Request</span>
+              <span>Wholesale RFQ</span>
             </div>
+
+            <span className="inline-flex items-center gap-1 text-[10px] font-black text-[#014b92] bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
+              <ShieldCheck className="w-3 h-3 text-[#014b92]" />
+              <span>Assured</span>
+            </span>
           </div>
 
-          {/* Wholesale Volume Tier Hint */}
-          <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-[#8B8175] font-medium">
-            <span>Volume Discounts Applied on Quotation (10+ pk &bull; 50+ pk)</span>
+          {/* Wholesale Volume Tier Hint & DHL Express */}
+          <div className="mt-2 flex items-center justify-between text-[10px] text-[#8B8175] font-medium">
+            <span>Tier savings up to 30%</span>
+            <span className="text-emerald-700 font-bold flex items-center gap-1">
+              <Truck className="w-3 h-3" />
+              <span>DHL Express</span>
+            </span>
           </div>
         </div>
 

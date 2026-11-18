@@ -1,5 +1,9 @@
 import React from 'react';
+import CategoryIconBar from '../components/home/CategoryIconBar';
 import HeroBanner from '../components/home/HeroBanner';
+import BeadsSourceAssuredBanner from '../components/home/BeadsSourceAssuredBanner';
+import AmazonQuadDeals from '../components/home/AmazonQuadDeals';
+import FlipkartDealsRail from '../components/home/FlipkartDealsRail';
 import FeaturedCategories from '../components/home/FeaturedCategories';
 import TrendingProducts from '../components/home/TrendingProducts';
 import BestSellers from '../components/home/BestSellers';
@@ -26,13 +30,34 @@ export default function HomePage({
   return (
     <div className="min-h-screen bg-[#F8F6F1]">
       
-      {/* 5. Animated Hero Carousel (5 Collection Slides) */}
+      {/* 1. Flipkart / Amazon Style Quick Category Icon Bar */}
+      <CategoryIconBar 
+        onSelectCategory={(catId) => onNavigate('catalog', { category: catId })} 
+      />
+
+      {/* 2. Animated Luxury Hero Carousel (5 Collection Slides) */}
       <HeroBanner 
         onNavigate={onNavigate} 
         dynamicSlides={siteContent?.heroSlides}
       />
 
-      {/* 6. Shop by Categories (12 Categories with counts & imagery) */}
+      {/* 3. Amazon Prime / Flipkart Assured 4-Pillar Trust Strip */}
+      <BeadsSourceAssuredBanner />
+
+      {/* 4. Amazon Signature 4-in-1 Quad Discovery Cards */}
+      <AmazonQuadDeals 
+        onNavigate={onNavigate}
+        onSelectProduct={onSelectProduct}
+      />
+
+      {/* 5. Flipkart Signature Deals of the Day Flash Rail with Live Countdown */}
+      <FlipkartDealsRail 
+        products={products}
+        onSelectProduct={onSelectProduct}
+        onNavigate={onNavigate}
+      />
+
+      {/* 6. Shop by Categories (Detailed Luxury Grid) */}
       <FeaturedCategories 
         categories={categories} 
         onSelectCategory={(catId) => onNavigate('catalog', { category: catId })} 

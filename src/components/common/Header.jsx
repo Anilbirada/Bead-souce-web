@@ -277,27 +277,37 @@ export default function Header({
             </div>
           </div>
 
-          {/* CENTER: Large Premium Product & SKU Search Bar */}
-          <div className="hidden md:flex flex-1 max-w-xl mx-4 relative" ref={searchRef}>
-            <form onSubmit={handleSearchSubmit} className="w-full relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onFocus={() => { if (searchResults.length > 0) setSearchDropdownOpen(true); }}
-                placeholder="Search natural gemstones, SKU (e.g. A12502), pave CZ, findings..."
-                className="w-full pl-11 pr-10 py-2.5 bg-[#FAF8F3] border border-[#EDE5D8] rounded-full text-xs sm:text-sm text-[#292723] placeholder-[#8B8175] focus:outline-none focus:border-[#C6A66B] focus:ring-2 focus:ring-[#C6A66B]/20 focus:bg-white transition-all shadow-inner"
-              />
-              <Search className="w-4 h-4 text-[#8B8175] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-              {searchQuery && (
+          {/* CENTER: Amazon/Flipkart Signature Large Search Bar */}
+          <div className="hidden md:flex flex-1 max-w-2xl mx-4 relative" ref={searchRef}>
+            <form onSubmit={handleSearchSubmit} className="w-full relative flex items-center">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => { if (searchResults.length > 0) setSearchDropdownOpen(true); }}
+                  placeholder="Search natural gemstones, SKU (e.g. A12502), pavé CZ, clasps & findings..."
+                  className="w-full pl-11 pr-24 py-2.5 bg-white border-2 border-[#014b92]/30 hover:border-[#014b92] focus:border-[#014b92] rounded-full text-xs sm:text-sm text-[#292723] placeholder-[#8B8175] focus:outline-none focus:ring-4 focus:ring-[#014b92]/10 transition-all shadow-sm"
+                />
+                <Search className="w-4 h-4 text-[#014b92] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-14 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+                {/* Search Action Pill Button */}
                 <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
+                  type="submit"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#014b92] hover:bg-[#003d78] text-white rounded-full text-xs font-bold transition-all shadow-xs flex items-center gap-1 cursor-pointer"
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <Search className="w-3.5 h-3.5" />
+                  <span className="hidden lg:inline">Search</span>
                 </button>
-              )}
+              </div>
             </form>
 
             {/* Live Autocomplete Dropdown Preview */}
