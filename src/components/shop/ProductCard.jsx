@@ -117,21 +117,21 @@ export default function ProductCard({
       <div className="p-4 flex-1 flex flex-col justify-between">
         <div>
           {/* Category & Rating Row */}
-          <div className="flex items-center justify-between text-[10px]">
-            <span className="uppercase font-bold tracking-widest text-[#8B8175]">
+          <div className="flex items-center justify-between text-xs">
+            <span className="uppercase font-bold tracking-wider text-[#8B8175]">
               {product.category?.replace(/-/g, ' ')}
             </span>
             <div className="flex items-center gap-1 text-[#C6A66B]">
-              <Star className="w-3 h-3 fill-current" />
-              <span className="font-bold text-[#292723]">{product.rating || '4.9'}</span>
-              <span className="text-[#8B8175]">({product.reviewsCount || '28'})</span>
+              <Star className="w-3.5 h-3.5 fill-current" />
+              <span className="font-bold text-[#292723] text-xs">{product.rating || '4.9'}</span>
+              <span className="text-[#8B8175] text-xs">({product.reviewsCount || '28'})</span>
             </div>
           </div>
 
           {/* Product Name */}
           <h3 
             onClick={() => onSelectProduct(product)}
-            className="text-xs sm:text-sm font-semibold text-[#292723] hover:text-[#C6A66B] line-clamp-2 mt-1.5 cursor-pointer transition-colors leading-snug"
+            className="text-sm sm:text-base font-semibold text-[#292723] hover:text-[#C6A66B] line-clamp-2 mt-2 cursor-pointer transition-colors leading-snug"
             title={product.name}
           >
             {product.name}
@@ -139,21 +139,21 @@ export default function ProductCard({
 
           {/* Pricing Row */}
           <div className="mt-2.5 flex items-baseline gap-2">
-            <span className="text-base font-bold text-[#292723]">
+            <span className="text-lg font-bold text-[#292723]">
               {formatPrice(basePrice)}
             </span>
             {product.salePrice && (
-              <span className="text-xs text-gray-400 line-through">
+              <span className="text-sm text-gray-400 line-through">
                 {formatPrice(product.price)}
               </span>
             )}
-            <span className="text-[10px] text-[#8B8175]">/ wholesale pack</span>
+            <span className="text-xs text-[#8B8175]">/ wholesale pack</span>
           </div>
 
           {/* Wholesale Volume Tier Hint */}
-          <div className="mt-1 flex items-center gap-1 text-[11px] text-[#8B8175] font-medium">
-            <Sparkles className="w-3 h-3 text-[#C6A66B]" />
-            <span>50+ packs: <strong className="text-[#C6A66B]">{formatPrice(tier3Price)}</strong> (-30%)</span>
+          <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[#8B8175] font-medium">
+            <Sparkles className="w-3.5 h-3.5 text-[#C6A66B]" />
+            <span>50+ packs: <strong className="text-[#C6A66B] font-bold">{formatPrice(tier3Price)}</strong> (-30%)</span>
           </div>
         </div>
 
@@ -161,15 +161,15 @@ export default function ProductCard({
         <div className="mt-4 pt-3 border-t border-[#EDE5D8] flex items-center gap-2">
           <button
             onClick={() => addToCart(product, 1)}
-            className="flex-1 py-2 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs border border-[#52463D] group"
+            className="flex-1 py-2.5 bg-[#40362F] hover:bg-[#52463D] text-[#FAF8F3] text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs border border-[#52463D] group"
           >
-            <ShoppingBag className="w-3.5 h-3.5 text-[#C6A66B] group-hover:scale-110 transition-transform" />
+            <ShoppingBag className="w-4 h-4 text-[#C6A66B] group-hover:scale-110 transition-transform" />
             <span>Add to Cart</span>
           </button>
 
           <button
             onClick={() => onSelectProduct(product)}
-            className="px-3 py-2 border border-[#EDE5D8] hover:border-[#C6A66B] hover:bg-[#FAF8F3] text-[#40362F] text-xs font-semibold rounded-xl transition-colors cursor-pointer"
+            className="px-3.5 py-2.5 border border-[#EDE5D8] hover:border-[#C6A66B] hover:bg-[#FAF8F3] text-[#40362F] text-sm font-semibold rounded-xl transition-colors cursor-pointer"
             title="View Specifications & Wholesale Tiers"
           >
             Details

@@ -94,13 +94,13 @@ export default function FeaturedCollections({ onNavigate }) {
               <button
                 key={col.id}
                 onClick={() => setActiveTab(idx)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all flex items-center gap-2 shrink-0 cursor-pointer ${
+                className={`px-4.5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shrink-0 cursor-pointer ${
                   isActive
                     ? 'bg-[#40362F] text-[#FAF8F3] shadow-md border border-[#52463D]'
-                    : 'bg-white text-[#8B8175] hover:text-[#292723] border border-[#EDE5D8] hover:border-[#C6A66B]'
+                    : 'bg-white text-[#5C554E] hover:text-[#292723] border border-[#EDE5D8] hover:border-[#C6A66B]'
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#C6A66B]' : 'text-[#8B8175]'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-[#C6A66B]' : 'text-[#8B8175]'}`} />
                 <span>{col.tabName}</span>
               </button>
             );
@@ -115,21 +115,21 @@ export default function FeaturedCollections({ onNavigate }) {
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
               <div className="lg:col-span-7 p-8 sm:p-12 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF8F3] border border-[#EDE5D8] text-[10px] font-bold uppercase tracking-wider text-[#C6A66B]">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF8F3] border border-[#EDE5D8] text-xs font-bold uppercase tracking-wider text-[#A9812A]">
                   <span>{EDITORIAL_COLLECTIONS[activeTab].badge}</span>
                 </div>
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#292723] group-hover:text-[#C6A66B] transition-colors leading-snug">
+                <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#292723] group-hover:text-[#C6A66B] transition-colors leading-snug">
                   {EDITORIAL_COLLECTIONS[activeTab].title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#8B8175] leading-relaxed max-w-xl">
+                <p className="text-sm sm:text-base text-[#5C554E] leading-relaxed max-w-xl">
                   {EDITORIAL_COLLECTIONS[activeTab].subtitle}
                 </p>
                 <div className="pt-4 flex items-center gap-4">
-                  <span className="inline-flex items-center gap-2 px-6 py-3 bg-[#C6A66B] group-hover:bg-[#B89354] text-white text-xs font-bold rounded-xl transition-all shadow-md">
+                  <span className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#C6A66B] group-hover:bg-[#B89354] text-[#292723] text-sm font-bold rounded-xl transition-all shadow-md">
                     <span>Explore Collection</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
-                  <span className="text-xs text-[#8B8175] font-semibold">
+                  <span className="text-sm text-[#5C554E] font-semibold">
                     {EDITORIAL_COLLECTIONS[activeTab].itemCount} Available
                   </span>
                 </div>

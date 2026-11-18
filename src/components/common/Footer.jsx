@@ -6,10 +6,9 @@ import {
   ShieldCheck, 
   Award, 
   Truck, 
-  Globe, 
+  FileText,
   ArrowRight, 
-  CheckCircle2, 
-  FileText 
+  CheckCircle2 
 } from 'lucide-react';
 import BrandLogo from './BrandLogo';
 
@@ -26,54 +25,54 @@ export default function Footer({ onNavigate }) {
   };
 
   return (
-    <footer className="bg-[#40362F] text-[#EDE5D8] border-t border-[#52463D] pt-16 pb-12">
+    <footer className="bg-[#FAF8F3] text-[#292723] border-t border-[#EDE5D8] pt-16 pb-14 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Top Trust Pillars Banner */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-12 border-b border-[#52463D]">
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#52463D] flex items-center justify-center shrink-0 border border-[#EDE5D8]/20">
-              <ShieldCheck className="w-5 h-5 text-[#C6A66B]" />
+        {/* Top Trust Pillars Banner in High-Legibility Luxury Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pb-14 border-b border-[#EDE5D8]">
+          <div className="bg-white p-5 rounded-2xl border border-[#EDE5D8] shadow-xs hover:border-[#C6A66B]/60 hover:shadow-md transition-all flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#FAF8F3] flex items-center justify-center shrink-0 border border-[#EDE5D8]">
+              <ShieldCheck className="w-6 h-6 text-[#C6A66B]" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-[#FAF8F3]">Direct Factory Sourcing</h4>
-              <p className="text-xs text-[#EDE5D8]/80 mt-0.5">True manufacturer pricing with zero middleman markups.</p>
+              <h4 className="text-base font-bold text-[#292723]">Direct Factory Sourcing</h4>
+              <p className="text-sm text-[#5C554E] leading-relaxed mt-1">True manufacturer pricing with zero middleman markups.</p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#52463D] flex items-center justify-center shrink-0 border border-[#EDE5D8]/20">
-              <Award className="w-5 h-5 text-[#C6A66B]" />
+          <div className="bg-white p-5 rounded-2xl border border-[#EDE5D8] shadow-xs hover:border-[#C6A66B]/60 hover:shadow-md transition-all flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#FAF8F3] flex items-center justify-center shrink-0 border border-[#EDE5D8]">
+              <Award className="w-6 h-6 text-[#C6A66B]" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-[#FAF8F3]">Tested Genuine Minerals</h4>
-              <p className="text-xs text-[#EDE5D8]/80 mt-0.5">100% authentic gemstones &amp; certified lead-free pewter.</p>
+              <h4 className="text-base font-bold text-[#292723]">Tested Genuine Minerals</h4>
+              <p className="text-sm text-[#5C554E] leading-relaxed mt-1">100% authentic gemstones &amp; certified lead-free pewter.</p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#52463D] flex items-center justify-center shrink-0 border border-[#EDE5D8]/20">
-              <Truck className="w-5 h-5 text-[#C6A66B]" />
+          <div className="bg-white p-5 rounded-2xl border border-[#EDE5D8] shadow-xs hover:border-[#C6A66B]/60 hover:shadow-md transition-all flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#FAF8F3] flex items-center justify-center shrink-0 border border-[#EDE5D8]">
+              <Truck className="w-6 h-6 text-[#C6A66B]" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-[#FAF8F3]">Worldwide Fast Dispatch</h4>
-              <p className="text-xs text-[#EDE5D8]/80 mt-0.5">Express DHL/FedEx worldwide delivery with tracking.</p>
+              <h4 className="text-base font-bold text-[#292723]">Worldwide Fast Dispatch</h4>
+              <p className="text-sm text-[#5C554E] leading-relaxed mt-1">Express DHL/FedEx worldwide delivery with live tracking.</p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#52463D] flex items-center justify-center shrink-0 border border-[#EDE5D8]/20">
-              <FileText className="w-5 h-5 text-[#C6A66B]" />
+          <div className="bg-white p-5 rounded-2xl border border-[#EDE5D8] shadow-xs hover:border-[#C6A66B]/60 hover:shadow-md transition-all flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#FAF8F3] flex items-center justify-center shrink-0 border border-[#EDE5D8]">
+              <FileText className="w-6 h-6 text-[#C6A66B]" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-[#FAF8F3]">Dedicated RFQ Desk</h4>
-              <p className="text-xs text-[#EDE5D8]/80 mt-0.5">Custom gemstone cuts, bulk orders &amp; OEM casting.</p>
+              <h4 className="text-base font-bold text-[#292723]">Dedicated RFQ Desk</h4>
+              <p className="text-sm text-[#5C554E] leading-relaxed mt-1">Custom gemstone cuts, bulk orders &amp; OEM casting.</p>
             </div>
           </div>
         </div>
 
         {/* Main Footer Links & Information */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 py-12 border-b border-[#52463D]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 py-14 border-b border-[#EDE5D8]">
           
           {/* Col 1: Brand & International Operations */}
           <div className="lg:col-span-2 space-y-4">
@@ -81,37 +80,37 @@ export default function Footer({ onNavigate }) {
               onClick={() => onNavigate && onNavigate('home')}
               className="cursor-pointer inline-block"
             >
-              <BrandLogo variant="dark" size="lg" withSubtitle={true} />
+              <BrandLogo variant="default" size="lg" withSubtitle={true} />
             </div>
 
-            <p className="text-xs text-[#EDE5D8]/80 leading-relaxed max-w-sm">
+            <p className="text-sm text-[#4A453F] leading-relaxed max-w-sm pt-1">
               BeadsSource is an international manufacturer and wholesale exporter of natural gemstone beads, pavé cubic zirconia, lead-free pewter components, and finished artisanal jewelry.
             </p>
 
-            <div className="space-y-2 text-xs text-[#EDE5D8] pt-2">
-              <p className="flex items-center gap-2">
+            <div className="space-y-2.5 text-sm text-[#292723] pt-3">
+              <p className="flex items-center gap-2.5">
                 <MapPin className="w-4 h-4 text-[#C6A66B] shrink-0" />
-                <span>Central International Distribution &amp; Sourcing Operations</span>
+                <span className="font-medium">Central International Distribution &amp; Sourcing Operations</span>
               </p>
-              <p className="flex items-center gap-2">
+              <p className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#C6A66B] shrink-0" />
-                <span>+1 (800) 555-0199 &bull; Global Wholesale Desk</span>
+                <span className="font-medium">+1 (800) 555-0199 &bull; Global Wholesale Desk</span>
               </p>
-              <p className="flex items-center gap-2">
+              <p className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#C6A66B] shrink-0" />
-                <span>wholesale@beadssource.com &bull; support@beadssource.com</span>
+                <span className="font-medium">wholesale@beadssource.com &bull; support@beadssource.com</span>
               </p>
             </div>
           </div>
 
           {/* Col 2: Wholesale Categories */}
-          <div className="space-y-3">
-            <h4 className="text-xs uppercase font-bold tracking-widest text-[#C6A66B]">Product Catalogue</h4>
-            <ul className="space-y-2 text-xs text-[#EDE5D8]/80">
+          <div className="space-y-4">
+            <h4 className="text-sm uppercase font-bold tracking-wider text-[#A9812A]">Product Catalogue</h4>
+            <ul className="space-y-2.5 text-sm text-[#4A453F]">
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'natural-gemstone-beads' })} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Natural Gemstones
                 </button>
@@ -119,7 +118,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'turquoise-beads' })} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Turquoise Beads &amp; Slabs
                 </button>
@@ -127,7 +126,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'cubic-zirconia' })} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Micro Pave CZ Spacers
                 </button>
@@ -135,7 +134,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'charms' })} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Lead-Free Pewter Charms
                 </button>
@@ -143,7 +142,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'jewelry-findings' })} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Lobster Clasps &amp; Findings
                 </button>
@@ -151,7 +150,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'handmade-necklaces' })} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Handmade Knotted Necklaces
                 </button>
@@ -160,21 +159,22 @@ export default function Footer({ onNavigate }) {
           </div>
 
           {/* Col 3: Wholesale B2B Services */}
-          <div className="space-y-3">
-            <h4 className="text-xs uppercase font-bold tracking-widest text-[#C6A66B]">Wholesale Desk</h4>
-            <ul className="space-y-2 text-xs text-[#EDE5D8]/80">
+          <div className="space-y-4">
+            <h4 className="text-sm uppercase font-bold tracking-wider text-[#A9812A]">Wholesale Desk</h4>
+            <ul className="space-y-2.5 text-sm text-[#4A453F]">
               <li>
                 <button 
                   onClick={() => onNavigate('quote')} 
-                  className="hover:text-white transition-colors text-[#C6A66B] font-semibold cursor-pointer"
+                  className="hover:text-[#8D6B23] transition-colors text-[#A9812A] font-bold cursor-pointer flex items-center gap-1"
                 >
-                  Submit Bulk RFQ Quotation
+                  <span>Submit Bulk RFQ Quotation</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => onNavigate('catalog', { category: 'all' })} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Tiered Volume Pricing
                 </button>
@@ -182,7 +182,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('about')} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Custom OEM Bead Sourcing
                 </button>
@@ -190,7 +190,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('contact')} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Private Showroom Visits
                 </button>
@@ -198,7 +198,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button 
                   onClick={() => onNavigate('dashboard')} 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#292723] hover:translate-x-1 transition-all cursor-pointer font-medium"
                 >
                   Track Purchase Orders
                 </button>
@@ -207,32 +207,32 @@ export default function Footer({ onNavigate }) {
           </div>
 
           {/* Col 4: Newsletter */}
-          <div className="space-y-3">
-            <h4 className="text-xs uppercase font-bold tracking-widest text-[#C6A66B]">Wholesale Insider</h4>
-            <p className="text-xs text-[#EDE5D8]/80 leading-relaxed">
+          <div className="space-y-4">
+            <h4 className="text-sm uppercase font-bold tracking-wider text-[#A9812A]">Wholesale Insider</h4>
+            <p className="text-sm text-[#5C554E] leading-relaxed">
               Receive priority alerts for new container shipments, rare gemstone arrivals, and private bulk discounts.
             </p>
             {subscribed ? (
-              <div className="p-3 bg-[#52463D] border border-[#EDE5D8]/30 rounded-xl text-xs text-[#D8C49A] flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#C6A66B]" />
+              <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-sm text-emerald-800 font-medium flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                 <span>Thank you! You are subscribed to Wholesale Alerts.</span>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="space-y-2">
+              <form onSubmit={handleSubscribe} className="space-y-2.5">
                 <input
                   type="email"
                   required
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="Enter business email..."
-                  className="w-full px-3.5 py-2.5 bg-[#52463D] border border-[#EDE5D8]/30 rounded-xl text-xs text-[#FAF8F3] placeholder-[#EDE5D8]/60 focus:outline-none focus:border-[#C6A66B]"
+                  className="w-full px-4 py-3 bg-white border border-[#EDE5D8] rounded-xl text-sm text-[#292723] placeholder-[#8B8175] focus:outline-none focus:border-[#C6A66B] shadow-xs"
                 />
                 <button
                   type="submit"
-                  className="w-full py-2.5 bg-[#C6A66B] hover:bg-[#D8C49A] text-[#40362F] font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+                  className="w-full py-3 bg-[#C6A66B] hover:bg-[#B39358] text-[#292723] font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md"
                 >
                   <span>Subscribe for Bulk Alerts</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
             )}
@@ -241,25 +241,27 @@ export default function Footer({ onNavigate }) {
         </div>
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#EDE5D8]/70 gap-4">
-          <p>
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-[#5C554E] gap-4">
+          <p className="font-medium">
             &copy; 2026 BeadsSource LLC &bull; All Rights Reserved.
           </p>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 font-medium text-xs sm:text-sm">
             <span>California Prop 65 Lead-Free</span>
+            <span className="hidden sm:inline">&bull;</span>
             <span>CPSIA Tested</span>
+            <span className="hidden sm:inline">&bull;</span>
             <span>US &amp; EU REACH Compliant</span>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <span className="text-[11px] bg-[#52463D] px-2.5 py-1 rounded-lg border border-[#EDE5D8]/20 text-[#D8C49A]">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-xs bg-white px-3 py-1.5 rounded-lg border border-[#EDE5D8] text-[#292723] font-semibold shadow-xs">
               Bank Wire / TT
             </span>
-            <span className="text-[11px] bg-[#52463D] px-2.5 py-1 rounded-lg border border-[#EDE5D8]/20 text-[#D8C49A]">
+            <span className="text-xs bg-white px-3 py-1.5 rounded-lg border border-[#EDE5D8] text-[#292723] font-semibold shadow-xs">
               UPI / Net Banking
             </span>
-            <span className="text-[11px] bg-[#52463D] px-2.5 py-1 rounded-lg border border-[#EDE5D8]/20 text-[#D8C49A]">
+            <span className="text-xs bg-white px-3 py-1.5 rounded-lg border border-[#EDE5D8] text-[#292723] font-semibold shadow-xs">
               DHL / FedEx
             </span>
           </div>

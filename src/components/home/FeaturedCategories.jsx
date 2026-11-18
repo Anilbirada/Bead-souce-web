@@ -63,21 +63,21 @@ export default function FeaturedCategories({ categories = [], onSelectCategory }
               {/* Text Info */}
               <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-serif font-bold text-sm sm:text-base text-[#292723] group-hover:text-[#C6A66B] transition-colors leading-snug">
+                  <h3 className="font-serif font-bold text-base sm:text-lg text-[#292723] group-hover:text-[#C6A66B] transition-colors leading-snug">
                     {cat.name}
                   </h3>
-                  <p className="text-[11px] text-[#8B8175] line-clamp-2 mt-1 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#5C554E] line-clamp-2 mt-1.5 leading-relaxed">
                     {cat.description}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-[#EDE5D8] flex items-center justify-between text-xs">
-                  <span className="text-[10px] font-semibold text-[#8B8175] uppercase tracking-wider">
+                <div className="mt-4 pt-3 border-t border-[#EDE5D8] flex items-center justify-between text-xs sm:text-sm">
+                  <span className="text-xs font-semibold text-[#8B8175] uppercase tracking-wider">
                     {cat.itemCount || 15}+ items
                   </span>
                   <span className="text-[#C6A66B] font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                     <span>Explore</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
               </div>

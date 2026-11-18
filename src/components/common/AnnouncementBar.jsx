@@ -37,20 +37,20 @@ export default function AnnouncementBar({ onOpenAuth }) {
   return (
     <aside 
       aria-label="Store Announcements" 
-      className="bg-[#40362F] text-[#FAF8F3] text-[11px] sm:text-xs py-2 px-4 border-b border-[#52463D] font-medium tracking-wide select-none"
+      className="bg-[#382F27] text-[#FAF8F3] text-xs sm:text-sm py-2.5 px-4 border-b border-[#4E4136] font-medium tracking-wide select-none"
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2.5">
         
         {/* Left: Rotating Sophisticated Luxury Message */}
-        <div className="flex items-center gap-3 justify-center md:justify-start min-h-[22px]">
-          <div className="flex items-center gap-2 transition-all duration-500 animate-fade-in key={currentIdx}">
-            <span className="w-5 h-5 rounded-full bg-[#C6A66B]/20 flex items-center justify-center text-[#C6A66B]">
-              <IconComponent className="w-3 h-3" />
+        <div className="flex items-center gap-3 justify-center md:justify-start min-h-[24px]">
+          <div className="flex items-center gap-2.5 transition-all duration-500 animate-fade-in key={currentIdx}">
+            <span className="w-5 h-5 rounded-full bg-[#C6A66B]/25 flex items-center justify-center text-[#C6A66B]">
+              <IconComponent className="w-3.5 h-3.5" />
             </span>
-            <span className="font-medium text-[#FAF8F3]">
+            <span className="font-medium text-[#FAF8F3] text-xs sm:text-sm">
               {activeAnnouncement.text}
             </span>
-            <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-[#C6A66B]/15 text-[#D8C49A] text-[10px] font-semibold uppercase tracking-wider border border-[#C6A66B]/30">
+            <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-[#C6A66B]/20 text-[#FAF8F3] text-xs font-semibold uppercase tracking-wider border border-[#C6A66B]/40">
               {activeAnnouncement.tag}
             </span>
           </div>
@@ -60,18 +60,18 @@ export default function AnnouncementBar({ onOpenAuth }) {
         <div className="flex items-center gap-4 sm:gap-6 text-[#EDE5D8]">
           
           {/* Customer Support Desk Link */}
-          <span className="hidden sm:flex items-center gap-1.5 text-[#EDE5D8] hover:text-[#C6A66B] transition-colors cursor-pointer text-[11px]">
-            <Headphones className="w-3.5 h-3.5 text-[#C6A66B]" />
+          <span className="hidden sm:flex items-center gap-1.5 text-[#EDE5D8] hover:text-[#C6A66B] transition-colors cursor-pointer text-xs">
+            <Headphones className="w-4 h-4 text-[#C6A66B]" />
             <span>Atelier Concierge: +1 (800) 555-0199</span>
           </span>
 
           {/* Currency Selector */}
-          <div className="flex items-center gap-1.5 bg-[#4F433A] px-2.5 py-1 rounded-md border border-[#63554A]">
-            <Globe className="w-3 h-3 text-[#C6A66B]" />
+          <div className="flex items-center gap-1.5 bg-[#4A3E34] px-2.5 py-1 rounded-md border border-[#5E4F42]">
+            <Globe className="w-3.5 h-3.5 text-[#C6A66B]" />
             <select
               value={currency}
               onChange={(e) => setCurrency(e.target.value)}
-              className="bg-transparent text-[#FAF8F3] cursor-pointer focus:outline-none text-[11px] font-semibold"
+              className="bg-transparent text-[#FAF8F3] cursor-pointer focus:outline-none text-xs font-semibold"
               aria-label="Select currency"
             >
               <option value="USD" className="bg-[#40362F] text-[#FAF8F3]">USD ($)</option>

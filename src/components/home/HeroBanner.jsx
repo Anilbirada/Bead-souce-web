@@ -197,7 +197,7 @@ export default function HeroBanner({ onNavigate, dynamicSlides = null }) {
             </h1>
 
             {/* Description */}
-            <p className="text-sm sm:text-base text-[#8B8175] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-[#5C554E] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
               {currentSlide.description}
             </p>
 
@@ -205,34 +205,34 @@ export default function HeroBanner({ onNavigate, dynamicSlides = null }) {
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <button
                 onClick={() => onNavigate('catalog', { category: currentSlide.category || currentSlide.ctaCategory || 'all' })}
-                className="w-full sm:w-auto px-8 py-3.5 bg-[#C6A66B] hover:bg-[#B89354] text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2.5 cursor-pointer group"
+                className="w-full sm:w-auto px-8 py-3.5 bg-[#C6A66B] hover:bg-[#B89354] text-[#292723] text-sm sm:text-base font-bold rounded-xl transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2.5 cursor-pointer group"
               >
                 <span>{currentSlide.ctaText || 'Shop Collection'}</span>
-                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#292723] group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
                 onClick={() => onNavigate('catalog', { category: 'all' })}
-                className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8] hover:border-[#C6A66B] text-xs sm:text-sm font-bold rounded-xl transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer group"
+                className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-[#FAF8F3] text-[#40362F] border border-[#EDE5D8] hover:border-[#C6A66B] text-sm sm:text-base font-bold rounded-xl transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer group"
               >
                 <span>{currentSlide.secondaryCtaText || 'Explore Products'}</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#8B8175] group-hover:text-[#C6A66B] group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="w-4 h-4 text-[#8B8175] group-hover:text-[#C6A66B] group-hover:translate-x-0.5 transition-all" />
               </button>
             </div>
 
             {/* Trust Metrics Bar */}
             <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#EDE5D8] text-left max-w-lg mx-auto lg:mx-0">
               <div>
-                <p className="text-xl sm:text-2xl font-serif font-bold text-[#292723]">5,000+</p>
-                <p className="text-[11px] text-[#8B8175]">Global Designers &amp; Boutiques</p>
+                <p className="text-2xl sm:text-3xl font-serif font-bold text-[#292723]">5,000+</p>
+                <p className="text-xs sm:text-sm text-[#5C554E] font-medium">Global Designers &amp; Boutiques</p>
               </div>
               <div>
-                <p className="text-xl sm:text-2xl font-serif font-bold text-[#292723]">100%</p>
-                <p className="text-[11px] text-[#8B8175]">Certified Genuine Minerals</p>
+                <p className="text-2xl sm:text-3xl font-serif font-bold text-[#292723]">100%</p>
+                <p className="text-xs sm:text-sm text-[#5C554E] font-medium">Certified Genuine Minerals</p>
               </div>
               <div>
-                <p className="text-xl sm:text-2xl font-serif font-bold text-[#292723]">3-5 Days</p>
-                <p className="text-[11px] text-[#8B8175]">Worldwide Express Dispatch</p>
+                <p className="text-2xl sm:text-3xl font-serif font-bold text-[#292723]">3-5 Days</p>
+                <p className="text-xs sm:text-sm text-[#5C554E] font-medium">Worldwide Express Dispatch</p>
               </div>
             </div>
 
@@ -257,23 +257,23 @@ export default function HeroBanner({ onNavigate, dynamicSlides = null }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
                 {/* Floating Top Showcase Pill */}
-                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg border border-[#EDE5D8] flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[#FAF8F3] flex items-center justify-center text-[#C6A66B]">
-                    <Gem className="w-4 h-4" />
+                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl shadow-lg border border-[#EDE5D8] flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-[#FAF8F3] flex items-center justify-center text-[#C6A66B]">
+                    <Gem className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#8B8175] font-medium">{currentSlide.tag || 'Wholesale Selection'}</p>
-                    <p className="text-xs font-bold text-[#292723]">{currentSlide.pillTitle || currentSlide.headline}</p>
+                    <p className="text-xs text-[#8B8175] font-medium">{currentSlide.tag || 'Wholesale Selection'}</p>
+                    <p className="text-sm font-bold text-[#292723]">{currentSlide.pillTitle || currentSlide.headline}</p>
                   </div>
                 </div>
 
                 {/* Floating Bottom Discount Pill */}
-                <div className="absolute bottom-4 right-4 bg-[#40362F]/95 backdrop-blur-md text-white px-4 py-2.5 rounded-xl shadow-xl border border-[#52463D] space-y-0.5">
-                  <div className="flex items-center gap-1.5 text-[#C6A66B] text-[10px] font-bold uppercase tracking-wider">
-                    <Sparkles className="w-3 h-3" />
+                <div className="absolute bottom-4 right-4 bg-[#40362F]/95 backdrop-blur-md text-white px-4 py-3 rounded-xl shadow-xl border border-[#52463D] space-y-1">
+                  <div className="flex items-center gap-1.5 text-[#C6A66B] text-xs font-bold uppercase tracking-wider">
+                    <Sparkles className="w-3.5 h-3.5" />
                     <span>Wholesale Advantage</span>
                   </div>
-                  <p className="text-xs font-semibold text-[#FAF8F3]">
+                  <p className="text-sm font-semibold text-[#FAF8F3]">
                     {currentSlide.volumeDiscount || 'Volume Tier Discounts Available'}
                   </p>
                 </div>
