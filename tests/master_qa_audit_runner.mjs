@@ -6,6 +6,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { spawn } from 'child_process';
 
 const LOCAL_API = 'http://localhost:5000/api';
 const LIVE_API = 'https://beadssource-wholesale.onrender.com/api';
@@ -53,6 +54,19 @@ async function runMasterQAAudit() {
   console.log('======================================================================');
   console.log('     BEADSSOURCE ENTERPRISE B2B PLATFORM - MASTER QA & SECURITY AUDIT');
   console.log('======================================================================');
+
+  // Spawn local test backend if not currently running
+  let serverProcess = null;
+  const healthCheck = await request(LOCAL_API, '/health');
+  if (!healthCheck.ok) {
+    console.log('[SPAWN] Initializing backend test instance on http://localhost:5000...');
+    serverProcess = spawn('node', ['server/index.js'], {
+      cwd: process.cwd(),
+      shell: true,
+      env: { ...process.env, PORT: '5000' }
+    });
+    await new Promise(r => setTimeout(r, 3500));
+  }
 
   // Snapshot database before running tests to ensure complete non-destructive idempotency
   const dataDir = path.join(process.cwd(), 'server', 'data');
@@ -1069,8 +1083,14 @@ async function runMasterQAAudit() {
     }
 
   } finally {
+    if (serverProcess) {
+      console.log('\n[CLEANUP] Stopping spawned backend test instance...');
+      try {
+        serverProcess.kill();
+      } catch (e) {}
+    }
     // Restore database snapshot so test execution leaves zero residue
-    console.log('\n[RESTORE] Restoring clean database baseline from snapshot...');
+    console.log('[RESTORE] Restoring clean database baseline from snapshot...');
     Object.entries(dbSnapshots).forEach(([file, content]) => {
       try {
         fs.writeFileSync(path.join(dataDir, file), content, 'utf-8');
