@@ -287,9 +287,9 @@ export default function Header({
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => { if (searchResults.length > 0) setSearchDropdownOpen(true); }}
                   placeholder="Search natural gemstones, SKU (e.g. A12502), pavé CZ, clasps & findings..."
-                  className="w-full pl-11 pr-24 py-2.5 bg-white border-2 border-[#012d59]/30 hover:border-[#012d59] focus:border-[#012d59] rounded-full text-xs sm:text-sm text-[#292723] placeholder-[#8B8175] focus:outline-none focus:ring-4 focus:ring-[#012d59]/10 transition-all shadow-sm"
+                  className="w-full pl-11 pr-24 py-2.5 bg-white border-2 border-[#EDE5D8] hover:border-[#C6A66B] focus:border-[#C6A66B] rounded-full text-xs sm:text-sm text-[#40362F] placeholder-[#766D62] focus:outline-none focus:ring-4 focus:ring-[#C6A66B]/15 transition-all shadow-xs"
                 />
-                <Search className="w-4 h-4 text-[#012d59] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Search className="w-4 h-4 text-[#C6A66B] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                 {searchQuery && (
                   <button
                     type="button"
@@ -302,7 +302,7 @@ export default function Header({
                 {/* Search Action Pill Button */}
                 <button
                   type="submit"
-                  className="absolute right-1 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-gradient-to-r from-[#012d59] to-[#014b92] hover:from-[#00172e] hover:to-[#012d59] text-white rounded-full text-xs font-bold transition-all shadow-xs flex items-center gap-1 cursor-pointer"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-gradient-to-r from-[#C6A66B] to-[#B99A5B] hover:from-[#d4b578] hover:to-[#c6a66b] text-[#40362F] rounded-full text-xs font-bold transition-all shadow-xs flex items-center gap-1 cursor-pointer"
                 >
                   <Search className="w-3.5 h-3.5" />
                   <span className="hidden lg:inline">Search</span>
@@ -340,7 +340,7 @@ export default function Header({
                         <p className="font-semibold text-[#292723] truncate text-xs mt-0.5">{item.name}</p>
                       </div>
                       <div className="text-right">
-                        <span className="text-[10px] font-semibold text-[#014b92] bg-[#f0f5fa] border border-[#d2e2f0] px-1.5 py-0.5 rounded inline-block">
+                        <span className="text-[10px] font-semibold text-[#C6A66B] bg-[#F0E8D9] border border-[#EDE5D8] px-1.5 py-0.5 rounded inline-block">
                           Wholesale RFQ
                         </span>
                         <p className="text-[10px] text-gray-500 mt-1">Stock: {item.stock}</p>
@@ -638,19 +638,19 @@ export default function Header({
             {/* WHOLESALE QUOTE LIST BUTTON */}
             <button
               onClick={openCartDrawer}
-              className="flex items-center gap-2 bg-gradient-to-r from-[#012d59] to-[#014b92] hover:from-[#00172e] hover:to-[#012d59] text-white px-3.5 py-2 rounded-full transition-all shadow-sm hover:shadow-md cursor-pointer ml-1 border border-[#013f7a] group"
+              className="flex items-center gap-2 bg-[#FAF8F3] hover:bg-[#F0E8D9] text-[#40362F] px-3.5 py-2 rounded-full transition-all shadow-xs hover:shadow-sm cursor-pointer ml-1 border border-[#EDE5D8] group"
               aria-label="Wholesale Quote List"
               title="View Wholesale Quote List"
             >
               <div className="relative">
-                <FileText className="w-4 h-4 text-[#ffd778] group-hover:scale-110 transition-transform" />
+                <FileText className="w-4 h-4 text-[#C6A66B] group-hover:scale-110 transition-transform" />
                 {itemsCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-[#cb0000] text-white text-[10px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
                     {itemsCount}
                   </span>
                 )}
               </div>
-              <span className="text-xs font-bold text-white hidden sm:inline">
+              <span className="text-xs font-bold text-[#40362F] hidden sm:inline">
                 Quote List
               </span>
             </button>
@@ -660,10 +660,10 @@ export default function Header({
 
       </div>
 
-      {/* REFINED ENTERPRISE NAVIGATION BAR (Harmonized Midnight Navy with Elevated Typography) */}
-      <div className="hidden lg:block bg-gradient-to-r from-[#00172e] via-[#012d59] to-[#00172e] border-t border-[#013f7a] border-b border-[#001224] shadow-md relative z-30 font-sans">
+      {/* LUXURY WARM NAVIGATION BAR */}
+      <div className="hidden lg:block bg-[#FAF8F3] border-t border-[#EDE5D8] border-b border-[#EDE5D8] shadow-xs relative z-30 font-['Manrope',sans-serif]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center justify-between h-12 text-[13.5px] font-semibold tracking-wide text-white/95 antialiased relative select-none" ref={megaMenuRef}>
+          <nav className="flex items-center justify-between h-12 text-[13.5px] font-semibold text-[#40362F] antialiased relative select-none" ref={megaMenuRef}>
             
             {/* Left Items Group: Home + Categories + Best Sellers */}
             <div className="flex items-center space-x-0.5 xl:space-x-1">
@@ -671,11 +671,11 @@ export default function Header({
               {/* 1. Red Home Icon with White Door */}
               <button
                 onClick={() => onNavigate('home')}
-                className="px-2.5 py-2 hover:bg-white/10 rounded-lg transition-colors flex items-center justify-center cursor-pointer mr-1"
+                className="px-2.5 py-2 hover:bg-[#F0E8D9] rounded-lg transition-colors flex items-center justify-center cursor-pointer mr-1"
                 title="Home"
                 aria-label="Home"
               >
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#ff2222] fill-[#ff2222] drop-shadow-xs" stroke="currentColor" strokeWidth="0.5">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#cb0000] fill-[#cb0000] drop-shadow-xs" stroke="currentColor" strokeWidth="0.5">
                   <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z" />
                   <rect x="10" y="14" width="4" height="6" fill="#ffffff" />
                 </svg>
@@ -686,10 +686,10 @@ export default function Header({
                 <button
                   onClick={() => onNavigate('catalog', { category: 'finished-jewelry' })}
                   onMouseEnter={() => setMegaMenuCategory('finishedJewelry')}
-                  className={`px-3 py-2 hover:bg-white/10 rounded-lg text-white/95 hover:text-[#ffd778] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'finishedJewelry' ? 'bg-white/15 text-[#ffd778]' : ''}`}
+                  className={`px-3 py-2 hover:bg-[#F0E8D9] hover:text-[#B99A5B] rounded-lg text-[#40362F] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'finishedJewelry' ? 'bg-[#F0E8D9] text-[#B99A5B]' : ''}`}
                 >
                   <span>Finished Jewelry</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-white/60 group-hover:text-[#ffd778] transition-colors" />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-colors ${megaMenuCategory === 'finishedJewelry' ? 'text-[#B99A5B]' : 'text-[#766D62] group-hover:text-[#B99A5B]'}`} />
                 </button>
               </div>
 
@@ -698,10 +698,10 @@ export default function Header({
                 <button
                   onClick={() => onNavigate('catalog', { category: 'beads' })}
                   onMouseEnter={() => setMegaMenuCategory('beads')}
-                  className={`px-3 py-2 hover:bg-white/10 rounded-lg text-white/95 hover:text-[#ffd778] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'beads' ? 'bg-white/15 text-[#ffd778]' : ''}`}
+                  className={`px-3 py-2 hover:bg-[#F0E8D9] hover:text-[#B99A5B] rounded-lg text-[#40362F] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'beads' ? 'bg-[#F0E8D9] text-[#B99A5B]' : ''}`}
                 >
                   <span>Beads</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-white/60 group-hover:text-[#ffd778] transition-colors" />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-colors ${megaMenuCategory === 'beads' ? 'text-[#B99A5B]' : 'text-[#766D62] group-hover:text-[#B99A5B]'}`} />
                 </button>
               </div>
 
@@ -710,10 +710,10 @@ export default function Header({
                 <button
                   onClick={() => onNavigate('catalog', { category: 'pewter' })}
                   onMouseEnter={() => setMegaMenuCategory('pewter')}
-                  className={`px-3 py-2 hover:bg-white/10 rounded-lg text-white/95 hover:text-[#ffd778] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'pewter' ? 'bg-white/15 text-[#ffd778]' : ''}`}
+                  className={`px-3 py-2 hover:bg-[#F0E8D9] hover:text-[#B99A5B] rounded-lg text-[#40362F] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'pewter' ? 'bg-[#F0E8D9] text-[#B99A5B]' : ''}`}
                 >
                   <span>Pewter</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-white/60 group-hover:text-[#ffd778] transition-colors" />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-colors ${megaMenuCategory === 'pewter' ? 'text-[#B99A5B]' : 'text-[#766D62] group-hover:text-[#B99A5B]'}`} />
                 </button>
               </div>
 
@@ -722,10 +722,10 @@ export default function Header({
                 <button
                   onClick={() => onNavigate('catalog', { category: 'finding' })}
                   onMouseEnter={() => setMegaMenuCategory('finding')}
-                  className={`px-3 py-2 hover:bg-white/10 rounded-lg text-white/95 hover:text-[#ffd778] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'finding' ? 'bg-white/15 text-[#ffd778]' : ''}`}
+                  className={`px-3 py-2 hover:bg-[#F0E8D9] hover:text-[#B99A5B] rounded-lg text-[#40362F] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'finding' ? 'bg-[#F0E8D9] text-[#B99A5B]' : ''}`}
                 >
                   <span>Finding</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-white/60 group-hover:text-[#ffd778] transition-colors" />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-colors ${megaMenuCategory === 'finding' ? 'text-[#B99A5B]' : 'text-[#766D62] group-hover:text-[#B99A5B]'}`} />
                 </button>
               </div>
 
@@ -734,10 +734,10 @@ export default function Header({
                 <button
                   onClick={() => onNavigate('catalog', { category: 'accessories' })}
                   onMouseEnter={() => setMegaMenuCategory('accessories')}
-                  className={`px-3 py-2 hover:bg-white/10 rounded-lg text-white/95 hover:text-[#ffd778] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'accessories' ? 'bg-white/15 text-[#ffd778]' : ''}`}
+                  className={`px-3 py-2 hover:bg-[#F0E8D9] hover:text-[#B99A5B] rounded-lg text-[#40362F] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'accessories' ? 'bg-[#F0E8D9] text-[#B99A5B]' : ''}`}
                 >
                   <span>Accessories</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-white/60 group-hover:text-[#ffd778] transition-colors" />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-colors ${megaMenuCategory === 'accessories' ? 'text-[#B99A5B]' : 'text-[#766D62] group-hover:text-[#B99A5B]'}`} />
                 </button>
               </div>
 
@@ -746,10 +746,10 @@ export default function Header({
                 <button
                   onClick={() => onNavigate('catalog', { category: 'seasonal-trends' })}
                   onMouseEnter={() => setMegaMenuCategory('trends')}
-                  className={`px-3 py-2 hover:bg-white/10 rounded-lg text-white/95 hover:text-[#ffd778] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'trends' ? 'bg-white/15 text-[#ffd778]' : ''}`}
+                  className={`px-3 py-2 hover:bg-[#F0E8D9] hover:text-[#B99A5B] rounded-lg text-[#40362F] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'trends' ? 'bg-[#F0E8D9] text-[#B99A5B]' : ''}`}
                 >
                   <span>Seasonal Trends</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-white/60 group-hover:text-[#ffd778] transition-colors" />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-colors ${megaMenuCategory === 'trends' ? 'text-[#B99A5B]' : 'text-[#766D62] group-hover:text-[#B99A5B]'}`} />
                 </button>
               </div>
 
@@ -758,17 +758,17 @@ export default function Header({
                 <button
                   onClick={() => onNavigate('catalog', { category: 'new-arrivals', sort: 'newest' })}
                   onMouseEnter={() => setMegaMenuCategory('newArrivals')}
-                  className={`px-3 py-2 hover:bg-white/10 rounded-lg text-white/95 hover:text-[#ffd778] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'newArrivals' ? 'bg-white/15 text-[#ffd778]' : ''}`}
+                  className={`px-3 py-2 hover:bg-[#F0E8D9] hover:text-[#B99A5B] rounded-lg text-[#40362F] transition-all flex items-center gap-1.5 cursor-pointer ${megaMenuCategory === 'newArrivals' ? 'bg-[#F0E8D9] text-[#B99A5B]' : ''}`}
                 >
                   <span>New Arrivals</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-white/60 group-hover:text-[#ffd778] transition-colors" />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-colors ${megaMenuCategory === 'newArrivals' ? 'text-[#B99A5B]' : 'text-[#766D62] group-hover:text-[#B99A5B]'}`} />
                 </button>
               </div>
 
               {/* 9. Best Sellers */}
               <button
                 onClick={() => onNavigate('catalog', { category: 'best-sellers', sort: 'popular' })}
-                className="px-3 py-2 hover:bg-white/10 rounded-lg text-white/95 hover:text-[#ffd778] transition-all cursor-pointer"
+                className="px-3 py-2 hover:bg-[#F0E8D9] hover:text-[#B99A5B] rounded-lg text-[#40362F] transition-all cursor-pointer"
               >
                 Best Sellers
               </button>
@@ -787,18 +787,18 @@ export default function Header({
                     onOpenAuth();
                   }
                 }}
-                className="px-3.5 py-2 hover:bg-white/10 rounded-lg text-white/95 hover:text-[#ffd778] transition-all flex items-center gap-1.5 cursor-pointer font-semibold text-[13px]"
+                className="px-3.5 py-2 hover:bg-[#F0E8D9] hover:text-[#B99A5B] rounded-lg text-[#40362F] transition-all flex items-center gap-1.5 cursor-pointer font-semibold text-[13px] group"
               >
-                <User className="w-3.5 h-3.5 text-white/90" />
+                <User className="w-3.5 h-3.5 text-[#766D62] group-hover:text-[#B99A5B] transition-colors" />
                 <span>My Account</span>
               </button>
 
               {/* 11. Request a Quote */}
               <button
                 onClick={() => onNavigate('quote')}
-                className="px-4 py-2 bg-gradient-to-r from-[#ffd778] via-[#e6c46a] to-[#c6a66b] hover:from-[#ffe094] hover:to-[#d8c49a] text-[#1c1913] text-[12px] font-bold uppercase tracking-wider rounded-lg transition-all flex items-center gap-1.5 cursor-pointer shadow-sm hover:shadow-md border border-[#ffd778]/50"
+                className="px-4 py-2 bg-gradient-to-r from-[#C6A66B] to-[#B99A5B] hover:from-[#d4b578] hover:to-[#c6a66b] text-[#40362F] text-[12px] font-bold uppercase tracking-wider rounded-lg transition-all flex items-center gap-1.5 cursor-pointer shadow-xs hover:shadow-sm border border-[#C6A66B]/50"
               >
-                <FileText className="w-3.5 h-3.5 text-[#1c1913]" />
+                <FileText className="w-3.5 h-3.5 text-[#40362F]" />
                 <span>Request a Quote</span>
               </button>
 
@@ -808,14 +808,15 @@ export default function Header({
             {megaMenuCategory && megaMenuData[megaMenuCategory] && (
               <div 
                 onMouseLeave={() => setMegaMenuCategory(null)}
-                className="absolute left-0 top-full w-full bg-white rounded-b-2xl shadow-2xl border border-[#EDE5D8] p-6 z-50 text-[#292723] animate-fade-in"
+                className="absolute left-0 top-full w-full bg-[#FAF8F3] rounded-b-2xl shadow-xl border-x border-b border-[#EDE5D8] p-6 z-50 text-[#40362F] animate-fade-in font-['Manrope',sans-serif]"
               >
                 <div className="grid grid-cols-12 gap-8">
                   <div className="col-span-5 space-y-3">
-                    <h4 className="font-serif font-bold text-lg text-[#292723]">
+                    <h4 className="font-serif font-bold text-lg text-[#40362F] flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#C6A66B]" />
                       {megaMenuData[megaMenuCategory].title}
                     </h4>
-                    <ul className="space-y-2 text-xs text-[#40362F]">
+                    <ul className="space-y-2 text-[13px] font-medium text-[#766D62]">
                       {megaMenuData[megaMenuCategory].links.map((link, idx) => (
                         <li key={idx}>
                           <button
@@ -823,10 +824,10 @@ export default function Header({
                               setMegaMenuCategory(null);
                               onNavigate('catalog', { category: link.category, subcategory: link.subcategory });
                             }}
-                            className="hover:text-[#014b92] flex items-center gap-2 transition-colors group py-0.5 text-left"
+                            className="hover:text-[#B99A5B] hover:translate-x-1 flex items-center gap-2 transition-all group py-0.5 text-left text-[13px] font-medium text-[#40362F]"
                           >
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#014b92] group-hover:scale-125 transition-transform" />
-                            <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#C6A66B] group-hover:bg-[#B99A5B] group-hover:scale-125 transition-transform" />
+                            <span>{link.label}</span>
                           </button>
                         </li>
                       ))}
@@ -841,19 +842,19 @@ export default function Header({
                           setMegaMenuCategory(null);
                           onNavigate('catalog', { search: item.sku });
                         }}
-                        className="group cursor-pointer rounded-xl overflow-hidden border border-[#EDE5D8] hover:border-[#014b92] transition-all bg-[#FAF8F3] p-3 flex items-center gap-3 shadow-xs hover:shadow-md"
+                        className="group cursor-pointer rounded-xl overflow-hidden border border-[#EDE5D8] hover:border-[#C6A66B] transition-all bg-white p-3 flex items-center gap-3 shadow-xs hover:shadow-md"
                       >
                         <img 
                           src={item.img} 
                           alt={item.name} 
-                          className="w-14 h-14 object-cover rounded-lg group-hover:scale-105 transition-transform bg-white" 
+                          className="w-14 h-14 object-cover rounded-lg group-hover:scale-105 transition-transform bg-[#FAF8F3]" 
                         />
                         <div>
-                          <span className="text-[10px] font-mono text-[#014b92] font-bold block">{item.sku}</span>
-                          <p className="font-semibold text-xs text-[#292723] group-hover:text-[#014b92] transition-colors">{item.name}</p>
-                          <span className="text-[10px] text-[#8B8175] flex items-center gap-1 mt-0.5">
+                          <span className="text-[10px] font-mono text-[#C6A66B] font-bold block">{item.sku}</span>
+                          <p className="font-semibold text-xs text-[#40362F] group-hover:text-[#B99A5B] transition-colors">{item.name}</p>
+                          <span className="text-[10px] text-[#766D62] flex items-center gap-1 mt-0.5 group-hover:text-[#B99A5B]">
                             <span>View Details</span>
-                            <ArrowRight className="w-2.5 h-2.5 text-[#014b92]" />
+                            <ArrowRight className="w-2.5 h-2.5 text-[#C6A66B] group-hover:text-[#B99A5B] group-hover:translate-x-0.5 transition-transform" />
                           </span>
                         </div>
                       </div>
